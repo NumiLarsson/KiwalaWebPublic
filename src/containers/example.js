@@ -32,7 +32,7 @@ class Example extends Component {
                 <h2>Title: {this.props.title} </h2>
                 <h2>Counter: {this.props.counter} </h2>
                 <button onClick={this.increaseCounter}>Increase counter</button>
-                <label for="title">Type in the field to change the title.</label> 
+                <label htmlFor="title">Type in the field to change the title.</label> 
                 <input name="title" type="text" value={this.props.title} onChange={this.changeTitle} />
                 <button onClick={this.changeTitleAsync}>Update title async</button>
             </div>
