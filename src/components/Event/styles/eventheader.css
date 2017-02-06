@@ -3,20 +3,24 @@
 	min-height: 200px;
 	max-height: 250px;
 
-	position: relative;
 	display: flex;
 	justify-content: center;
 
 	background-color: #000;
 }
 
-.event-header-content {
+.event-header__content {
 	width: 1024px;
-	height: 100%;
+	align-items: stretch;
+
+	position: relative;
 }
 
 .event-header__title {
-	vertical-align: bottom;
+	position: absolute;
+
+	bottom: 15pt;
+	left: 15pt;
 }
 
 .event-header__title h1 {

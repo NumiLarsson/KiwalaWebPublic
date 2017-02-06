@@ -27,10 +27,6 @@ class Spinner extends Component {
     }
 }
 
-function getEventTitle(event) {
-    return (!event) ? "Loading": event.name;
-}
-
 //Maps the state in our store to the props property of the Example object.
 const mapStateToProps = (state) => {
     return {

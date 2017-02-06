@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { } from '../../actions/eventviewer';
-import './styles/eventheader.css';
+import './styles/eventdescription.css';
 
-class EventHeader extends Component {
+class EventDescription extends Component {
     
     constructor() {
         super();
@@ -16,24 +16,11 @@ class EventHeader extends Component {
 
     render() {
         return (
-            <div className="event-header">
-                <div className="event-header__content">
-                    <div className="event-header__title">
-                        <h1>{ this.props.event.name }</h1>
-                    </div>
-                    <div className="event-header__info">
-                        <h1>{ getEventInfo(this.props.event) }</h1>
-                    </div>
-                </div>
+            <div className="event-description">
+                 <h2> { this.props.event.description } </h2>
             </div> 
         )
     }
-}
-
-function getEventInfo(event) {
-    return (
-        <i class="material-icons">event</i>
-    );
 }
 
 //Maps the state in our store to the props property of the Example object.
@@ -49,4 +36,4 @@ const mapDispatchToProps = {
 
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(EventHeader);
+export default connect(mapStateToProps, mapDispatchToProps)(EventDescription);

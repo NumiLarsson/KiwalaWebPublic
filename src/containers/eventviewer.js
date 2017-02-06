@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getEvent, setCurrentEvent } from '../actions/eventviewer';
 import EventHeader from '../components/Event/EventHeader';
+import EventDescription from '../components/Event/EventDescription';
 import Spinner from '../components/Utils/Spinner';
 import './styles/eventviewer.css';
 
@@ -28,21 +29,16 @@ class EventViewer extends Component {
         else {
             return (
                 <div className="event-viewer">
-                    <EventHeader props={this.props} />
+                    <EventHeader />
+
+                    {(this.props.event.description) ? (
+                        <EventDescription />
+                    ) : ( null )
+                    }
+
                 </div>
             )
         }
-    }
-}
-
-function getEventDescription(event) {
-    if(!event) {
-       return null; 
-    }
-    else {
-        return (
-            <h2> { event.description } </h2>
-        );
     }
 }
 
