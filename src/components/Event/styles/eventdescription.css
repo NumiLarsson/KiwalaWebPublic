@@ -1,0 +1,29 @@
+.event-description {
+	padding: 10pt 5pt 5pt 5pt;
+
+	text-align: left;
+
+	min-height: 100px;
+	max-height: 250px;
+
+	max-width: 640px;
+
+	border-radius: 0 0 2px 2px;
+
+	box-shadow: 1px 0px 3px #424242;
+}
+
+.event-description p {
+	padding-left: 10pt;
+	font-size: 11pt;
+}
+
+.event-description i,
+.event-description span {
+	vertical-align: middle;
+}
+
+.event-description span {
+	font-weight: 600;
+	font-size: 14pt;
+}

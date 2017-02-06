@@ -28,3 +28,20 @@
 
 	color: #fff;
 }
+
+.event-header__info {
+	position: absolute;
+
+	bottom: 10pt;
+	right: 15pt;
+}
+
+.event-header__info i {
+	vertical-align: middle;
+}
+
+.event-header__info span {
+	vertical-align: middle;
+
+	color: #fff;
+}

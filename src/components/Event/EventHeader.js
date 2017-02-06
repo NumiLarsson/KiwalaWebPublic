@@ -22,7 +22,7 @@ class EventHeader extends Component {
                         <h1>{ this.props.event.name }</h1>
                     </div>
                     <div className="event-header__info">
-                        <h1>{ getEventInfo(this.props.event) }</h1>
+                       <i className="material-icons color-white">event</i> <span>{ translateEventDate(this.props.event) }</span>
                     </div>
                 </div>
             </div> 
@@ -30,10 +30,17 @@ class EventHeader extends Component {
     }
 }
 
-function getEventInfo(event) {
-    return (
-        <i class="material-icons">event</i>
-    );
+function translateEventDate(event) {
+    if(!event.startDate) {
+        return (
+            "No date specified"
+        );
+    }
+    else {
+        return (
+            event.startDate
+        );
+    }
 }
 
 //Maps the state in our store to the props property of the Example object.

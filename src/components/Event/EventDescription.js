@@ -17,7 +17,8 @@ class EventDescription extends Component {
     render() {
         return (
             <div className="event-description">
-                 <h2> { this.props.event.description } </h2>
+                <i className="material-icons color-dark-gray">description</i> <span> Description </span>
+                <p> { this.props.event.description } </p>
             </div> 
         )
     }

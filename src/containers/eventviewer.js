@@ -31,10 +31,12 @@ class EventViewer extends Component {
                 <div className="event-viewer">
                     <EventHeader />
 
-                    {(this.props.event.description) ? (
-                        <EventDescription />
-                    ) : ( null )
-                    }
+                    <div className="event-content">
+                        {(this.props.event.description) ? (
+                            <EventDescription />
+                        ) : ( null )
+                        }
+                    </div>
 
                 </div>
             )
