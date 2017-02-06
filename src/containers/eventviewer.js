@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getEvent, setCurrentEvent } from '../actions/eventviewer';
+import EventHeader from '../components/Event/EventHeader';
+import Spinner from '../components/Utils/Spinner';
 import './styles/eventviewer.css';
 
 class EventViewer extends Component {
@@ -18,19 +20,19 @@ class EventViewer extends Component {
     }
 
     render() {
-        return (
-            <div className="event_viewer">
-                <div className="header">
-                    <h1>{ getEventTitle(this.props.event) }</h1>
-                </div> 
-                { getEventDescription(this.props.event) }
-            </div>
-        )
+        if(!this.props.event) {
+            return (
+                <Spinner label="Loading Event" />
+            )
+        }
+        else {
+            return (
+                <div className="event-viewer">
+                    <EventHeader props={this.props} />
+                </div>
+            )
+        }
     }
-}
-
-function getEventTitle(event) {
-    return (!event) ? "Loading": event.name;
 }
 
 function getEventDescription(event) {

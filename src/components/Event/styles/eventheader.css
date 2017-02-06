@@ -1,0 +1,26 @@
+.event-header {
+	width: 100%;
+	min-height: 200px;
+	max-height: 250px;
+
+	position: relative;
+	display: flex;
+	justify-content: center;
+
+	background-color: #000;
+}
+
+.event-header-content {
+	width: 1024px;
+	height: 100%;
+}
+
+.event-header__title {
+	vertical-align: bottom;
+}
+
+.event-header__title h1 {
+	margin: 0;
+
+	color: #fff;
+}
