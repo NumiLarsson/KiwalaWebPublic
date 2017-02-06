@@ -20,7 +20,12 @@ class Spinner extends Component {
                     <div className="spinner-dot1"></div>
                     <div className="spinner-dot2"></div>
                 </div>
-                <span className="spinner-text">{ this.props.label }</span>
+                {(this.props.label) ? (
+                    <span className="spinner-text">{ this.props.label }</span>
+                ) : (
+                    null
+                )
+                }
             </div>
 
         )

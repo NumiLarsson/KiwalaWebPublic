@@ -23,7 +23,7 @@ class EventViewer extends Component {
     render() {
         if(!this.props.event) {
             return (
-                <Spinner label="Loading Event" />
+                <Spinner label="" />
             )
         }
         else {
@@ -34,7 +34,9 @@ class EventViewer extends Component {
                     <div className="event-content">
                         {(this.props.event.description) ? (
                             <EventDescription />
-                        ) : ( null )
+                        ) : ( 
+                            null 
+                        )
                         }
                     </div>
 
