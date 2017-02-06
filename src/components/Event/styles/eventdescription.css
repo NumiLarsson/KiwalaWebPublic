@@ -12,11 +12,12 @@
 
 	border-radius: 0 0 2px 2px;
 
-	box-shadow: 1px 0px 3px #424242;
+	box-shadow: 1px 1px 3px #BDBDBD;
 }
 
 .event-description p {
 	padding-left: 10pt;
+	padding-top: 5pt;
 	font-size: 11pt;
 }
 
@@ -26,7 +27,7 @@
 }
 
 .event-description span {
-	font-weight: 600;
+	font-weight: 400;
 	font-size: 14pt;
 }
 

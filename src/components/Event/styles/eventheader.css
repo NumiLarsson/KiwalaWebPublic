@@ -66,6 +66,11 @@
 /* Desktop */
 @media only screen and (min-width: 768px) {
 
+	.event-header {
+		min-height: 250px;
+		max-height: 300px;
+	}
+
 	.event-header__gradient {
 		background: linear-gradient(
 		    to bottom,
