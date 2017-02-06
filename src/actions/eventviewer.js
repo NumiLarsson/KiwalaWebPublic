@@ -10,7 +10,7 @@ import { createAction } from 'redux-actions';
 //push can be used to navigate. dispatch(push('path'))
 import { push } from 'react-router-redux';
 //get the API
-import Api from '../models/__mocks__/api';
+import Api from '../api/Api';
 
 //Constants identifying actions.
 export const EVENT_ACTIONS = {
@@ -24,7 +24,7 @@ export const setCurrentEvent = createAction(EVENT_ACTIONS.SET_CURRENT_EVENT);
 //Async action. This is what the thunk middleware lets us do.
 export function getEvent(val) {
     return (dispatch) => {
-        Api.getEvent(val)
+        Api.events.getEvent(val)
         .then((val) => {
             dispatch(setCurrentEvent(val))
         })
