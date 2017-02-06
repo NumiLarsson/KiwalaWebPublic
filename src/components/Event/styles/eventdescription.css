@@ -3,10 +3,12 @@
 
 	text-align: left;
 
-	min-height: 100px;
+	min-height: 125px;
 	max-height: 250px;
 
-	max-width: 640px;
+	width: 100%;
+	word-wrap: break-word;
+	box-sizing: border-box;
 
 	border-radius: 0 0 2px 2px;
 
@@ -26,4 +28,11 @@
 .event-description span {
 	font-weight: 600;
 	font-size: 14pt;
+}
+
+/* Desktop */
+@media only screen and (min-width: 768px) {
+	.event-description{
+		max-width: 640px;
+	}
 }

@@ -15,14 +15,24 @@ class EventHeader extends Component {
     }
 
     render() {
+        var sectionStyle = {
+          backgroundImage: 'url(images/' + this.props.event.headerImg + ')',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'center',
+          overflow: 'hidden',
+        };
+
         return (
-            <div className="event-header">
-                <div className="event-header__content">
-                    <div className="event-header__title">
-                        <h1>{ this.props.event.name }</h1>
-                    </div>
-                    <div className="event-header__info">
-                       <i className="material-icons color-white">event</i> <span>{ translateEventDate(this.props.event) }</span>
+            <div className="event-header" style={ sectionStyle }>
+                <div className="event-header__gradient">
+                    <div className="event-header__content">
+                        <div className="event-header__title">
+                            <h1>{ this.props.event.name }</h1>
+                        </div>
+                        <div className="event-header__info">
+                           <i className="material-icons color-white">event</i> <span>{ translateEventDate(this.props.event) }</span>
+                        </div>
                     </div>
                 </div>
             </div> 
