@@ -43,6 +43,7 @@
 .event-header__title h1 {
 	margin: 0;
 
+	font-size: 2.5em;
 	color: #fff;
 }
 
@@ -60,11 +61,12 @@
 .event-header__info span {
 	vertical-align: middle;
 
+	font-size: 1.2em;
 	color: #fff;
 }
 
 /* Desktop */
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 1024px) {
 
 	.event-header {
 		min-height: 250px;

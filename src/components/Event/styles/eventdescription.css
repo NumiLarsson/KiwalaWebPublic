@@ -19,7 +19,7 @@
 	padding-left: 10pt;
 	padding-right: 10pt;
 	padding-top: 5pt;
-	font-size: 11pt;
+	font-size: 1.1em;
 }
 
 .event-description i,
@@ -29,7 +29,7 @@
 
 .event-description span {
 	font-weight: 400;
-	font-size: 14pt;
+	font-size: 1.3em;
 }
 
 /* Desktop */
