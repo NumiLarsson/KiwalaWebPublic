@@ -29,11 +29,11 @@ class EventViewer extends Component {
         else {
             return (
                 <div className="event-viewer">
-                    <EventHeader />
+                    <EventHeader headerImg={this.props.event.headerImg} name={this.props.event.name} startDate={this.props.event.startDate} />
 
                     <div className="event-content">
                         {(this.props.event.description) ? (
-                            <EventDescription />
+                            <EventDescription description={this.props.event.description} />
                         ) : ( 
                             null 
                         )
