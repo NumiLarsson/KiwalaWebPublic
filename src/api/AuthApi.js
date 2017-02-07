@@ -4,6 +4,13 @@ const RESULT = {
   SUCCESS: 'Success'
 }
 
+const ACCOUNT_CREATION_ERRORS = {
+    'auth/email-already-in-use': 'Email already in use',
+    'auth/invalid-email': 'Invalid email address',
+    'auth/operation-not-allowed': 'Unknown error',
+    'auth/weak-password': 'Need a stronger password'
+}
+
 const EMAIL_LOGIN_ERRORS = {
     'auth/invalid-email' : 'Invalid email address',
     'auth/user-disabled' : 'Account disabled',
@@ -41,13 +48,33 @@ export default class AuthApi {
     });
   }
 
-  //
+  //Get the current user if any.
   getCurrentUser() {
     return this.auth().currentUser;
   }
 
+
+  //A successful create also logs the user in.
+  createUser(email="", password="") {
+      let self = this;
+      return new Promise((resolve, reject) => {
+          self.auth().createUserWithEmailAndPassword(email, password)
+          .then((user) => {
+              resolve(user);
+          })
+          .catch(error => {
+              let err = ACCOUNT_CREATION_ERRORS[error.code] || 'Network error';
+              reject(err);
+          })
+      })
+    }  
+
+  /*
+    Register to listen for auth changes.
+    Returns a function which can be used to unregister the listener. 
+  */
   listenForAuthChanges(signedIn, signedOut) {
-    this.auth().onAuthStateChanged(user => {
+    return this.auth().onAuthStateChanged(user => {
       if (user) {
         signedIn(user);
       } else {
@@ -56,11 +83,12 @@ export default class AuthApi {
     });
   }
 
-  loginWithEmail(email, password) {
+  loginWithEmail(email="", password="") {
+    const self = this;
     return new Promise((resolve, reject) => {
-        this.auth().signInWithEmailAndPassword(email, password)
-        .then(() => {
-          resolve(RESULT.SUCCESS);
+        self.auth().signInWithEmailAndPassword(email, password)
+        .then(user => {
+          resolve(user);
         })
         .catch(error => {
           let err = EMAIL_LOGIN_ERRORS[error.code] || 'Network error';
@@ -69,17 +97,15 @@ export default class AuthApi {
     }); 
   }
 
-  loginWithFacebook() {
-    const provider = new this.auth.FacebookAuthProvider();
-    this.auth().signInWithRedirect(provider);
-  }
+
 
   loginWithFacebookPopup() {
-    const provider = new fb.auth.FacebookAuthProvider();
+    const provider = new this.auth.FacebookAuthProvider();
+    const self = this;
     return new Promise((resolve, reject) => {
-      this.auth().signInWithPopup(provider)
-      .then(() => {
-        resolve(RESULT.SUCCESS);
+      self.auth().signInWithPopup(provider)
+      .then(user => {
+        resolve(user);
       })
       .catch(error => {
         let err = FACEBOOK_POPUP_ERRORS[error.code] || 'Network error';
@@ -89,9 +115,15 @@ export default class AuthApi {
     
   }
 
+  loginWithFacebookRedirect() {
+    const provider = new this.auth.FacebookAuthProvider();
+    this.auth().signInWithRedirect(provider);
+  }
+
   getRedirectResult() {
+    const self = this;
     return new Promise((resolve, reject) => {
-        fb.auth().getRedirectResult().then((result) => {
+        self.auth().getRedirectResult().then(result => {
           resolve(result);
         })
         .catch(error => {
@@ -102,9 +134,10 @@ export default class AuthApi {
   }
     
 
-  signOut() {
+  logout() {
+    const self = this;
     return new Promise((resolve, reject) => {
-        fb.auth().signOut()
+        self.auth().signOut()
         .then(() => {
           resolve(RESULT.SUCCESS);
         }).catch(error => {

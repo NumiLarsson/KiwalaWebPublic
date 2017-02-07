@@ -10,7 +10,7 @@ const FIREBASE_CONFIG = {
     messagingSenderId: "44705571393"
 };
 
-firebase.initializeApp(config);
+firebase.initializeApp(FIREBASE_CONFIG);
 
 class Api {
   events = new EventApi();
