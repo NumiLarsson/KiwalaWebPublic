@@ -37,4 +37,12 @@
 	.event-description{
 		max-width: 640px;
 	}
+
+	.event-description p {
+		font-size: 1em;
+	}
+
+	.event-description span {
+		font-size: 1.1em;
+	}
 }

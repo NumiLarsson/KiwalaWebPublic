@@ -73,6 +73,15 @@
 		max-height: 300px;
 	}
 
+	.event-header__title h1 {
+		font-size: 2.5em;
+	}
+
+	.event-header__info span {
+		font-size: 1em;
+	}
+
+
 	.event-header__gradient {
 		background: linear-gradient(
 		    to bottom,
