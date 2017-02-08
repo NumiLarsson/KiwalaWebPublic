@@ -9,7 +9,7 @@ const EventDetails = (props) => {
         <div className="event-details">
             { renderStartDate(props.startDate) }
             { renderLocation(props.location) }
-            { renderMap(props.showMap) }
+            { renderMap(props.location, props.showMap) }
         </div> 
     )
 }
@@ -34,7 +34,7 @@ function renderLocation(location) {
     if(location) {
         return (
             <div>
-                <i className="material-icons color-light-blue">event</i>
+                <i className="material-icons color-light-blue">location_on</i>
                 <span> { formatLocation(location) } </span>
             </div>
         );
@@ -46,8 +46,18 @@ function renderLocation(location) {
     }
 }
 
-function renderMap(showMap) {
-
+function renderMap(location, showMap) {
+    if(location && showMap) {
+        return (
+            <div className="event-details__map">
+            </div>
+        );
+    }
+    else {
+        return (
+            null
+        );
+    }
 }
 
 export default (EventDetails);
