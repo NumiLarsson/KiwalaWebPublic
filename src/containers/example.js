@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {increaseCounter, updateTitle, updateTitleAsync} from '../actions/example';
 import './styles/example.css';
+import User from './../components/User/User.js';
+import UserInterface from './../components/UserInterface/UserInterface.js';
 
 class Example extends Component {
     
@@ -10,6 +12,7 @@ class Example extends Component {
         this.increaseCounter = this.increaseCounter.bind(this);
         this.changeTitle = this.changeTitle.bind(this);
         this.changeTitleAsync = this.changeTitleAsync.bind(this);
+        this.user = new User(1, "Spam", "Anton");
     }
 
     increaseCounter() {
@@ -35,6 +38,9 @@ class Example extends Component {
                 <label htmlFor="title">Type in the field to change the title.</label> 
                 <input name="title" type="text" value={this.props.title} onChange={this.changeTitle} />
                 <button onClick={this.changeTitleAsync}>Update title async</button>
+                <div className="UI">
+                    <UserInterface user={this.user} />
+                </div>
             </div>
         )
     }
