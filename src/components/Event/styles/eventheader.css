@@ -43,7 +43,7 @@
 .event-header__title h1 {
 	margin: 0;
 
-	font-size: 2.5em;
+	font-size: 2.2em;
 	color: #fff;
 }
 
@@ -54,6 +54,13 @@
 	left: 15pt;
 }
 
+.event-header__info div {
+	display: inline-block;
+}
+.event-header__info div:nth-child(2) {
+	margin-left: 10px;
+}
+
 .event-header__info i {
 	vertical-align: middle;
 }
@@ -61,7 +68,7 @@
 .event-header__info span {
 	vertical-align: middle;
 
-	font-size: 1.2em;
+	font-size: 1.1em;
 	color: #fff;
 }
 

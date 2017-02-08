@@ -3,6 +3,8 @@ export default class Event {
   name = null;
   headerImg = null;
   startDate = null;
+  location = null;
+  showMap = false;
   description = null;
   participants = [];
 

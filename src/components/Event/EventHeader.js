@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { } from '../../actions/eventviewer';
+import { formatDate, formatLocation } from '../../utils/utils';
 import './styles/eventheader.css';
 
 const EventHeader = (props) => {
@@ -13,7 +13,8 @@ const EventHeader = (props) => {
                         <h1>{ props.name }</h1>
                     </div>
                     <div className="event-header__info">
-                       <i className="material-icons color-white">event</i> <span>{ translateEventDate(props.startDate) }</span>
+                        { renderEventDateString(props.startDate) }
+                        { renderEventLocationString(props.location) }
                     </div>
                 </div>
             </div>
@@ -32,15 +33,32 @@ function getHeaderImgStyle(headerImg) {
     };
 }
 
-function translateEventDate(startDate) {
+function renderEventDateString(startDate) {
     if(!startDate) {
         return (
-            "No date specified"
+            null
         );
     }
     else {
         return (
-            startDate
+             <div>
+               <i className="material-icons color-white">event</i> <span>{ formatDate(startDate) }</span>
+            </div>
+        );
+    }
+}
+
+function renderEventLocationString(location) {
+    if(!location) {
+        return (
+            null
+        );
+    }
+    else {
+        return (
+             <div>
+               <i className="material-icons color-white">location_on</i> <span>{ formatLocation(location) }</span>
+            </div>
         );
     }
 }

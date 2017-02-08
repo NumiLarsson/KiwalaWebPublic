@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getEvent, setCurrentEvent } from '../actions/eventviewer';
 import EventHeader from '../components/Event/EventHeader';
+import EventDetails from '../components/Event/EventDetails';
 import EventDescription from '../components/Event/EventDescription';
 import Spinner from '../components/Utils/Spinner';
 import './styles/eventviewer.css';
@@ -29,15 +30,11 @@ class EventViewer extends Component {
         else {
             return (
                 <div className="event-viewer">
-                    <EventHeader headerImg={this.props.event.headerImg} name={this.props.event.name} startDate={this.props.event.startDate} />
+                    <EventHeader headerImg={this.props.event.headerImg} name={this.props.event.name} startDate={this.props.event.startDate} location={this.props.event.location} />
 
                     <div className="event-content">
-                        {(this.props.event.description) ? (
-                            <EventDescription description={this.props.event.description} />
-                        ) : ( 
-                            null 
-                        )
-                        }
+                        <EventDetails startDate={this.props.event.startDate} location={this.props.event.location} showMap={this.props.event.showMap} />
+                        <EventDescription description={this.props.event.description} />
                     </div>
 
                 </div>

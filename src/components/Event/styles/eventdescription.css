@@ -1,5 +1,5 @@
 .event-description {
-	padding: 10pt 5pt 5pt 5pt;
+	padding: 10pt 5pt 10pt 5pt;
 
 	text-align: left;
 
@@ -12,14 +12,14 @@
 
 	border-radius: 0 0 2px 2px;
 
-	box-shadow: 1px 1px 3px #BDBDBD;
+	box-shadow: 1px 2px 3px #BDBDBD;
 }
 
 .event-description p {
 	padding-left: 10pt;
 	padding-right: 10pt;
 	padding-top: 5pt;
-	font-size: 1.1em;
+	font-size: 1em;
 }
 
 .event-description i,
@@ -29,7 +29,7 @@
 
 .event-description span {
 	font-weight: 400;
-	font-size: 1.3em;
+	font-size: 1.2em;
 }
 
 /* Desktop */

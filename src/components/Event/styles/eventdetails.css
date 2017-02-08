@@ -1,0 +1,27 @@
+.event-details {
+	padding: 10pt 5pt 10pt 5pt;
+
+	text-align: left;
+
+	min-height: 50px;
+	max-height: 250px;
+
+	width: 100%;
+	word-wrap: break-word;
+	box-sizing: border-box;
+
+	border-radius: 0 0 2px 2px;
+
+	box-shadow: 1px 2px 3px #BDBDBD;
+}
+
+.event-details i,
+.event-details span{
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.event-details span{
+	margin-left: 5px;
+	font-size: 1.1em;
+}
