@@ -4,6 +4,7 @@ import { getEvent, setCurrentEvent } from '../actions/eventviewer';
 import EventHeader from '../components/Event/EventHeader';
 import EventDetails from '../components/Event/EventDetails';
 import EventDescription from '../components/Event/EventDescription';
+import EventParticipants from '../components/Event/EventParticipants';
 import Spinner from '../components/Utils/Spinner';
 import './styles/eventviewer.css';
 
@@ -33,8 +34,13 @@ class EventViewer extends Component {
                     <EventHeader headerImg={this.props.event.headerImg} name={this.props.event.name} startDate={this.props.event.startDate} location={this.props.event.location} />
 
                     <div className="event-content">
-                        <EventDetails startDate={this.props.event.startDate} location={this.props.event.location} showMap={this.props.event.showMap} />
-                        <EventDescription description={this.props.event.description} />
+                        <div className="event-content__spotlight">
+                            <EventDetails startDate={this.props.event.startDate} location={this.props.event.location} showMap={this.props.event.showMap} />
+                            <EventDescription description={this.props.event.description} />
+                        </div>
+                        <div className="event-content__sideline">
+                            <EventParticipants participants={this.props.event.participants} />
+                        </div>
                     </div>
 
                 </div>

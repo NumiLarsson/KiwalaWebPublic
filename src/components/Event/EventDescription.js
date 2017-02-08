@@ -7,7 +7,9 @@ const EventDescription = (props) => {
     if(props.description) {
         return (
             <div className="event-description">
-                <i className="material-icons color-light-blue">description</i> <span> Description </span>
+                <div className="event-description__header">
+                    <i className="material-icons color-light-blue">description</i> <span> Description </span>
+                </div>
                 <p> { props.description } </p>
             </div> 
         )
