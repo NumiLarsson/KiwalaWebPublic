@@ -3,18 +3,18 @@ export default class Event {
   name = null;
   headerImg = null;
   startDate = null;
-  location = "null";
-  showMap = true;
+  location = null;
   description = null;
   participants = [];
 
-  modules = [];
+  modules = {};
 
-  constructor(id, name, startDate, description, headerImg = 'event_header_default.jpg') {
+  constructor(id, name, startDate, description, modules, headerImg = 'event_header_default.jpg') {
   	this.id = id;
   	this.name = name;
   	this.startDate = startDate;
   	this.description = description;
     this.headerImg = headerImg;
+    this.modules = modules;
   }
 }
