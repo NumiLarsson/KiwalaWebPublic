@@ -12,10 +12,7 @@ const EventHeader = (props) => {
                     <div className="event-header__title">
                         <h1>{ props.name }</h1>
                     </div>
-                    <div className="event-header__info">
-                        { renderEventDateString(props.startDate) }
-                        { renderEventLocationString(props.location) }
-                    </div>
+                    { renderHeaderInfo(props.module, props.startDate, props.location) }
                 </div>
             </div>
         </div> 
@@ -33,32 +30,48 @@ function getHeaderImgStyle(headerImg) {
     };
 }
 
-function renderEventDateString(startDate) {
-    if(!startDate) {
+function renderHeaderInfo(module, startDate, location) {
+    if(module.enabled) {
+        return (
+             <div className="event-header__info">
+                { renderEventDateString(module, startDate) }
+                { renderEventLocationString(module, location) }
+            </div>
+        );
+    }
+    else {
         return (
             null
         );
     }
-    else {
+}
+
+function renderEventDateString(module, startDate) {
+    if(module.showTime) {
         return (
              <div>
                <i className="material-icons color-white">event</i> <span>{ formatDate(startDate) }</span>
             </div>
         );
     }
-}
-
-function renderEventLocationString(location) {
-    if(!location) {
+    else {
         return (
             null
         );
     }
-    else {
+}
+
+function renderEventLocationString(module, location) {
+    if(module.showLocation) {
         return (
              <div>
                <i className="material-icons color-white">location_on</i> <span>{ formatLocation(location) }</span>
             </div>
+        );
+    }
+    else {
+        return (
+            null
         );
     }
 }

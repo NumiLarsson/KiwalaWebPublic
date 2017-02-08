@@ -9,10 +9,11 @@ export default class Event {
 
   modules = {};
 
-  constructor(id, name, startDate, description, modules, headerImg = 'event_header_default.jpg') {
+  constructor(id, name, startDate, location, description, modules, headerImg = 'event_header_default.jpg') {
   	this.id = id;
   	this.name = name;
   	this.startDate = startDate;
+    this.location = location;
   	this.description = description;
     this.headerImg = headerImg;
     this.modules = modules;

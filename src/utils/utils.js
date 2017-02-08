@@ -4,6 +4,9 @@
  * @returns a formatted String.
  */
 export function formatDate(date) {
+	if(!date)
+		return "";
+
     var mm = date.getMonth() + 1; // getMonth() is zero-based
     var dd = date.getDate();
 
@@ -19,5 +22,8 @@ export function formatDate(date) {
  * @returns a formatted String.
  */
 export function formatLocation(location) {
+	if(!location)
+		return "";
+	
 	return location;
 }

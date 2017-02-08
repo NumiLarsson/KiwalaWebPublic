@@ -31,15 +31,15 @@ class EventViewer extends Component {
         else {
             return (
                 <div className="event-viewer">
-                    <EventHeader headerImg={this.props.event.headerImg} name={this.props.event.name} startDate={this.props.event.startDate} location={this.props.event.location} />
+                    <EventHeader headerImg={this.props.event.headerImg} name={this.props.event.name} module={this.props.event.modules.headerDetails} startDate={this.props.event.startDate} location={this.props.event.location} />
 
                     <div className="event-content">
                         <div className="event-content__spotlight">
-                            <EventDetails startDate={this.props.event.startDate} location={this.props.event.location} showMap={this.props.event.showMap} />
-                            <EventDescription description={this.props.event.description} />
+                            <EventDetails module={this.props.event.modules.eventDetails} startDate={this.props.event.startDate} location={this.props.event.location} />
+                            <EventDescription module={this.props.event.modules.eventDescription} description={this.props.event.description} />
                         </div>
                         <div className="event-content__sideline">
-                            <EventParticipants participants={this.props.event.participants} />
+                            <EventParticipants module={this.props.event.modules.eventParticipants} participants={this.props.event.participants} />
                         </div>
                     </div>
 

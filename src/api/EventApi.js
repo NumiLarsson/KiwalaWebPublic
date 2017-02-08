@@ -4,7 +4,8 @@ export default class EventApi {
   getEvent(uuid) {
     return new Promise((resolve, reject) => {
     	var event = new Event(uuid, "Awesome event at camping place", 
-    			new Date(), "This is a description of the awesome event. It will take place in... YOUR PANTS BADUMM-DSHHH!",
+    			new Date(), "Stockholm",
+    			"This is a description of the awesome event. It will take place in... YOUR PANTS BADUMM-DSHHH!",
     			{
     				headerDetails:{
     					enabled: true,
@@ -19,9 +20,10 @@ export default class EventApi {
 					},
 					eventDescription:{
 						enabled: true,
+					},
+					eventParticipants:{
+						enabled: true,
 					}
-
-
     			});
 
     	setTimeout(function() {

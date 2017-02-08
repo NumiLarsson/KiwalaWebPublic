@@ -4,7 +4,7 @@ import './styles/eventdescription.css';
 
 const EventDescription = (props) => {
 
-    if(props.description) {
+    if(props.module.enabled) {
         return (
             <div className="event-description">
                 <div className="event-description__header">
