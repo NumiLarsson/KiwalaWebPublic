@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {increaseCounter, updateTitle, updateTitleAsync} from '../actions/example';
+import {increaseCounter, updateTitle, updateTitleAsync, loadRandomEvent} from '../actions/example';
 import './styles/example.css';
 import User from './../components/User/User.js';
 import UserInterface from './../components/UserInterface/UserInterface.js';
@@ -13,6 +13,7 @@ class Example extends Component {
         this.changeTitle = this.changeTitle.bind(this);
         this.changeTitleAsync = this.changeTitleAsync.bind(this);
         this.user = new User(1, "Spam", "Anton");
+        this.loadRandomEvent = this.loadRandomEvent.bind(this);
     }
 
     increaseCounter() {
@@ -28,12 +29,18 @@ class Example extends Component {
         this.props.updateTitleAsync(this.props.title);
     }
 
+    loadRandomEvent() {
+        this.props.loadRandomEvent();
+    }
+
     render() {
         return (
             <div className="example">
                 <h1>This is the example container</h1>
                 <h2>Title: {this.props.title} </h2>
                 <h2>Counter: {this.props.counter} </h2>
+                <button onClick={this.loadRandomEvent}>Load random event</button>
+                <br/>
                 <button onClick={this.increaseCounter}>Increase counter</button>
                 <label htmlFor="title">Type in the field to change the title.</label> 
                 <input name="title" type="text" value={this.props.title} onChange={this.changeTitle} />
@@ -59,7 +66,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
     increaseCounter,
     updateTitle,
-    updateTitleAsync
+    updateTitleAsync,
+    loadRandomEvent
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Example);

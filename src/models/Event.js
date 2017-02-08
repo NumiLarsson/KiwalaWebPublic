@@ -3,8 +3,12 @@ export default class Event {
   name = null;
   headerImg = null;
   startDate = null;
+  location = "null";
+  showMap = true;
   description = null;
   participants = [];
+
+  modules = [];
 
   constructor(id, name, startDate, description, headerImg = 'event_header_default.jpg') {
   	this.id = id;
