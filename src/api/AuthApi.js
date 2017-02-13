@@ -3,7 +3,7 @@ import User from '../models/User';
 const RESULT = {
   SUCCESS: 'Success'
 }
-
+//TODO: Write better error messages.
 const ACCOUNT_CREATION_ERRORS = {
     'auth/email-already-in-use': 'Email already in use',
     'auth/invalid-email': 'Invalid email address',
@@ -42,19 +42,21 @@ export default class AuthApi {
     this.auth = auth;
   }
 
-  login(email, password) {
-    return new Promise((resolve, reject) => {
-        resolve(new User);
-    });
-  }
-
-  //Get the current user if any.
+  /**
+   * Get the current user signed in to the application. 
+   * Should be used with care, it updates asynchrounously and may not return the correct user object because of this.
+   */
   getCurrentUser() {
     return this.auth().currentUser;
   }
 
 
-  //A successful create also logs the user in.
+/**
+ * Create and sign an user.
+ * @param {string} email - The email of the user.
+ * @param {string} password - The password of the user.
+ * @returns A Promise which resolves to a Firebase.Auth user object and rejects with an error message.
+ */
   createUser(email="", password="") {
       let self = this;
       return new Promise((resolve, reject) => {
@@ -83,6 +85,13 @@ export default class AuthApi {
     });
   }
 
+
+ /**
+ * Sign in using email and password.
+ * @param {string} email - The email of the user.
+ * @param {string} password - The password of the user.
+ * @returns A Promise which resolves to a Firebase.Auth user object and rejects with an error message.
+ */
   loginWithEmail(email="", password="") {
     const self = this;
     return new Promise((resolve, reject) => {
@@ -98,7 +107,10 @@ export default class AuthApi {
   }
 
 
-
+/**
+ * Sign in using a Facebook popup.
+ * @returns A Promise which resolves to a Firebase.Auth user object and rejects with an error message.
+ */
   loginWithFacebookPopup() {
     const provider = new this.auth.FacebookAuthProvider();
     const self = this;
@@ -115,16 +127,25 @@ export default class AuthApi {
     
   }
 
+ /**
+ * Sign in using a Facebook redirect. The result can later be obtained by calling getRedirectResult.
+ */
   loginWithFacebookRedirect() {
     const provider = new this.auth.FacebookAuthProvider();
     this.auth().signInWithRedirect(provider);
   }
 
+
+/**
+ * Sign in by redirecting to Facebook.
+ * @returns A Promise which resolves to an object which can be used to obtain the Facebook user credentials if a successful login. It rejects with an error message.
+ * If no redirect has been performed it returns null.
+ */
   getRedirectResult() {
     const self = this;
     return new Promise((resolve, reject) => {
-        self.auth().getRedirectResult().then(result => {
-          resolve(result);
+        self.auth().getRedirectResult().then(user => {
+          resolve(user);
         })
         .catch(error => {
           let err = FACEBOOK_REDIRECT_LOGIN_ERRORS[error.code] || 'Unknown error, contact support';
@@ -133,7 +154,10 @@ export default class AuthApi {
     });
   }
     
-
+/**
+ * Logout from the application
+ * @returns A Promise which resolves to a Success message and rejects with an error message.
+ */
   logout() {
     const self = this;
     return new Promise((resolve, reject) => {
