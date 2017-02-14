@@ -24,7 +24,15 @@ export default class EventApi {
 					eventParticipants:{
 						enabled: true,
 					}
-    			});
+    			},
+                [
+                    {name: "Eyeam Smart", avatar: null, id: 1},
+                    {name: "Will Udye", avatar: null, id: 2},
+                    {name: "Meg Aboot", avatar: null, id: 3},
+                    {name: "Eyegot Wood", avatar: null, id: 4},
+                    {name: "Fil Mey", avatar: null, id: 5},
+                    {name: "Anote Rack", avatar: null, id: 6}
+                ]);
 
     	setTimeout(function() {
         	resolve(event);

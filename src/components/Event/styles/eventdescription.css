@@ -42,11 +42,4 @@
 /* Desktop */
 @media only screen and (min-width: 768px) {
 
-	.event-participants p {
-		font-size: 1em;
-	}
-
-	.event-participants span {
-		font-size: 1.1em;
-	}
 }
