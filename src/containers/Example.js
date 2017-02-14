@@ -32,6 +32,7 @@ class Example extends Component {
 
     loadRandomEvent() {
         this.props.loadRandomEvent();
+    }
 
     login() {
         api.auth.loginWithEmail("jonas.olander91@gmail.com", "1234567")
