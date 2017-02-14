@@ -1,5 +1,5 @@
 .event-controlpanel {
-	background-color: #e0e0e0;
+	background-color: #eee;
 	width: 100%;
 	min-height: 50px;
 
@@ -7,7 +7,8 @@
 	justify-content: center;
 	align-items: center;
 
-	padding: 10px;
+	padding: 15px 10px 10px 10px;
+	box-sizing: border-box;
 }
 
 .event-controlpanel__attendbtn {
