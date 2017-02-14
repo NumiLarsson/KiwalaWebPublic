@@ -34,6 +34,26 @@ export function updateTitleAsync(val) {
     }
 }
 
+export function loadRandomEvent() {
+    var eventID = Math.floor((Math.random() * 100) + 1);
+    return (dispatch) => {
+        randomEventId()
+        .then((val) => {
+            dispatch(push('/event:' + eventID));
+        })
+        .catch((error) => {
+            //dispatch();
+        })
+    }
+}
+
+function randomEventId() {
+    return new Promise((resolve, reject) => {
+        var val = Math.floor((Math.random() * 100) + 1);
+        resolve(val);
+    })
+}
+
 function randomAsyncFunction(val) {
     return new Promise((resolve, reject) => {
         if (val.length > 10) {

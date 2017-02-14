@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {increaseCounter, updateTitle, updateTitleAsync} from '../actions/example';
+import {increaseCounter, updateTitle, updateTitleAsync, loadRandomEvent} from '../actions/example';
 import './styles/example.css';
 import api from '../api/Api';
 
@@ -11,6 +11,7 @@ class Example extends Component {
         this.increaseCounter = this.increaseCounter.bind(this);
         this.changeTitle = this.changeTitle.bind(this);
         this.changeTitleAsync = this.changeTitleAsync.bind(this);
+        this.loadRandomEvent = this.loadRandomEvent.bind(this);
         this.login = this.login.bind(this);
         this.logout = this.logout.bind(this);
     }
@@ -27,6 +28,10 @@ class Example extends Component {
     changeTitleAsync() {
         this.props.updateTitleAsync(this.props.title);
     }
+
+
+    loadRandomEvent() {
+        this.props.loadRandomEvent();
 
     login() {
         api.auth.loginWithEmail("jonas.olander91@gmail.com", "1234567")
@@ -54,6 +59,8 @@ class Example extends Component {
                 <h1>This is the example container</h1>
                 <h2>Title: {this.props.title} </h2>
                 <h2>Counter: {this.props.counter} </h2>
+                <button onClick={this.loadRandomEvent}>Load random event</button>
+                <br/>
                 <button onClick={this.increaseCounter}>Increase counter</button>
                 <label htmlFor="title">Type in the field to change the title.</label> 
                 <input name="title" type="text" value={this.props.title} onChange={this.changeTitle} />
@@ -78,7 +85,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
     increaseCounter,
     updateTitle,
-    updateTitleAsync
+    updateTitleAsync,
+    loadRandomEvent
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Example);

@@ -22,3 +22,25 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+
+/* Colors */
+.color-white {
+  color: #fff;
+}
+
+.color-light-gray {
+  color: #E0E0E0;
+}
+
+.color-gray {
+  color: #757575;
+}
+
+.color-dark-gray {
+  color: #242424;
+}
+
+.color-light-blue {
+  color: #2196F3;
+}

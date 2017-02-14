@@ -1,0 +1,52 @@
+.event-description {
+	padding: 10pt 5pt 10pt 5pt;
+
+	margin-top: 5px;
+	background-color: #fff;
+	text-align: left;
+
+	min-height: 125px;
+	max-height: 250px;
+
+	width: 100%;
+	word-wrap: break-word;
+	box-sizing: border-box;
+
+	border-radius: 0 0 2px 2px;
+
+	box-shadow: 1px 2px 3px #BDBDBD;
+}
+
+.event-description__header {
+	padding-bottom: 10px;
+	border-bottom: 1px solid #E0E0E0;
+}
+
+.event-description p {
+	padding-left: 25px;
+	padding-right: 10px;
+	padding-top: 15px;
+	font-size: 1.2em;
+}
+
+.event-description i,
+.event-description span {
+	vertical-align: middle;
+}
+
+.event-description span {
+	font-weight: 400;
+	font-size: 1.3em;
+}
+
+/* Desktop */
+@media only screen and (min-width: 768px) {
+
+	.event-description p {
+		font-size: 1em;
+	}
+
+	.event-description span {
+		font-size: 1.1em;
+	}
+}
