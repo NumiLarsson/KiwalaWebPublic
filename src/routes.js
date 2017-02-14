@@ -5,8 +5,8 @@ import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 
 //Containers to be used as the building blocks of the application.
-import App from './containers/app';
-import Example from './containers/example';
+import App from './containers/App';
+import Example from './containers/Example';
 
 const routes = (
     <Route path="/" component={App}>

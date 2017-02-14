@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {increaseCounter, updateTitle, updateTitleAsync} from '../actions/example';
 import './styles/example.css';
+import api from '../api/Api';
 
 class Example extends Component {
     
@@ -10,6 +11,8 @@ class Example extends Component {
         this.increaseCounter = this.increaseCounter.bind(this);
         this.changeTitle = this.changeTitle.bind(this);
         this.changeTitleAsync = this.changeTitleAsync.bind(this);
+        this.login = this.login.bind(this);
+        this.logout = this.logout.bind(this);
     }
 
     increaseCounter() {
@@ -25,6 +28,26 @@ class Example extends Component {
         this.props.updateTitleAsync(this.props.title);
     }
 
+    login() {
+        api.auth.loginWithEmail("jonas.olander91@gmail.com", "1234567")
+        .then(user => {
+            console.log(user);
+        })
+        .catch(error => {
+            console.log(error);
+        })
+    }
+
+    logout() {
+        api.auth.logout()
+        .then(result => {
+            console.log(result);
+        })
+        .catch(error => {
+            console.log(error);
+        })
+    }
+
     render() {
         return (
             <div className="example">
@@ -35,6 +58,8 @@ class Example extends Component {
                 <label htmlFor="title">Type in the field to change the title.</label> 
                 <input name="title" type="text" value={this.props.title} onChange={this.changeTitle} />
                 <button onClick={this.changeTitleAsync}>Update title async</button>
+                <button onClick={this.login}>Login</button>
+                <button onClick={this.logout}>Logout</button>
             </div>
         )
     }
