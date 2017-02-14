@@ -26,10 +26,8 @@
 .event-participants__header > span {
 	vertical-align: middle;
 }
-
-.event-participants > span {
-	font-weight: 400;
-	font-size: 1.1em;
+.event-participants__header > span {
+	font-size: 1.3em;
 }
 
 .event-participants__list {
@@ -59,11 +57,11 @@
 	color: #757575;
 
 	margin-top: 1px;
-    margin-left: 1px;
+    margin-left: 2px;
 }
 
 .event-participant__name {
-	font-size: 1em;
+	font-size: 1.2em;
 
 	padding-left: 10px;
 	display: inline-block;
@@ -79,5 +77,13 @@
 
 	.event-participants__header > span {
 		font-size: 1.1em;
+	}
+
+	.event-participant__name {
+		font-size: 1em;
+
+		padding-left: 10px;
+		display: inline-block;
+		vertical-align: middle;
 	}
 }

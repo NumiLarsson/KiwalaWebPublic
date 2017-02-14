@@ -5,6 +5,7 @@ import EventHeader from '../components/Event/EventHeader';
 import EventDetails from '../components/Event/EventDetails';
 import EventDescription from '../components/Event/EventDescription';
 import EventParticipants from '../components/Event/EventParticipants';
+import EventControlpanel from '../components/Event/EventControlpanel';
 import Spinner from '../components/Utils/Spinner';
 import './styles/eventviewer.css';
 
@@ -32,6 +33,8 @@ class EventViewer extends Component {
             return (
                 <div className="event-viewer">
                     <EventHeader headerImg={this.props.event.headerImg} name={this.props.event.name} module={this.props.event.modules.headerDetails} startDate={this.props.event.startDate} location={this.props.event.location} />
+
+                    <EventControlpanel />
 
                     <div className="event-content">
                         <div className="event-content__spotlight">
