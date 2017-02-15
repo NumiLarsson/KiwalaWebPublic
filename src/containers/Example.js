@@ -41,6 +41,7 @@ class Example extends Component {
         api.auth.loginWithEmail("jonas.olander91@gmail.com", "1234567")
         .then(user => {
             console.log(user);
+            this.user.update(user);
         })
         .catch(error => {
             console.log(error);
@@ -69,6 +70,7 @@ class Example extends Component {
                 <label htmlFor="title">Type in the field to change the title.</label> 
                 <input name="title" type="text" value={this.props.title} onChange={this.changeTitle} />
                 <button onClick={this.changeTitleAsync}>Update title async</button>
+
                 <div className="UI">
                     <UserInterface user={this.user} />
                 </div>
