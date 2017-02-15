@@ -29,7 +29,7 @@
 
 .event-details span{
 	margin-left: 5px;
-	font-size: 1.1em;
+	font-size: 1.3em;
 }
 
 .event-details__map {
@@ -38,4 +38,11 @@
 
 	margin-top: 10px;
 	background-color: #000;
+}
+
+/* Desktop */
+@media only screen and (min-width: 768px) {
+	.event-details span{
+		font-size: 1.1em;
+	}
 }

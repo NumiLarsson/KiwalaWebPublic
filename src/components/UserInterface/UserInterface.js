@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import User from './../User/User.js'
-import AcceptedEvents from './AcceptedEvents/AcceptedEvents.js';
 
 export default class UserInterface extends Component {
     constructor(user){
@@ -10,9 +9,19 @@ export default class UserInterface extends Component {
 
 
     render(){
+        const upcomingEvents = this.props.user.upcomingEvents.map( 
+            (event) => <li key={event.id}>
+                Event: {event.name}, 
+                Day: {event.startDate.getDate()}, 
+                Month: {event.startDate.getMonth()}
+                Year: {event.startDate.getFullYear()}
+                </li>
+        )
+
         return(
             <div className="UserInterface">
-                <AcceptedEvents user={this.user} />
+                <div className="upcomingEvents">
+                </div>
             </div>
         );
     }
