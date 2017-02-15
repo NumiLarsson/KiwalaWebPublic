@@ -20,7 +20,11 @@ export default class UserInterface extends Component {
 
         return(
             <div className="UserInterface">
+<<<<<<< HEAD
                 <div className="upcomingEvents">
+=======
+                <div className="AcceptedUser">
+>>>>>>> 185d292e783f5d1409d52854596de72d21ec48c4
                 </div>
             </div>
         );
