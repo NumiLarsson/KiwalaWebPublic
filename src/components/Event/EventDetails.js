@@ -5,17 +5,25 @@ import './styles/eventdetails.css';
 
 const EventDetails = (props) => {
 
-    return (
-        <div className="event-details">
-            { renderStartDate(props.startDate) }
-            { renderLocation(props.location) }
-            { renderMap(props.location, props.showMap) }
-        </div> 
-    )
+    if(props.module.enabled) {
+
+        return (
+            <div className="event-details">
+                { renderStartDate(props.module, props.startDate) }
+                { renderLocation(props.module, props.location) }
+                { renderMap(props.module, props.location, props.showMap) }
+            </div> 
+        )
+    }
+    else {
+        return (
+            null
+        )
+    }
 }
 
-function renderStartDate(startDate) {
-    if(startDate) {
+function renderStartDate(module, startDate) {
+    if(module.showTime) {
         return (
             <div>
                 <i className="material-icons color-light-blue">event</i>
@@ -30,8 +38,8 @@ function renderStartDate(startDate) {
     }
 }
 
-function renderLocation(location) {
-    if(location) {
+function renderLocation(module, location) {
+    if(module.showLocation) {
         return (
             <div>
                 <i className="material-icons color-light-blue">location_on</i>
@@ -46,8 +54,8 @@ function renderLocation(location) {
     }
 }
 
-function renderMap(location, showMap) {
-    if(location && showMap) {
+function renderMap(module, location, showMap) {
+    if(module.showMap) {
         return (
             <div className="event-details__map">
             </div>

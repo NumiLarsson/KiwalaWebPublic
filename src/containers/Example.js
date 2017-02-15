@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {increaseCounter, updateTitle, updateTitleAsync, loadRandomEvent} from '../actions/example';
 import './styles/example.css';
-import User from './../components/User/User.js';
+import User from './../models/User.js';
 import UserInterface from './../components/UserInterface/UserInterface.js';
+import api from '../api/Api';
 
 class Example extends Component {
     
@@ -14,6 +15,8 @@ class Example extends Component {
         this.changeTitleAsync = this.changeTitleAsync.bind(this);
         this.user = new User(1, "Spam", "Anton");
         this.loadRandomEvent = this.loadRandomEvent.bind(this);
+        this.login = this.login.bind(this);
+        this.logout = this.logout.bind(this);
     }
 
     increaseCounter() {
@@ -29,8 +32,29 @@ class Example extends Component {
         this.props.updateTitleAsync(this.props.title);
     }
 
+
     loadRandomEvent() {
         this.props.loadRandomEvent();
+    }
+
+    login() {
+        api.auth.loginWithEmail("jonas.olander91@gmail.com", "1234567")
+        .then(user => {
+            console.log(user);
+        })
+        .catch(error => {
+            console.log(error);
+        })
+    }
+
+    logout() {
+        api.auth.logout()
+        .then(result => {
+            console.log(result);
+        })
+        .catch(error => {
+            console.log(error);
+        })
     }
 
     render() {
@@ -48,6 +72,8 @@ class Example extends Component {
                 <div className="UI">
                     <UserInterface user={this.user} />
                 </div>
+                <button onClick={this.login}>Login</button>
+                <button onClick={this.logout}>Logout</button>
             </div>
         )
     }

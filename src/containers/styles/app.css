@@ -29,6 +29,14 @@
   color: #fff;
 }
 
+.color-light-gray {
+  color: #E0E0E0;
+}
+
+.color-gray {
+  color: #757575;
+}
+
 .color-dark-gray {
   color: #242424;
 }
