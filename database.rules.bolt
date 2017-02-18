@@ -1,0 +1,75 @@
+path /users/{uid} is User {
+  read() { isCurrentUser(uid)}
+  write() { isCurrentUser(uid)}
+}
+path /users/{uid}/events/{eventref} is EventRef{}
+
+type User {
+  email: EmailString,
+  name : NameString | Null
+}
+
+type EventRef extends Boolean{
+  validate() {isEvent(eventref)}
+}
+
+
+type NameString extends String {
+  validate() {this.length > 0 && this.length < 100}
+}
+
+type EmailString extends String {
+  validate() {this.matches(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}$/i)}
+}
+
+path /events/{eventId} is Event {}
+
+
+path /events/{eventId}/participants {
+  write() {true}
+}
+
+type Event {
+  read() {true}
+  write() {false}
+  id: String | Null,
+  name: NameString | Null,
+  startDate: Number | Null,
+  location: String | Null,
+  description: String | Null,
+  headerImg: String | Null,
+  modules: ModuleConfig | Null,
+}
+
+type ModuleConfig {
+  headerDetails: HeaderDetails,
+  eventDetails: EventDetails,
+  eventDescription: EventDescription,
+  eventParticipants: EventParticipants
+}
+
+type HeaderDetails {
+  enabled: Boolean,
+  showTime: Boolean,
+  showLocation: Boolean
+}
+
+type EventDetails {
+  enabled: Boolean,
+  showTime: Boolean,
+  showLocation: Boolean,
+  showMap: Boolean
+}
+
+type EventDescription {
+  enabled: Boolean
+}
+
+type EventParticipants {
+  enabled: Boolean
+}
+
+
+isCurrentUser(uid) { isSignedIn() && auth.uid == uid }
+isSignedIn() { auth != null }
+isEvent(event) {prior(root.events[event]) != null}

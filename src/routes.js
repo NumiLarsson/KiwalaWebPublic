@@ -13,7 +13,7 @@ import EventViewer from './containers/EventViewer';
 const routes = (
     <Route path="/" component={App}>
         <IndexRoute component={Example} />
-        <Route path="/event:eventid" component={EventViewer}/>
+        <Route path="/event/:eventid" component={EventViewer}/>
     </Route>
 );
 

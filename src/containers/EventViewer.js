@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getEvent, setCurrentEvent } from '../actions/eventviewer';
+import { getEvent, subScribeToEvent, setCurrentEvent, attendEvent } from '../actions/eventviewer';
 import EventHeader from '../components/Event/EventHeader';
 import EventDetails from '../components/Event/EventDetails';
 import EventDescription from '../components/Event/EventDescription';
@@ -15,12 +15,14 @@ class EventViewer extends Component {
         super();
     }
 
-    componentDidMount(){
+    componentWillMount(){
         // perform any preparations for an upcoming update
         // Enable loading state
 
         // Load event
-        this.props.getEvent(2);
+        const {eventid} = this.props.params;
+        this.props.getEvent(eventid);
+        this.props.attendEvent(eventid, '1234546');
     }
 
     render() {
@@ -63,7 +65,9 @@ const mapStateToProps = (state) => {
 //access them through the props property of the Example object. 
 const mapDispatchToProps = {
     getEvent,
-    setCurrentEvent
+    setCurrentEvent,
+    subScribeToEvent,
+    attendEvent
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(EventViewer);

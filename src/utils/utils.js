@@ -4,13 +4,14 @@
  * @returns a formatted String.
  */
 export function formatDate(date) {
-	if(!date)
+  let realDate = new Date(date);
+	if(!realDate)
 		return "";
 
-    var mm = date.getMonth() + 1; // getMonth() is zero-based
-    var dd = date.getDate();
+    var mm = realDate.getMonth() + 1; // getMonth() is zero-based
+    var dd = realDate.getDate();
 
-    return [date.getFullYear(),
+    return [realDate.getFullYear(),
           (mm>9 ? '' : '0') + mm,
           (dd>9 ? '' : '0') + dd
          ].join('-');
