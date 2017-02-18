@@ -5,6 +5,7 @@ import './styles/example.css';
 import User from './../models/User.js';
 import UserInterface from './../components/UserInterface/UserInterface.js';
 import api from '../api/Api';
+import { createUser } from './../actions/user'
 
 class Example extends Component {
     
@@ -29,7 +30,7 @@ class Example extends Component {
     }
 
     changeTitleAsync() {
-        this.props.updateTitleAsync(this.props.title);
+        this.props.createUser(this.user)
     }
 
 
@@ -59,21 +60,27 @@ class Example extends Component {
     }
 
     render() {
+        let {title, counter, loadRandomEvent,
+             increaseCounter, changeTitleAsync, name} = this.props;
         return (
             <div className="example">
                 <h1>This is the example container</h1>
-                <h2>Title: {this.props.title} </h2>
-                <h2>Counter: {this.props.counter} </h2>
-                <button onClick={this.loadRandomEvent}>Load random event</button>
+                <h2>Title: {title} </h2>
+                <h2>Counter: {counter} </h2>
+                <button onClick={loadRandomEvent}>Load random event</button>
                 <br/>
-                <button onClick={this.increaseCounter}>Increase counter</button>
+                <button onClick={increaseCounter}>Increase counter</button>
                 <label htmlFor="title">Type in the field to change the title.</label> 
-                <input name="title" type="text" value={this.props.title} onChange={this.changeTitle} />
-                <button onClick={this.changeTitleAsync}>Update title async</button>
+                <input name="title" type="text" value={title} onChange={this.changeTitle} />
+                <button onClick={changeTitleAsync}>Update title async</button>
 
                 <div className="UI">
                     <UserInterface user={this.user} />
                 </div>
+                <div className="Test">
+                    {name}
+                </div>
+
                 <button onClick={this.login}>Login</button>
                 <button onClick={this.logout}>Logout</button>
             </div>
@@ -85,7 +92,8 @@ class Example extends Component {
 const mapStateToProps = (state) => {
     return {
         title: state.example.title,
-        counter: state.example.counter
+        counter: state.example.counter,
+        name: state.user.name
     }
 }
 
@@ -95,7 +103,8 @@ const mapDispatchToProps = {
     increaseCounter,
     updateTitle,
     updateTitleAsync,
-    loadRandomEvent
+    loadRandomEvent,
+    createUser
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Example);

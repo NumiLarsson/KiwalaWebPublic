@@ -1,8 +1,18 @@
 export default class User {
   name = null;
-  upcomingEvents = [];
+  id = null;
+  email = null;
+  upcomingEvents = ["Test"];
+
+  constructor(id, email, name) {
+    this.id = id;
+    this.email = email;
+    this.name = name;
+  }
 
   update(user) {
-    this.name = user;
+    this.name = user.name;
+    this.id = user.id;
+    this.email = user.email;
   }
 }
