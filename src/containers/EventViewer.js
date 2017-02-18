@@ -8,6 +8,7 @@ import EventParticipants from '../components/Event/EventParticipants';
 import EventControlpanel from '../components/Event/EventControlpanel';
 import Spinner from '../components/Utils/Spinner';
 import './styles/eventviewer.css';
+import { loadMapImageURL } from './../actions/maps'
 
 class EventViewer extends Component {
     
@@ -18,7 +19,7 @@ class EventViewer extends Component {
     componentDidMount(){
         // perform any preparations for an upcoming update
         // Enable loading state
-
+        this.props.loadMapImageURL("Hello World");
         // Load event
         this.props.getEvent(2);
     }
@@ -46,6 +47,10 @@ class EventViewer extends Component {
                         </div>
                     </div>
 
+                    <div id="map"> 
+                        <img src={this.props.map}/>
+                    </div>
+
                 </div>
             )
         }
@@ -55,7 +60,8 @@ class EventViewer extends Component {
 //Maps the state in our store to the props property of the Example object.
 const mapStateToProps = (state) => {
     return {
-        event: state.eventviewer.event
+        event: state.eventviewer.event,
+        map: state.eventviewer.map
     }
 }
 
@@ -63,7 +69,8 @@ const mapStateToProps = (state) => {
 //access them through the props property of the Example object. 
 const mapDispatchToProps = {
     getEvent,
-    setCurrentEvent
+    setCurrentEvent,
+    loadMapImageURL
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(EventViewer);

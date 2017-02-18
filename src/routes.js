@@ -6,13 +6,13 @@ import { Route, IndexRoute } from 'react-router';
 
 //Containers to be used as the building blocks of the application.
 import App from './containers/App';
-import Example from './containers/Example';
+import EventList from './containers/EventList';
 import EventViewer from './containers/EventViewer';
 
 
 const routes = (
     <Route path="/" component={App}>
-        <IndexRoute component={Example} />
+        <IndexRoute component={EventList} />
         <Route path="/event:eventid" component={EventViewer}/>
     </Route>
 );
