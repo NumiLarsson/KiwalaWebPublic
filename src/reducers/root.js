@@ -5,7 +5,8 @@ import { routerReducer } from 'react-router-redux';
 import example from './example';
 import eventviewer from './eventviewer';
 import user from './user'
+import events from './events'
 
-const root = combineReducers({example, eventviewer, user, routing: routerReducer, form: formReducer});
+const root = combineReducers({example, eventviewer, user, events, routing: routerReducer, form: formReducer});
 
 export default root;

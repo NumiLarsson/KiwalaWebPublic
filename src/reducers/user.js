@@ -13,6 +13,10 @@ export default (state = initialState, action) => {
             return Object.assign({}, state, {
                 ...action.payload
             });
+        case USER_ACTIONS.ATTEND_EVENT:
+            return Object.assign({}, state, {
+                ...action.payload
+            });
         default:
             return state;
     }

@@ -6,6 +6,9 @@ import User from './../models/User.js';
 import UserInterface from './../components/UserInterface/UserInterface.js';
 import api from '../api/Api';
 import { createUser } from './../actions/user'
+import { addEvent, removeEvent, updateEvent } from './../actions/events'
+import { push } from 'react-router-redux';
+import { Link } from 'react-router';
 
 class Example extends Component {
     
@@ -59,9 +62,21 @@ class Example extends Component {
         })
     }
 
+    formatEvents(events) {
+        const formattedEvents = events.map( 
+            (event) => 
+                <li key={event.id}>
+                    <Link to={`/event:${event.id}`}>
+                        {event.name}
+                    </Link>
+                </li>
+        )
+        return formattedEvents
+    }
+
     render() {
         let {title, counter, loadRandomEvent,
-             increaseCounter, changeTitleAsync, name} = this.props;
+             increaseCounter, changeTitleAsync, name, events} = this.props;
         return (
             <div className="example">
                 <h1>This is the example container</h1>
@@ -74,11 +89,9 @@ class Example extends Component {
                 <input name="title" type="text" value={title} onChange={this.changeTitle} />
                 <button onClick={changeTitleAsync}>Update title async</button>
 
-                <div className="UI">
-                    <UserInterface user={this.user} />
-                </div>
                 <div className="Test">
                     {name}
+                    {this.formatEvents(events)}
                 </div>
 
                 <button onClick={this.login}>Login</button>
@@ -93,7 +106,8 @@ const mapStateToProps = (state) => {
     return {
         title: state.example.title,
         counter: state.example.counter,
-        name: state.user.name
+        name: state.user.name,
+        events: state.events.events
     }
 }
 
@@ -104,7 +118,10 @@ const mapDispatchToProps = {
     updateTitle,
     updateTitleAsync,
     loadRandomEvent,
-    createUser
+    createUser,
+    addEvent,
+    removeEvent,
+    updateEvent
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Example);
