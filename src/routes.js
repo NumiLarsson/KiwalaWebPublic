@@ -8,12 +8,24 @@ import { Route, IndexRoute } from 'react-router';
 import App from './containers/App';
 import Example from './containers/Example';
 import EventViewer from './containers/EventViewer';
+import Login from "./containers/Login";
+import Api from './api/Api';
 
+// Taken from https://github.com/ReactTraining/react-router/blob/master/examples/auth-flow/app.js
+function requireAuth(nextState, replace) {
+    if (! Api.auth.loggedIn()) {
+        replace({
+            pathname: '/login',
+            state: {nextPathname: nextState.location.pathname}
+        })
+    }
+}
 
 const routes = (
     <Route path="/" component={App}>
         <IndexRoute component={Example} />
-        <Route path="/event:eventid" component={EventViewer}/>
+        <Route path="/event:eventid" component={EventViewer} onEnter={requireAuth}/>
+        <Route path="/login" component={Login} />
     </Route>
 );
 
