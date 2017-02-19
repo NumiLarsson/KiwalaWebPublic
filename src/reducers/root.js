@@ -4,8 +4,9 @@ import { routerReducer } from 'react-router-redux';
 //Import custom reducers here.
 import example from './example';
 import eventviewer from './eventviewer';
+import events from './events'
 import auth from './auth';
 
-const root = combineReducers({example, eventviewer, auth, routing: routerReducer, form: formReducer});
+const root = combineReducers({example, eventviewer, auth, events, routing: routerReducer, form: formReducer});
 
 export default root;

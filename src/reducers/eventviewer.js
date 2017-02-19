@@ -1,36 +1,10 @@
 import {EVENT_ACTIONS} from '../actions/eventviewer';
+import { MAPS_ACTIONS } from '../actions/maps';
 const { GET_EVENT, SET_CURRENT_EVENT } = EVENT_ACTIONS;
 
 const initialState = {
-    event: null
-    /*{
-		description : null,
-		headerImg : null,
-		id : null,
-		location : null,
-		modules : {
-		  eventDescription : {
-		    enabled : false
-		  },
-		  eventDetails : {
-		    enabled : false,
-		    showLocation : null,
-		    showMap : null,
-		    showTime : null
-		  },
-		  eventParticipants : {
-		    enabled : false
-		  },
-		  headerDetails : {
-		    enabled : false,
-		    showLocation : null,
-		    showTime : null
-		  }
-		},
-		name : null,
-		participants : null,
-		startDate : null
-	}*/
+    event: null,
+    map: null
 }
 
 export default (state = initialState, action) => {
@@ -41,7 +15,10 @@ export default (state = initialState, action) => {
             return Object.assign({}, state, {
                 event: action.payload
             });
-
+        case MAPS_ACTIONS.MAP_IMAGE_URL: 
+            return Object.assign({}, state, {
+                map: action.payload
+            })
         default:
             return state;
     }

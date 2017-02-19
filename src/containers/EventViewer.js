@@ -8,6 +8,7 @@ import EventParticipants from '../components/Event/EventParticipants';
 import EventControlpanel from '../components/Event/EventControlpanel';
 import Spinner from '../components/Utils/Spinner';
 import './styles/eventviewer.css';
+import { loadMapImageURL } from './../actions/maps'
 
 class EventViewer extends Component {
     
@@ -18,7 +19,7 @@ class EventViewer extends Component {
     componentWillMount(){
         // perform any preparations for an upcoming update
         // Enable loading state
-
+        this.props.loadMapImageURL();
         // Load event
         const {eventid} = this.props.params;
         this.props.subscribeToEvent(eventid);
@@ -40,12 +41,16 @@ class EventViewer extends Component {
 
                     <div className="event-content">
                         <div className="event-content__spotlight">
-                            <EventDetails module={this.props.event.modules.eventDetails} startDate={this.props.event.startDate} location={this.props.event.location} />
+                            <EventDetails module={this.props.event.modules.eventDetails} startDate={this.props.event.startDate} location={this.props.event.location} map={this.props.map}/>
                             <EventDescription module={this.props.event.modules.eventDescription} description={this.props.event.description} />
                         </div>
                         <div className="event-content__sideline">
                             <EventParticipants module={this.props.event.modules.eventParticipants} participants={this.props.event.participants} />
                         </div>
+                    </div>
+
+                    <div id="map"> 
+                        <img src={this.props.map}/>
                     </div>
 
                 </div>
@@ -58,7 +63,8 @@ class EventViewer extends Component {
 const mapStateToProps = (state) => {
     return {
         event: state.eventviewer.event,
-        user: state.auth.user
+        user: state.auth.user,
+        map: state.eventviewer.map
     }
 }
 
@@ -68,7 +74,8 @@ const mapDispatchToProps = {
     getEvent,
     setCurrentEvent,
     subscribeToEvent,
-    attendEvent
+    attendEvent,
+    loadMapImageURL
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(EventViewer);
