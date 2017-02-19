@@ -49,10 +49,6 @@ class EventViewer extends Component {
                         </div>
                     </div>
 
-                    <div id="map"> 
-                        <img src={this.props.map}/>
-                    </div>
-
                 </div>
             )
         }
