@@ -78,6 +78,10 @@
 /* Desktop */
 @media only screen and (min-width: 768px) {
 
+	.event-participants {
+		width: 300px;
+	}
+
 	.event-participants__header > p {
 		font-size: 1em;
 	}

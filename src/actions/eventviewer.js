@@ -16,12 +16,14 @@ import Api from '../api/Api';
 export const EVENT_ACTIONS = {
     GET_EVENT : 'GET_EVENT',
     SET_CURRENT_EVENT : 'SET_CURRENT_EVENT',
-    ATTEND_EVENT_SUCCESS: 'ATTEND_EVENT_SUCCESS'
+    ATTEND_EVENT_SUCCESS: 'ATTEND_EVENT_SUCCESS',
+    UNATTEND_EVENT_SUCCESS: 'UNATTEND_EVENT_SUCCESS'
 };
 
 //Standard actions.
 export const setCurrentEvent = createAction(EVENT_ACTIONS.SET_CURRENT_EVENT);
 export const attendSuccessful = createAction(EVENT_ACTIONS.ATTEND_EVENT_SUCCESS);
+export const unattendSuccessful = createAction(EVENT_ACTIONS.UNATTEND_EVENT_SUCCESS);
 
 //Async action. This is what the thunk middleware lets us do.
 export function getEvent(eventId) {
@@ -58,6 +60,18 @@ export function attendEvent(eventId, uid) {
         Api.events.attendEvent(eventId, uid)
         .then(res => {
             dispatch(attendSuccessful(res));
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    }
+}
+
+export function unattendEvent(eventId, uid) {
+    return dispatch => {
+        Api.events.unattendEvent(eventId, uid)
+        .then(res => {
+            dispatch(unattendSuccessful(res));
         })
         .catch(err => {
             console.log(err);

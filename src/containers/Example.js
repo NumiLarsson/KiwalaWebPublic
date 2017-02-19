@@ -39,7 +39,7 @@ class Example extends Component {
         api.auth.loginWithEmail("jonas.olander91@gmail.com", "1234567")
         .then(user => {
             console.log(user);
-            userLoggedIn(user);
+            this.props.userLoggedIn(user);
         })
         .catch(error => {
             console.log(error);
@@ -50,7 +50,7 @@ class Example extends Component {
         api.auth.logout()
         .then(result => {
             console.log(result);
-            userLoggedOut(result);
+            this.props.userLoggedOut(result);
         })
         .catch(error => {
             console.log(error);
