@@ -39,7 +39,7 @@ export function loadRandomEvent() {
     return (dispatch) => {
         randomEventId()
         .then((val) => {
-            dispatch(push('/event:' + eventID));
+            dispatch(push('/event/' + eventID));
         })
         .catch((error) => {
             //dispatch();

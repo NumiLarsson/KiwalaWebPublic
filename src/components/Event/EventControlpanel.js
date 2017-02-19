@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { formatDate, formatLocation } from '../../utils/utils';
+import { attendEvent } from '../../actions/eventviewer';
 import './styles/eventcontrolpanel.css';
 
 class EventControlpanel extends Component {
     
     constructor() {
         super();
+
+        this.attendEvent = this.attendEvent.bind(this)
     }
 
     componentDidMount(){
@@ -14,12 +17,16 @@ class EventControlpanel extends Component {
         // Enable loading state
     }
 
+    attendEvent() {
+        this.props.attendEvent(this.props.event.id, '1234546');
+    }
+
     render() {
         // If logged in && not attending
-        if(true) {
+        if(this.props.user) {
             return (
                 <div className="event-controlpanel">
-                    <button className="event-controlpanel__attendbtn"><i className="material-icons">event_available</i> <span>Attend</span></button>
+                    <button className="event-controlpanel__attendbtn" onClick={this.attendEvent}><i className="material-icons">event_available</i> <span>Attend</span></button>
                 </div>
             )
         }
@@ -43,14 +50,15 @@ class EventControlpanel extends Component {
 //Maps the state in our store to the props property of the Example object.
 const mapStateToProps = (state) => {
     return {
-        event: state.eventviewer.event
+        event: state.eventviewer.event,
+        user: state.auth.user
     }
 }
 
 //Wrapping the action creators in a dispatch call and allowing us to 
 //access them through the props property of the Example object. 
 const mapDispatchToProps = {
-
+    attendEvent
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(EventControlpanel);

@@ -33,7 +33,7 @@ function renderParticipants(participants) {
                 listItems.push(
                     <div key={key} className="event-participant">
                         { renderAvatar(key) }
-                    <span className="event-participant__name">{ key }</span>
+                    <div className="event-participant__name" title={ key }>{ key }</div>
                     </div>
                 )
             }

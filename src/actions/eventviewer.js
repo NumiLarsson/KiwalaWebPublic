@@ -37,10 +37,10 @@ export function getEvent(eventId) {
     }
 }
 
-export function subScribeToEvent(eventId) {
+export function subscribeToEvent(eventId) {
     return dispatch => {
-        Api.events.subScribeToEvent(eventId, (event) => {
-            dispatch(setCurrentEvent(eventId));
+        Api.events.subscribeToEvent(eventId, (event) => {
+            dispatch(setCurrentEvent(event));
         })
         .then(res => {
             console.log(res);

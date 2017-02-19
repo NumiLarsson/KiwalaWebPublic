@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getEvent, subScribeToEvent, setCurrentEvent, attendEvent } from '../actions/eventviewer';
+import { getEvent, subscribeToEvent, setCurrentEvent, attendEvent } from '../actions/eventviewer';
 import EventHeader from '../components/Event/EventHeader';
 import EventDetails from '../components/Event/EventDetails';
 import EventDescription from '../components/Event/EventDescription';
@@ -21,8 +21,7 @@ class EventViewer extends Component {
 
         // Load event
         const {eventid} = this.props.params;
-        this.props.getEvent(eventid);
-        this.props.attendEvent(eventid, '1234546');
+        this.props.subscribeToEvent(eventid);
     }
 
     render() {
@@ -32,6 +31,7 @@ class EventViewer extends Component {
             )
         }
         else {
+            console.log(this.props.event);
             return (
                 <div className="event-viewer">
                     <EventHeader headerImg={this.props.event.headerImg} name={this.props.event.name} module={this.props.event.modules.headerDetails} startDate={this.props.event.startDate} location={this.props.event.location} />
@@ -57,7 +57,8 @@ class EventViewer extends Component {
 //Maps the state in our store to the props property of the Example object.
 const mapStateToProps = (state) => {
     return {
-        event: state.eventviewer.event
+        event: state.eventviewer.event,
+        user: state.auth.user
     }
 }
 
@@ -66,7 +67,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
     getEvent,
     setCurrentEvent,
-    subScribeToEvent,
+    subscribeToEvent,
     attendEvent
 }
 

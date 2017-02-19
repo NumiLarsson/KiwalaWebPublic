@@ -21,15 +21,23 @@
 	padding: 1px 0 1px 0;
 }
 
-.event-details i,
-.event-details span{
-	display: inline-block;
-	vertical-align: middle;
+.event-details__item {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
 }
 
-.event-details span{
+.event-details__item > i {
+	flex-shrink: 0;
+}
+
+.event-details__item-text {
 	margin-left: 5px;
 	font-size: 1.3em;
+
+	white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .event-details__map {
@@ -42,7 +50,7 @@
 
 /* Desktop */
 @media only screen and (min-width: 768px) {
-	.event-details span{
+	.event-details__item-text {
 		font-size: 1.1em;
 	}
 }

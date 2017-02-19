@@ -26,7 +26,7 @@ export default class EventApi {
   }
 
 
-  subScribeToEvent(eventId, callback) {
+  subscribeToEvent(eventId, callback) {
 	let self = this;
 	return new Promise((resolve, reject) => {
 			self.getEvent(eventId)

@@ -22,7 +22,7 @@
 	background-color: #43A047;
 	border-radius: 4px;
 
-	transition: background-color 0.5s;
+	transition: background-color 0.2s;
 }
 .event-controlpanel__attendbtn:hover {
 	color: #fff;

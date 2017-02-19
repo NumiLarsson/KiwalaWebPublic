@@ -25,9 +25,9 @@ const EventDetails = (props) => {
 function renderStartDate(module, startDate) {
     if(module.showTime) {
         return (
-            <div>
+            <div className="event-details__item">
                 <i className="material-icons color-light-blue">event</i>
-                <span> { formatDate(startDate) } </span>
+                <div className="event-details__item-text" title={ formatDate(startDate) }> { formatDate(startDate) } </div>
             </div>
         );
     }
@@ -41,9 +41,9 @@ function renderStartDate(module, startDate) {
 function renderLocation(module, location) {
     if(module.showLocation) {
         return (
-            <div>
+            <div className="event-details__item">
                 <i className="material-icons color-light-blue">location_on</i>
-                <span> { formatLocation(location) } </span>
+                <div className="event-details__item-text" title={ formatLocation(location) }> { formatLocation(location) } </div>
             </div>
         );
     }
