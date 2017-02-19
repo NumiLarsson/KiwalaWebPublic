@@ -11,7 +11,7 @@ const EventDetails = (props) => {
             <div className="event-details">
                 { renderStartDate(props.module, props.startDate) }
                 { renderLocation(props.module, props.location) }
-                { renderMap(props.module, props.location, props.showMap) }
+                { renderMap(props.module, props.map, props.showMap) }
             </div> 
         )
     }
@@ -54,10 +54,11 @@ function renderLocation(module, location) {
     }
 }
 
-function renderMap(module, location, showMap) {
+function renderMap(module, map, showMap) {
     if(module.showMap) {
         return (
             <div className="event-details__map">
+                <img className="map-image" src={map} />
             </div>
         );
     }

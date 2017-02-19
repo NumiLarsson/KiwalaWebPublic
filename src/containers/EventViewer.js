@@ -19,7 +19,7 @@ class EventViewer extends Component {
     componentDidMount(){
         // perform any preparations for an upcoming update
         // Enable loading state
-        this.props.loadMapImageURL("Hello World");
+        this.props.loadMapImageURL();
         // Load event
         this.props.getEvent(2);
     }
@@ -39,7 +39,7 @@ class EventViewer extends Component {
 
                     <div className="event-content">
                         <div className="event-content__spotlight">
-                            <EventDetails module={this.props.event.modules.eventDetails} startDate={this.props.event.startDate} location={this.props.event.location} />
+                            <EventDetails module={this.props.event.modules.eventDetails} startDate={this.props.event.startDate} location={this.props.event.location} map={this.props.map}/>
                             <EventDescription module={this.props.event.modules.eventDescription} description={this.props.event.description} />
                         </div>
                         <div className="event-content__sideline">

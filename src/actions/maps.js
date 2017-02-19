@@ -16,45 +16,62 @@ var publicConfig = {
 };
 var gmAPI = new GoogleMapsAPI(publicConfig);
 
+const STOCKHOLM_LOCATION = "59.329321, 18.068581";
+
 export function loadMapImageURL(val) {
-    return (dispatch) => {
-        var params = {
-            center: '444 W Main St Lock Haven PA',
-            zoom: 15,
-            size: '500x400',
-            maptype: 'roadmap',
-            markers: [
-                {
-                    location: '300 W Main St Lock Haven, PA',
-                    label   : 'A',
-                    color   : 'green',
-                    shadow  : true
-                },
-                {
-                    location: '444 W Main St Lock Haven, PA',
-                    icon: 'http://chart.apis.google.com/chart?chst=d_map_pin_icon&chld=cafe%7C996600'
-                }
-            ],
-            style: [
-                {
-                    feature: 'road',
-                    element: 'all',
-                    rules: {
-                        hue: '0x00ff00'
+    if (val) {
+        return (dispatch) => {
+            var params = {
+                center: val,
+                zoom: 12,
+                size: '620x200',
+                maptype: 'roadmap',
+                markers: [
+                    {
+                        location: val,
+                        label   : 'A',
+                        color   : 'red',
+                        shadow  : true
                     }
-                }
-            ],
-            path: [
-                {
-                    color: '0x0000ff',
-                    weight: '5',
-                    points: [
-                        '41.139817,-77.454439',
-                        '41.138621,-77.451596'
-                    ]
-                }
-            ]
-        };
-        dispatch(mapImageURL(gmAPI.staticMap(params)));
+                ],
+                style: [
+                    {
+                        feature: 'road',
+                        element: 'all',
+                        rules: {
+                            hue: '0x00ff00'
+                        }
+                    }
+                ]
+            };
+            dispatch(mapImageURL(gmAPI.staticMap(params)));
+        }
+    } else {
+        return (dispatch) => {
+            var params = {
+                center: STOCKHOLM_LOCATION,
+                zoom: 12,
+                size: '640x200',
+                maptype: 'roadmap',
+                markers: [
+                    {
+                        location: STOCKHOLM_LOCATION,
+                        label   : 'A',
+                        color   : 'red',
+                        shadow  : true
+                    }
+                ],
+                style: [
+                    {
+                        feature: 'road',
+                        element: 'all',
+                        rules: {
+                            hue: '0x00ff00'
+                        }
+                    }
+                ]
+            };
+            dispatch(mapImageURL(gmAPI.staticMap(params)));
+        }
     }
 }
