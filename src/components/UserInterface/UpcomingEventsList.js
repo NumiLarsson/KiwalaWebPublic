@@ -1,26 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './styles/eventlist.css';
-import api from '../api/Api';
-import { addEvent, removeEvent, updateEvent } from './../actions/events'
+import api from '../../api/Api';
+import { addEvent, removeEvent, updateEvent } from '../../actions/events'
 import { Link } from 'react-router';
-import { loadMapImageURL} from './../actions/maps'
 
-
-class EventList extends Component {
+class UpcomingEventsList extends Component {
 
     formatEvents(events) {
         const formattedEvents = events.map( 
             (event) => 
                 <li key={event.id}>
-                    <Link to={`/event:${event.id}`}>
+                    <Link to={`/event/${event.id}`}>
                         {event.name}
                     </Link>
                 </li>
         )
         return formattedEvents
     }
-
 
     render() {
         let {title, counter, loadRandomEvent,
@@ -48,8 +45,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
     addEvent,
     removeEvent,
-    updateEvent,
-    loadMapImageURL
+    updateEvent
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(EventList);
