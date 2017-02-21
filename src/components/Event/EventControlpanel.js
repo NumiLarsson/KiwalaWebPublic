@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 import { formatDate, formatLocation } from '../../utils/utils';
 import { attendEvent, unattendEvent } from '../../actions/eventviewer';
 import './styles/eventcontrolpanel.css';
@@ -32,6 +33,7 @@ class EventControlpanel extends Component {
             return (
                 <div className="event-controlpanel">
                     <button className="event-controlpanel__attendbtn" onClick={this.attendEvent}><i className="material-icons">event_available</i> <span>Attend</span></button>
+                    <Link to={'/event/settings/' + this.props.event.id}>Settings</Link>
                 </div>
             )
         }
@@ -40,6 +42,7 @@ class EventControlpanel extends Component {
             return (
                 <div className="event-controlpanel">
                     <button className="event-controlpanel__unattendbtn" onClick={this.unattendEvent}><i className="material-icons">event_busy</i> <span>Unattend</span></button>
+                    <Link to={'/event/settings/' + this.props.event.id}>Settings</Link>
                 </div>
             )
         }
