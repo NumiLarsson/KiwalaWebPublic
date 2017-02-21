@@ -1,5 +1,6 @@
 import {EVENT_ACTIONS} from '../actions/eventviewer';
 import { MAPS_ACTIONS } from '../actions/maps';
+import {LOCATION_CHANGE} from "react-router-redux";
 const { GET_EVENT, SET_CURRENT_EVENT } = EVENT_ACTIONS;
 
 const initialState = {
@@ -10,7 +11,7 @@ const initialState = {
 export default (state = initialState, action) => {
     switch(action.type) {
 
-        case SET_CURRENT_EVENT:
+        case LOCATION_CHANGE:
 
             return Object.assign({}, state, {
                 event: action.payload

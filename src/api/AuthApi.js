@@ -43,7 +43,7 @@ export default class AuthApi {
   }
 
   /**
-   * Get the current user signed in to the application. 
+   * Get the current user signed in to the application.
    * Should be used with care, it updates asynchrounously and may not return the correct user object because of this.
    */
   getCurrentUser() {
@@ -69,11 +69,11 @@ export default class AuthApi {
               reject(err);
           })
       })
-    }  
+    }
 
   /*
     Register to listen for auth changes.
-    Returns a function which can be used to unregister the listener. 
+    Returns a function which can be used to unregister the listener.
   */
   listenForAuthChanges(signedIn, signedOut) {
     return this.auth().onAuthStateChanged(user => {
@@ -81,7 +81,7 @@ export default class AuthApi {
         signedIn(user);
       } else {
         signedOut();
-      } 
+      }
     });
   }
 
@@ -97,13 +97,15 @@ export default class AuthApi {
     return new Promise((resolve, reject) => {
         self.auth().signInWithEmailAndPassword(email, password)
         .then(user => {
+            console.log(user);
+            // TODO: Store a token to localStorage
           resolve(user);
         })
         .catch(error => {
           let err = EMAIL_LOGIN_ERRORS[error.code] || 'Network error';
           reject(err);
         });
-    }); 
+    });
   }
 
 
@@ -117,6 +119,7 @@ export default class AuthApi {
     return new Promise((resolve, reject) => {
       self.auth().signInWithPopup(provider)
       .then(user => {
+          // TODO: Store a token to localStorage
         resolve(user);
       })
       .catch(error => {
@@ -124,7 +127,7 @@ export default class AuthApi {
         reject(err);
       })
     })
-    
+
   }
 
  /**
@@ -145,6 +148,7 @@ export default class AuthApi {
     const self = this;
     return new Promise((resolve, reject) => {
         self.auth().getRedirectResult().then(user => {
+            // TODO: Store a token to localStorage
           resolve(user);
         })
         .catch(error => {
@@ -153,7 +157,7 @@ export default class AuthApi {
         });
     });
   }
-    
+
 /**
  * Logout from the application
  * @returns A Promise which resolves to a Success message and rejects with an error message.
@@ -163,10 +167,15 @@ export default class AuthApi {
     return new Promise((resolve, reject) => {
         self.auth().signOut()
         .then(() => {
+            // TODO: Clear token from localStorage
           resolve(RESULT.SUCCESS);
         }).catch(error => {
           reject(error);
         });
     });
+  }
+
+  loggedIn() {
+    return !!localStorage.token;
   }
 }
