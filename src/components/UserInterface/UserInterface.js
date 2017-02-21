@@ -24,8 +24,8 @@ export default class UserInterface extends Component {
         return(
             <div className="UserInterface">
                 {username}
-                <div className="upcomingEvents">
-                    {upcomingEvents}
+                <div className="UpcomingEventsList">
+                    {upcomingEventsList}
                 </div>
             </div>
         );
