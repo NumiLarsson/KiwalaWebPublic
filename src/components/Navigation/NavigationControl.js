@@ -12,7 +12,7 @@ const NavigationControl = (props) => {
             return (
                 <div className="navigationcontrol">
                     <div className="navigationcontrol-item">
-                         <button className="navigationcontrol-item__button" onClick={goToHome}><i className="material-icons">home</i><br className="only-on-mobile"/><span className="">Home</span></button>
+                         <button className="navigationcontrol-item__button" onClick={goToHome}><i className="material-icons color-green">home</i><br className="only-on-mobile"/><span className="">Home</span></button>
                     </div>
                     <div className="navigationcontrol-item">
                          <button className="navigationcontrol-item__button"><i className="material-icons">person</i><br className="only-on-mobile"/><span className="">Profile</span></button>
