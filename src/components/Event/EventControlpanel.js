@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
 import { formatDate, formatLocation } from '../../utils/utils';
 import { attendEvent, unattendEvent } from '../../actions/eventviewer';
 import './styles/eventcontrolpanel.css';
@@ -31,18 +30,20 @@ class EventControlpanel extends Component {
         // If logged in && not attending
         if(this.props.user && !this.props.user.isAnonymous && !isAttendingEvent(this.props.event, this.props.user.uid)) {
             return (
-                <div className="event-controlpanel">
-                    <button className="event-controlpanel__attendbtn" onClick={this.attendEvent}><i className="material-icons">event_available</i> <span>Attend</span></button>
-                    <Link to={'/event/settings/' + this.props.event.id}>Settings</Link>
+                <div className="event-controlpanel-wrapper">
+                    <div className="event-controlpanel">
+                        <button className="event-controlpanel__attendbtn" onClick={this.attendEvent}><i className="material-icons">event_available</i> <span>Attend</span></button>
+                    </div>
                 </div>
             )
         }
         // If logged in && already attending
         else if(this.props.user && !this.props.user.isAnonymous && isAttendingEvent(this.props.event, this.props.user.uid)) {
             return (
-                <div className="event-controlpanel">
-                    <button className="event-controlpanel__unattendbtn" onClick={this.unattendEvent}><i className="material-icons">event_busy</i> <span>Unattend</span></button>
-                    <Link to={'/event/settings/' + this.props.event.id}>Settings</Link>
+                <div className="event-controlpanel-wrapper">
+                    <div className="event-controlpanel">
+                        <button className="event-controlpanel__unattendbtn" onClick={this.unattendEvent}><i className="material-icons">event_busy</i> <span>Unattend</span></button>
+                    </div>
                 </div>
             )
         }
