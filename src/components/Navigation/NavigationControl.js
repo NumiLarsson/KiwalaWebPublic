@@ -41,7 +41,7 @@ const NavigationControl = (props) => {
                      <button className="navigationcontrol-item__button" onClick={goToHome}><i className="material-icons color-dark-blue">person</i><br className="only-on-mobile"/><span className="color-dark-blue">Login</span></button>
                 </div>
                 <div className="navigationcontrol-item">
-                     <button className="navigationcontrol-item__button"><i className="material-icons color-dark-green">person_add</i><br className="only-on-mobile"/><span className="color-dark-green">Register</span></button>
+                     <button className="navigationcontrol-item__button" onClick={goToHome}><i className="material-icons color-dark-green">person_add</i><br className="only-on-mobile"/><span className="color-dark-green">Register</span></button>
                 </div>
             </div> 
         )
