@@ -60,15 +60,9 @@ class Example extends Component {
     render() {
         return (
             <div className="example">
-                <h1>This is the example container</h1>
-                <h2>Title: {this.props.title} </h2>
-                <h2>Counter: {this.props.counter} </h2>
+                <h1>Demo</h1>
                 <button onClick={this.loadRandomEvent}>Load random event</button>
                 <br/>
-                <button onClick={this.increaseCounter}>Increase counter</button>
-                <label htmlFor="title">Type in the field to change the title.</label> 
-                <input name="title" type="text" value={this.props.title} onChange={this.changeTitle} />
-                <button onClick={this.changeTitleAsync}>Update title async</button>
                 <button onClick={this.login}>Login</button>
                 <button onClick={this.logout}>Logout</button>
             </div>

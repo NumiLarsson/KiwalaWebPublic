@@ -105,7 +105,7 @@
         ".read": "true",
         "participants": {
           ".validate": "true",
-          ".write": "true"
+          ".write": "auth != null"
         }
       }
     }

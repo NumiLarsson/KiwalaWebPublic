@@ -26,7 +26,7 @@ path /events/{eventId} is Event {}
 
 
 path /events/{eventId}/participants {
-  write() {true}
+  write() {isSignedIn()}
 }
 
 type Event {
