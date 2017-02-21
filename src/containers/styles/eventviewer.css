@@ -2,6 +2,9 @@
 	display: flex;
     flex-direction: column;
     align-items: center;
+
+    /* For the navigation */
+    padding-bottom: 10%;
 }
 
 .event-content {
@@ -22,6 +25,12 @@
 
 /* Desktop */
 @media only screen and (min-width: 1024px) {
+
+	.event-viewer {
+	    /* For the navigation */
+	    padding-top: 50px;
+	}
+
 	.event-content{
 		width: 1024px;
 

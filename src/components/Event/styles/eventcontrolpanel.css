@@ -65,11 +65,11 @@
 }
 .event-controlpanel__unattendbtn > i,
 .event-controlpanel__attendbtn > i {
-	font-size: 3em;
+	font-size: 2.5em;
 }
 .event-controlpanel__unattendbtn > span,
 .event-controlpanel__attendbtn > span {
-	font-size: 2.4em;
+	font-size: 2em;
 	font-weight: 600;
 
 	margin-left: 5px;
