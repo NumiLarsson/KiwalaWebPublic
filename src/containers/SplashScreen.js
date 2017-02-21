@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { userLoggedIn, userLoggedOut } from '../actions/auth';
+import Login from './Login';
 import './styles/splashscreen.css';
 import api from '../api/Api';
 
@@ -45,7 +46,7 @@ class SplashScreen extends Component {
                 <h1>Demo</h1>
                 <Link to={'event/2'}>Load demo event</Link>
                 <br/>
-                <Link to={'/login'}>Login</Link>
+                <Login />
             </div>
         )
     }
