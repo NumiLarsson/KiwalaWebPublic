@@ -13,7 +13,7 @@ const FIREBASE_CONFIG = {
 firebase.initializeApp(FIREBASE_CONFIG);
 
 class Api {
-  events = new EventApi();
+  events = new EventApi(firebase.database);
   auth = new AuthApi(firebase.auth);
 
   constructor() {

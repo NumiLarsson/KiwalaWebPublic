@@ -11,7 +11,7 @@ const EventDetails = (props) => {
             <div className="event-details">
                 { renderStartDate(props.module, props.startDate) }
                 { renderLocation(props.module, props.location) }
-                { renderMap(props.module, props.location, props.showMap) }
+                { renderMap(props.module, props.map, props.showMap) }
             </div> 
         )
     }
@@ -25,9 +25,9 @@ const EventDetails = (props) => {
 function renderStartDate(module, startDate) {
     if(module.showTime) {
         return (
-            <div>
+            <div className="event-details__item">
                 <i className="material-icons color-light-blue">event</i>
-                <span> { formatDate(startDate) } </span>
+                <div className="event-details__item-text" title={ formatDate(startDate) }> { formatDate(startDate) } </div>
             </div>
         );
     }
@@ -41,9 +41,9 @@ function renderStartDate(module, startDate) {
 function renderLocation(module, location) {
     if(module.showLocation) {
         return (
-            <div>
+            <div className="event-details__item">
                 <i className="material-icons color-light-blue">location_on</i>
-                <span> { formatLocation(location) } </span>
+                <div className="event-details__item-text" title={ formatLocation(location) }> { formatLocation(location) } </div>
             </div>
         );
     }
@@ -54,10 +54,11 @@ function renderLocation(module, location) {
     }
 }
 
-function renderMap(module, location, showMap) {
+function renderMap(module, map, showMap) {
     if(module.showMap) {
         return (
             <div className="event-details__map">
+                <img className="map-image" src={map} />
             </div>
         );
     }

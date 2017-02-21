@@ -11,6 +11,7 @@
 	box-sizing: border-box;
 }
 
+.event-controlpanel__unattendbtn,
 .event-controlpanel__attendbtn {
 	outline: none;
 	border: none;
@@ -22,19 +23,32 @@
 	background-color: #43A047;
 	border-radius: 4px;
 
-	transition: background-color 0.5s;
+	transition: background-color 0.2s;
 }
 .event-controlpanel__attendbtn:hover {
 	color: #fff;
 	background-color: #66BB6A;
 }
+
+.event-controlpanel__unattendbtn {
+	background-color: #D32F2F;
+}
+.event-controlpanel__unattendbtn:hover {
+	color: #fff;
+	background-color: #EF5350;
+}
+
+.event-controlpanel__unattendbtn > i,
+.event-controlpanel__unattendbtn > span,
 .event-controlpanel__attendbtn > i,
 .event-controlpanel__attendbtn > span {
 	vertical-align: middle;
 }
+.event-controlpanel__unattendbtn > i,
 .event-controlpanel__attendbtn > i {
 	font-size: 3em;
 }
+.event-controlpanel__unattendbtn > span,
 .event-controlpanel__attendbtn > span {
 	font-size: 2.4em;
 	font-weight: 600;
@@ -44,9 +58,11 @@
 
 /* Desktop */
 @media only screen and (min-width: 1024px) {
+	.event-controlpanel__unattendbtn > i,
 	.event-controlpanel__attendbtn > i {
 		font-size: 24px;
 	}
+	.event-controlpanel__unattendbtn > span,
 	.event-controlpanel__attendbtn > span {
 		font-size: 2em;
 	}

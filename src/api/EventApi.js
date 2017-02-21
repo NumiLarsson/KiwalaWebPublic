@@ -1,42 +1,106 @@
-import Event from '../models/Event';
-
 export default class EventApi {
-  getEvent(uuid) {
-    return new Promise((resolve, reject) => {
-    	var event = new Event(uuid, "Awesome event at camping place", 
-    			new Date(), "Stockholm",
-    			"This is a description of the awesome event. It will take place in... YOUR PANTS BADUMM-DSHHH!",
-    			{
-    				headerDetails:{
-    					enabled: true,
-						showTime: true, 
-						showLocation: true
-					},
-    				eventDetails:{
-    					enabled: true,
-    					showTime: true,
-    					showLocation: true,
-    					showMap: true
-					},
-					eventDescription:{
-						enabled: true,
-					},
-					eventParticipants:{
-						enabled: true,
-					}
-    			},
-                [
-                    {name: "Eyeam Smart", avatar: null, id: 1},
-                    {name: "Will Udye", avatar: null, id: 2},
-                    {name: "Meg Aboot", avatar: null, id: 3},
-                    {name: "Eyegot Wood", avatar: null, id: 4},
-                    {name: "Fil Mey", avatar: null, id: 5},
-                    {name: "Anote Rack", avatar: null, id: 6}
-                ]);
+  
+  
+	constructor(database) {
+		this.database = database;
+		this.subscriptions = {};
+	}
 
-    	setTimeout(function() {
-        	resolve(event);
-        }, 1000);
-    });
-  }
+	getEvent(eventId) {
+	  let self = this;
+
+	  return new Promise((resolve, reject) =>{
+		  self.database().ref(`/events/${eventId}`).once('value')
+		  .then(snapshot => {
+			  let event = snapshot.val();
+
+			  if(event) {
+				  resolve(event);
+			  } else {
+				  reject('No event with that id exists');
+			  }
+		  })
+		  .catch(err => {
+			  reject(err);
+		  })
+	  })
+	}
+
+
+	subscribeToEvent(eventId, callback) {
+	let self = this;
+	return new Promise((resolve, reject) => {
+			self.getEvent(eventId)
+			.then(event => {
+				let ref = self.database().ref(`/events/${eventId}`)
+				ref.on('value', snapshot => {
+					callback(snapshot.val());
+				});
+				this.subscriptions[event] = ref;
+				resolve('SUCCESS');
+			})
+			.catch(err => {
+				reject(err);
+			})
+	});
+	}
+	// /this.subscriptions[event] = ref;
+
+	attendEvent(eventId, uid) {
+	let self = this;
+		return new Promise((resolve, reject) => {
+	        let updates = {};
+	        updates[`/events/${eventId}/participants/${uid}`] = true;
+	        self.database().ref().update(updates)
+	        .then(() => {
+	            resolve('SUCCESS');
+	        })
+	        .catch(err => {
+	            reject(err);
+	        });
+	    })
+	}
+
+	unattendEvent(eventId, uid) {
+		let self = this;
+		return new Promise((resolve, reject) => {
+	        self.database().ref(`/events/${eventId}/participants/${uid}`).set(null)
+	        .then(() => {
+	            resolve('SUCCESS');
+	        })
+	        .catch(err => {
+	            reject(err);
+	        });
+	    })
+	}
+
+	subscribeToEventList(added, changed, deleted) {
+		let ref = this.database().ref('/events');
+		ref.on('child_added', (snapshot => {
+			added(snapshot.val());
+		}));
+
+		ref.on('child_changed', (snapshot => {
+			changed(snapshot.val());
+		}));
+
+		ref.on('child_removed', (snapshot => {
+			deleted(snapshot.val());
+		}));
+
+		this.subscriptions['eventList'] = ref;
+	}
+
+	/**
+	  * Clear all subscriptions.
+	*/
+    clearSubscriptions() {
+        for (var key in this.subscriptions) {
+            if (this.subscriptions.hasOwnProperty(key) && this.subscriptions[key]) {
+                this.subscriptions[key].off();
+                this.subscriptions[key] = null;
+            }
+        }
+    }
+
 }

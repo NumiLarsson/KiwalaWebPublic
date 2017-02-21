@@ -8,7 +8,7 @@ const EventParticipants = (props) => {
         return (
             <div className="event-participants">
                 <div className="event-participants__header">
-                    <i className="material-icons color-light-blue">person</i> <span> Participants ({ props.participants.length })</span>
+                    <i className="material-icons color-light-blue">person</i> <span> Participants ({ Object.keys(props.participants).length })</span>
                 </div>
                 <div className="event-participants__list"> 
                     { renderParticipants(props.participants) } 
@@ -25,6 +25,23 @@ const EventParticipants = (props) => {
 }
 
 function renderParticipants(participants) {
+
+    const listItems = [];
+
+    for (var key in participants) {
+            if (participants.hasOwnProperty(key)) {
+                listItems.push(
+                    <div key={key} className="event-participant">
+                        { renderAvatar(key) }
+                    <div className="event-participant__name" title={ key }>{ key }</div>
+                    </div>
+                )
+            }
+    }
+    return listItems;
+}
+
+/*
     const listItems = participants.map((participant) =>
         <div key={participant.id} className="event-participant">
             { renderAvatar(participant) }
@@ -33,10 +50,10 @@ function renderParticipants(participants) {
     );
 
     return listItems;
-}
+}*/
 
 function renderAvatar(participant) {
-    if(participant.avatar) {
+    if(!participant) {
         return (
             <div className="event-participant__avatar"></div>
         );

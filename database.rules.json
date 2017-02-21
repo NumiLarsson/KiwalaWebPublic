@@ -1,6 +1,113 @@
 {
   "rules": {
-    ".read": "auth != null",
-    ".write": "auth != null"
+    "users": {
+      "$uid": {
+        ".validate": "newData.hasChildren(['email'])",
+        "email": {
+          ".validate": "newData.isString() && newData.val().matches(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\\\.[A-Z]{2,4}$/i)"
+        },
+        "name": {
+          ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length < 100"
+        },
+        "$other": {
+          ".validate": "false"
+        },
+        ".read": "auth != null && auth.uid == $uid",
+        ".write": "auth != null && auth.uid == $uid",
+        "events": {
+          "$eventref": {
+            ".validate": "newData.isBoolean() && root.child('events').child($eventref).val() != null"
+          }
+        }
+      }
+    },
+    "events": {
+      "$eventId": {
+        ".validate": "newData.hasChildren()",
+        "id": {
+          ".validate": "newData.isString()"
+        },
+        "name": {
+          ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length < 100"
+        },
+        "startDate": {
+          ".validate": "newData.isNumber()"
+        },
+        "location": {
+          ".validate": "newData.isString()"
+        },
+        "description": {
+          ".validate": "newData.isString()"
+        },
+        "headerImg": {
+          ".validate": "newData.isString()"
+        },
+        "modules": {
+          ".validate": "newData.hasChildren() && newData.hasChildren(['headerDetails', 'eventDetails', 'eventDescription', 'eventParticipants'])",
+          "headerDetails": {
+            ".validate": "newData.hasChildren() && newData.hasChildren(['enabled', 'showTime', 'showLocation'])",
+            "enabled": {
+              ".validate": "newData.isBoolean()"
+            },
+            "showTime": {
+              ".validate": "newData.isBoolean()"
+            },
+            "showLocation": {
+              ".validate": "newData.isBoolean()"
+            },
+            "$other": {
+              ".validate": "false"
+            }
+          },
+          "eventDetails": {
+            ".validate": "newData.hasChildren() && newData.hasChildren(['enabled', 'showTime', 'showLocation', 'showMap'])",
+            "enabled": {
+              ".validate": "newData.isBoolean()"
+            },
+            "showTime": {
+              ".validate": "newData.isBoolean()"
+            },
+            "showLocation": {
+              ".validate": "newData.isBoolean()"
+            },
+            "showMap": {
+              ".validate": "newData.isBoolean()"
+            },
+            "$other": {
+              ".validate": "false"
+            }
+          },
+          "eventDescription": {
+            ".validate": "newData.hasChildren() && newData.hasChildren(['enabled'])",
+            "enabled": {
+              ".validate": "newData.isBoolean()"
+            },
+            "$other": {
+              ".validate": "false"
+            }
+          },
+          "eventParticipants": {
+            ".validate": "newData.hasChildren() && newData.hasChildren(['enabled'])",
+            "enabled": {
+              ".validate": "newData.isBoolean()"
+            },
+            "$other": {
+              ".validate": "false"
+            }
+          },
+          "$other": {
+            ".validate": "false"
+          }
+        },
+        "$other": {
+          ".validate": "false"
+        },
+        ".read": "true",
+        "participants": {
+          ".validate": "true",
+          ".write": "auth != null"
+        }
+      }
+    }
   }
 }

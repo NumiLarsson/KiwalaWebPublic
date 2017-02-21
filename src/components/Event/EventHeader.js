@@ -22,7 +22,8 @@ const EventHeader = (props) => {
 
 function getHeaderImgStyle(headerImg) {
     return {
-      backgroundImage: 'url(images/' + headerImg + ')',
+      backgroundImage: 'url(../images/event_header_default.jpg)',
+      //backgroundImage: 'url(' + headerImg + ')',
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
       backgroundPosition: 'center',

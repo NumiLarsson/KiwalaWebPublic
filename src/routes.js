@@ -6,14 +6,26 @@ import { Route, IndexRoute } from 'react-router';
 
 //Containers to be used as the building blocks of the application.
 import App from './containers/App';
-import Example from './containers/Example';
+import SplashScreen from './containers/SplashScreen';
 import EventViewer from './containers/EventViewer';
+import Login from "./containers/Login";
+import Api from './api/Api';
 
+// Taken from https://github.com/ReactTraining/react-router/blob/master/examples/auth-flow/app.js
+function requireAuth(nextState, replace) {
+    if (! Api.auth.loggedIn()) {
+        replace({
+            pathname: '/login',
+            state: {nextPathname: nextState.location.pathname}
+        })
+    }
+}
 
 const routes = (
     <Route path="/" component={App}>
-        <IndexRoute component={Example} />
-        <Route path="/event:eventid" component={EventViewer}/>
+        <IndexRoute component={SplashScreen} />
+        <Route path="/event/:eventid" component={EventViewer}/>
+        <Route path="/login" component={Login} />
     </Route>
 );
 
