@@ -24,7 +24,7 @@ function requireAuth(nextState, replace) {
 const routes = (
     <Route path="/" component={App}>
         <IndexRoute component={Example} />
-        <Route path="/event:eventid" component={EventViewer} onEnter={requireAuth}/>
+        <Route path="/event:eventid" component={EventViewer}/>
         <Route path="/login" component={Login} />
     </Route>
 );

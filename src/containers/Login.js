@@ -50,8 +50,8 @@ class Login extends Component {
 //Maps the state in our store to the props property of the Example object.
 const mapStateToProps = (state) => {
     return {
-        email: state.email,
-        password: state.password
+        email: state.login.email,
+        password: state.login.password
     }
 }
 

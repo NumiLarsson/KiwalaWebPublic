@@ -94,7 +94,6 @@ export default class AuthApi {
  */
   loginWithEmail(email="", password="") {
     const self = this;
-    console.log('logging in with email');
     return new Promise((resolve, reject) => {
         self.auth().signInWithEmailAndPassword(email, password)
         .then(user => {
