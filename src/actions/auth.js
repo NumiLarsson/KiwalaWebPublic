@@ -22,28 +22,15 @@ export const AUTH_ACTIONS = {
 export const userLoggedIn = createAction(AUTH_ACTIONS.USER_LOGGED_IN);
 export const userLoggedOut = createAction(AUTH_ACTIONS.USER_LOGGED_OUT);
 
-//Async action. This is what the thunk middleware lets us do.
-export function loginWithEmail(email, password) {
-    return dispatch => {
-        Api.auth.loginWithEmail(email, password)
-        .then((user) => {
-            dispatch(userLoggedIn(user))
-        })
-        .catch((error) => {
-            console.log(error);
-            //dispatch({type: "GET_EVENT_ERROR", payload: eventId});
-        })
-    }
-}
-
-export function logout(eventId, uid) {
-    return dispatch => {
-        Api.events.logout()
-        .then(res => {
-            dispatch(userLoggedOut(res));
-        })
-        .catch(err => {
-            console.log(err);
-        })
-    }
+export function listenForAuthChanges() {
+    return (dispatch, getState) => {
+        Api.auth.listenForAuthChanges(
+            (user) => {
+                dispatch(userLoggedIn(user))
+            }, //Success
+            () => {
+                dispatch(userLoggedOut());
+            }
+        );
+    };
 }

@@ -1,10 +1,10 @@
-.example {
+.splashscreen {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.example > input, label {
+.splashscreen > input, label {
     margin-top: 10px;
     margin-bottom: 10px;
 }
