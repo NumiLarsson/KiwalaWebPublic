@@ -41,6 +41,26 @@
   color: #242424;
 }
 
-.color-light-blue {
+.color-green {
+  color: #4CAF50;
+}
+
+.color-dark-green {
+  color: #1B5E20;
+}
+
+.color-dark-blue {
+  color: #0D47A1;
+}
+
+.color-blue {
   color: #2196F3;
+}
+
+
+/* Desktop */
+@media only screen and (min-width: 1024px) {
+  .only-on-mobile {
+    display: none;
+  }
 }

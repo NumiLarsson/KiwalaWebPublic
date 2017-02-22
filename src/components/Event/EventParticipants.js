@@ -8,7 +8,7 @@ const EventParticipants = (props) => {
         return (
             <div className="event-participants">
                 <div className="event-participants__header">
-                    <i className="material-icons color-light-blue">person</i> <span> Participants ({ Object.keys(props.participants).length })</span>
+                    <i className="material-icons color-blue">person</i> <span> Participants ({ Object.keys(props.participants).length })</span>
                 </div>
                 <div className="event-participants__list"> 
                     { renderParticipants(props.participants) } 

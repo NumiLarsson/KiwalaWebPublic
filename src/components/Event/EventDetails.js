@@ -26,7 +26,7 @@ function renderStartDate(module, startDate) {
     if(module.showTime) {
         return (
             <div className="event-details__item">
-                <i className="material-icons color-light-blue">event</i>
+                <i className="material-icons color-blue">event</i>
                 <div className="event-details__item-text" title={ formatDate(startDate) }> { formatDate(startDate) } </div>
             </div>
         );
@@ -42,7 +42,7 @@ function renderLocation(module, location) {
     if(module.showLocation) {
         return (
             <div className="event-details__item">
-                <i className="material-icons color-light-blue">location_on</i>
+                <i className="material-icons color-blue">location_on</i>
                 <div className="event-details__item-text" title={ formatLocation(location) }> { formatLocation(location) } </div>
             </div>
         );

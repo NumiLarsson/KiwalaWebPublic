@@ -8,3 +8,9 @@
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
+.splashscreen-logo {
+	margin-top: 30px;
+	width: 80%;
+	max-width: 400px;
+}

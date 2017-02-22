@@ -9,6 +9,7 @@ import App from './containers/App';
 import SplashScreen from './containers/SplashScreen';
 import EventViewer from './containers/EventViewer';
 import UserInterface from './containers/UserInterface';
+import EventEditor from './containers/EventEditor';
 import Login from "./containers/Login";
 import Api from './api/Api';
 
@@ -28,6 +29,7 @@ const routes = (
         <Route path="/event/:eventid" component={EventViewer}/>
         <Route path="/login" component={Login} />
         <Route path="/user/:userid" component={UserInterface}/>
+        <Route path="event/settings/:eventid" component={EventEditor} />
     </Route>
 );
 

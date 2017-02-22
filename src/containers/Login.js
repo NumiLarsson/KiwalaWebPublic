@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { setEmail, setPassword, login } from '../actions/login';
+import { setEmail, setPassword, login, logout } from '../actions/login';
 import EventDetails from '../components/Event/EventDetails';
 import EventDescription from '../components/Event/EventDescription';
 import EventParticipants from '../components/Event/EventParticipants';
-import './styles/eventviewer.css';
+import './styles/loginscreen.css';
 
 class Login extends Component {
     
@@ -14,6 +14,7 @@ class Login extends Component {
         this.setPassword = this.setPassword.bind(this);
         this.loginWithEmail = this.loginWithEmail.bind(this);
         this.loginWithFacebook = this.loginWithFacebook.bind(this);
+        this.logout = this.logout.bind(this);
     }
 
     setEmail(event) {
@@ -32,24 +33,44 @@ class Login extends Component {
         this.props.login('facebook');
     }
 
+    logout() {
+        this.props.logout();
+    }
+
     render() {
-        return (
-            <div className="login-screen">
-                <button type="button" onClick={this.loginWithFacebook}>Login with Facebook</button>
-                <span>OR</span>
-                <form>
-                    <input type="text" placeholder="Email address" onChange={this.setEmail}/>
-                    <input type="password" placeholder="Password" onChange={this.setPassword}/>
-                    <button type="button" onClick={this.loginWithEmail}>Login</button>
-                </form>
-            </div>
-        )
+        // If user is logged in
+        if(this.props.user && !this.props.user.isAnonymous) {
+            return (
+                <div className="login-screen">
+                    <form>
+                        <button className="login-screen__button red" type="button" onClick={this.logout}><i className="material-icons">person</i><span>Logout</span></button>
+                    </form>
+                </div>
+            )
+        }
+        else {
+            return (
+                <div className="login-screen">
+                    <button type="button" onClick={this.loginWithFacebook}>Login with Facebook</button>
+                    <span>OR</span>
+                    <br />
+                    <form>
+                        <input className="login-screen__input" type="text" placeholder="Email address" onChange={this.setEmail}/>
+                        <br />
+                        <input className="login-screen__input" type="password" placeholder="Password" onChange={this.setPassword}/>
+                        <br />
+                        <button className="login-screen__button" type="button" onClick={this.loginWithEmail}><i className="material-icons">person</i><span>Login</span></button>
+                    </form>
+                </div>
+            )
+        }
     }
 }
 
 //Maps the state in our store to the props property of the Example object.
 const mapStateToProps = (state) => {
     return {
+        user: state.auth.user,
         email: state.login.email,
         password: state.login.password
     }
@@ -59,6 +80,7 @@ const mapStateToProps = (state) => {
 //access them through the props property of the Example object. 
 const mapDispatchToProps = {
     login,
+    logout,
     setEmail,
     setPassword
 }

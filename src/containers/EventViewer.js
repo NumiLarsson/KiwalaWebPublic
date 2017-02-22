@@ -6,6 +6,7 @@ import EventDetails from '../components/Event/EventDetails';
 import EventDescription from '../components/Event/EventDescription';
 import EventParticipants from '../components/Event/EventParticipants';
 import EventControlpanel from '../components/Event/EventControlpanel';
+import NavigationControl from '../components/Navigation/NavigationControl';
 import Spinner from '../components/Utils/Spinner';
 import './styles/eventviewer.css';
 import { loadMapImageURL } from '../actions/maps'
@@ -34,21 +35,25 @@ class EventViewer extends Component {
         else {
             console.log(this.props.event);
             return (
-                <div className="event-viewer">
-                    <EventHeader headerImg={this.props.event.headerImg} name={this.props.event.name} module={this.props.event.modules.headerDetails} startDate={this.props.event.startDate} location={this.props.event.location} />
+                <div>
+                    <NavigationControl user={this.props.user} template="eventviewer" />
+                    <div className="event-viewer">
 
-                    <EventControlpanel />
+                        <EventHeader headerImg={this.props.event.headerImg} name={this.props.event.name} module={this.props.event.modules.headerDetails} startDate={this.props.event.startDate} location={this.props.event.location} />
 
-                    <div className="event-content">
-                        <div className="event-content__spotlight">
-                            <EventDetails module={this.props.event.modules.eventDetails} startDate={this.props.event.startDate} location={this.props.event.location} map={this.props.map}/>
-                            <EventDescription module={this.props.event.modules.eventDescription} description={this.props.event.description} />
+                        <EventControlpanel />
+
+                        <div className="event-content">
+                            <div className="event-content__spotlight">
+                                <EventDetails module={this.props.event.modules.eventDetails} startDate={this.props.event.startDate} location={this.props.event.location} map={this.props.map}/>
+                                <EventDescription module={this.props.event.modules.eventDescription} description={this.props.event.description} />
+                            </div>
+                            <div className="event-content__sideline">
+                                <EventParticipants module={this.props.event.modules.eventParticipants} participants={this.props.event.participants} />
+                            </div>
                         </div>
-                        <div className="event-content__sideline">
-                            <EventParticipants module={this.props.event.modules.eventParticipants} participants={this.props.event.participants} />
-                        </div>
+
                     </div>
-
                 </div>
             )
         }
