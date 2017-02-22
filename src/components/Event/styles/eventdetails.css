@@ -16,8 +16,27 @@
 	box-shadow: 1px 2px 3px #BDBDBD;
 }
 
-.event-details div{
+.event-details > .event-details__item{
 	padding: 1px 5px 1px 0;
+}
+
+.event-details__header {
+	padding-bottom: 10px;
+	border-bottom: 1px solid #E0E0E0;
+}
+
+.event-details__header > i,
+.event-details__header > span {
+	vertical-align: middle;
+}
+
+.event-details__header > span {
+	font-weight: 400;
+	font-size: 1.3em;
+}
+
+.event-details-spacer {
+	margin-top: 15px;
 }
 
 .event-details__item {
@@ -62,6 +81,9 @@
 /* Desktop */
 @media only screen and (min-width: 768px) {
 	.event-details__item-text {
+		font-size: 1.1em;
+	}
+	.event-details__header > span {
 		font-size: 1.1em;
 	}
 }

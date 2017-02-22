@@ -37,39 +37,14 @@
 	text-align: left;
 	padding-right: 15px;
 
-	bottom: 35pt;
-	left: 15pt;
+	bottom: 15px;
+	left: 15px;
 }
 
 .event-header__title h1 {
 	margin: 0;
 
 	font-size: 2.2em;
-	color: #fff;
-}
-
-.event-header__info {
-	position: absolute;
-
-	bottom: 10pt;
-	left: 15pt;
-}
-
-.event-header__info div {
-	display: inline-block;
-}
-.event-header__info div:nth-child(2) {
-	margin-left: 10px;
-}
-
-.event-header__info i {
-	vertical-align: middle;
-}
-
-.event-header__info span {
-	vertical-align: middle;
-
-	font-size: 1.3em;
 	color: #fff;
 }
 
@@ -84,11 +59,6 @@
 	.event-header__title h1 {
 		font-size: 2.5em;
 	}
-
-	.event-header__info span {
-		font-size: 1.1em;
-	}
-
 
 	.event-header__gradient {
 		background: linear-gradient(
@@ -105,13 +75,5 @@
 
 		bottom: 15pt;
 		left: 15pt;
-	}
-
-	.event-header__info {
-		position: absolute;
-
-		bottom: 10pt;
-		right: 15pt;
-		left: auto;
 	}
 }

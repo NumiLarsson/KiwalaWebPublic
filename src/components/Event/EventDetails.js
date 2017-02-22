@@ -9,9 +9,14 @@ const EventDetails = (props) => {
 
         return (
             <div className="event-details">
-                { renderStartDate(props.module, props.startDate) }
-                { renderLocation(props.module, props.location) }
-                { renderMap(props.module, props.map, props.showMap) }
+                <div className="event-details__header">
+                    <i className="material-icons color-blue">info</i> <span> Details </span>
+                </div>
+                <div className="event-details-spacer">
+                    { renderStartDate(props.module, props.startDate) }
+                    { renderLocation(props.module, props.location) }
+                    { renderMap(props.module, props.map, props.showMap) }
+                </div>
             </div> 
         )
     }

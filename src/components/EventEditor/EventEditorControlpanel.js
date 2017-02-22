@@ -28,9 +28,9 @@ class EventEditorControlpanel extends Component {
 
     render() {
         return (
-            <div className="event-controlpanel-wrapper">
-                <div className="event-controlpanel">
-                    <button className="event-controlpanel__button" onClick={this.attendEvent}><i className="material-icons">add</i> <span>Add module</span></button>
+            <div className="eventeditor-controlpanel-wrapper">
+                <div className="eventeditor-controlpanel">
+                    <button className="eventeditor-controlpanel__button" onClick={this.attendEvent}><i className="material-icons">add</i> <span>Add module</span></button>
                 </div>
             </div>
         )

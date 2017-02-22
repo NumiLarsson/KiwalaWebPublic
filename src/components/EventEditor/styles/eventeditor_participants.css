@@ -1,4 +1,4 @@
-.event-participants {
+.eventeditor-participants {
 	padding: 10pt 5pt 10pt 5pt;
 
 	margin-top: 5px;
@@ -6,7 +6,6 @@
 	text-align: left;
 
 	min-height: 125px;
-	max-height: 250px;
 
 	width: 100%;
 	word-wrap: break-word;
@@ -17,20 +16,28 @@
 	box-shadow: 1px 2px 3px #BDBDBD;
 }
 
-.event-participants__header {
-	padding-bottom: 10px;
+.eventeditor-participants__mainenabler {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	padding: 0px 5px 5px 0px;
 	border-bottom: 1px solid #E0E0E0;
 }
 
-.event-participants__header > i,
-.event-participants__header > span {
+.eventeditor-participants__header {
+	padding-bottom: 10px;
+}
+
+.eventeditor-participants__header > i,
+.eventeditor-participants__header > span {
 	vertical-align: middle;
 }
-.event-participants__header > span {
+.eventeditor-participants__header > span {
 	font-size: 1.3em;
 }
 
-.event-participants__list {
+.eventeditor-participants__list {
 	padding: 15px 20px;
 
 	/* Temporary values until we have a popup to show the rest */
@@ -38,7 +45,7 @@
     overflow: auto;
 }
 
-.event-participant {
+.eventeditor-participant {
 	padding-top: 4px;
 	padding-bottom: 4px;
 
@@ -47,7 +54,7 @@
     align-items: center;
 }
 
-.event-participant__avatar {
+.eventeditor-participant__avatar {
 	background-color: #E0E0E0;
 	width: 28px;
 	height: 28px;
@@ -57,14 +64,14 @@
 	flex-shrink: 0;
 }
 
-.event-participant__default__avatar {
+.eventeditor-participant__default__avatar {
 	color: #757575;
 
 	margin-top: 1px;
     margin-left: 1px;
 }
 
-.event-participant__name {
+.eventeditor-participant__name {
 	font-size: 1.2em;
 
 	padding-left: 10px;
@@ -78,19 +85,19 @@
 /* Desktop */
 @media only screen and (min-width: 768px) {
 
-	.event-participants {
+	.eventeditor-participants {
 		width: 300px;
 	}
 
-	.event-participants__header > p {
+	.eventeditor-participants__header > p {
 		font-size: 1em;
 	}
 
-	.event-participants__header > span {
+	.eventeditor-participants__header > span {
 		font-size: 1.1em;
 	}
 
-	.event-participant__name {
+	.eventeditor-participant__name {
 		font-size: 1em;
 
 		padding-left: 10px;

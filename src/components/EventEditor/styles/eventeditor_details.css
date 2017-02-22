@@ -27,7 +27,6 @@
 }
 
 .eventeditor-details__enabler {
-
 	padding: 0px 5px 10px 0px;
 	margin-bottom: 10px;
 	border-bottom: 1px solid #E0E0E0;
@@ -36,6 +35,20 @@
 .eventeditor-details__enabler > .eventeditor-details__item,
 .eventeditor-details__enabler > .eventeditor-details__map {
 	margin-top: 10px;
+}
+
+.eventeditor-details__header {
+	padding-bottom: 10px;
+}
+
+.eventeditor-details__header > i,
+.eventeditor-details__header > span {
+	vertical-align: middle;
+}
+
+.eventeditor-details__header > span {
+	font-weight: 400;
+	font-size: 1.3em;
 }
 
 .eventeditor-details__item {
@@ -81,6 +94,9 @@
 /* Desktop */
 @media only screen and (min-width: 768px) {
 	.eventeditor-details__item-text {
+		font-size: 1.1em;
+	}
+	.eventeditor-details__header > span {
 		font-size: 1.1em;
 	}
 }

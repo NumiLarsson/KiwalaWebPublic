@@ -11,6 +11,9 @@ const EventEditorDetails = (props) => {
 
         return (
             <div className="eventeditor-details">
+                <div className="eventeditor-details__header">
+                    <i className="material-icons color-blue">info</i> <span> Details </span>
+                </div>
                 <div className="eventeditor-details__mainenabler">
                     <CheckBox label="Show module" checked={true} />
                     <IconButton mIcon="save" label="Apply" />

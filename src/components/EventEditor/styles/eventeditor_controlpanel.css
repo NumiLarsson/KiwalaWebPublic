@@ -1,4 +1,4 @@
-.event-controlpanel-wrapper {
+.eventeditor-controlpanel-wrapper {
 	width: 100%;
 
 	display: flex;
@@ -9,7 +9,7 @@
 	box-sizing: border-box;
 }
 
-.event-controlpanel {
+.eventeditor-controlpanel {
 	background-color: #fff;
 	width: 100%;
 	min-height: 50px;
@@ -24,7 +24,7 @@
 	box-shadow: 1px 2px 3px #BDBDBD;
 }
 
-.event-controlpanel__button {
+.eventeditor-controlpanel__button {
 	outline: none;
 	border: none;
 
@@ -38,14 +38,14 @@
 	transition: background-color 0.2s;
 }
 
-.event-controlpanel__button > i,
-.event-controlpanel__button > span {
+.eventeditor-controlpanel__button > i,
+.eventeditor-controlpanel__button > span {
 	vertical-align: middle;
 }
-.event-controlpanel__button > i {
+.eventeditor-controlpanel__button > i {
 	font-size: 2em;
 }
-.event-controlpanel__button > span {
+.eventeditor-controlpanel__button > span {
 	font-size: 1.8em;
 	font-weight: 600;
 
@@ -54,17 +54,17 @@
 
 /* Desktop */
 @media only screen and (min-width: 1024px) {
-	.event-controlpanel-wrapper {
+	.eventeditor-controlpanel-wrapper {
 		width: 1024px;
 	}
-	.event-controlpanel__button > i {
+	.eventeditor-controlpanel__button > i {
 		font-size: 2em;
 	}
-	.event-controlpanel__button > span {
+	.eventeditor-controlpanel__button > span {
 		font-size: 1.8em;
 	}
 
-	.event-controlpanel__button:hover {
+	.eventeditor-controlpanel__button:hover {
 		color: #424242;
 		background-color: #e0e0e0;
 	}

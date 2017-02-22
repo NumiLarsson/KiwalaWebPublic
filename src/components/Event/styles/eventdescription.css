@@ -22,19 +22,19 @@
 	border-bottom: 1px solid #E0E0E0;
 }
 
-.event-description p {
+.event-description > p {
 	padding-left: 15px;
 	padding-right: 10px;
 	padding-top: 5px;
 	font-size: 1.2em;
 }
 
-.event-description i,
-.event-description span {
+.event-description__header > i,
+.event-description__header > span {
 	vertical-align: middle;
 }
 
-.event-description span {
+.event-description__header > span {
 	font-weight: 400;
 	font-size: 1.3em;
 }
@@ -42,11 +42,11 @@
 /* Desktop */
 @media only screen and (min-width: 768px) {
 
-	.event-description p {
+	.event-description > p {
 		font-size: 1em;
 	}
 
-	.event-description span {
+	.event-description__header > span {
 		font-size: 1.1em;
 	}
 }

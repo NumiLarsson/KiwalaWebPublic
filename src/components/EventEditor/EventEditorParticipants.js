@@ -1,16 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import IconButton from '../Utils/IconButton';
+import CheckBox from '../Utils/CheckBox';
 import './styles/eventeditor_participants.css';
 
 const EventEditorParticipants = (props) => {
 
     if(props.module.enabled) {
         return (
-            <div className="event-participants">
-                <div className="event-participants__header">
+            <div className="eventeditor-participants">
+                <div className="eventeditor-participants__header">
                     <i className="material-icons color-blue">person</i> <span> Participants ({ Object.keys(props.participants).length })</span>
                 </div>
-                <div className="event-participants__list"> 
+                <div className="eventeditor-participants__mainenabler">
+                    <CheckBox label="Show module" checked={true} />
+                    <IconButton mIcon="save" label="Apply" />
+                </div>
+                <div className="eventeditor-participants__list"> 
                     { renderParticipants(props.participants) } 
                 </div>
             </div> 
@@ -31,9 +37,9 @@ function renderParticipants(participants) {
     for (var key in participants) {
             if (participants.hasOwnProperty(key)) {
                 listItems.push(
-                    <div key={key} className="event-participant">
+                    <div key={key} className="eventeditor-participant">
                         { renderAvatar(key) }
-                    <div className="event-participant__name" title={ key }>{ key }</div>
+                    <div className="eventeditor-participant__name" title={ key }>{ key }</div>
                     </div>
                 )
             }
@@ -41,27 +47,16 @@ function renderParticipants(participants) {
     return listItems;
 }
 
-/*
-    const listItems = participants.map((participant) =>
-        <div key={participant.id} className="event-participant">
-            { renderAvatar(participant) }
-            <span className="event-participant__name">{ participant.name }</span>
-        </div>
-    );
-
-    return listItems;
-}*/
-
 function renderAvatar(participant) {
     if(!participant) {
         return (
-            <div className="event-participant__avatar"></div>
+            <div className="eventeditor-participant__avatar"></div>
         );
     }
     else {
         return (
-            <div className="event-participant__avatar">
-                <div className="event-participant__default__avatar">
+            <div className="eventeditor-participant__avatar">
+                <div className="eventeditor-participant__default__avatar">
                     <i className="material-icons">person</i>
                 </div>
             </div>
