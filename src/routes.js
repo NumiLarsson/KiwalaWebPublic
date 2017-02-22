@@ -8,6 +8,7 @@ import { Route, IndexRoute } from 'react-router';
 import App from './containers/App';
 import SplashScreen from './containers/SplashScreen';
 import EventViewer from './containers/EventViewer';
+import EventEditor from './containers/EventEditor';
 import Login from "./containers/Login";
 import Api from './api/Api';
 
@@ -24,8 +25,9 @@ function requireAuth(nextState, replace) {
 const routes = (
     <Route path="/" component={App}>
         <IndexRoute component={SplashScreen} />
-        <Route path="/event/:eventid" component={EventViewer}/>
-        <Route path="/login" component={Login} />
+        <Route path="event/:eventid" component={EventViewer} />
+        <Route path="event/settings/:eventid" component={EventEditor} />
+        <Route path="login" component={Login} />
     </Route>
 );
 

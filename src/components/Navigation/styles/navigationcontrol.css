@@ -1,0 +1,63 @@
+.navigationcontrol {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	width: 100%;
+	height: 10%;
+
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+
+	background-color: #eee;
+	z-index: 10;
+
+	padding-top: 2px;
+	box-shadow: 1px -1px 8px #BDBDBD;
+}
+
+.navigationcontrol-item {
+	width: 100%;
+	height: 100%;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.navigationcontrol-item__button {
+	outline: none;
+	border: none;
+
+	padding: 10px 15px;
+
+	cursor: pointer;
+	color: #424242;
+	background-color: #eee;
+}
+
+.navigationcontrol-item__button > i,
+.navigationcontrol-item__button > span {
+	vertical-align: middle;
+}
+.navigationcontrol-item__button > span {
+	font-size: 1.4em;
+}
+
+/* Desktop */
+@media only screen and (min-width: 1024px) {
+	.navigationcontrol {
+		top: 0;
+		bottom: auto;
+		height: 50px;
+
+		justify-content: center;
+
+		box-shadow: 1px 1px 4px #BDBDBD;
+	}
+
+	.navigationcontrol-item__button > span {
+		margin-left: 5px;
+	}
+}

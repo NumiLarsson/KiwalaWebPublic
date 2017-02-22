@@ -8,7 +8,7 @@ const EventDescription = (props) => {
         return (
             <div className="event-description">
                 <div className="event-description__header">
-                    <i className="material-icons color-light-blue">description</i> <span> Description </span>
+                    <i className="material-icons color-blue">description</i> <span> Description </span>
                 </div>
                 <p> { props.description } </p>
             </div> 
