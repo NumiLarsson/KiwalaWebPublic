@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import api from '../../api/Api';
 import Event from '../../models/Event'
-import { Link } from 'react-router';
 import Spinner from '../Utils/Spinner';
+import { browserHistory } from 'react-router';
 import './styles/upcomingeventslist.css';
 import { formatDate, formatLocation } from '../../utils/utils';
 import NavigationControl from '../Navigation/NavigationControl';
@@ -18,7 +18,7 @@ class UpcomingEventsList extends Component {
         console.log(events);
         const formattedEvents = events.map(
             (event) => 
-                <div key={event.id} className="eventlist-event">
+                <div key={event.id} className="eventlist-event" onClick={this.goToEvent.bind(this, event.id)}>
                     <div className="eventlist-header" style={this.getHeaderImgStyle()}>
                         <div className="eventlist-header__gradient">
                             <div className="eventlist-event__title" > 
@@ -37,7 +37,7 @@ class UpcomingEventsList extends Component {
     }
 
     goToEvent(id) {
-        console.log("Going to event" + id);
+        browserHistory.push('/event/' + id);
     }
      
     getHeaderImgStyle(headerImg) {
@@ -80,17 +80,17 @@ class UpcomingEventsList extends Component {
         } else {*/
             let { auth } = this.props;
             let eventsToRender = [];
-            if (auth.user){
+            /*if (!auth.user){
                 return (
                     <Spinner label="Fix the database please" />
                 )
-            } else {
+            } else {*/
                 eventsToRender = this.formatEvents(FAKE_EVENT_DATA);
-            }
+            //}
             if (auth) {
                 return (
                     <div className="upcomingeventslist"> 
-                        <NavigationControl user={this.props.user} template="eventviewer" />
+                        <NavigationControl user={this.props.user} template="upcomingeventslist" />
 
                         <div className="eventslist">
                             {eventsToRender}
