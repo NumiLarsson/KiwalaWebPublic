@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getEvent, subscribeToEvent, setCurrentEvent, attendEvent } from '../actions/eventviewer';
+import NavigationControl from '../components/Navigation/NavigationControl';
 import Spinner from '../components/Utils/Spinner';
-import './styles/eventviewer.css';
+import './styles/eventeditor.css';
 import { loadMapImageURL } from './../actions/maps'
 
-class EventViewer extends Component {
+class EventEditor extends Component {
     
     constructor() {
         super();
@@ -29,8 +30,11 @@ class EventViewer extends Component {
         else {
             console.log(this.props.event);
             return (
-                <div className="event-viewer">
+                 <div>
+                    <NavigationControl user={this.props.user} eventId={this.props.event.id} template="eventeditor" />
+                    <div className="event-editor">
 
+                    </div>
                 </div>
             )
         }
@@ -56,4 +60,4 @@ const mapDispatchToProps = {
     loadMapImageURL
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(EventViewer);
+export default connect(mapStateToProps, mapDispatchToProps)(EventEditor);

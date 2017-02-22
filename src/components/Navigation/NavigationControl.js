@@ -8,31 +8,18 @@ const NavigationControl = (props) => {
     // If logged in
     if(props.user && !props.user.isAnonymous) {
 
-        if(props.template == "eventviewer") {
-            return (
-                <div className="navigationcontrol">
-                    <div className="navigationcontrol-item">
-                         <button className="navigationcontrol-item__button" onClick={goToHome}><i className="material-icons color-green">home</i><br className="only-on-mobile"/><span className="">Home</span></button>
-                    </div>
-                    <div className="navigationcontrol-item">
-                         <button className="navigationcontrol-item__button"><i className="material-icons">person</i><br className="only-on-mobile"/><span className="">Profile</span></button>
-                    </div>
-                    { renderAdminSettings(props.user) }
-                </div> 
-            )
-        }
-        else {
-            return (
-                <div className="navigationcontrol">
-                    <div className="navigationcontrol-item">
-                         <button className="navigationcontrol-item__button" onClick={goToHome}><i className="material-icons">home</i><br className="only-on-mobile"/><span className="">Home</span></button>
-                    </div>
-                    <div className="navigationcontrol-item">
-                         <button className="navigationcontrol-item__button"><i className="material-icons">person</i><br className="only-on-mobile"/><span className="">Profile</span></button>
-                    </div>
-                </div> 
-            )
-        }
+        return (
+            <div className="navigationcontrol">
+                <div className="navigationcontrol-item">
+                     <button className="navigationcontrol-item__button" onClick={goToHome}><i className="material-icons">home</i><br className="only-on-mobile"/><span className="">Home</span></button>
+                </div>
+                <div className="navigationcontrol-item">
+                     <button className="navigationcontrol-item__button"><i className="material-icons">person</i><br className="only-on-mobile"/><span className="">Profile</span></button>
+                </div>
+                { (props.template == "eventviewer") ? renderEventViewerAdminSettings(props.user, props.eventId) : null }
+                { (props.template == "eventeditor") ? renderEventEditorAdminSettings(props.user, props.eventId) : null }
+            </div> 
+        )
     }
     else {
         return (
@@ -53,11 +40,34 @@ function goToHome() {
     browserHistory.push('/');
 }
 
-function renderAdminSettings(user) {
+function gotoEventSettings(eventId) {
+    browserHistory.push('/event/settings/' + eventId);
+}
+
+function gotoEvent(eventId) {
+    browserHistory.push('/event/' + eventId);
+}
+
+function renderEventViewerAdminSettings(user, eventId) {
     if(true) {
         return (
              <div className="navigationcontrol-item">
-                 <button className="navigationcontrol-item__button"><i className="material-icons">settings</i><br className="only-on-mobile"/><span className="">Settings</span></button>
+                 <button className="navigationcontrol-item__button" onClick={() => gotoEventSettings(eventId)}><i className="material-icons">settings</i><br className="only-on-mobile"/><span className="">Settings</span></button>
+            </div>
+        );
+    }
+    else {
+        return (
+            null
+        );
+    }
+}
+
+function renderEventEditorAdminSettings(user, eventId) {
+    if(true) {
+        return (
+             <div className="navigationcontrol-item">
+                 <button className="navigationcontrol-item__button" onClick={() => gotoEvent(eventId)}><i className="material-icons">event</i><br className="only-on-mobile"/><span className="">Event</span></button>
             </div>
         );
     }
