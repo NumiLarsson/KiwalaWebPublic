@@ -28,7 +28,7 @@ const routes = (
         <IndexRoute component={SplashScreen} />
         <Route path="/event/:eventid" component={EventViewer}/>
         <Route path="/login" component={Login} />
-        <Route path="/user/:userid" component={UserInterface}/>
+        <Route path="/user" component={UserInterface}/>
         <Route path="event/settings/:eventid" component={EventEditor} />
     </Route>
 );

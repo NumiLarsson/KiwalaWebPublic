@@ -14,7 +14,7 @@ const NavigationControl = (props) => {
                      <button className="navigationcontrol-item__button" onClick={goToHome}><i className="material-icons">home</i><br className="only-on-mobile"/><span className="">Home</span></button>
                 </div>
                 <div className="navigationcontrol-item">
-                     <button className="navigationcontrol-item__button"><i className="material-icons">person</i><br className="only-on-mobile"/><span className="">Profile</span></button>
+                     <button className="navigationcontrol-item__button" onClick={goToProfile}><i className="material-icons">person</i><br className="only-on-mobile"/><span className="">Profile</span></button>
                 </div>
                 { (props.template == "eventviewer") ? renderEventViewerAdminSettings(props.user, props.eventId) : null }
                 { (props.template == "eventeditor") ? renderEventEditorAdminSettings(props.user, props.eventId) : null }
@@ -34,6 +34,10 @@ const NavigationControl = (props) => {
         )
     }
     
+}
+
+function goToProfile() {
+    browserHistory.push('/user/');
 }
 
 function goToHome() {
