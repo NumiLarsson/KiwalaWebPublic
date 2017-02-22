@@ -6,14 +6,14 @@ import './styles/eventeditor_participants.css';
 
 const EventEditorParticipants = (props) => {
 
-    if(props.module.enabled) {
+    if(props.module) {
         return (
             <div className="eventeditor-participants">
                 <div className="eventeditor-participants__header">
                     <i className="material-icons color-blue">person</i> <span> Participants ({ Object.keys(props.participants).length })</span>
                 </div>
                 <div className="eventeditor-participants__mainenabler">
-                    <CheckBox label="Show module" checked={true} />
+                    <CheckBox label="Show module" checked={props.module.enabled} />
                     <IconButton mIcon="save" label="Apply" />
                 </div>
                 <div className="eventeditor-participants__list"> 

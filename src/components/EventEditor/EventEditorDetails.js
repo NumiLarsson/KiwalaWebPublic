@@ -7,20 +7,19 @@ import './styles/eventeditor_details.css';
 
 const EventEditorDetails = (props) => {
 
-    if(props.module.enabled) {
-
+    if(props.module) {
         return (
             <div className="eventeditor-details">
                 <div className="eventeditor-details__header">
                     <i className="material-icons color-blue">info</i> <span> Details </span>
                 </div>
                 <div className="eventeditor-details__mainenabler">
-                    <CheckBox label="Show module" checked={true} />
+                    <CheckBox label="Show module" checked={props.module.enabled} />
                     <IconButton mIcon="save" label="Apply" />
                 </div>
                 { renderStartDate(props.module, props.startDate) }
                 { renderLocation(props.module, props.location) }
-                { renderMap(props.module, props.map, props.showMap) }
+                { renderMap(props.module, props.map) }
             </div> 
         )
     }
@@ -32,59 +31,39 @@ const EventEditorDetails = (props) => {
 }
 
 function renderStartDate(module, startDate) {
-    if(module.showTime) {
-        return (
-            <div className="eventeditor-details__enabler">
-                    <CheckBox label="Show date" checked={true} />
-                    <div className="eventeditor-details__item">
-                        <i className="material-icons color-blue">event</i>
-                        <div className="event-details__item-text" title={ formatDate(startDate) }> { formatDate(startDate) } </div>
-                    </div>
+    return (
+        <div className="eventeditor-details__enabler">
+            <CheckBox label="Show date" checked={module.showTime} />
+            <div className="eventeditor-details__item">
+                <i className="material-icons color-gray">event</i>
+                <div className="event-details__item-text" title={ formatDate(startDate) }> { formatDate(startDate) } </div>
             </div>
-        );
-    }
-    else {
-        return (
-            null
-        );
-    }
+        </div>
+    );
 }
 
 function renderLocation(module, location) {
-    if(module.showLocation) {
-        return (
-             <div className="eventeditor-details__enabler">
-                    <CheckBox label="Show location" checked={true} />
-                    <div className="eventeditor-details__item">
-                        <i className="material-icons color-blue">location_on</i>
-                        <div className="eventeditor-details__item-text" title={ formatLocation(location) }> { formatLocation(location) } </div>
-                    </div>
+    return (
+         <div className="eventeditor-details__enabler">
+            <CheckBox label="Show location" checked={module.showLocation} />
+            <div className="eventeditor-details__item">
+                <i className="material-icons color-gray">location_on</i>
+                <div className="eventeditor-details__item-text" title={ formatLocation(location) }> { formatLocation(location) } </div>
             </div>
-        );
-    }
-    else {
-        return (
-            null
-        );
-    }
+        </div>
+    );
 }
 
-function renderMap(module, map, showMap) {
-    if(module.showMap) {
-        return (
-            <div className="eventeditor-details__enabler">
-                <CheckBox label="Show map" checked={true} />
-                <div className="eventeditor-details__map">
-                    <img className="map-image" src={map} />
-                </div>
+function renderMap(module, map) {
+
+    return (
+        <div className="eventeditor-details__enabler">
+            <CheckBox label="Show map" checked={module.showMap} />
+            <div className="eventeditor-details__map">
+                <img className="map-image" src={map} />
             </div>
-        );
-    }
-    else {
-        return (
-            null
-        );
-    }
+        </div>
+    );
 }
 
 export default (EventEditorDetails);

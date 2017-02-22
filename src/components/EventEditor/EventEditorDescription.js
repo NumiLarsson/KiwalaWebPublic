@@ -6,14 +6,14 @@ import './styles/eventeditor_description.css';
 
 const EventEditorDescription = (props) => {
 
-    if(props.module.enabled) {
+    if(props.module) {
         return (
             <div className="eventeditor-description">
                 <div className="eventeditor-description__header">
                     <i className="material-icons color-blue">description</i> <span> Description </span>
                 </div>
                 <div className="eventeditor-description__mainenabler">
-                    <CheckBox label="Show module" checked={true} />
+                    <CheckBox label="Show module" checked={props.module.enabled} />
                     <IconButton mIcon="save" label="Apply" />
                 </div>
                 <p> { props.description } </p>
