@@ -1,0 +1,47 @@
+.event-editor {
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    /* For the navigation */
+  	padding-bottom: 20%;
+}
+
+.event-content {
+	width: 100%;
+	position: relative;
+
+	display: flex;
+	flex-direction: column;
+}
+
+.event-content__spotlight,
+.event-content__sideline {
+	display: flex;
+
+	flex-direction: column;
+	padding: 2px 5px 2px 5px;
+}
+
+/* Desktop */
+@media only screen and (min-width: 1024px) {
+	.event-editor {
+	    
+	    /* For the navigation */
+		padding-top: 50px;
+	}
+
+	.event-content{
+		width: 1024px;
+
+		flex-direction: row;
+	}
+
+	.event-content__spotlight {
+		width: 70%;
+	}
+
+	.event-content__sideline {
+		width: 30%;
+	}
+}

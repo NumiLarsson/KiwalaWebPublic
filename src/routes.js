@@ -9,7 +9,7 @@ import App from './containers/App';
 import SplashScreen from './containers/SplashScreen';
 import EventViewer from './containers/EventViewer';
 import EventEditor from './containers/EventEditor';
-import Login from "./containers/Login";
+import Login from "./components/Login/Login";
 import Api from './api/Api';
 
 // Taken from https://github.com/ReactTraining/react-router/blob/master/examples/auth-flow/app.js

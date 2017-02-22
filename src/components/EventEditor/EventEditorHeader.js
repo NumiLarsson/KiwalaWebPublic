@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { formatDate, formatLocation } from '../../utils/utils';
-import './styles/eventheader.css';
+import './styles/eventeditor_header.css';
 
-const EventHeader = (props) => {
+const EventEditorHeader = (props) => {
 
     return (
         <div className="event-header" style={ getHeaderImgStyle(props.headerImg) }>
@@ -76,4 +76,4 @@ function renderEventLocationString(module, location) {
     }
 }
 
-export default (EventHeader);
+export default (EventEditorHeader);

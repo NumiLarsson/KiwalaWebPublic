@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { userLoggedIn, userLoggedOut } from '../actions/auth';
-import Login from './Login';
+import Login from '../components/Login/Login';
 import './styles/splashscreen.css';
 import api from '../api/Api';
 

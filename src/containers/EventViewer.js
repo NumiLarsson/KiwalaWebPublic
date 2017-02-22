@@ -33,7 +33,6 @@ class EventViewer extends Component {
             )
         }
         else {
-            console.log(this.props.event);
             return (
                 <div>
                     <NavigationControl user={this.props.user} eventId={this.props.event.id} template="eventviewer" />
