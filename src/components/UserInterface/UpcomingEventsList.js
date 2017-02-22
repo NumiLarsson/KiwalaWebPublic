@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import './styles/eventlist.css';
 import api from '../../api/Api';
-import { addEvent, removeEvent, updateEvent } from '../../actions/events'
+import Event from '../../models/Event'
 import { Link } from 'react-router';
+
+const FAKE_EVENT_DATA = [
+    new Event(10, "FakeEvent1", new Date(), null, "Hello World", null, null), 
+    new Event(2, "Awesome event at the beach", new Date(), null, "Hello World", null, null)
+]
 
 class UpcomingEventsList extends Component {
 
@@ -20,32 +24,34 @@ class UpcomingEventsList extends Component {
     }
 
     render() {
-        let {title, counter, loadRandomEvent,
-             increaseCounter, changeTitleAsync, name, events} = this.props;
-        return (
-            <div className="index">
-                <div className="Test">
-                    {name}
-                    {this.formatEvents(events)}
+        let { auth } = this.props;
+        let eventsToRender = [];
+        if (auth.user){
+            eventsToRender = this.formatEvents(auth.user.upcomingEvents);
+        } else {
+            eventsToRender = this.formatEvents(FAKE_EVENT_DATA);
+        }
+
+        if (auth) {
+            return (
+                <div className="UpcomingEventsList">
+                    {eventsToRender}
                 </div>
-            </div>
-        )
+            )
+        }
     }
 }
 
 //Maps the state in our store to the props property of the Example object.
 const mapStateToProps = (state) => {
     return {
-        events: state.events.events
+        auth: state.auth,
     }
 }
 
 //Wrapping the action creators in a dispatch call and allowing us to 
 //access them through the props property of the Example object. 
 const mapDispatchToProps = {
-    addEvent,
-    removeEvent,
-    updateEvent
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(EventList);
+export default connect(mapStateToProps, mapDispatchToProps)(UpcomingEventsList);

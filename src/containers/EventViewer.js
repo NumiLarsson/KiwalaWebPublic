@@ -8,7 +8,7 @@ import EventParticipants from '../components/Event/EventParticipants';
 import EventControlpanel from '../components/Event/EventControlpanel';
 import Spinner from '../components/Utils/Spinner';
 import './styles/eventviewer.css';
-import { loadMapImageURL } from './../actions/maps'
+import { loadMapImageURL } from '../actions/maps'
 
 class EventViewer extends Component {
     
