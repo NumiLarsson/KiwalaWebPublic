@@ -10,7 +10,7 @@
 	justify-content: space-around;
 	align-items: center;
 
-	background-color: #eee;
+	background-color: #fff;
 	z-index: 10;
 
 	padding-top: 2px;
@@ -34,7 +34,7 @@
 
 	cursor: pointer;
 	color: #424242;
-	background-color: #eee;
+	background-color: #fff;
 }
 
 .navigationcontrol-item__button > i,

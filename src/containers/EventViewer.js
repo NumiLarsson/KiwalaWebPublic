@@ -33,10 +33,9 @@ class EventViewer extends Component {
             )
         }
         else {
-            console.log(this.props.event);
             return (
                 <div>
-                    <NavigationControl user={this.props.user} template="eventviewer" />
+                    <NavigationControl user={this.props.user} eventId={this.props.event.id} template="eventviewer" />
                     <div className="event-viewer">
 
                         <EventHeader headerImg={this.props.event.headerImg} name={this.props.event.name} module={this.props.event.modules.headerDetails} startDate={this.props.event.startDate} location={this.props.event.location} />

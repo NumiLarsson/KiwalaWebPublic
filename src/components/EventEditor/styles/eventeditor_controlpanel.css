@@ -1,0 +1,71 @@
+.eventeditor-controlpanel-wrapper {
+	width: 100%;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	padding: 10px 5px 0px 5px;
+	box-sizing: border-box;
+}
+
+.eventeditor-controlpanel {
+	background-color: #fff;
+	width: 100%;
+	min-height: 50px;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	padding: 0px 10px 0px 10px;
+	box-sizing: border-box;
+
+	box-shadow: 1px 2px 3px #BDBDBD;
+}
+
+.eventeditor-controlpanel__button {
+	outline: none;
+	border: none;
+
+	padding: 10px 15px;
+
+	cursor: pointer;
+	color: #424242;
+	background-color: #fff;
+	border-radius: 4px;
+
+	transition: background-color 0.2s;
+}
+
+.eventeditor-controlpanel__button > i,
+.eventeditor-controlpanel__button > span {
+	vertical-align: middle;
+}
+.eventeditor-controlpanel__button > i {
+	font-size: 2em;
+}
+.eventeditor-controlpanel__button > span {
+	font-size: 1.8em;
+	font-weight: 600;
+
+	margin-left: 5px;
+}
+
+/* Desktop */
+@media only screen and (min-width: 1024px) {
+	.eventeditor-controlpanel-wrapper {
+		width: 1024px;
+	}
+	.eventeditor-controlpanel__button > i {
+		font-size: 2em;
+	}
+	.eventeditor-controlpanel__button > span {
+		font-size: 1.8em;
+	}
+
+	.eventeditor-controlpanel__button:hover {
+		color: #424242;
+		background-color: #e0e0e0;
+	}
+}

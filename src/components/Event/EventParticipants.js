@@ -41,17 +41,6 @@ function renderParticipants(participants) {
     return listItems;
 }
 
-/*
-    const listItems = participants.map((participant) =>
-        <div key={participant.id} className="event-participant">
-            { renderAvatar(participant) }
-            <span className="event-participant__name">{ participant.name }</span>
-        </div>
-    );
-
-    return listItems;
-}*/
-
 function renderAvatar(participant) {
     if(!participant) {
         return (

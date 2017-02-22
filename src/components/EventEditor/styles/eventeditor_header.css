@@ -1,4 +1,4 @@
-.event-header {
+.eventeditor-header {
 	width: 100%;
 	min-height: 200px;
 	max-height: 250px;
@@ -7,7 +7,7 @@
 	position: relative;
 }
 
-.event-header__gradient {
+.eventeditor-header__gradient {
 	position: absolute;
 	top: 0;
 	bottom: 0;
@@ -25,23 +25,23 @@
 	);
 }
 
-.event-header__content {
+.eventeditor-header__content {
 	width: 1024px;
 	align-items: stretch;
 
 	position: relative;
 }
 
-.event-header__title {
+.eventeditor-header__title {
 	position: absolute;
 	text-align: left;
 	padding-right: 15px;
 
-	bottom: 15px;
-	left: 15px;
+	bottom: 15pt;
+	left: 15pt;
 }
 
-.event-header__title h1 {
+.eventeditor-header__title h1 {
 	margin: 0;
 
 	font-size: 2.2em;
@@ -51,16 +51,16 @@
 /* Desktop */
 @media only screen and (min-width: 1024px) {
 
-	.event-header {
+	.eventeditor-header {
 		min-height: 250px;
 		max-height: 300px;
 	}
 
-	.event-header__title h1 {
+	.eventeditor-header__title h1 {
 		font-size: 2.5em;
 	}
 
-	.event-header__gradient {
+	.eventeditor-header__gradient {
 		background: linear-gradient(
 		    to bottom,
 		    rgba(64, 64, 64, 1) 0%,
@@ -70,7 +70,7 @@
 		);
 	}
 
-	.event-header__title {
+	.eventeditor-header__title {
 		position: absolute;
 
 		bottom: 15pt;
