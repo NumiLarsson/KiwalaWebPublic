@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { formatDate, formatLocation } from '../../utils/utils';
-import './styles/eventheader.css';
+import './styles/eventeditor_header.css';
 
-const EventHeader = (props) => {
+const EventEditorHeader = (props) => {
 
     return (
-        <div className="event-header" style={ getHeaderImgStyle(props.headerImg) }>
-            <div className="event-header__gradient">
-                <div className="event-header__content">
-                    <div className="event-header__title">
+        <div className="eventeditor-header" style={ getHeaderImgStyle(props.headerImg) }>
+            <div className="eventeditor-header__gradient">
+                <div className="eventeditor-header__content">
+                    <div className="eventeditor-header__title">
                         <h1>{ props.name }</h1>
                     </div>
                 </div>
@@ -29,4 +29,4 @@ function getHeaderImgStyle(headerImg) {
     };
 }
 
-export default (EventHeader);
+export default (EventEditorHeader);

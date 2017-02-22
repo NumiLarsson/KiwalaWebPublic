@@ -1,4 +1,4 @@
-.event-viewer {
+.event-editor {
 	display: flex;
     flex-direction: column;
     align-items: center;
@@ -25,7 +25,7 @@
 
 /* Desktop */
 @media only screen and (min-width: 1024px) {
-	.event-viewer {
+	.event-editor {
 	    
 	    /* For the navigation */
 		padding-top: 50px;

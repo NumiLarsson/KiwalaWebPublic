@@ -1,4 +1,4 @@
-.event-description {
+.eventeditor-description {
 	padding: 10pt 5pt 10pt 5pt;
 
 	margin-top: 5px;
@@ -17,24 +17,32 @@
 	box-shadow: 1px 2px 3px #BDBDBD;
 }
 
-.event-description__header {
-	padding-bottom: 10px;
+.eventeditor-description__mainenabler {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	padding: 0px 5px 5px 0px;
 	border-bottom: 1px solid #E0E0E0;
 }
 
-.event-description > p {
+.eventeditor-description__header {
+	padding-bottom: 10px;
+}
+
+.eventeditor-description > p {
 	padding-left: 15px;
 	padding-right: 10px;
 	padding-top: 5px;
 	font-size: 1.2em;
 }
 
-.event-description__header > i,
-.event-description__header > span {
+.eventeditor-description__header > i,
+.eventeditor-description__header > span {
 	vertical-align: middle;
 }
 
-.event-description__header > span {
+.eventeditor-description__header > span {
 	font-weight: 400;
 	font-size: 1.3em;
 }
@@ -42,11 +50,11 @@
 /* Desktop */
 @media only screen and (min-width: 768px) {
 
-	.event-description > p {
+	.eventeditor-description > p {
 		font-size: 1em;
 	}
 
-	.event-description__header > span {
+	.eventeditor-description__header > span {
 		font-size: 1.1em;
 	}
 }

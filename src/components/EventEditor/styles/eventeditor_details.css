@@ -1,4 +1,4 @@
-.event-details {
+.eventeditor-details {
 	padding: 10pt 5pt 10pt 5pt;
 
 	margin-top: 5px;
@@ -16,40 +16,53 @@
 	box-shadow: 1px 2px 3px #BDBDBD;
 }
 
-.event-details > .event-details__item{
-	padding: 1px 5px 1px 0;
-}
+.eventeditor-details__mainenabler {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 
-.event-details__header {
-	padding-bottom: 10px;
+	padding: 0px 5px 10px 0px;
+	margin-bottom: 10px;
 	border-bottom: 1px solid #E0E0E0;
 }
 
-.event-details__header > i,
-.event-details__header > span {
+.eventeditor-details__enabler {
+	padding: 0px 5px 10px 0px;
+	margin-bottom: 10px;
+	border-bottom: 1px solid #E0E0E0;
+}
+
+.eventeditor-details__enabler > .eventeditor-details__item,
+.eventeditor-details__enabler > .eventeditor-details__map {
+	margin-top: 10px;
+}
+
+.eventeditor-details__header {
+	padding-bottom: 10px;
+}
+
+.eventeditor-details__header > i,
+.eventeditor-details__header > span {
 	vertical-align: middle;
 }
 
-.event-details__header > span {
+.eventeditor-details__header > span {
 	font-weight: 400;
 	font-size: 1.3em;
 }
 
-.event-details-spacer {
-	margin-top: 15px;
-}
-
-.event-details__item {
+.eventeditor-details__item {
+	padding: 1px 10px 1px 10px;
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
 }
 
-.event-details__item > i {
+.eventeditor-details__item > i {
 	flex-shrink: 0;
 }
 
-.event-details__item-text {
+.eventeditor-details__item-text {
 	margin-left: 5px;
 	font-size: 1.3em;
 
@@ -58,7 +71,7 @@
     text-overflow: ellipsis;
 }
 
-.event-details__map {
+.eventeditor-details__map {
 	display: block;
 	width: 100%;
 	max-height: auto;
@@ -80,10 +93,10 @@
 
 /* Desktop */
 @media only screen and (min-width: 768px) {
-	.event-details__item-text {
+	.eventeditor-details__item-text {
 		font-size: 1.1em;
 	}
-	.event-details__header > span {
+	.eventeditor-details__header > span {
 		font-size: 1.1em;
 	}
 }

@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getEvent, subscribeToEvent, setCurrentEvent, attendEvent } from '../actions/eventviewer';
+import { getEvent, subscribeToEvent, setCurrentEvent, attendEvent } from '../actions/eventeditor';
+import EventEditorHeader from '../components/EventEditor/EventEditorHeader';
+import EventEditorDetails from '../components/EventEditor/EventEditorDetails';
+import EventEditorDescription from '../components/EventEditor/EventEditorDescription';
+import EventEditorParticipants from '../components/EventEditor/EventEditorParticipants';
+import EventEditorControlpanel from '../components/EventEditor/EventEditorControlpanel';
+import NavigationControl from '../components/Navigation/NavigationControl';
 import Spinner from '../components/Utils/Spinner';
-import './styles/eventviewer.css';
+import './styles/eventeditor.css';
 import { loadMapImageURL } from './../actions/maps'
 
-class EventViewer extends Component {
+class EventEditor extends Component {
     
     constructor() {
         super();
@@ -27,10 +33,26 @@ class EventViewer extends Component {
             )
         }
         else {
-            console.log(this.props.event);
             return (
-                <div className="event-viewer">
+                <div>
+                    <NavigationControl user={this.props.user} eventId={this.props.event.id} template="eventeditor" />
+                    <div className="event-editor">
 
+                        <EventEditorHeader headerImg={this.props.event.headerImg} name={this.props.event.name} module={this.props.event.modules.headerDetails} startDate={this.props.event.startDate} location={this.props.event.location} />
+
+                        <EventEditorControlpanel />
+
+                        <div className="event-content">
+                            <div className="event-content__spotlight">
+                                <EventEditorDetails module={this.props.event.modules.eventDetails} startDate={this.props.event.startDate} location={this.props.event.location} map={this.props.map}/>
+                                <EventEditorDescription module={this.props.event.modules.eventDescription} description={this.props.event.description} />
+                            </div>
+                            <div className="event-content__sideline">
+                                <EventEditorParticipants module={this.props.event.modules.eventParticipants} participants={this.props.event.participants} />
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             )
         }
@@ -56,4 +78,4 @@ const mapDispatchToProps = {
     loadMapImageURL
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(EventViewer);
+export default connect(mapStateToProps, mapDispatchToProps)(EventEditor);

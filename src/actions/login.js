@@ -39,7 +39,7 @@ export function login(provider, email, password) {
     }
 }
 
-export function logout(eventId, uid) {
+export function logout() {
     return dispatch => {
         return Api.auth.logout();
     }

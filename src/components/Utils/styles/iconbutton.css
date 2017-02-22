@@ -1,0 +1,42 @@
+.iconbutton {
+	outline: none;
+	border: none;
+
+	padding: 10px 15px;
+
+	cursor: pointer;
+	color: #424242;
+	background-color: #fff;
+	border-radius: 4px;
+
+	transition: background-color 0.2s;
+}
+
+.iconbutton > i,
+.iconbutton > span {
+	vertical-align: middle;
+}
+.iconbutton > i {
+	font-size: 2em;
+}
+.iconbutton > span {
+	font-size: 1.6em;
+	font-weight: 600;
+
+	margin-left: 5px;
+}
+
+/* Desktop */
+@media only screen and (min-width: 1024px) {
+	.iconbutton > i {
+		font-size: 2em;
+	}
+	.iconbutton > span {
+		font-size: 1.6em;
+	}
+
+	.iconbutton:hover {
+		color: #424242;
+		background-color: #e0e0e0;
+	}
+}
