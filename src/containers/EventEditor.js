@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getEvent, subscribeToEvent, setCurrentEvent, attendEvent } from '../actions/eventviewer';
+import { getEvent, subscribeToEvent, setCurrentEvent, attendEvent } from '../actions/eventeditor';
 import EventEditorHeader from '../components/EventEditor/EventEditorHeader';
 import EventEditorDetails from '../components/EventEditor/EventEditorDetails';
 import EventEditorDescription from '../components/EventEditor/EventEditorDescription';
@@ -34,7 +34,7 @@ class EventEditor extends Component {
         }
         else {
             return (
-                 <div>
+                <div>
                     <NavigationControl user={this.props.user} eventId={this.props.event.id} template="eventeditor" />
                     <div className="event-editor">
 
