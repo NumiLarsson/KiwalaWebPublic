@@ -88,9 +88,9 @@ input[type=checkbox]:indeterminate:after {
   pointer-events: none;
 }
 .checkbox-wrapper > input,
-.checkbox-wrapper > span {
+.checkbox-wrapper > label {
   vertical-align: middle;
 }
-.checkbox-wrapper > span {
+.checkbox-wrapper > label {
   font-size: 1.1em;
 }

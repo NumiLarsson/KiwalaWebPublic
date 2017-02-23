@@ -13,7 +13,7 @@ const EventEditorParticipants = (props) => {
                     <i className="material-icons color-blue">person</i> <span> Participants ({ Object.keys(props.participants).length })</span>
                 </div>
                 <div className="eventeditor-participants__mainenabler">
-                    <CheckBox label="Show module" checked={props.module.enabled} />
+                    <CheckBox label="Show module" name="participantsEnabled" checked={props.module.enabled} />
                     <IconButton mIcon="save" label="Apply" />
                 </div>
                 <div className="eventeditor-participants__list"> 

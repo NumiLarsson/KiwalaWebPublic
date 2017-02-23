@@ -13,7 +13,7 @@ const EventEditorDescription = (props) => {
                     <i className="material-icons color-blue">description</i> <span> Description </span>
                 </div>
                 <div className="eventeditor-description__mainenabler">
-                    <CheckBox label="Show module" checked={props.module.enabled} />
+                    <CheckBox label="Show module" name="descriptionEnabled" checked={props.module.enabled} />
                     <IconButton mIcon="save" label="Apply" />
                 </div>
                 <p> { props.description } </p>
