@@ -1,20 +1,14 @@
+import moment from 'moment';
+
 /**
  * Formats a date to a string
  * @param {Date} date, the Date object to be formatted
- * @returns a formatted String.
+ * @returns {string} a formatted String.
  */
 export function formatDate(date) {
-  let realDate = new Date(date);
-	if(!realDate)
-		return "";
+  let realDate = moment(date);
 
-    var mm = realDate.getMonth() + 1; // getMonth() is zero-based
-    var dd = realDate.getDate();
-
-    return [realDate.getFullYear(),
-          (mm>9 ? '' : '0') + mm,
-          (dd>9 ? '' : '0') + dd
-         ].join('-');
+  return realDate.isValid() ? realDate.format('YYYY-MM-DD') : '';
 }
 
 /**
