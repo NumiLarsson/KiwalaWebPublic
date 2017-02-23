@@ -1,4 +1,5 @@
 import EventApi from './EventApi';
+import UserApi from './UserApi';
 import AuthApi from './AuthApi';
 import firebase from 'firebase';
 

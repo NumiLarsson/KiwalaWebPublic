@@ -57,13 +57,17 @@ class EventControlpanel extends Component {
 }
 
 function isAttendingEvent(event, userUid) {
+    if(event.participants) {
         return (event.participants[userUid]);
+    }
+    
+    return false;
 }
 
 //Maps the state in our store to the props property of the Example object.
 const mapStateToProps = (state) => {
     return {
-        event: state.eventdata.event,
+        event: state.eventdata,
         user: state.auth.user
     }
 }

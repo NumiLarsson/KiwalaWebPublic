@@ -106,7 +106,10 @@ function renderMap(module, map, handleChange) {
 //Maps the state in our store to the props property of the Example object.
 const mapStateToProps = (state) => {
     return {
-        module: state.eventdata.event.modules.eventDetails,
+        module: state.eventmodules.details,
+        startDate: state.eventdata.data.startDate,
+        location: state.eventdata.data.location,
+        map: state.eventdata.data.map
     }
 }
 

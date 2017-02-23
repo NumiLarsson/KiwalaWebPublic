@@ -5,7 +5,7 @@ import './styles/eventdetails.css';
 
 const EventDetails = (props) => {
 
-    if(props.module.enabled) {
+    if(props.module && props.module.enabled) {
 
         return (
             <div className="event-details">
