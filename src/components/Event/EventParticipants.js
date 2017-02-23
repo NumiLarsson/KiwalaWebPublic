@@ -4,7 +4,7 @@ import './styles/eventparticipants.css';
 
 const EventParticipants = (props) => {
 
-    if(props.module.enabled) {
+    if(props.module && props.module.enabled && props.participants) {
         return (
             <div className="event-participants">
                 <div className="event-participants__header">

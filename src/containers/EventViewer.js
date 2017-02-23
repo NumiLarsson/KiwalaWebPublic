@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getEvent, subscribeToEvent, setCurrentEvent, attendEvent } from '../actions/eventviewer';
+import { getEvent, subscribeToEvent, setCurrentEvent } from '../actions/eventdata';
+import { attendEvent } from '../actions/eventviewer';
 import EventHeader from '../components/Event/EventHeader';
 import EventDetails from '../components/Event/EventDetails';
 import EventDescription from '../components/Event/EventDescription';
@@ -27,7 +28,7 @@ class EventViewer extends Component {
     }
 
     render() {
-        if(!this.props.event) {
+        if(!this.props.event.loaded) {
             return (
                 <Spinner label="" />
             )
@@ -38,17 +39,17 @@ class EventViewer extends Component {
                     <NavigationControl user={this.props.user} eventId={this.props.event.id} template="eventviewer" />
                     <div className="event-viewer">
 
-                        <EventHeader headerImg={this.props.event.headerImg} name={this.props.event.name} module={this.props.event.modules.headerDetails} startDate={this.props.event.startDate} location={this.props.event.location} />
+                        <EventHeader headerImage={this.props.event.data.headerImage} name={this.props.event.name} />
 
                         <EventControlpanel />
 
                         <div className="event-content">
                             <div className="event-content__spotlight">
-                                <EventDetails module={this.props.event.modules.eventDetails} startDate={this.props.event.startDate} location={this.props.event.location} map={this.props.map}/>
-                                <EventDescription module={this.props.event.modules.eventDescription} description={this.props.event.description} />
+                                <EventDetails module={this.props.modules.details} startDate={this.props.event.data.startDate} location={this.props.event.data.location} map={this.props.event.map}/>
+                                <EventDescription module={this.props.modules.description} description={this.props.event.data.description} />
                             </div>
                             <div className="event-content__sideline">
-                                <EventParticipants module={this.props.event.modules.eventParticipants} participants={this.props.event.participants} />
+                                <EventParticipants module={this.props.modules.participants} participants={this.props.event.participants} />
                             </div>
                         </div>
 
@@ -62,9 +63,9 @@ class EventViewer extends Component {
 //Maps the state in our store to the props property of the Example object.
 const mapStateToProps = (state) => {
     return {
-        event: state.eventviewer.event,
-        user: state.auth.user,
-        map: state.eventviewer.map
+        event: state.eventdata,
+        modules: state.eventmodules,
+        user: state.auth.user
     }
 }
 

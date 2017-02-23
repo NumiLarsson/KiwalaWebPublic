@@ -6,7 +6,7 @@ import './styles/eventeditor_header.css';
 const EventEditorHeader = (props) => {
 
     return (
-        <div className="eventeditor-header" style={ getHeaderImgStyle(props.headerImg) }>
+        <div className="eventeditor-header" style={ getHeaderImgStyle(props.headerImage) }>
             <div className="eventeditor-header__gradient">
                 <div className="eventeditor-header__content">
                     <div className="eventeditor-header__title">
@@ -19,9 +19,9 @@ const EventEditorHeader = (props) => {
     
 }
 
-function getHeaderImgStyle(headerImg) {
+function getHeaderImgStyle(headerImage) {
     return {
-      backgroundImage: 'url(' + headerImg + ')',
+      backgroundImage: 'url(' + headerImage + ')',
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
       backgroundPosition: 'center',

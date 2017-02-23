@@ -73,7 +73,7 @@
 	.event-header__title {
 		position: absolute;
 
-		bottom: 15pt;
-		left: 15pt;
+		bottom: 15px;
+		left: 15px;
 	}
 }

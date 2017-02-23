@@ -36,7 +36,7 @@ export default class EventApi {
 	 * @param {function} callback - Callback function which is called with the updated event object.
  	 */
 	subscribeToEvent(eventId, callback) {
-	  let ref = self.database().ref(`/events/${eventId}`)
+	  let ref = this.database().ref(`/events/${eventId}`)
 		ref.on('value', snapshot => {
 			callback(snapshot.val());
 		});
@@ -110,11 +110,49 @@ export default class EventApi {
 	 * @param {function} callback - Callback function which is called with the updated eventModules object.
  	 */
 	subscribeToEventModules(eventId, callback) {
-		let ref = this.database().ref(`eventModules/${eventId}`);
+		let ref = this.database().ref(`/eventModules/${eventId}`);
 		ref.on('value', snapshot => {
 				callback(snapshot.val());
 		});
 		this.subscriptions[`eventModules_${eventId}`] = ref;
+	}
+
+	/**
+	 * Get the participants for an event.
+	 * @param {string} eventId - The id of the event.
+	 * @return Promise which resolve to an eventParticipants object and reject with an error.
+ 	 */
+	getEventParticipants(eventId) {
+		let self = this;
+		return new Promise((resolve, reject) =>{
+			self.database().ref(`/eventParticipants/${eventId}`).once('value')
+			.then(snapshot => {
+				let eventParticipants = snapshot.val();
+
+				if(eventParticipants) {
+					resolve(eventParticipants);
+				} else {
+					reject('No modules exists for that event');
+				}
+			})
+			.catch(err => {
+				reject(err);
+			})
+		})
+	}
+
+	/**
+	 * Subsribe to changes to the participants of an event. USE WITH CARE
+	 * @param {string} eventId - The id of the event.
+	 * @param {function} callback - Callback function which is called with the updated eventParticipants object.
+ 	 */
+	subscribeToEventParticipants(eventId, callback) {
+		let ref = this.database().ref(`/eventParticipants/${eventId}`);
+		console.log("hej");
+		ref.on('value', snapshot => {
+			callback(snapshot.val());
+		});
+		this.subscriptions[`eventParticipants_${eventId}`] = ref;
 	}
 
 	/**

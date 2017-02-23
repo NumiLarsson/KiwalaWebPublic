@@ -12,14 +12,14 @@ import { push } from 'react-router-redux';
 //get the API
 import Api from '../api/Api';
 
-//Constants identifying actions.
-export const EVENT_ACTIONS = {
-    GET_EVENT : 'GET_EVENT',
-    SET_CURRENT_EVENT : 'SET_CURRENT_EVENT'
-};
+//get action types
+import { EVENT_ACTIONS } from './actionTypes';
 
 //Standard actions.
-export const setCurrentEvent = createAction(EVENT_ACTIONS.SET_CURRENT_EVENT);
+export const setCurrentEvent                = createAction(EVENT_ACTIONS.SET_CURRENT_EVENT);
+export const setCurrentEventData            = createAction(EVENT_ACTIONS.SET_CURRENT_EVENT_DATA);
+export const setCurrentEventParticipants    = createAction(EVENT_ACTIONS.SET_CURRENT_EVENT_PARTICIPANTS);
+export const setCurrentEventModules         = createAction(EVENT_ACTIONS.SET_CURRENT_EVENT_MODULES);
 
 //Async action. This is what the thunk middleware lets us do.
 export function getEvent(eventId) {
@@ -37,16 +37,19 @@ export function getEvent(eventId) {
 
 export function subscribeToEvent(eventId) {
     return dispatch => {
+        Api.events.clearSubscriptions();
+
         Api.events.subscribeToEvent(eventId, (event) => {
             dispatch(setCurrentEvent(event));
-        })
-        .then(res => {
-            console.log(res);
-        })
-        .catch(error => {
-            console.log(error);
-            dispatch({type: "GET_EVENT_ERROR", payload: eventId});
-        })
-
+        });
+        Api.events.subscribeToEventData(eventId, (event) => {
+            dispatch(setCurrentEventData(event));
+        });
+        Api.events.subscribeToEventModules(eventId, (event) => {
+            dispatch(setCurrentEventModules(event));
+        });
+        Api.events.subscribeToEventParticipants(eventId, (event) => {
+            dispatch(setCurrentEventParticipants(event));
+        });
     }
 }

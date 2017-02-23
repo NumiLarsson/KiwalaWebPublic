@@ -84,6 +84,9 @@ input[type=checkbox]:indeterminate:after {
 
   cursor: pointer;
 }
+.checkbox-wrapper.disabled {
+  pointer-events: none;
+}
 .checkbox-wrapper > input,
 .checkbox-wrapper > span {
   vertical-align: middle;

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getEvent, subscribeToEvent, setCurrentEvent, attendEvent } from '../actions/eventeditor';
+import { getEvent, subscribeToEvent, setCurrentEvent } from '../actions/eventdata';
 import EventEditorHeader from '../components/EventEditor/EventEditorHeader';
 import EventEditorDetails from '../components/EventEditor/EventEditorDetails';
 import EventEditorDescription from '../components/EventEditor/EventEditorDescription';
@@ -27,7 +27,7 @@ class EventEditor extends Component {
     }
 
     render() {
-        if(!this.props.event) {
+        if(!this.props.event.loaded) {
             return (
                 <Spinner label="" />
             )
@@ -38,17 +38,17 @@ class EventEditor extends Component {
                     <NavigationControl user={this.props.user} eventId={this.props.event.id} template="eventeditor" />
                     <div className="event-editor">
 
-                        <EventEditorHeader headerImg={this.props.event.headerImg} name={this.props.event.name} module={this.props.event.modules.headerDetails} startDate={this.props.event.startDate} location={this.props.event.location} />
+                        <EventEditorHeader headerImage={this.props.event.data.headerImage} name={this.props.event.name} />
 
                         <EventEditorControlpanel />
 
                         <div className="event-content">
                             <div className="event-content__spotlight">
-                                <EventEditorDetails module={this.props.event.modules.eventDetails} startDate={this.props.event.startDate} location={this.props.event.location} map={this.props.map}/>
-                                <EventEditorDescription module={this.props.event.modules.eventDescription} description={this.props.event.description} />
+                                <EventEditorDetails />
+                                <EventEditorDescription module={this.props.modules.description} description={this.props.event.data.description} />
                             </div>
                             <div className="event-content__sideline">
-                                <EventEditorParticipants module={this.props.event.modules.eventParticipants} participants={this.props.event.participants} />
+                                <EventEditorParticipants module={this.props.modules.participants} participants={this.props.event.participants} />
                             </div>
                         </div>
 
@@ -62,9 +62,9 @@ class EventEditor extends Component {
 //Maps the state in our store to the props property of the Example object.
 const mapStateToProps = (state) => {
     return {
-        event: state.eventviewer.event,
-        user: state.auth.user,
-        map: state.eventviewer.map
+        event: state.eventdata,
+        modules: state.eventmodules,
+        user: state.auth.user
     }
 }
 
@@ -74,7 +74,6 @@ const mapDispatchToProps = {
     getEvent,
     setCurrentEvent,
     subscribeToEvent,
-    attendEvent,
     loadMapImageURL
 }
 
