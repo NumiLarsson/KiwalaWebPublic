@@ -10,9 +10,13 @@ import { createAction } from 'redux-actions';
 //push can be used to navigate. dispatch(push('path'))
 import { push } from 'react-router-redux';
 //get the API
-import Api from '../api/Api';
+import Api from '../../api/Api';
 
 //get action types
-import { EVENT_ACTIONS } from './actionTypes';
+import { EVENT_EDITOR_ACTIONS } from '../actionTypes';
 
 //Standard actions.
+export const eventDetailsToggled = createAction(EVENT_EDITOR_ACTIONS.EDIT_DETAILS_TOGGLED);
+export const eventDetailsTimeToggled = createAction(EVENT_EDITOR_ACTIONS.EDIT_DETAILS_TIME_TOGGLED);
+export const eventDetailsLocToggled = createAction(EVENT_EDITOR_ACTIONS.EDIT_DETAILS_LOC_TOGGLED);
+export const eventDetailsMapToggled = createAction(EVENT_EDITOR_ACTIONS.EDIT_DETAILS_MAP_TOGGLED);

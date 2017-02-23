@@ -44,7 +44,7 @@ class EventEditor extends Component {
 
                         <div className="event-content">
                             <div className="event-content__spotlight">
-                                <EventEditorDetails module={this.props.event.modules.eventDetails} startDate={this.props.event.startDate} location={this.props.event.location} map={this.props.map}/>
+                                <EventEditorDetails startDate={this.props.event.startDate} location={this.props.event.location} map={this.props.map}/>
                                 <EventEditorDescription module={this.props.event.modules.eventDescription} description={this.props.event.description} />
                             </div>
                             <div className="event-content__sideline">
