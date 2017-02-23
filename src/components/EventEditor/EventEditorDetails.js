@@ -109,7 +109,7 @@ const mapStateToProps = (state) => {
         module: state.eventmodules.details,
         startDate: state.eventdata.data.startDate,
         location: state.eventdata.data.location,
-        map: state.eventdata.data.map
+        map: state.eventdata.map
     }
 }
 
