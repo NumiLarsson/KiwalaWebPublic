@@ -53,33 +53,19 @@ function gotoEvent(eventId) {
 }
 
 function renderEventViewerAdminSettings(user, eventId) {
-    if(true) {
-        return (
-             <div className="navigationcontrol-item">
-                 <button className="navigationcontrol-item__button" onClick={() => gotoEventSettings(eventId)}><i className="material-icons">settings</i><br className="only-on-mobile"/><span className="">Settings</span></button>
-            </div>
-        );
-    }
-    else {
-        return (
-            null
-        );
-    }
+    return (
+         <div className="navigationcontrol-item">
+             <button className="navigationcontrol-item__button" onClick={() => gotoEventSettings(eventId)}><i className="material-icons">settings</i><br className="only-on-mobile"/><span className="">Settings</span></button>
+        </div>
+    );
 }
 
 function renderEventEditorAdminSettings(user, eventId) {
-    if(true) {
-        return (
-             <div className="navigationcontrol-item">
-                 <button className="navigationcontrol-item__button" onClick={() => gotoEvent(eventId)}><i className="material-icons">event</i><br className="only-on-mobile"/><span className="">Event</span></button>
-            </div>
-        );
-    }
-    else {
-        return (
-            null
-        );
-    }
+    return (
+         <div className="navigationcontrol-item">
+             <button className="navigationcontrol-item__button" onClick={() => gotoEvent(eventId)}><i className="material-icons">event</i><br className="only-on-mobile"/><span className="">Event</span></button>
+        </div>
+    );
 }
 
 export default (NavigationControl);

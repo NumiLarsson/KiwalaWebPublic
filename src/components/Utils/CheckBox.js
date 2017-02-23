@@ -42,8 +42,8 @@ class CheckBox extends Component {
 
     render() {
         return (
-            <div className="checkbox-wrapper">
-                <input type="checkbox" checked={this.state.checked} onChange={this.handleChange} />
+            <div className={(!this.props.disabled) ? "checkbox-wrapper" : "checkbox-wrapper disabled"}>
+                <input type="checkbox" checked={this.state.checked} onChange={this.handleChange}/>
                 { this.renderLabel() }
             </div>
         )

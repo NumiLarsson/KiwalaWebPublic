@@ -15,7 +15,6 @@ const FAKE_EVENT_DATA = [
 
 class UpcomingEventsList extends Component {
     formatEvents(events) {
-        console.log(events);
         const formattedEvents = events.map(
             (event) => 
                 <div key={event.id} className="eventlist-event" onClick={this.goToEvent.bind(this, event.id)}>

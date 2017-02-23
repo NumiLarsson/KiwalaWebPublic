@@ -9,7 +9,7 @@ const EventEditorDetails = (props) => {
 
     if(props.module) {
         return (
-            <div className="eventeditor-details">
+            <div className={(props.module.enabled) ? "eventeditor-details" : "eventeditor-details disabled"}>
                 <div className="eventeditor-details__header">
                     <i className="material-icons color-blue">info</i> <span> Details </span>
                 </div>
@@ -33,7 +33,7 @@ const EventEditorDetails = (props) => {
 function renderStartDate(module, startDate) {
     return (
         <div className="eventeditor-details__enabler">
-            <CheckBox label="Show date" checked={module.showTime} />
+            <CheckBox label="Show date" checked={module.showTime} disabled={!module.enabled} />
             <div className="eventeditor-details__item">
                 <i className="material-icons color-gray">event</i>
                 <div className="event-details__item-text" title={ formatDate(startDate) }> { formatDate(startDate) } </div>
@@ -45,7 +45,7 @@ function renderStartDate(module, startDate) {
 function renderLocation(module, location) {
     return (
          <div className="eventeditor-details__enabler">
-            <CheckBox label="Show location" checked={module.showLocation} />
+            <CheckBox label="Show location" checked={module.showLocation} disabled={!module.enabled} />
             <div className="eventeditor-details__item">
                 <i className="material-icons color-gray">location_on</i>
                 <div className="eventeditor-details__item-text" title={ formatLocation(location) }> { formatLocation(location) } </div>
@@ -58,7 +58,7 @@ function renderMap(module, map) {
 
     return (
         <div className="eventeditor-details__enabler">
-            <CheckBox label="Show map" checked={module.showMap} />
+            <CheckBox label="Show map" checked={module.showMap} disabled={!module.enabled} />
             <div className="eventeditor-details__map">
                 <img className="map-image" src={map} />
             </div>

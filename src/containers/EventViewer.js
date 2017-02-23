@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getEvent, subscribeToEvent, setCurrentEvent, attendEvent } from '../actions/eventviewer';
+import { getEvent, subscribeToEvent, setCurrentEvent } from '../actions/eventdata';
+import { attendEvent } from '../actions/eventviewer';
 import EventHeader from '../components/Event/EventHeader';
 import EventDetails from '../components/Event/EventDetails';
 import EventDescription from '../components/Event/EventDescription';
@@ -62,9 +63,9 @@ class EventViewer extends Component {
 //Maps the state in our store to the props property of the Example object.
 const mapStateToProps = (state) => {
     return {
-        event: state.eventviewer.event,
+        event: state.eventdata.event,
         user: state.auth.user,
-        map: state.eventviewer.map
+        map: state.eventdata.map
     }
 }
 

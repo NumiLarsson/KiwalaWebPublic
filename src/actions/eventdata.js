@@ -15,31 +15,35 @@ import Api from '../api/Api';
 //get action types
 import { EVENT_ACTIONS } from './actionTypes';
 
-
 //Standard actions.
-export const attendSuccessful = createAction(EVENT_ACTIONS.ATTEND_EVENT_SUCCESS);
-export const unattendSuccessful = createAction(EVENT_ACTIONS.UNATTEND_EVENT_SUCCESS);
+export const setCurrentEvent = createAction(EVENT_ACTIONS.SET_CURRENT_EVENT);
 
-export function attendEvent(eventId, uid) {
+//Async action. This is what the thunk middleware lets us do.
+export function getEvent(eventId) {
     return dispatch => {
-        Api.events.attendEvent(eventId, uid)
-        .then(res => {
-            dispatch(attendSuccessful(res));
+        Api.events.getEvent(eventId)
+        .then((event) => {
+            dispatch(setCurrentEvent(event))
         })
-        .catch(err => {
-            console.log(err);
+        .catch((error) => {
+            console.log(error);
+            dispatch({type: "GET_EVENT_ERROR", payload: eventId});
         })
     }
 }
 
-export function unattendEvent(eventId, uid) {
+export function subscribeToEvent(eventId) {
     return dispatch => {
-        Api.events.unattendEvent(eventId, uid)
+        Api.events.subscribeToEvent(eventId, (event) => {
+            dispatch(setCurrentEvent(event));
+        })
         .then(res => {
-            dispatch(unattendSuccessful(res));
+            console.log(res);
         })
-        .catch(err => {
-            console.log(err);
+        .catch(error => {
+            console.log(error);
+            dispatch({type: "GET_EVENT_ERROR", payload: eventId});
         })
+
     }
 }

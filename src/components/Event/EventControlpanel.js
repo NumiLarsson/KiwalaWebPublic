@@ -63,7 +63,7 @@ function isAttendingEvent(event, userUid) {
 //Maps the state in our store to the props property of the Example object.
 const mapStateToProps = (state) => {
     return {
-        event: state.eventviewer.event,
+        event: state.eventdata.event,
         user: state.auth.user
     }
 }
