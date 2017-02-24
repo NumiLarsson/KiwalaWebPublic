@@ -105,6 +105,7 @@ class UpcomingEventsList extends Component {
 const mapStateToProps = (state) => {
     return {
         auth: state.auth,
+        user: state.auth.user,
     }
 }
 
