@@ -51,7 +51,7 @@ class Login extends Component {
         else {
             return (
                 <div className="login-screen">
-                    <button type="button" onClick={this.loginWithFacebook}>Login with Facebook</button>
+                    <button type="button" className="login-screen__button login-screen__button--with-facebook" onClick={this.loginWithFacebook}>Login with Facebook</button>
                     <span>OR</span>
                     <br />
                     <form>
