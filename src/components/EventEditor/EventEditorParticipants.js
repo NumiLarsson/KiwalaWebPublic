@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import IconButton from '../Utils/IconButton';
-import CheckBox from '../Utils/CheckBox';
+import { Field, reduxForm } from 'redux-form';
+import IconButton from '../Utils/IconButtonField';
+import CheckBox from '../Utils/CheckBoxField';
 import './styles/eventeditor_participants.css';
 
 class EventEditorParticipants extends Component {
@@ -18,19 +19,22 @@ class EventEditorParticipants extends Component {
 
     render() {
         if(this.props.module) {
+            const { handleParticipantsSubmit } = this.props;
             return (
-                <div className="eventeditor-participants">
-                    <div className="eventeditor-participants__header">
-                        <i className="material-icons color-blue">person</i> <span> Participants ({ (this.props.participants) ? Object.keys(this.props.participants).length : "-" })</span>
-                    </div>
-                    <div className="eventeditor-participants__mainenabler">
-                        <CheckBox label="Show module" name="participantsEnabled" checked={this.props.module.enabled} />
-                        <IconButton mIcon="save" label="Apply" />
-                    </div>
-                    <div className="eventeditor-participants__list"> 
-                        { renderParticipants(this.props.participants) } 
-                    </div>
-                </div> 
+                <form onSubmit={handleParticipantsSubmit}>
+                    <div className={(this.props.module.enabled) ? "eventeditor-participants" : "eventeditor-participants disabled"}>
+                        <div className="eventeditor-participants__header">
+                            <i className="material-icons color-blue">person</i> <span> Participants ({ (this.props.participants) ? Object.keys(this.props.participants).length : "-" })</span>
+                        </div>
+                        <div className="eventeditor-participants__mainenabler">
+                            <Field label="Show module" name="participantsEnabled" component={CheckBox} />
+                            <Field mIcon="save" label="Save" name="participantsSave" component={IconButton} />
+                        </div>
+                        <div className="eventeditor-participants__list"> 
+                            { renderParticipants(this.props.participants) } 
+                        </div>
+                    </div> 
+                </form>
             )
         }
         else {
@@ -41,6 +45,12 @@ class EventEditorParticipants extends Component {
     }
     
 }
+
+// Decorate the form component
+EventEditorParticipants = reduxForm({
+  form: 'moduleparticipants', // a unique name for this form
+  enableReinitialize: true
+})(EventEditorParticipants);
 
 function renderParticipants(participants) {
 
@@ -82,7 +92,7 @@ const mapStateToProps = (state) => {
         module: state.eventmodules.participants,
         participants: state.eventdata.participants,
         initialValues : {
-            //detailsEnabled: state.eventmodules.details.enabled
+            participantsEnabled: state.eventmodules.participants.enabled
         }
     }
 }

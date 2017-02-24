@@ -23,7 +23,7 @@ class EventEditor extends Component {
     }
 
     render() {
-        if(!this.props.event.loaded) {
+        if(!this.props.event.loaded && !this.props.modules.loaded) {
             return (
                 <Spinner label="" />
             )

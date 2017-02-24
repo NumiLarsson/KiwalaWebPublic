@@ -148,7 +148,6 @@ export default class EventApi {
  	 */
 	subscribeToEventParticipants(eventId, callback) {
 		let ref = this.database().ref(`/eventParticipants/${eventId}`);
-		console.log("hej");
 		ref.on('value', snapshot => {
 			callback(snapshot.val());
 		});

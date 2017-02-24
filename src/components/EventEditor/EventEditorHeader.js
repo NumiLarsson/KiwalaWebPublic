@@ -43,7 +43,7 @@ function getHeaderImgStyle(headerImage) {
 //Maps the state in our store to the props property of the Example object.
 const mapStateToProps = (state) => {
     return {
-        headerImage: state.eventdata.headerImage,
+        headerImage: state.eventdata.data.headerImage,
         name: state.eventdata.name
     }
 }
