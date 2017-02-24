@@ -4,28 +4,40 @@ import IconButton from '../Utils/IconButton';
 import CheckBox from '../Utils/CheckBox';
 import './styles/eventeditor_participants.css';
 
-const EventEditorParticipants = (props) => {
+class EventEditorParticipants extends Component {
+    
+    constructor() {
+        super();
 
-    if(props.module) {
-        return (
-            <div className="eventeditor-participants">
-                <div className="eventeditor-participants__header">
-                    <i className="material-icons color-blue">person</i> <span> Participants ({ Object.keys(props.participants).length })</span>
-                </div>
-                <div className="eventeditor-participants__mainenabler">
-                    <CheckBox label="Show module" name="participantsEnabled" checked={props.module.enabled} />
-                    <IconButton mIcon="save" label="Apply" />
-                </div>
-                <div className="eventeditor-participants__list"> 
-                    { renderParticipants(props.participants) } 
-                </div>
-            </div> 
-        )
+        this.handleParticipantsEnabledChange     = this.handleParticipantsEnabledChange.bind(this);
     }
-    else {
-        return (
-            null
-        )
+
+    handleParticipantsEnabledChange(event) {
+        //eventDetailsToggled(event.value.checked);
+    }
+
+    render() {
+        if(this.props.module) {
+            return (
+                <div className="eventeditor-participants">
+                    <div className="eventeditor-participants__header">
+                        <i className="material-icons color-blue">person</i> <span> Participants ({ (this.props.participants) ? Object.keys(this.props.participants).length : "-" })</span>
+                    </div>
+                    <div className="eventeditor-participants__mainenabler">
+                        <CheckBox label="Show module" name="participantsEnabled" checked={this.props.module.enabled} />
+                        <IconButton mIcon="save" label="Apply" />
+                    </div>
+                    <div className="eventeditor-participants__list"> 
+                        { renderParticipants(this.props.participants) } 
+                    </div>
+                </div> 
+            )
+        }
+        else {
+            return (
+                null
+            )
+        }
     }
     
 }
@@ -64,4 +76,20 @@ function renderAvatar(participant) {
     }
 }
 
-export default (EventEditorParticipants);
+//Maps the state in our store to the props property of the Example object.
+const mapStateToProps = (state) => {
+    return {
+        module: state.eventmodules.participants,
+        participants: state.eventdata.participants,
+        initialValues : {
+            //detailsEnabled: state.eventmodules.details.enabled
+        }
+    }
+}
+
+//Wrapping the action creators in a dispatch call and allowing us to 
+//access them through the props property of the Example object. 
+const mapDispatchToProps = {
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(EventEditorParticipants);
