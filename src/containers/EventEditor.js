@@ -12,10 +12,6 @@ import './styles/eventeditor.css';
 import { loadMapImageURL } from './../actions/maps'
 
 class EventEditor extends Component {
-    
-    constructor() {
-        super();
-    }
 
     componentWillMount(){
         // perform any preparations for an upcoming update

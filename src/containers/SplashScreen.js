@@ -43,7 +43,7 @@ class SplashScreen extends Component {
     render() {
         return (
             <div className="splashscreen">
-                <img src="images/logo.png" className="splashscreen-logo"/>
+                <img src="images/logo.png" role="presentation" className="splashscreen-logo"/>
                 <h1>Kiwala</h1>
                 <Link to={'event/2'}>Demo event</Link>
                 <br/>

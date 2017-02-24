@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { formatDate, formatLocation } from '../../utils/utils';
 import './styles/eventeditor_header.css';
 
 class EventEditorHeader extends Component {
