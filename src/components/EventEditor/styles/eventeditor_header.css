@@ -1,3 +1,7 @@
+.eventeditor-header__form {
+	width: 100%;
+}
+
 .eventeditor-header {
 	width: 100%;
 	min-height: 200px;
@@ -35,16 +39,20 @@
 .eventeditor-header__title {
 	position: absolute;
 	text-align: left;
-	padding-right: 15px;
 
 	bottom: 15px;
 	left: 15px;
+	right: 15px;
 }
 
-.eventeditor-header__title h1 {
+.eventeditor-header__titleField {
+	background: none;
 	margin: 0;
+	border: none;
+	width: 100%;
 
 	font-size: 2.2em;
+	font-weight: 700;
 	color: #fff;
 }
 
@@ -56,7 +64,7 @@
 		max-height: 300px;
 	}
 
-	.eventeditor-header__title h1 {
+	.eventeditor-header__titleField {
 		font-size: 2.5em;
 	}
 

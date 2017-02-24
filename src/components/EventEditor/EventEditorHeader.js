@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Field, reduxForm } from 'redux-form';
+import IconButton from '../Utils/IconButtonField';
 import './styles/eventeditor_header.css';
 
 class EventEditorHeader extends Component {
@@ -15,20 +17,29 @@ class EventEditorHeader extends Component {
     }
 
     render() {
+      const { handleModuleSaved } = this.props;
       return (
-          <div className="eventeditor-header" style={ getHeaderImgStyle(this.props.headerImage) }>
-              <div className="eventeditor-header__gradient">
-                  <div className="eventeditor-header__content">
-                      <div className="eventeditor-header__title">
-                          <h1>{ this.props.name }</h1>
-                      </div>
-                  </div>
-              </div>
-          </div> 
+          <form className="eventeditor-header__form" onSubmit={handleModuleSaved}>
+            <div className="eventeditor-header" style={ getHeaderImgStyle(this.props.headerImage) }>
+                <div className="eventeditor-header__gradient">
+                    <div className="eventeditor-header__content">
+                    <Field mIcon="save" label="Save" name="eventheaderSave" component={IconButton} />
+                        <div className="eventeditor-header__title">
+                            <Field className="eventeditor-header__titleField" name="eventheaderName" component="input"/>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+          </form>
       )
     }
-    
 }
+
+// Decorate the form component
+EventEditorHeader = reduxForm({
+  form: 'eventheader', // a unique name for this form
+  enableReinitialize: true
+})(EventEditorHeader);
 
 function getHeaderImgStyle(headerImage) {
     return {
@@ -44,7 +55,9 @@ function getHeaderImgStyle(headerImage) {
 const mapStateToProps = (state) => {
     return {
         headerImage: state.eventdata.headerImage,
-        name: state.eventdata.name
+        initialValues : {
+            eventheaderName: state.eventdata.name
+        }
     }
 }
 
