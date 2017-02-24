@@ -49,7 +49,7 @@ class EventEditorDescription extends Component {
 const mapStateToProps = (state) => {
     return {
         module: state.eventmodules.details,
-        description: state.eventdata.data.description,
+        description: state.eventdata.description,
         initialValues : {
             //detailsEnabled: state.eventmodules.details.enabled
         }

@@ -109,8 +109,8 @@ function renderMap(module, map, handleChange) {
 const mapStateToProps = (state) => {
     return {
         module: state.eventmodules.details,
-        startDate: state.eventdata.data.startDate,
-        location: state.eventdata.data.location,
+        startDate: state.eventdata.startDate,
+        location: state.eventdata.location,
         map: state.eventdata.map,
         initialValues : {
             //detailsEnabled: state.eventmodules.details.enabled
