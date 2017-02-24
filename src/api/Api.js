@@ -16,7 +16,7 @@ firebase.initializeApp(FIREBASE_CONFIG);
 class Api {
   events = new EventApi(firebase.database);
   auth = new AuthApi(firebase.auth);
-  user = new UserApi(firebase.auth);
+  user = new UserApi(firebase.database);
 
   constructor() {
     if (!Api.instance) {

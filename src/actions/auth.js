@@ -26,7 +26,8 @@ export function listenForAuthChanges() {
     return (dispatch, getState) => {
         Api.auth.listenForAuthChanges(
             (user) => {
-                dispatch(userLoggedIn(user))
+                dispatch(userLoggedIn(user));
+                Api.user.createUserIfNotExists(user);
             }, //Success
             () => {
                 dispatch(userLoggedOut());
