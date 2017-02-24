@@ -22,7 +22,7 @@ class EventEditorParticipants extends Component {
             const { handleParticipantsSubmit } = this.props;
             return (
                 <form onSubmit={handleParticipantsSubmit}>
-                    <div className="eventeditor-participants">
+                    <div className={(this.props.module.enabled) ? "eventeditor-participants" : "eventeditor-participants disabled"}>
                         <div className="eventeditor-participants__header">
                             <i className="material-icons color-blue">person</i> <span> Participants ({ (this.props.participants) ? Object.keys(this.props.participants).length : "-" })</span>
                         </div>
@@ -48,7 +48,7 @@ class EventEditorParticipants extends Component {
 
 // Decorate the form component
 EventEditorParticipants = reduxForm({
-  form: 'module-participants', // a unique name for this form
+  form: 'moduleparticipants', // a unique name for this form
   enableReinitialize: true
 })(EventEditorParticipants);
 

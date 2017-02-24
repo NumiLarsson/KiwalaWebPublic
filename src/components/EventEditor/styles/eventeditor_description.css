@@ -17,6 +17,10 @@
 	box-shadow: 1px 2px 3px #BDBDBD;
 }
 
+.eventeditor-description.disabled {
+	opacity: 0.5;
+}
+
 .eventeditor-description__mainenabler {
 	display: flex;
 	justify-content: space-between;

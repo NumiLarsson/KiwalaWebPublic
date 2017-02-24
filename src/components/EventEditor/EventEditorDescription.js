@@ -27,7 +27,7 @@ class EventEditorDescription extends Component {
             const { handleDescriptionSubmit } = this.props;
             return (
                 <form onSubmit={handleDescriptionSubmit}>
-                    <div className="eventeditor-description">
+                    <div className={(this.props.module.enabled) ? "eventeditor-description" : "eventeditor-description disabled"}>
                         <div className="eventeditor-description__header">
                             <i className="material-icons color-blue">description</i> <span> Description </span>
                         </div>
@@ -50,7 +50,7 @@ class EventEditorDescription extends Component {
 
 // Decorate the form component
 EventEditorDescription = reduxForm({
-  form: 'module-description', // a unique name for this form
+  form: 'moduledescription', // a unique name for this form
   enableReinitialize: true
 })(EventEditorDescription);
 
