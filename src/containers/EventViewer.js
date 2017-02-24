@@ -13,10 +13,6 @@ import './styles/eventviewer.css';
 import { loadMapImageURL } from '../actions/maps'
 
 class EventViewer extends Component {
-    
-    constructor() {
-        super();
-    }
 
     componentWillMount(){
         // perform any preparations for an upcoming update

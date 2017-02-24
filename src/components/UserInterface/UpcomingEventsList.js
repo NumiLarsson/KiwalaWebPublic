@@ -1,16 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import api from '../../api/Api';
-import Event from '../../models/Event'
-import Spinner from '../Utils/Spinner';
 import { browserHistory } from 'react-router';
 import './styles/upcomingeventslist.css';
 import { formatDate, formatLocation } from '../../utils/utils';
 import NavigationControl from '../Navigation/NavigationControl';
 
 const FAKE_EVENT_DATA = [
-    new Event(10, "FakeEvent1", new Date(), "Uppsala", "Hello World", null, null), 
-    new Event(2, "Awesome event at the beach", new Date(), "Stockholm", "Hello World", null, null)
 ]
 
 class UpcomingEventsList extends Component {

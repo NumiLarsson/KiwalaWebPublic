@@ -1,6 +1,6 @@
 import { EVENT_ACTIONS } from '../actions/actionTypes';
 import { MAPS_ACTIONS } from '../actions/maps';
-const { GET_EVENT, SET_CURRENT_EVENT, SET_CURRENT_EVENT_DATA, SET_CURRENT_EVENT_PARTICIPANTS } = EVENT_ACTIONS;
+const { SET_CURRENT_EVENT, SET_CURRENT_EVENT_DATA, SET_CURRENT_EVENT_PARTICIPANTS } = EVENT_ACTIONS;
 
 const initialState = {
     id: null,

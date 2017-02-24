@@ -8,9 +8,9 @@
 //createAction is an action creator used to create standard actions.
 import { createAction } from 'redux-actions';
 //push can be used to navigate. dispatch(push('path'))
-import { push } from 'react-router-redux';
+import {  } from 'react-router-redux';
 //get the API
-import Api from '../../api/Api';
+//import Api from '../../api/Api';
 
 //get action types
 import { EVENT_EDITOR_ACTIONS } from '../actionTypes';

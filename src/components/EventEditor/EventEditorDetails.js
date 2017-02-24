@@ -99,7 +99,7 @@ function renderMap(module, map, handleChange) {
         <div className="eventeditor-details__enabler">
             <Field label="Show map" name="detailsMapEnabled" component={CheckBox} />
             <div className="eventeditor-details__map">
-                <img className="map-image" src={map} />
+                <img className="map-image" role="presentation" src={map} />
             </div>
         </div>
     );

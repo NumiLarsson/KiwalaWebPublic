@@ -1,5 +1,4 @@
 import { EVENT_ACTIONS } from '../actions/actionTypes';
-import { MAPS_ACTIONS } from '../actions/maps';
 const { SET_CURRENT_EVENT_MODULES } = EVENT_ACTIONS;
 
 const initialState = {

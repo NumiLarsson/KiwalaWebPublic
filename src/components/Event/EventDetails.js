@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
 import { formatDate, formatLocation } from '../../utils/utils';
 import './styles/eventdetails.css';
 
@@ -63,7 +62,7 @@ function renderMap(module, map) {
     if(module.showMap) {
         return (
             <div className="event-details__map">
-                <img className="map-image" src={map} />
+                <img className="map-image" role="presentation" src={map} />
             </div>
         );
     }

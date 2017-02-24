@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
 import { browserHistory } from 'react-router';
 import './styles/navigationcontrol.css';
 
@@ -16,8 +15,8 @@ const NavigationControl = (props) => {
                 <div className="navigationcontrol-item">
                      <button className="navigationcontrol-item__button" onClick={goToProfile}><i className="material-icons">person</i><br className="only-on-mobile"/><span className="">Profile</span></button>
                 </div>
-                { (props.template == "eventviewer") ? renderEventViewerAdminSettings(props.user, props.eventId) : null }
-                { (props.template == "eventeditor") ? renderEventEditorAdminSettings(props.user, props.eventId) : null }
+                { (props.template === "eventviewer") ? renderEventViewerAdminSettings(props.user, props.eventId) : null }
+                { (props.template === "eventeditor") ? renderEventEditorAdminSettings(props.user, props.eventId) : null }
             </div> 
         )
     }
