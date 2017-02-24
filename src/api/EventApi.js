@@ -155,21 +155,6 @@ export default class EventApi {
 		this.subscriptions[`eventParticipants_${eventId}`] = ref;
 	}
 
-	tempWriteToUser(eventId, uid) {
-		let self = this;
-			return new Promise((resolve, reject) => {
-				let updates = {};
-				updates[`/userAcceptedEvents/${uid}/${eventId}`] = true;
-				self.database().ref().update(updates)
-				.then(() => {
-					resolve('SUCCESS');
-				})
-				.catch(err => {
-					reject(err);
-				})
-			})
-	}
-
 	/**
 	 * Attend an event
 	 * @param {string} eventId - The id of the event.
@@ -178,19 +163,18 @@ export default class EventApi {
  	 */
 	attendEvent(eventId, uid) {
 		let self = this;
-		if (this.tempWriteToUser(eventId, uid)) {
-			return new Promise((resolve, reject) => {
-				let updates = {};
-				updates[`/events/${eventId}/participants/${uid}`] = true;
-				self.database().ref().update(updates)
-				.then(() => {
-					resolve('SUCCESS');
-				})
-				.catch(err => {
-					reject(err);
-				});
+		return new Promise((resolve, reject) => {
+			let updates = {};
+			updates[`/eventParticipants/${eventId}/${uid}`] = true;
+			updates[`/userAcceptedEvents/${uid}/${eventId}`] = true;
+			self.database().ref().update(updates)
+			.then(() => {
+				resolve('SUCCESS');
 			})
-		}
+			.catch(err => {
+				reject(err);
+			});
+		})
 	}
 
 	/**
@@ -202,7 +186,10 @@ export default class EventApi {
 	unattendEvent(eventId, uid) {
 		let self = this;
 		return new Promise((resolve, reject) => {
-	        self.database().ref(`/eventParticipants/${eventId}/${uid}`).set(null)
+			let updates = {};
+			updates[`/eventParticipants/${eventId}/${uid}`] = null;
+			updates[`/userAcceptedEvents/${uid}/${eventId}`] = null;
+	        self.database().ref().update(updates)
 	        .then(() => {
 	            resolve('SUCCESS');
 	        })
