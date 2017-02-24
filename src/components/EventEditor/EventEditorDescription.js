@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import IconButton from '../Utils/IconButton';
-import CheckBox from '../Utils/CheckBox';
+import { Field, reduxForm } from 'redux-form';
+import IconButton from '../Utils/IconButtonField';
+import CheckBox from '../Utils/CheckBoxField';
 import './styles/eventeditor_description.css';
 
 class EventEditorDescription extends Component {
@@ -23,17 +24,20 @@ class EventEditorDescription extends Component {
 
     render() {
         if(this.props.module) {
+            const { handleDetailsSubmit } = this.props;
             return (
-                <div className="eventeditor-description">
-                    <div className="eventeditor-description__header">
-                        <i className="material-icons color-blue">description</i> <span> Description </span>
-                    </div>
-                    <div className="eventeditor-description__mainenabler">
-                        <CheckBox label="Show module" name="descriptionEnabled" checked={this.props.module.enabled} />
-                        <IconButton mIcon="save" label="Apply" />
-                    </div>
-                    <p> { this.props.description } </p>
-                </div> 
+                <form onSubmit={handleDetailsSubmit}>
+                    <div className="eventeditor-description">
+                        <div className="eventeditor-description__header">
+                            <i className="material-icons color-blue">description</i> <span> Description </span>
+                        </div>
+                        <div className="eventeditor-description__mainenabler">
+                            <Field label="Show module" name="descriptionEnabled" component={CheckBox} />
+                            <Field mIcon="save" label="Save" name="descriptionSave" component={IconButton} />
+                        </div>
+                        <p> { this.props.description } </p>
+                    </div> 
+                </form>
             )
         }
         else {
@@ -42,8 +46,12 @@ class EventEditorDescription extends Component {
             )
         }
     }
-    
 }
+
+// Decorate the form component
+EventEditorDescription = reduxForm({
+  form: 'module-description' // a unique name for this form
+})(EventEditorDescription);
 
 //Maps the state in our store to the props property of the Example object.
 const mapStateToProps = (state) => {

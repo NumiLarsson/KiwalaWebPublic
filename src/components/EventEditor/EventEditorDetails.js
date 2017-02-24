@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { formatDate, formatLocation } from '../../utils/utils';
 import { eventDetailsToggled, eventDetailsTimeToggled, eventDetailsLocToggled, eventDetailsMapToggled } from '../../actions/EventEditor/eventeditor';
-import IconButton from '../Utils/IconButton';
+import IconButton from '../Utils/IconButtonField';
 import CheckBox from '../Utils/CheckBoxField';
 import './styles/eventeditor_details.css';
 
@@ -45,7 +45,7 @@ class EventEditorDetails extends Component {
                         </div>
                         <div className="eventeditor-details__mainenabler">
                             <Field label="Show module" name="detailsEnabled" component={CheckBox} />
-                            <Field mIcon="save" label="Apply" name="detailsSave" component={IconButton} /> 
+                            <Field mIcon="save" label="Save" name="detailsSave" component={IconButton} /> 
                         </div>
                         { renderStartDate(this.props.module, this.props.startDate, this.handleDetailsTimeEnabledChange) }
                         { renderLocation(this.props.module, this.props.location, this.handleDetailsLocEnabledChange) }
