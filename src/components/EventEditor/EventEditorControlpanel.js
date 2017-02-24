@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { formatDate, formatLocation } from '../../utils/utils';
 import './styles/eventeditor_controlpanel.css';
 
 class EventEditorControlpanel extends Component {
@@ -34,10 +33,6 @@ class EventEditorControlpanel extends Component {
             </div>
         )
     }
-}
-
-function isAttendingEvent(event, userUid) {
-        return (event.participants[userUid]);
 }
 
 //Maps the state in our store to the props property of the Example object.

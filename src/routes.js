@@ -11,17 +11,6 @@ import EventViewer from './containers/EventViewer';
 import UserInterface from './containers/UserInterface';
 import EventEditor from './containers/EventEditor';
 import Login from "./components/Login/Login";
-import Api from './api/Api';
-
-// Taken from https://github.com/ReactTraining/react-router/blob/master/examples/auth-flow/app.js
-function requireAuth(nextState, replace) {
-    if (! Api.auth.loggedIn()) {
-        replace({
-            pathname: '/login',
-            state: {nextPathname: nextState.location.pathname}
-        })
-    }
-}
 
 const routes = (
     <Route path="/" component={App}>
@@ -29,7 +18,7 @@ const routes = (
         <Route path="/event/:eventid" component={EventViewer}/>
         <Route path="/login" component={Login} />
         <Route path="/user" component={UserInterface}/>
-        <Route path="event/settings/:eventid" component={EventEditor} />
+        <Route path="eventsettings/:eventid" component={EventEditor} />
     </Route>
 );
 

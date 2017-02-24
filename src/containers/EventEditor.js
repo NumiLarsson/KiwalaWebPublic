@@ -12,10 +12,6 @@ import './styles/eventeditor.css';
 import { loadMapImageURL } from './../actions/maps'
 
 class EventEditor extends Component {
-    
-    constructor() {
-        super();
-    }
 
     componentWillMount(){
         // perform any preparations for an upcoming update
@@ -27,7 +23,7 @@ class EventEditor extends Component {
     }
 
     render() {
-        if(!this.props.event.loaded) {
+        if(!this.props.event.loaded && !this.props.modules.loaded) {
             return (
                 <Spinner label="" />
             )

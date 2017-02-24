@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { setEmail, setPassword, login, logout } from '../../actions/login';
-import EventDetails from '../Event/EventDetails';
-import EventDescription from '../Event/EventDescription';
-import EventParticipants from '../Event/EventParticipants';
 import './styles/loginscreen.css';
 
 class Login extends Component {
