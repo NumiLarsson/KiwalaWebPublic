@@ -5,16 +5,16 @@ const CheckBox = (props) => {
 
     return (
         <div className={(!props.disabled) ? "checkbox-wrapper" : "checkbox-wrapper disabled"}>
-            <input type="checkbox" checked={props.checked} onChange={props.handleChange}/>
-            { renderLabel(props.label, props.handleChange) }
+            <input type="checkbox" name={props.name} id={props.name} onChange={props.onChange}/>
+            { renderLabel(props.label, props.name) }
         </div>
     )
 }
 
-function renderLabel(label, handleChange) {
+function renderLabel(label, name) {
     if(label) {
         return (
-            <span onClick={handleChange}>{label}</span>
+            <label htmlFor={name}>{label}</label>
         );
     }
     else {

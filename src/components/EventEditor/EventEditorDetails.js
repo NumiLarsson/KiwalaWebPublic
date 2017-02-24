@@ -4,7 +4,7 @@ import { Field, reduxForm } from 'redux-form';
 import { formatDate, formatLocation } from '../../utils/utils';
 import { eventDetailsToggled, eventDetailsTimeToggled, eventDetailsLocToggled, eventDetailsMapToggled } from '../../actions/EventEditor/eventeditor';
 import IconButton from '../Utils/IconButton';
-import CheckBox from '../Utils/CheckBox';
+import CheckBox from '../Utils/CheckBoxField';
 import './styles/eventeditor_details.css';
 
 class EventEditorDetails extends Component {
@@ -44,7 +44,7 @@ class EventEditorDetails extends Component {
                             <i className="material-icons color-blue">info</i> <span> Details </span>
                         </div>
                         <div className="eventeditor-details__mainenabler">
-                            <CheckBox label="Show module" checked={this.props.module.enabled} handleChange={this.handleDetailsEnabledChange} />
+                            <Field label="Show module" name="detailsEnabled" component={CheckBox} />
                             <IconButton mIcon="save" label="Apply" />
                         </div>
                         { renderStartDate(this.props.module, this.props.startDate, this.handleDetailsTimeEnabledChange) }
@@ -67,10 +67,12 @@ EventEditorDetails = reduxForm({
   form: 'module-details' // a unique name for this form
 })(EventEditorDetails);
 
+
+
 function renderStartDate(module, startDate, handleChange) {
     return (
         <div className="eventeditor-details__enabler">
-            <CheckBox label="Show date" checked={module.showTime} handleChange={handleChange} disabled={!module.enabled} />
+            <CheckBox label="Show date" name="detailsTimeEnabled" checked={module.showTime} handleChange={handleChange} disabled={!module.enabled} />
             <div className="eventeditor-details__item">
                 <i className="material-icons color-gray">event</i>
                 <div className="event-details__item-text" title={ formatDate(startDate) }> { formatDate(startDate) } </div>
@@ -82,7 +84,7 @@ function renderStartDate(module, startDate, handleChange) {
 function renderLocation(module, location, handleChange) {
     return (
          <div className="eventeditor-details__enabler">
-            <CheckBox label="Show location" checked={module.showLocation} handleChange={handleChange} disabled={!module.enabled} />
+            <CheckBox label="Show location" name="detailsLocEnabled" checked={module.showLocation} handleChange={handleChange} disabled={!module.enabled} />
             <div className="eventeditor-details__item">
                 <i className="material-icons color-gray">location_on</i>
                 <div className="eventeditor-details__item-text" title={ formatLocation(location) }> { formatLocation(location) } </div>
@@ -95,7 +97,7 @@ function renderMap(module, map, handleChange) {
 
     return (
         <div className="eventeditor-details__enabler">
-            <CheckBox label="Show map" checked={module.showMap} handleChange={handleChange} disabled={!module.enabled} />
+            <CheckBox label="Show map" name="detailsMapEnabled" checked={module.showMap} handleChange={handleChange} disabled={!module.enabled} />
             <div className="eventeditor-details__map">
                 <img className="map-image" src={map} />
             </div>
@@ -109,7 +111,10 @@ const mapStateToProps = (state) => {
         module: state.eventmodules.details,
         startDate: state.eventdata.data.startDate,
         location: state.eventdata.data.location,
-        map: state.eventdata.map
+        map: state.eventdata.map,
+        initialValues : {
+            //detailsEnabled: state.eventmodules.details.enabled
+        }
     }
 }
 

@@ -16,6 +16,16 @@
         ".write": "auth != null && auth.uid == $uid"
       }
     },
+    "userAcceptedEvents": {
+      "$uid": {
+        ".validate": "newData.hasChildren()",
+        ".read": "auth != null && auth.uid == $uid",
+        ".write": "true",
+        "$eventId": {
+          ".validate": "newData.isBoolean() && root.child('events').child($eventId).val() != null"
+        }
+      }
+    },
     "events": {
       "$eventId": {
         ".validate": "newData.hasChildren(['id'])",
@@ -56,6 +66,7 @@
     "eventParticipants": {
       "$event": {
         ".validate": "newData.hasChildren()",
+        ".read": "true",
         ".write": "root.child('events').child($event).val() != null",
         "$uid": {
           ".validate": "newData.isBoolean() && (auth != null && auth.uid == $uid)"

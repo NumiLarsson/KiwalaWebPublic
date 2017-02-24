@@ -9,6 +9,17 @@ type User {
   name : NameString | Null
 }
 
+path /userAcceptedEvents/{uid} is Object {
+  read() { isCurrentUser(uid) }
+  write() { true }
+}
+
+
+path /userAcceptedEvents/{uid}/{eventId} is Boolean {
+  validate() { isEvent(eventId) }
+}
+
+
 
 //event
 path /events/{eventId} is Event {}
@@ -35,12 +46,12 @@ type EventData {
 
 //participants
 path /eventParticipants/{event} is Object {
-	read() {false}
-	write() {isEvent(event)}
+  read() { true }
+  write() {isEvent(event)}
 }
 
 path /eventParticipants/{event}/{uid} is Boolean {
-	validate() {isCurrentUser(uid)}
+  validate() {isCurrentUser(uid)}
 }
 
 //eventModules
