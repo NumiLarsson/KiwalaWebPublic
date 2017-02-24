@@ -45,7 +45,7 @@ function goToHome() {
 }
 
 function gotoEventSettings(eventId) {
-    browserHistory.push('/event/settings/' + eventId);
+    browserHistory.push('/eventsettings/' + eventId);
 }
 
 function gotoEvent(eventId) {

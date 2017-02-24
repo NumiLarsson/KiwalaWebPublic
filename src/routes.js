@@ -29,7 +29,7 @@ const routes = (
         <Route path="/event/:eventid" component={EventViewer}/>
         <Route path="/login" component={Login} />
         <Route path="/user" component={UserInterface}/>
-        <Route path="event/settings/:eventid" component={EventEditor} />
+        <Route path="eventsettings/:eventid" component={EventEditor} />
     </Route>
 );
 
