@@ -5,14 +5,13 @@ const { SET_CURRENT_EVENT, SET_CURRENT_EVENT_DATA, SET_CURRENT_EVENT_PARTICIPANT
 const initialState = {
     id: null,
     name: null,
+    participants: null,
     loaded: null, 
     map: null,
-    data: {
-        description: "",
-        startDate: null,
-        location: null
-    },
-    participants: null
+    description: "",
+    startDate: null,
+    location: null,
+    headerImage: null
 }
 
 export default (state = initialState, action) => {
@@ -29,7 +28,7 @@ export default (state = initialState, action) => {
         case SET_CURRENT_EVENT_DATA:
 
             return Object.assign({}, state, {
-                data: action.payload   
+                ...action.payload
             });
 
         case SET_CURRENT_EVENT_PARTICIPANTS:

@@ -57,8 +57,10 @@ EventEditorDescription = reduxForm({
 //Maps the state in our store to the props property of the Example object.
 const mapStateToProps = (state) => {
     return {
-        module: state.eventmodules.description,
-        description: state.eventdata.data.description,
+
+        module: state.eventmodules.details,
+        description: state.eventdata.description,
+
         initialValues : {
             descriptionEnabled: state.eventmodules.description.enabled
         }
