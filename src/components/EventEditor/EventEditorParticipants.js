@@ -19,19 +19,22 @@ class EventEditorParticipants extends Component {
 
     render() {
         if(this.props.module) {
+            const { handleParticipantsSubmit } = this.props;
             return (
-                <div className="eventeditor-participants">
-                    <div className="eventeditor-participants__header">
-                        <i className="material-icons color-blue">person</i> <span> Participants ({ (this.props.participants) ? Object.keys(this.props.participants).length : "-" })</span>
-                    </div>
-                    <div className="eventeditor-participants__mainenabler">
-                        <Field label="Show module" name="participantsEnabled" component={CheckBox} />
-                        <Field mIcon="save" label="Save" name="participantsSave" component={IconButton} />
-                    </div>
-                    <div className="eventeditor-participants__list"> 
-                        { renderParticipants(this.props.participants) } 
-                    </div>
-                </div> 
+                <form onSubmit={handleParticipantsSubmit}>
+                    <div className="eventeditor-participants">
+                        <div className="eventeditor-participants__header">
+                            <i className="material-icons color-blue">person</i> <span> Participants ({ (this.props.participants) ? Object.keys(this.props.participants).length : "-" })</span>
+                        </div>
+                        <div className="eventeditor-participants__mainenabler">
+                            <Field label="Show module" name="participantsEnabled" component={CheckBox} />
+                            <Field mIcon="save" label="Save" name="participantsSave" component={IconButton} />
+                        </div>
+                        <div className="eventeditor-participants__list"> 
+                            { renderParticipants(this.props.participants) } 
+                        </div>
+                    </div> 
+                </form>
             )
         }
         else {
@@ -45,7 +48,8 @@ class EventEditorParticipants extends Component {
 
 // Decorate the form component
 EventEditorParticipants = reduxForm({
-  form: 'module-description' // a unique name for this form
+  form: 'module-participants', // a unique name for this form
+  enableReinitialize: true
 })(EventEditorParticipants);
 
 function renderParticipants(participants) {
@@ -88,7 +92,7 @@ const mapStateToProps = (state) => {
         module: state.eventmodules.participants,
         participants: state.eventdata.participants,
         initialValues : {
-            //detailsEnabled: state.eventmodules.details.enabled
+            participantsEnabled: state.eventmodules.participants.enabled
         }
     }
 }

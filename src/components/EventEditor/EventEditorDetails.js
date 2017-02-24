@@ -64,7 +64,8 @@ class EventEditorDetails extends Component {
 
 // Decorate the form component
 EventEditorDetails = reduxForm({
-  form: 'module-details' // a unique name for this form
+    form: 'module-details', // a unique name for this form
+    enableReinitialize: true
 })(EventEditorDetails);
 
 
@@ -113,7 +114,10 @@ const mapStateToProps = (state) => {
         location: state.eventdata.data.location,
         map: state.eventdata.map,
         initialValues : {
-            //detailsEnabled: state.eventmodules.details.enabled
+            detailsEnabled: state.eventmodules.details.enabled,
+            detailsTimeEnabled: state.eventmodules.details.showTime,
+            detailsLocEnabled: state.eventmodules.details.showLocation,
+            detailsMapEnabled: state.eventmodules.details.showMap
         }
     }
 }
