@@ -24,9 +24,9 @@ class EventEditorDescription extends Component {
 
     render() {
         if(this.props.module) {
-            const { handleDescriptionSubmit } = this.props;
+            const { handleModuleSaved } = this.props;
             return (
-                <form onSubmit={handleDescriptionSubmit}>
+                <form onSubmit={handleModuleSaved}>
                     <div className={(this.props.module.enabled) ? "eventeditor-description" : "eventeditor-description disabled"}>
                         <div className="eventeditor-description__header">
                             <i className="material-icons color-blue">description</i> <span> Description </span>
@@ -35,7 +35,7 @@ class EventEditorDescription extends Component {
                             <Field label="Show module" name="descriptionEnabled" component={CheckBox} />
                             <Field mIcon="save" label="Save" name="descriptionSave" component={IconButton} />
                         </div>
-                        <p> { this.props.description } </p>
+                        <Field className="event-description__description" name="descriptionText" component="textarea"/>
                     </div> 
                 </form>
             )
@@ -59,10 +59,9 @@ const mapStateToProps = (state) => {
     return {
 
         module: state.eventmodules.details,
-        description: state.eventdata.description,
-
         initialValues : {
-            descriptionEnabled: state.eventmodules.description.enabled
+            descriptionEnabled: state.eventmodules.description.enabled,
+            descriptionText: state.eventdata.description
         }
     }
 }

@@ -19,9 +19,9 @@ class EventEditorParticipants extends Component {
 
     render() {
         if(this.props.module) {
-            const { handleParticipantsSubmit } = this.props;
+            const { handleModuleSaved } = this.props;
             return (
-                <form onSubmit={handleParticipantsSubmit}>
+                <form onSubmit={handleModuleSaved}>
                     <div className={(this.props.module.enabled) ? "eventeditor-participants" : "eventeditor-participants disabled"}>
                         <div className="eventeditor-participants__header">
                             <i className="material-icons color-blue">person</i> <span> Participants ({ (this.props.participants) ? Object.keys(this.props.participants).length : "-" })</span>

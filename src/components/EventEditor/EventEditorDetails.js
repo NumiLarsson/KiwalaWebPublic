@@ -36,9 +36,9 @@ class EventEditorDetails extends Component {
 
     render() {
         if(this.props.module) {
-            const { handleDetailsSubmit } = this.props;
+            const { handleModuleSaved } = this.props;
             return (
-                <form onSubmit={handleDetailsSubmit}>
+                <form onSubmit={handleModuleSaved}>
                     <div className={(this.props.module.enabled) ? "eventeditor-details" : "eventeditor-details disabled"}>
                         <div className="eventeditor-details__header">
                             <i className="material-icons color-blue">info</i> <span> Details </span>
