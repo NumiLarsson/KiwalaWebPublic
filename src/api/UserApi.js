@@ -36,6 +36,19 @@ export default class UserApi {
      * @param {string} uid - ID of the user.
      * @param {function} cb - Function to call when the data changes.
      */    
+    getAcceptedEvents(uid, callback) {
+        let ref = this.database().ref(`/userAcceptedEvents/${uid}`);
+        ref.on('value', snapshot => {
+            callback(snapshot.val());
+        });
+        this.subscriptions[`userAcceptedEvents_${uid}`] = ref;
+    }
+
+    /**
+     * Subscribe to data about the user.
+     * @param {string} uid - ID of the user.
+     * @param {function} cb - Function to call when the data changes.
+     */    
     subscribeToUserData(uid, cb) {
         let ref = this.database().ref(`/users/${uid}`);
         ref.on('value', (snapshot) => {
