@@ -89,9 +89,9 @@ export default class EventApi {
 		let self = this;
 		return new Promise((resolve, reject) => {
 			let updates = {}
-			for key in Object().key(dataUpdates) {
+			Object().keys(dataUpdates).foreach(key => {
 				updates[`eventData/${eventId}/${key}`] = dataUpdates[key];
-			}
+			});
 			self.database().ref.update(updates)
 			.then(() => {
 				resolve('SUCCESS');
