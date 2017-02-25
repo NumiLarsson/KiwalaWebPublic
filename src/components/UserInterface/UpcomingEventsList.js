@@ -14,6 +14,7 @@ const FAKE_EVENT_DATA = [
 
 const UpcomingEventsList = (props) => {
     let eventsToRender = [];
+    eventsToRender = formatEvents(props.eventList)
     let { user } = props;
         if (props) {
             return (
@@ -48,8 +49,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(UpcomingEventsList);
 function formatEvents(events) {
     const formattedEvents = events.map(
         (event) =>
-            <div key={event.id} className="eventlist-event" onClick={goToEvent.bind(this, event.id)}>
-                <div className="eventlist-header" style={getHeaderImgStyle(event.headerImg)}>
+            <div key={event['eventId']} className="eventlist-event" onClick={goToEvent.bind(this, event['eventId'])}>
+                <div className="eventlist-header" style={getHeaderImgStyle(event['eventData']['headerImage'])}>
                     <div className="eventlist-header__gradient">
                         <div className="eventlist-event__title" >
                             {event.name}
@@ -58,8 +59,9 @@ function formatEvents(events) {
                 </div>
 
                 <div className="eventlist-event__details" >
-                    {renderEventDateString(event.startDate)}
-                    {renderEventLocationString(event.location)}
+                    {console.log(event['eventData']['location'])}
+                    {renderEventDateString(event['eventData']['location'])}
+                    {renderEventLocationString(event['eventData']['startDate'])}
                 </div>
             </div>
     )
@@ -85,9 +87,9 @@ function renderEventDateString(startDate) {
     return (
         <div className="eventlist-event__date">
             <i className="material-icons color-gray">
-                event
+                date_icon
                 </i>
-            <span>{formatDate(startDate)}</span>
+            <span>{(startDate)}</span>
         </div>
     );
 }
@@ -96,7 +98,7 @@ function renderEventLocationString(location) {
     return (
         <div className="eventlist-event__location">
             <i className="material-icons color-gray">
-                location_on
+                location_icon
             </i>
             <span>{formatLocation(location)}</span>
         </div>
