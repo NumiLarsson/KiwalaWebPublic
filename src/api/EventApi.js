@@ -81,6 +81,29 @@ export default class EventApi {
 	}
 
 	/**
+	 * Update event data.
+	 * @param {string} eventId - The id of the event.
+	 * @param {object} dataUpdates - Object mapping the name of the data field to the new value.
+	 * @example updateEventData(2. {description: 'New event description'})
+ 	 */
+	updateEventData(eventId, dataUpdates) {
+		let self = this;
+		return new Promise((resolve, reject) => {
+			let updates = {}
+			for key in Object().key(dataUpdates) {
+				updates[`eventData/${eventId}/${key}`] = dataUpdates[key];
+			}
+			self.database().ref.update(updates)
+			.then(() => {
+				resolve('SUCCESS');
+			})
+			.catch(err => {
+				reject(err);
+			});
+		});
+	}
+
+	/**
 	 * Get the module settings for an event.
 	 * @param {string} eventId - The id of the event.
 	 * @return Promise which resolve to an eventModules object and reject with an error.
@@ -115,6 +138,26 @@ export default class EventApi {
 				callback(snapshot.val());
 		});
 		this.subscriptions[`eventModules_${eventId}`] = ref;
+	}
+
+
+	/**
+	 * Update the settings for an event module.
+	 * @param {string} eventId - The id of the event.
+	 * @param {string} module - The name/id of the module.
+	 * @param {object} settings - The values to be saved.
+ 	 */
+	UpdateEventModuleSettings(eventId, module, settings) {
+		let self = this;
+		return new Promise((resolve, reject) => {
+			self.database().ref(`eventModules\${eventId}\${module}`).set(settings)
+			.then(() => {
+				resolve('SUCCESS');
+			})
+			.catch(err => {
+				reject(err);
+			})
+		})
 	}
 
 	/**

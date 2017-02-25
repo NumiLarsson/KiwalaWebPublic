@@ -11,7 +11,7 @@ type User {
 
 path /userAcceptedEvents/{uid} is Object {
   read() { isCurrentUser(uid) }
-  write() { true }
+  write() { isCurrentUser(uid) }
 }
 
 
@@ -27,8 +27,7 @@ path /events/{eventId} is Event {}
 type Event {
   read() {true}
   write() {false}
-  id: String,
-  name: NameString | Null
+  id: String
 }
 
 //eventData
@@ -38,6 +37,7 @@ path /eventData/{eventId} is EventData {
 }
 
 type EventData {
+  name: NameString | Null,
   description: String | Null,
   headerImage: String | Null,
   location: String | Null,
