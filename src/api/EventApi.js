@@ -147,7 +147,7 @@ export default class EventApi {
 	 * @param {string} module - The name/id of the module.
 	 * @param {object} settings - The values to be saved.
  	 */
-	UpdateEventModuleSettings(eventId, module, settings) {
+	updateEventModuleSettings(eventId, module, settings) {
 		let self = this;
 		return new Promise((resolve, reject) => {
 			self.database().ref(`eventModules\${eventId}\${module}`).set(settings)
