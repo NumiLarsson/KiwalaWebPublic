@@ -1,6 +1,6 @@
 //user
 path /users/{uid} is User {
-  read() { isCurrentUser(uid)}
+  read() { isSignedIn()}
   write() { isCurrentUser(uid)}
 }
 
