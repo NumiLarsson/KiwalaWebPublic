@@ -135,7 +135,10 @@ export default class AuthApi {
     return new Promise((resolve, reject) => {
       self.auth().signInWithPopup(provider)
       .then(user => {
-          // TODO: Store a token to localStorage
+        localStorage.setItem('authentication', JSON.stringify({
+          provider: user.credential.provider,
+          accessToken: user.credential.accessToken
+        }));
         resolve(user);
       })
       .catch(error => {
@@ -183,6 +186,7 @@ export default class AuthApi {
     return new Promise((resolve, reject) => {
         self.auth().signOut()
         .then(() => {
+          localStorage.removeItem('authentication');
             // TODO: Clear token from localStorage
           resolve(RESULT.SUCCESS);
         }).catch(error => {
@@ -192,6 +196,14 @@ export default class AuthApi {
   }
 
   loggedIn() {
-    return !!localStorage.token;
+    return this.getCurrentUser() !== null;
+  }
+
+  isUsingFacebook() {
+    if (! this.loggedIn()) {
+      return false;
+    }
+    let auth = JSON.parse(localStorage.getItem('authentication'));
+    return auth.provider === 'facebook.com';
   }
 }
