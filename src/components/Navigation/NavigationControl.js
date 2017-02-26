@@ -1,6 +1,7 @@
 import React from 'react';
 import { browserHistory } from 'react-router';
 import './styles/navigationcontrol.css';
+import Api from "../../api/Api";
 
 const NavigationControl = (props) => {
 
@@ -17,6 +18,9 @@ const NavigationControl = (props) => {
                 </div>
                 { (props.template === "eventviewer") ? renderEventViewerAdminSettings(props.user, props.eventId) : null }
                 { (props.template === "eventeditor") ? renderEventEditorAdminSettings(props.user, props.eventId) : null }
+                <div className="navigationcontrol-item">
+                  <button className="navigationcontrol-item__button" onClick={logout}><i className="material-icons">door</i><span>Logout</span></button>
+                </div>
             </div> 
         )
     }
@@ -33,6 +37,11 @@ const NavigationControl = (props) => {
         )
     }
     
+}
+
+function logout() {
+  Api.auth.logout()
+    .then(goToHome);
 }
 
 function goToProfile() {
