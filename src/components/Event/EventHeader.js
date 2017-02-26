@@ -1,6 +1,4 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { formatDate, formatLocation } from '../../utils/utils';
+import React from 'react';
 import './styles/eventheader.css';
 
 const EventHeader = (props) => {

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { formatDate, formatLocation } from '../../utils/utils';
 import { attendEvent, unattendEvent } from '../../actions/eventviewer';
 import './styles/eventcontrolpanel.css';
 

@@ -12,10 +12,6 @@ import './styles/eventeditor.css';
 import { loadMapImageURL } from './../actions/maps'
 
 class EventEditor extends Component {
-    
-    constructor() {
-        super();
-    }
 
     componentWillMount(){
         // perform any preparations for an upcoming update
@@ -27,7 +23,7 @@ class EventEditor extends Component {
     }
 
     render() {
-        if(!this.props.event.loaded) {
+        if(!this.props.event.loaded && !this.props.modules.loaded) {
             return (
                 <Spinner label="" />
             )
@@ -38,14 +34,14 @@ class EventEditor extends Component {
                     <NavigationControl user={this.props.user} eventId={this.props.event.id} template="eventeditor" />
                     <div className="event-editor">
 
-                        <EventEditorHeader headerImage={this.props.event.data.headerImage} name={this.props.event.name} />
+                        <EventEditorHeader headerImage={this.props.event.headerImage} name={this.props.event.name} />
 
                         <EventEditorControlpanel />
 
                         <div className="event-content">
                             <div className="event-content__spotlight">
                                 <EventEditorDetails />
-                                <EventEditorDescription module={this.props.modules.description} description={this.props.event.data.description} />
+                                <EventEditorDescription module={this.props.modules.description} description={this.props.event.description} />
                             </div>
                             <div className="event-content__sideline">
                                 <EventEditorParticipants module={this.props.modules.participants} participants={this.props.event.participants} />

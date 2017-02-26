@@ -1,7 +1,4 @@
 import React from 'react';
-import Api from '../../api/Api';
-import Event from '../../models/Event'
-import Spinner from '../Utils/Spinner';
 import { browserHistory } from 'react-router';
 import './styles/upcomingeventslist.css';
 import { formatDate, formatLocation } from '../../utils/utils';
@@ -19,21 +16,6 @@ const UpcomingEventsList = (props) => {
 }
 
 export default (UpcomingEventsList);
-
-/*//Maps the state in our store to the props property of the Example object.
-const mapStateToProps = (state) => {
-    return {
-        auth: state.auth,
-        user: state.auth.user,
-    }
-}
-
-//Wrapping the action creators in a dispatch call and allowing us to 
-//access them through the props property of the Example object. 
-const mapDispatchToProps = {
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(UpcomingEventsList);*/
 
 function formatEvents(events) {
     const formattedEvents = events.map(

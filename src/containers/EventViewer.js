@@ -13,10 +13,6 @@ import './styles/eventviewer.css';
 import { loadMapImageURL } from '../actions/maps'
 
 class EventViewer extends Component {
-    
-    constructor() {
-        super();
-    }
 
     componentWillMount(){
         // perform any preparations for an upcoming update
@@ -39,14 +35,14 @@ class EventViewer extends Component {
                     <NavigationControl user={this.props.user} eventId={this.props.event.id} template="eventviewer" />
                     <div className="event-viewer">
 
-                        <EventHeader headerImage={this.props.event.data.headerImage} name={this.props.event.name} />
+                        <EventHeader headerImage={this.props.event.headerImage} name={this.props.event.name} />
 
                         <EventControlpanel />
 
                         <div className="event-content">
                             <div className="event-content__spotlight">
-                                <EventDetails module={this.props.modules.details} startDate={this.props.event.data.startDate} location={this.props.event.data.location} map={this.props.event.map}/>
-                                <EventDescription module={this.props.modules.description} description={this.props.event.data.description} />
+                                <EventDetails module={this.props.modules.details} startDate={this.props.event.startDate} location={this.props.event.location} map={this.props.event.map}/>
+                                <EventDescription module={this.props.modules.description} description={this.props.event.description} />
                             </div>
                             <div className="event-content__sideline">
                                 <EventParticipants module={this.props.modules.participants} participants={this.props.event.participants} />

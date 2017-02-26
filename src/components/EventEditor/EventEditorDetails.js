@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { formatDate, formatLocation } from '../../utils/utils';
 import { eventDetailsToggled, eventDetailsTimeToggled, eventDetailsLocToggled, eventDetailsMapToggled } from '../../actions/EventEditor/eventeditor';
-import IconButton from '../Utils/IconButton';
+import IconButton from '../Utils/IconButtonField';
 import CheckBox from '../Utils/CheckBoxField';
 import './styles/eventeditor_details.css';
 
@@ -45,7 +45,7 @@ class EventEditorDetails extends Component {
                         </div>
                         <div className="eventeditor-details__mainenabler">
                             <Field label="Show module" name="detailsEnabled" component={CheckBox} />
-                            <Field mIcon="save" label="Apply" name="detailsSave" component={IconButton} /> 
+                            <Field mIcon="save" label="Save" name="detailsSave" component={IconButton} /> 
                         </div>
                         { renderStartDate(this.props.module, this.props.startDate, this.handleDetailsTimeEnabledChange) }
                         { renderLocation(this.props.module, this.props.location, this.handleDetailsLocEnabledChange) }
@@ -64,7 +64,8 @@ class EventEditorDetails extends Component {
 
 // Decorate the form component
 EventEditorDetails = reduxForm({
-  form: 'module-details' // a unique name for this form
+    form: 'module-details', // a unique name for this form
+    enableReinitialize: true
 })(EventEditorDetails);
 
 
@@ -99,7 +100,7 @@ function renderMap(module, map, handleChange) {
         <div className="eventeditor-details__enabler">
             <Field label="Show map" name="detailsMapEnabled" component={CheckBox} />
             <div className="eventeditor-details__map">
-                <img className="map-image" src={map} />
+                <img className="map-image" role="presentation" src={map} />
             </div>
         </div>
     );
@@ -109,11 +110,14 @@ function renderMap(module, map, handleChange) {
 const mapStateToProps = (state) => {
     return {
         module: state.eventmodules.details,
-        startDate: state.eventdata.data.startDate,
-        location: state.eventdata.data.location,
+        startDate: state.eventdata.startDate,
+        location: state.eventdata.location,
         map: state.eventdata.map,
         initialValues : {
-            //detailsEnabled: state.eventmodules.details.enabled
+            detailsEnabled: state.eventmodules.details.enabled,
+            detailsTimeEnabled: state.eventmodules.details.showTime,
+            detailsLocEnabled: state.eventmodules.details.showLocation,
+            detailsMapEnabled: state.eventmodules.details.showMap
         }
     }
 }
