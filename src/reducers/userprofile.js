@@ -23,7 +23,6 @@ export default (state = initialState, action) => {
 
 function isNotInEventList(eventList, payload) {
     let newEventList = eventList;
-    console.log(newEventList, "payload: ", payload);
     for (let i = 0; i < newEventList.length; i++ ) {
         if (newEventList[i]['eventId'] === payload['eventId']) {
             return false;

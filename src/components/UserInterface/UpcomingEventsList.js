@@ -5,28 +5,17 @@ import Spinner from '../Utils/Spinner';
 import { browserHistory } from 'react-router';
 import './styles/upcomingeventslist.css';
 import { formatDate, formatLocation } from '../../utils/utils';
-import NavigationControl from '../Navigation/NavigationControl';
-
-const FAKE_EVENT_DATA = [
-    new Event(10, "FakeEvent1", new Date(), "Uppsala", "Hello World", null, null),
-    new Event(2, "Awesome event at the beach", new Date(), "Stockholm", "Hello World", null, null)
-]
 
 const UpcomingEventsList = (props) => {
     let eventsToRender = [];
     eventsToRender = formatEvents(props.eventList)
-    let { user } = props;
-        if (props) {
-            return (
-                <div className="upcomingeventslist">
-                    <NavigationControl user={props.user} template="upcomingeventslist" />
-
-                    <div className="eventslist">
-                        {eventsToRender}
-                    </div>
-                </div>
-            )
-        }
+    return (
+        <div className="upcomingeventslist">
+            <div className="eventslist">
+                {eventsToRender}
+            </div>
+        </div>
+    )
 }
 
 export default (UpcomingEventsList);
@@ -59,7 +48,6 @@ function formatEvents(events) {
                 </div>
 
                 <div className="eventlist-event__details" >
-                    {console.log(event['eventData']['location'])}
                     {renderEventDateString(event['eventData']['location'])}
                     {renderEventLocationString(event['eventData']['startDate'])}
                 </div>
@@ -87,7 +75,7 @@ function renderEventDateString(startDate) {
     return (
         <div className="eventlist-event__date">
             <i className="material-icons color-gray">
-                date_icon
+                event
                 </i>
             <span>{(startDate)}</span>
         </div>
@@ -98,7 +86,7 @@ function renderEventLocationString(location) {
     return (
         <div className="eventlist-event__location">
             <i className="material-icons color-gray">
-                location_icon
+                location_on
             </i>
             <span>{formatLocation(location)}</span>
         </div>

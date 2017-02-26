@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import UpcomingEventsList from '../components/UserInterface/UpcomingEventsList'
 import { getAcceptedEvents } from '../actions/userprofile'
 import Spinner from '../components/Utils/Spinner';
+import NavigationControl from '../components/Navigation/NavigationControl';
 
 class UserProfile extends Component {
     constructor() {
@@ -22,6 +23,7 @@ class UserProfile extends Component {
             this.props.getAcceptedEvents(this.props.user.uid);
             return(
                 <div className="userprofile">
+                    <NavigationControl user={ user } template="upcomingeventslist" />
                     <UpcomingEventsList user={ user } eventList={ eventList }/>
                 </div>
             );
