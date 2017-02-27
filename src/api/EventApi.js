@@ -150,7 +150,7 @@ export default class EventApi {
 	updateEventModuleSettings(eventId, module, settings) {
 		let self = this;
 		return new Promise((resolve, reject) => {
-			self.database().ref(`eventModules\${eventId}\${module}`).set(settings)
+			self.database().ref(`eventModules/${eventId}/${module}`).set(settings)
 			.then(() => {
 				resolve('SUCCESS');
 			})

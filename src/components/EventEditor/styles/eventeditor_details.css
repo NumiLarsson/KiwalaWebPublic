@@ -17,7 +17,7 @@
 }
 
 .eventeditor-details.disabled {
-	opacity: 0.5;
+	background-color: rgba(255, 255, 255, 0.4);
 }
 
 .eventeditor-details__mainenabler {

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { formatDate, formatLocation } from '../../utils/utils';
-import { eventDetailsToggled, eventDetailsTimeToggled, eventDetailsLocToggled, eventDetailsMapToggled } from '../../actions/EventEditor/eventeditor';
 import IconButton from '../Utils/IconButtonField';
 import CheckBox from '../Utils/CheckBoxField';
 import './styles/eventeditor_details.css';
@@ -11,45 +10,24 @@ class EventEditorDetails extends Component {
     
     constructor() {
         super();
-
-        this.handleDetailsEnabledChange         = this.handleDetailsEnabledChange.bind(this);
-        this.handleDetailsTimeEnabledChange     = this.handleDetailsTimeEnabledChange.bind(this);
-        this.handleDetailsLocEnabledChange      = this.handleDetailsLocEnabledChange.bind(this);
-        this.handleDetailsMapEnabledChange      = this.handleDetailsMapEnabledChange.bind(this);
-    }
-
-    handleDetailsEnabledChange(event) {
-        eventDetailsToggled(event.value.checked);
-    }
-
-    handleDetailsTimeEnabledChange(event) {
-        eventDetailsToggled(event.value.checked);
-    }
-
-    handleDetailsLocEnabledChange(event) {
-        eventDetailsToggled(event.value.checked);
-    }
-
-    handleDetailsMapEnabledChange(event) {
-        eventDetailsToggled(event.value.checked);
     }
 
     render() {
         if(this.props.module) {
-            const { handleModuleSaved } = this.props;
+            const { handleSubmit } = this.props;
             return (
-                <form onSubmit={handleModuleSaved}>
+                <form onSubmit={handleSubmit}>
                     <div className={(this.props.module.enabled) ? "eventeditor-details" : "eventeditor-details disabled"}>
                         <div className="eventeditor-details__header">
                             <i className="material-icons color-blue">info</i> <span> Details </span>
                         </div>
                         <div className="eventeditor-details__mainenabler">
-                            <Field label="Show module" name="detailsEnabled" component={CheckBox} />
-                            <Field mIcon="save" label="Save" name="detailsSave" component={IconButton} /> 
+                            <Field label="Show module" name="enabled" component={CheckBox} />
+                            <Field mIcon="save" label="Save" name="detailsSave" component={IconButton} type="submit" /> 
                         </div>
-                        { renderStartDate(this.props.module, this.props.startDate, this.handleDetailsTimeEnabledChange) }
-                        { renderLocation(this.props.module, this.props.location, this.handleDetailsLocEnabledChange) }
-                        { renderMap(this.props.module, this.props.map, this.handleDetailsMapEnabledChange) }
+                        { renderStartDate(this.props.module, this.props.startDate) }
+                        { renderLocation(this.props.module, this.props.location) }
+                        { renderMap(this.props.module, this.props.map) }
                     </div>
                 </form>
             )
@@ -70,10 +48,10 @@ EventEditorDetails = reduxForm({
 
 
 
-function renderStartDate(module, startDate, handleChange) {
+function renderStartDate(module, startDate) {
     return (
         <div className="eventeditor-details__enabler">
-            <Field label="Show date" name="detailsTimeEnabled" component={CheckBox} />
+            <Field label="Show date" name="showTime" component={CheckBox} />
             <div className="eventeditor-details__item">
                 <i className="material-icons color-gray">event</i>
                 <div className="event-details__item-text" title={ formatDate(startDate) }> { formatDate(startDate) } </div>
@@ -82,10 +60,10 @@ function renderStartDate(module, startDate, handleChange) {
     );
 }
 
-function renderLocation(module, location, handleChange) {
+function renderLocation(module, location) {
     return (
          <div className="eventeditor-details__enabler">
-            <Field label="Show location" name="detailsLocEnabled" component={CheckBox} />
+            <Field label="Show location" name="showLocation" component={CheckBox} />
             <div className="eventeditor-details__item">
                 <i className="material-icons color-gray">location_on</i>
                 <div className="eventeditor-details__item-text" title={ formatLocation(location) }> { formatLocation(location) } </div>
@@ -94,11 +72,11 @@ function renderLocation(module, location, handleChange) {
     );
 }
 
-function renderMap(module, map, handleChange) {
+function renderMap(module, map) {
 
     return (
         <div className="eventeditor-details__enabler">
-            <Field label="Show map" name="detailsMapEnabled" component={CheckBox} />
+            <Field label="Show map" name="showMap" component={CheckBox} />
             <div className="eventeditor-details__map">
                 <img className="map-image" role="presentation" src={map} />
             </div>
@@ -114,10 +92,10 @@ const mapStateToProps = (state) => {
         location: state.eventdata.location,
         map: state.eventdata.map,
         initialValues : {
-            detailsEnabled: state.eventmodules.details.enabled,
-            detailsTimeEnabled: state.eventmodules.details.showTime,
-            detailsLocEnabled: state.eventmodules.details.showLocation,
-            detailsMapEnabled: state.eventmodules.details.showMap
+            enabled: state.eventmodules.details.enabled,
+            showTime: state.eventmodules.details.showTime,
+            showLocation: state.eventmodules.details.showLocation,
+            showMap: state.eventmodules.details.showMap
         }
     }
 }
@@ -125,10 +103,6 @@ const mapStateToProps = (state) => {
 //Wrapping the action creators in a dispatch call and allowing us to 
 //access them through the props property of the Example object. 
 const mapDispatchToProps = {
-    eventDetailsToggled, 
-    eventDetailsTimeToggled, 
-    eventDetailsLocToggled, 
-    eventDetailsMapToggled
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(EventEditorDetails);

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getEvent, subscribeToEvent, setCurrentEvent } from '../actions/eventdata';
+import { updateEventData, updateEventModuleSettings } from '../actions/eventeditor';
 import EventEditorHeader from '../components/EventEditor/EventEditorHeader';
 import EventEditorDetails from '../components/EventEditor/EventEditorDetails';
 import EventEditorDescription from '../components/EventEditor/EventEditorDescription';
@@ -20,6 +21,12 @@ class EventEditor extends Component {
         // Load event
         const {eventid} = this.props.params;
         this.props.subscribeToEvent(eventid);
+
+        this.handleDetailsModuleSaved = this.handleDetailsModuleSaved.bind(this);
+    }
+
+    handleDetailsModuleSaved(values) {        
+        this.props.updateEventModuleSettings(this.props.event.id, 'details', values);
     }
 
     render() {
@@ -40,7 +47,7 @@ class EventEditor extends Component {
 
                         <div className="event-content">
                             <div className="event-content__spotlight">
-                                <EventEditorDetails />
+                                <EventEditorDetails onSubmit={this.handleDetailsModuleSaved} />
                                 <EventEditorDescription module={this.props.modules.description} description={this.props.event.description} />
                             </div>
                             <div className="event-content__sideline">
@@ -70,7 +77,9 @@ const mapDispatchToProps = {
     getEvent,
     setCurrentEvent,
     subscribeToEvent,
-    loadMapImageURL
+    loadMapImageURL,
+    updateEventData,
+    updateEventModuleSettings
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(EventEditor);
