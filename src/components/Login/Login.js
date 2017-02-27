@@ -48,16 +48,15 @@ class Login extends Component {
         else {
             return (
                 <div className="login-screen">
-                    <button type="button" className="login-screen__button login-screen__button--with-facebook" onClick={this.loginWithFacebook}>Login with Facebook</button>
-                    <span>OR</span>
-                    <br />
-                    <form>
-                        <input className="login-screen__input" type="text" placeholder="Email address" onChange={this.setEmail}/>
-                        <br />
-                        <input className="login-screen__input" type="password" placeholder="Password" onChange={this.setPassword}/>
-                        <br />
-                        <button className="login-screen__button" type="button" onClick={this.loginWithEmail}><i className="material-icons">person</i><span>Login</span></button>
-                    </form>
+                    <div className="login-screen__content">
+                        <button type="button" className="login-screen__button login-screen__button--with-facebook" onClick={this.loginWithFacebook}>Login with Facebook</button>
+                        <span className="login-screen--separate">OR</span>
+                        <form>
+                            <input className="login-screen__input login-screen--separate" type="text" placeholder="Email address" onChange={this.setEmail}/>
+                            <input className="login-screen__input login-screen--separate" type="password" placeholder="Password" onChange={this.setPassword}/>
+                            <button className="login-screen__button login-screen--separate" type="button" onClick={this.loginWithEmail}><i className="material-icons">person</i><span>Login</span></button>
+                        </form>
+                    </div>
                 </div>
             )
         }
