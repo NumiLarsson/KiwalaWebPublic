@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getEvent, subscribeToEvent, setCurrentEvent } from '../actions/eventdata';
-import { attendEvent } from '../actions/eventviewer';
 import EventHeader from '../components/Event/EventHeader';
 import EventDetails from '../components/Event/EventDetails';
 import EventDescription from '../components/Event/EventDescription';
@@ -71,7 +70,6 @@ const mapDispatchToProps = {
     getEvent,
     setCurrentEvent,
     subscribeToEvent,
-    attendEvent,
     loadMapImageURL
 }
 
