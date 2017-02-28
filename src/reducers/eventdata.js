@@ -1,6 +1,6 @@
 import { EVENT_ACTIONS } from '../actions/actionTypes';
 import { MAPS_ACTIONS } from '../actions/maps';
-const { SET_CURRENT_EVENT, SET_CURRENT_EVENT_DATA, SET_CURRENT_EVENT_PARTICIPANTS } = EVENT_ACTIONS;
+const { SET_CURRENT_EVENT, SET_CURRENT_EVENT_DATA, SET_CURRENT_EVENT_PARTICIPANTS, UPDATE_CURRENT_EVENT_PARTICIPANTS_USERS } = EVENT_ACTIONS;
 
 const initialState = {
     id: null,
@@ -37,10 +37,16 @@ export default (state = initialState, action) => {
                 participants: action.payload   
             });
 
+        case UPDATE_CURRENT_EVENT_PARTICIPANTS_USERS:
+
+            let copy = Object.assign({}, state);
+            copy.participants[action.payload.uid] = action.payload;
+            return copy;
+
         case MAPS_ACTIONS.MAP_IMAGE_URL: 
             return Object.assign({}, state, {
                 map: action.payload
-            })
+            });
         default:
             return state;
     }
