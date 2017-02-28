@@ -187,7 +187,6 @@ export default class AuthApi {
         self.auth().signOut()
         .then(() => {
           localStorage.removeItem('authentication');
-            // TODO: Clear token from localStorage
           resolve(RESULT.SUCCESS);
         }).catch(error => {
           reject(error);
@@ -204,6 +203,6 @@ export default class AuthApi {
       return false;
     }
     let auth = JSON.parse(localStorage.getItem('authentication'));
-    return auth.provider === 'facebook.com';
+    return typeof auth === 'object' && auth.provider === 'facebook.com';
   }
 }
