@@ -4,12 +4,10 @@ import './styles/upcomingeventslist.css';
 import { formatDate, formatLocation } from '../../utils/utils';
 
 const UpcomingEventsList = (props) => {
-    let eventsToRender = [];
-    eventsToRender = formatEvents(props.eventList)
     return (
         <div className="upcomingeventslist">
             <div className="upcomingeventslist-eventlist">
-                {eventsToRender}
+                {Object.values(props.eventList).map(renderEventItem)}
             </div>
         </div>
     )
@@ -17,35 +15,13 @@ const UpcomingEventsList = (props) => {
 
 export default (UpcomingEventsList);
 
-function formatEvents(events) {
-    const formattedEvents = events.map(
-        (event) =>
-            <div key={event['eventId']} className="eventlist-event" onClick={goToEvent.bind(this, event['eventId'])}>
-                <div className="eventlist-header" style={getHeaderImgStyle(event['eventData']['headerImage'])}>
-                    <div className="eventlist-header__gradient">
-                        <div className="eventlist-event__title" >
-                            {event.name}
-                        </div>
-                    </div>
-                </div>
-
-                <div className="eventlist-event__details" >
-                    {renderEventDateString(event['eventData']['location'])}
-                    {renderEventLocationString(event['eventData']['startDate'])}
-                </div>
-            </div>
-    )
-    return formattedEvents
-}
-
 function goToEvent(id) {
     browserHistory.push('/event/' + id);
 }
 
 function getHeaderImgStyle(headerImage) {
     return {
-        backgroundImage: 'url(../images/event_header_default.jpg)',
-        //backgroundImage: 'url(' + headerImage + ')',
+        backgroundImage: 'url(' + headerImage + ')',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
@@ -53,24 +29,89 @@ function getHeaderImgStyle(headerImage) {
     };
 }
 
-function renderEventDateString(startDate) {
-    return (
-        <div className="eventlist-event__date">
-            <i className="material-icons color-gray">
-                event
-                </i>
-            <span>{(startDate)}</span>
-        </div>
-    );
+function renderEventItem(event){
+    if(event && event.eventData && event.eventModules){
+        return (
+            <div key={event.eventId} className="eventlist-event" onClick={goToEvent.bind(this, event.eventId)}>
+                <div className="eventlist-header" style={getHeaderImgStyle(event.eventData.headerImage)}>
+                    <div className="eventlist-header__gradient">
+                        <div className="eventlist-event__title" >
+                            {event.eventData.name}
+                        </div>
+                    </div>
+                </div>
+
+                <div className="eventlist-event__details" >
+                    {renderEventDateString(event)}
+                    {renderEventLocationString(event)}
+                    {renderEventDescriptionString(event)}
+                </div>
+            </div>
+        );
+    }
+    else {
+        return(
+            <div key={event.eventId} className="eventlist-event" onClick={goToEvent.bind(this, event.eventId)}>
+            </div>
+        );
+    }
 }
 
-function renderEventLocationString(location) {
-    return (
-        <div className="eventlist-event__location">
-            <i className="material-icons color-gray">
-                location_on
-            </i>
-            <span>{formatLocation(location)}</span>
-        </div>
-    );
+function renderEventDateString(event) {
+    if(event.eventModules.details.showTime){
+        return (
+            <div className="eventlist-event__date">
+                <i className="material-icons color-gray">
+                    event
+                    </i>
+                <span>{formatDate(event.eventData.startDate)}</span>
+            </div>
+        );
+    }
+    else {
+        return (
+            null
+        );
+    }
+}
+
+function renderEventLocationString(event) {
+    if(event.eventModules.details.showLocation){
+        return (
+            <div className="eventlist-event__location">
+                <i className="material-icons color-gray">
+                    location_on
+                </i>
+                <span>{formatLocation(event.eventData.location)}</span>
+            </div>
+        );
+    }
+    else {
+        return (
+            null
+        );
+    }
+}
+
+function renderEventDescriptionString(event) {
+    if(event.eventModules.description.enabled){
+
+        let desc = event.eventData.description;
+        if(desc.length > 75)
+            desc = desc.substr(0, 72) + '...';
+
+        return (
+            <div className="eventlist-event__description">
+                <i className="material-icons color-gray">
+                    description
+                    </i>
+                <p>{desc}</p>
+            </div>
+        );
+    }
+    else {
+        return (
+            null
+        );
+    }
 }

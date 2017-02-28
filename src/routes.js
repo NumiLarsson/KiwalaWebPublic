@@ -11,13 +11,24 @@ import EventViewer from './containers/EventViewer';
 import UserProfile from './containers/UserProfile';
 import EventEditor from './containers/EventEditor';
 import Login from "./components/Login/Login";
+import Api from './api/Api'; //get the API
+
+const requireAuth = (nextState, replace, callback) => {
+
+    if (Api.auth.getCurrentUser()) {
+        callback();
+    } else {
+        replace('/');
+        callback();
+    }
+}
 
 const routes = (
     <Route path="/" component={App}>
         <IndexRoute component={SplashScreen} />
-        <Route path="/event/:eventid" component={EventViewer}/>
+        <Route path="/event/:eventid" component={EventViewer} />
         <Route path="/login" component={Login} />
-        <Route path="/user" component={UserProfile}/>
+        <Route path="/user" component={UserProfile} onEnter={requireAuth} />
         <Route path="eventsettings/:eventid" component={EventEditor} />
     </Route>
 );

@@ -7,26 +7,58 @@ const initialState = {
 export default (state = initialState, action) => {
     switch(action.type) {
 
-        case USER_PROFILE_ACTIONS.GET_ACCEPTED_EVENTS:
-            if (isNotInEventList(state.eventList, action.payload)) {
-                return Object.assign({}, state, {
-	            eventList: state.eventList.concat([action.payload])
-            });
-            } else {
-                return state;
-            }
+        case USER_PROFILE_ACTIONS.GET_ACCEPTED_EVENTS_DATA:
+            return addOrChangeData(state, action.payload);
+
+        case USER_PROFILE_ACTIONS.GET_ACCEPTED_EVENTS_MODULES:
+            return addOrChangeModules(state, action.payload);
 
         default:
             return state;
     }
 }
 
-function isNotInEventList(eventList, payload) {
-    let newEventList = eventList;
-    for (let i = 0; i < newEventList.length; i++ ) {
-        if (newEventList[i]['eventId'] === payload['eventId']) {
-            return false;
+/** 
+https://egghead.io/lessons/javascript-redux-avoiding-array-mutations-with-concat-slice-and-spread
+**/
+
+function addOrChangeData(state, payload) {
+    for (let i = 0; i < state.eventList.length; i++ ) {
+        if (state.eventList[i]['eventId'] === payload['eventId']) {
+            // Overwrite the data
+            let tempArr = state.eventList[i];
+            tempArr['eventData'] = payload.eventData;
+            return Object.assign({}, state, {
+                eventList: state.eventList
+                    .slice(0, i)
+                    .concat(tempArr)
+                    .concat(state.eventList.slice(i + 1))
+            });
         }
     }
-    return true;
+    // Add, does not exist
+    return Object.assign({}, state, {
+        eventList: state.eventList.concat([payload])
+    });
+}
+
+function addOrChangeModules(state, payload) {
+    for (let i = 0; i < state.eventList.length; i++ ) {
+        if (state.eventList[i]['eventId'] === payload['eventId']) {
+            // Overwrite the data
+            let tempArr = state.eventList[i];
+            tempArr['eventModules'] = payload.eventModules;
+            //state.eventList[i] = payload;
+            return Object.assign({}, state, {
+                eventList: state.eventList
+                    .slice(0, i)
+                    .concat(tempArr)
+                    .concat(state.eventList.slice(i + 1))
+            });
+        }
+    }
+    // Add, does not exist
+    return Object.assign({}, state, {
+        eventList: state.eventList.concat([payload])
+    });
 }
