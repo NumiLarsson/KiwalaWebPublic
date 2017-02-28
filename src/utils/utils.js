@@ -12,6 +12,16 @@ export function formatDate(date) {
 }
 
 /**
+ * Formats a date to a unix ms timestamp
+ * @param {Date} date, the Date object to be formatted
+ * @returns {Integer} a formatted unix ms timestamp.
+ */
+export function formatDateUnix(date) {
+  let realDate = moment(date);
+  return realDate.isValid() ? parseInt(realDate.format('x')) : '';
+}
+
+/**
  * Formats an location to a string
  * @param {?} location, the location to be formatted
  * @returns a formatted String.

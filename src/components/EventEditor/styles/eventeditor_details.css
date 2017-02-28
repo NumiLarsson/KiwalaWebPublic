@@ -75,6 +75,15 @@
     text-overflow: ellipsis;
 }
 
+.eventeditor-details__item-field {
+	margin-left: 5px;
+	padding: 2px;
+	font-size: 1.3em;
+	border: 1px #eee solid;
+
+	width: 100%;
+}
+
 .eventeditor-details__map {
 	display: block;
 	width: 100%;
