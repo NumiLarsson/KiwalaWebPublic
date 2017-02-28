@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import Login from '../components/Login/Login';
+import NavigationControl from '../components/Navigation/NavigationControl';
 import './styles/splashscreen.css';
 
 class SplashScreen extends Component {
@@ -12,12 +13,15 @@ class SplashScreen extends Component {
 
     render() {
         return (
-            <div className="splashscreen">
-                <img src="images/logo.png" role="presentation" className="splashscreen-logo"/>
-                <h1>Kiwala</h1>
-                <Link to={'event/2'}>Demo event</Link>
-                <br/>
-                <Login />
+            <div>
+                <NavigationControl user={this.props.user} template="home" />
+                <div className="splashscreen">
+                    <img src="images/logo.png" role="presentation" className="splashscreen-logo"/>
+                    <h1>Kiwala</h1>
+                    <Link to={'event/2'}>Demo event</Link>
+                    <br/>
+                    <Login />
+                </div>
             </div>
         )
     }
@@ -26,6 +30,7 @@ class SplashScreen extends Component {
 //Maps the state in our store to the props property of the SplashScreen object.
 const mapStateToProps = (state) => {
     return {
+        user: state.auth.user
     }
 }
 
