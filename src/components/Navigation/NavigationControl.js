@@ -10,17 +10,11 @@ const NavigationControl = (props) => {
 
         return (
             <div className="navigationcontrol">
-                <div className="navigationcontrol-item">
-                     <button className="navigationcontrol-item__button" onClick={goToHome}><i className="material-icons">home</i><br className="only-on-mobile"/><span className="">Home</span></button>
-                </div>
-                <div className="navigationcontrol-item">
-                     <button className="navigationcontrol-item__button" onClick={goToProfile}><i className="material-icons">person</i><br className="only-on-mobile"/><span className="">Profile</span></button>
-                </div>
+                { (props.template !== "home") ? renderHome() : null }
+                { (props.template === "eventviewer" || props.template === "eventeditor" || props.template === "home") ? renderUserProfile() : null }
                 { (props.template === "eventviewer") ? renderEventViewerAdminSettings(props.user, props.eventId) : null }
                 { (props.template === "eventeditor") ? renderEventEditorAdminSettings(props.user, props.eventId) : null }
-                <div className="navigationcontrol-item">
-                  <button className="navigationcontrol-item__button" onClick={logout}><i className="material-icons">door</i><span>Logout</span></button>
-                </div>
+                { (props.template === "userprofile") ? renderLogout() : null }
             </div> 
         )
     }
@@ -58,6 +52,30 @@ function gotoEventSettings(eventId) {
 
 function gotoEvent(eventId) {
     browserHistory.push('/event/' + eventId);
+}
+
+function renderHome() {
+    return (
+        <div className="navigationcontrol-item">
+             <button className="navigationcontrol-item__button" onClick={goToHome}><i className="material-icons">home</i><br className="only-on-mobile"/><span className="">Home</span></button>
+        </div>
+    );
+}
+
+function renderUserProfile() {
+    return (
+        <div className="navigationcontrol-item">
+             <button className="navigationcontrol-item__button" onClick={goToProfile}><i className="material-icons">person</i><br className="only-on-mobile"/><span className="">Profile</span></button>
+        </div>
+    );
+}
+
+function renderLogout() {
+    return (
+        <div className="navigationcontrol-item">
+          <button className="navigationcontrol-item__button" onClick={logout}><i className="material-icons">exit_to_app</i><br className="only-on-mobile"/><span>Logout</span></button>
+        </div>
+    );
 }
 
 function renderEventViewerAdminSettings(user, eventId) {

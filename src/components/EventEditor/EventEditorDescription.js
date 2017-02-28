@@ -1,41 +1,26 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm, formValueSelector } from 'redux-form';
 import IconButton from '../Utils/IconButtonField';
 import CheckBox from '../Utils/CheckBoxField';
 import './styles/eventeditor_description.css';
 
 class EventEditorDescription extends Component {
     
-    constructor() {
-        super();
-
-        this.handleDescriptionEnabledChange     = this.handleDescriptionEnabledChange.bind(this);
-        this.handleDescriptionChange            = this.handleDescriptionChange.bind(this);
-    }
-
-    handleDescriptionEnabledChange(event) {
-        //eventDetailsToggled(event.value.checked);
-    }
-
-    handleDescriptionChange(event) {
-        //eventDetailsToggled(event.value.checked);
-    }
-
     render() {
         if(this.props.module) {
-            const { handleDescriptionSubmit } = this.props;
+            const { handleSubmit } = this.props;
             return (
-                <form onSubmit={handleDescriptionSubmit}>
+                <form onSubmit={handleSubmit}>
                     <div className={(this.props.module.enabled) ? "eventeditor-description" : "eventeditor-description disabled"}>
                         <div className="eventeditor-description__header">
                             <i className="material-icons color-blue">description</i> <span> Description </span>
                         </div>
                         <div className="eventeditor-description__mainenabler">
-                            <Field label="Show module" name="descriptionEnabled" component={CheckBox} />
-                            <Field mIcon="save" label="Save" name="descriptionSave" component={IconButton} />
+                            <Field label="Show module" name="description_enabled" component={CheckBox} />
+                            { renderSubmitButton(this.props.pristine) }
                         </div>
-                        <p> { this.props.description } </p>
+                        <Field className="event-description__description" name="description_data_text" component="textarea"/>
                     </div> 
                 </form>
             )
@@ -48,21 +33,35 @@ class EventEditorDescription extends Component {
     }
 }
 
+function renderSubmitButton(pristine) {
+    if(pristine) {
+        return (
+            null
+        );
+    }
+    else {
+        return (
+            <Field className="green" mIcon="save" label="Save" name="description_save" component={IconButton} type="submit" />
+        );
+    }
+}
+
 // Decorate the form component
 EventEditorDescription = reduxForm({
-  form: 'moduledescription', // a unique name for this form
+  form: 'module-description', // a unique name for this form
   enableReinitialize: true
 })(EventEditorDescription);
 
 //Maps the state in our store to the props property of the Example object.
+const selector = formValueSelector('module-description')
 const mapStateToProps = (state) => {
     return {
-
-        module: state.eventmodules.details,
-        description: state.eventdata.description,
-
+        module: {
+            enabled: selector(state, 'description_enabled')
+        },
         initialValues : {
-            descriptionEnabled: state.eventmodules.description.enabled
+            description_enabled: state.eventmodules.description.enabled,
+            description_data_text: state.eventdata.description
         }
     }
 }

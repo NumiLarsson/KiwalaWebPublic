@@ -1,3 +1,7 @@
+.eventeditor-header__form {
+	width: 100%;
+}
+
 .eventeditor-header {
 	width: 100%;
 	min-height: 200px;
@@ -19,8 +23,8 @@
 
 	background: linear-gradient(
 	    to bottom,
-	    rgba(64, 64, 64, 1) 0%,
-	    rgba(64, 64, 64, 0) 0%,
+	    rgba(0, 0, 0, 0) 20%,
+	    rgba(0, 0, 0, 0) 30%,
 	    rgba(0, 0, 0, 1) 100%
 	);
 }
@@ -35,17 +39,41 @@
 .eventeditor-header__title {
 	position: absolute;
 	text-align: left;
-	padding-right: 15px;
 
 	bottom: 15px;
 	left: 15px;
+	right: 15px;
 }
 
-.eventeditor-header__title h1 {
+.eventeditor-header__titleField {
+	background: none;
 	margin: 0;
+	border: none;
+	width: 100%;
 
 	font-size: 2.2em;
+	font-weight: 700;
 	color: #fff;
+}
+
+.eventeditor-header__imageField {
+	background: #eee;
+	margin: 0;
+	border: none;
+	border-radius: 0px 0px 2px 2px;
+	width: 100%;
+	padding: 5px;
+
+	text-align: center;
+	font-size: 1em;
+	font-weight: 400;
+	color: #424242;
+
+	box-shadow: 1px 2px 3px #757575;
+}
+
+.eventeditor-header__saveButton {
+	margin-bottom: 10px;
 }
 
 /* Desktop */
@@ -56,16 +84,15 @@
 		max-height: 300px;
 	}
 
-	.eventeditor-header__title h1 {
+	.eventeditor-header__titleField {
 		font-size: 2.5em;
 	}
 
 	.eventeditor-header__gradient {
 		background: linear-gradient(
 		    to bottom,
-		    rgba(64, 64, 64, 1) 0%,
-		    rgba(64, 64, 64, 0) 0%,
-		    rgba(64, 64, 64, 0) 65%,
+		    rgba(64, 64, 64, 0) 40%,
+		    rgba(0, 0, 0, 0) 60%,
 		    rgba(0, 0, 0, 1) 100%
 		);
 	}

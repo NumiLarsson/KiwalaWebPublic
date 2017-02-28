@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getEvent, subscribeToEvent, setCurrentEvent } from '../actions/eventdata';
+import { updateEventData, updateEventModuleSettings } from '../actions/eventeditor';
 import EventEditorHeader from '../components/EventEditor/EventEditorHeader';
 import EventEditorDetails from '../components/EventEditor/EventEditorDetails';
 import EventEditorDescription from '../components/EventEditor/EventEditorDescription';
@@ -9,6 +10,7 @@ import EventEditorControlpanel from '../components/EventEditor/EventEditorContro
 import NavigationControl from '../components/Navigation/NavigationControl';
 import Spinner from '../components/Utils/Spinner';
 import './styles/eventeditor.css';
+import { formatDateUnix } from './../utils/utils';
 import { loadMapImageURL } from './../actions/maps'
 
 class EventEditor extends Component {
@@ -20,6 +22,62 @@ class EventEditor extends Component {
         // Load event
         const {eventid} = this.props.params;
         this.props.subscribeToEvent(eventid);
+
+        this.handleHeaderSettingsSaved      = this.handleHeaderSettingsSaved.bind(this);
+        this.handleDetailsModuleSaved       = this.handleDetailsModuleSaved.bind(this);
+        this.handleDescriptionModuleSaved   = this.handleDescriptionModuleSaved.bind(this);
+        this.handleParticipantsModuleSaved  = this.handleParticipantsModuleSaved.bind(this);
+    }
+
+    handleHeaderSettingsSaved(values) {
+        // Split the values to data
+        const eventData = {
+            name: values.header_data_name,
+            headerImage: values.header_data_image
+        };
+        this.props.updateEventData(this.props.event.id, eventData);
+    }
+
+    handleDetailsModuleSaved(values) {
+        // Split the values to module
+        const moduleSettings = {
+            enabled: values.details_enabled,
+            showTime: values.details_showTime,
+            showLocation: values.details_showLocation,
+            showMap: values.details_showMap
+        };
+        this.props.updateEventModuleSettings(this.props.event.id, 'details', moduleSettings);
+
+        // Split the values to data
+        const eventData = {
+            startDate: formatDateUnix(values.details_data_startDate),
+            location: values.details_data_location
+        };
+        this.props.updateEventData(this.props.event.id, eventData);
+    }
+
+    handleDescriptionModuleSaved(values) {
+        console.log(values);
+        // Split the values to module
+        const moduleSettings = {
+            enabled: values.description_enabled
+        };
+        this.props.updateEventModuleSettings(this.props.event.id, 'description', moduleSettings);
+
+        // Split the values to data
+        const eventData = {
+            description: values.description_data_text
+        };
+        this.props.updateEventData(this.props.event.id, eventData);
+    }
+
+    handleParticipantsModuleSaved(values) {
+        console.log(values);
+        // Split the values to module
+        const moduleSettings = {
+            enabled: values.participants_enabled
+        };
+        this.props.updateEventModuleSettings(this.props.event.id, 'participants', moduleSettings);
     }
 
     render() {
@@ -34,17 +92,17 @@ class EventEditor extends Component {
                     <NavigationControl user={this.props.user} eventId={this.props.event.id} template="eventeditor" />
                     <div className="event-editor">
 
-                        <EventEditorHeader headerImage={this.props.event.headerImage} name={this.props.event.name} />
+                        <EventEditorHeader onSubmit={this.handleHeaderSettingsSaved} />
 
                         <EventEditorControlpanel />
 
                         <div className="event-content">
                             <div className="event-content__spotlight">
-                                <EventEditorDetails />
-                                <EventEditorDescription module={this.props.modules.description} description={this.props.event.description} />
+                                <EventEditorDetails onSubmit={this.handleDetailsModuleSaved} />
+                                <EventEditorDescription onSubmit={this.handleDescriptionModuleSaved} />
                             </div>
                             <div className="event-content__sideline">
-                                <EventEditorParticipants module={this.props.modules.participants} participants={this.props.event.participants} />
+                                <EventEditorParticipants onSubmit={this.handleParticipantsModuleSaved} />
                             </div>
                         </div>
 
@@ -70,7 +128,9 @@ const mapDispatchToProps = {
     getEvent,
     setCurrentEvent,
     subscribeToEvent,
-    loadMapImageURL
+    loadMapImageURL,
+    updateEventData,
+    updateEventModuleSettings
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(EventEditor);

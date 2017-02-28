@@ -17,13 +17,13 @@
 }
 
 .eventeditor-details.disabled {
-	opacity: 0.5;
+	background-color: rgba(255, 255, 255, 0.4);
 }
 
 .eventeditor-details__mainenabler {
 	display: flex;
 	justify-content: space-between;
-	align-items: center;
+	align-items: flex-end;
 
 	padding: 0px 5px 10px 0px;
 	margin-bottom: 10px;
@@ -73,6 +73,15 @@
 	white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.eventeditor-details__item-field {
+	margin-left: 5px;
+	padding: 2px;
+	font-size: 1.3em;
+	border: 1px #eee solid;
+
+	width: 100%;
 }
 
 .eventeditor-details__map {

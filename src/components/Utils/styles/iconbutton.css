@@ -11,6 +11,10 @@
 
 	transition: background-color 0.2s;
 }
+.iconbutton.green {
+	background-color: #689F38;
+	color: #fff;
+}
 
 .iconbutton > i,
 .iconbutton > span {
@@ -38,5 +42,9 @@
 	.iconbutton:hover {
 		color: #424242;
 		background-color: #e0e0e0;
+	}
+	.iconbutton.green:hover {
+		background-color: #9CCC65;
+		color: #fff;
 	}
 }

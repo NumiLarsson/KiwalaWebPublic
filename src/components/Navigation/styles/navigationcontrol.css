@@ -1,8 +1,6 @@
 .navigationcontrol {
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
+	position: block;
+
 	width: 100%;
 	height: 10%;
 
@@ -24,6 +22,8 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+
+	overflow: hidden;
 }
 
 .navigationcontrol-item__button {
