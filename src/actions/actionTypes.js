@@ -16,4 +16,4 @@ export const EVENT_EDITOR_ACTIONS = {
 };
 export const USER_PROFILE_ACTIONS = {
     GET_ACCEPTED_EVENTS : 'GET_ACCEPTED_EVENTS'
-}
+};
