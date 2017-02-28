@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Api from '../../api/Api';
-import { setEmail, setPassword, setPassword2, toggleRegister, logout, finishLogin} from '../../actions/login';
+import { setEmail, setPassword, setPassword2, 
+    toggleRegister, logout, finishLogin, loginScreenError, resetLoginScreenError} from '../../actions/login';
 import './styles/loginscreen.css';
 
 class Login extends Component {
@@ -37,7 +38,7 @@ class Login extends Component {
             this.props.finishLogin();
         })
         .catch(err => {
-            console.log(err);
+            this.props.loginScreenError(err);
         })
     }
 
@@ -47,7 +48,7 @@ class Login extends Component {
             this.props.finishLogin();
         })
         .catch(err => {
-            console.log(err);
+            this.props.loginScreenError(err);
         })
     }
 
@@ -60,10 +61,10 @@ class Login extends Component {
                 this.props.finishLogin();
             })
             .catch(err => {
-                console.log(err);
+                this.props.loginScreenError(err);
             })
         } else {
-            console.log(message);
+            this.props.loginScreenError(message);
         }
     }
 
@@ -83,6 +84,7 @@ class Login extends Component {
 
     submitForm(e) {
         e.preventDefault();
+        this.props.resetLoginScreenError();
         if (this.props.register) {
             this.registerWithEmail();
         } else {
@@ -111,7 +113,7 @@ class Login extends Component {
                     <div className="login-screen__content">
                         <button type="button" className="login-screen__button login-screen__button--with-facebook" onClick={this.loginWithFacebook}>Login with Facebook</button>
                         <span className="login-screen--separate">OR</span>
-                        <form onSubmit={this.submitForm}>
+                        <form className="login-screen__form" onSubmit={this.submitForm}>
                             <input className="login-screen__input login-screen--separate" required type="email" placeholder="Email address" onChange={this.setEmail}/>
                             <input className="login-screen__input login-screen--separate" required type="password" placeholder="Password" onChange={this.setPassword}/>
                             {this.props.register && <input className="login-screen__input login-screen--separate" required type="password" placeholder="Password again" onChange={this.setPassword2}/>}
@@ -120,7 +122,16 @@ class Login extends Component {
                                 type="submit">
                                     <i className="material-icons">person</i><span>{!this.props.register ? 'Login' : 'Register'}</span>
                             </button>
+                            {this.props.error && 
+                                <div className="login-screen__form__error-container">
+                                    <div className="login-screen__form__error">
+                                        <span className="error--message">{this.props.errorMessage}</span>
+                                        <i onClick={this.props.resetLoginScreenError} className="material-icons error--close">close</i>
+                                    </div>
+                                </div>
+                            }
                         </form>
+                        
                         <div className='login-screen--separate'><button className="login-screen__button--flat" onClick={this.props.toggleRegister}>{!this.props.register ? 'Register' : 'Login'}</button></div>
                     </div>
                 </div>
@@ -136,7 +147,9 @@ const mapStateToProps = (state) => {
         email: state.login.email,
         password: state.login.password,
         password2: state.login.password2,
-        register: state.login.register     
+        register: state.login.register,
+        error: state.login.error,
+        errorMessage: state.login.errorMessage     
     }
 }
 
@@ -148,7 +161,9 @@ const mapDispatchToProps = {
     setPassword,
     setPassword2,
     toggleRegister,
-    finishLogin
+    finishLogin,
+    loginScreenError,
+    resetLoginScreenError
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

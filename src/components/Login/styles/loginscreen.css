@@ -12,6 +12,46 @@
     flex-direction: column;
 }
 
+.login-screen__form {
+    position: relative;
+}
+
+.login-screen__form__error-container {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    top:0;
+    background: transparent;
+    display: flex;
+    align-items: center;
+}
+
+.login-screen__form__error {
+    position: absolute;
+    bottom: 52px;
+    background: #E53935;
+    padding: 5px;
+    height: 48px;
+    color: #fff;
+    width: 100%;
+    z-index: 5;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;    
+}
+
+.error--message {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.error--close {
+    font-size: 2em;
+}
+
 .login-screen__input {
     padding: 5px;
     border-radius: 4px;

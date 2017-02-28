@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import Login from '../components/Login/Login';
 import './styles/splashscreen.css';
-import api from '../api/Api';
 
 class SplashScreen extends Component {
     
