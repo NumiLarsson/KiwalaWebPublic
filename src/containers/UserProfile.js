@@ -23,7 +23,7 @@ class UserProfile extends Component {
             this.props.getAcceptedEvents(this.props.user.uid);
             return(
                 <div className="userprofile">
-                    <NavigationControl user={ user } template="upcomingeventslist" />
+                    <NavigationControl user={ user } template="userprofile" />
                     <UpcomingEventsList user={ user } eventList={ eventList }/>
                 </div>
             );
