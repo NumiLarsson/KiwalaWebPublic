@@ -274,6 +274,4 @@ export default class EventApi {
             }
         }
     }
-  }
-
 }
