@@ -8,7 +8,7 @@ const UpcomingEventsList = (props) => {
     eventsToRender = formatEvents(props.eventList)
     return (
         <div className="upcomingeventslist">
-            <div className="eventslist">
+            <div className="upcomingeventslist-eventlist">
                 {eventsToRender}
             </div>
         </div>
