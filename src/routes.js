@@ -8,7 +8,7 @@ import { Route, IndexRoute } from 'react-router';
 import App from './containers/App';
 import SplashScreen from './containers/SplashScreen';
 import EventViewer from './containers/EventViewer';
-import UserInterface from './containers/UserInterface';
+import UserProfile from './containers/UserProfile';
 import EventEditor from './containers/EventEditor';
 import Login from "./components/Login/Login";
 
@@ -17,8 +17,8 @@ const routes = (
         <IndexRoute component={SplashScreen} />
         <Route path="/event/:eventid" component={EventViewer}/>
         <Route path="/login" component={Login} />
-        <Route path="/user" component={UserInterface}/>
-        <Route path="eventsettings/:eventid" component={EventEditor} />
+        <Route path="/user" component={UserProfile}/>
+        <Route path="event/settings/:eventid" component={EventEditor} />
     </Route>
 );
 

@@ -1,15 +1,19 @@
-.eventlist {
+.upcomingeventslist-eventlist {
     display: flex;
     flex-direction: column;
+    align-items: center;
     justify-content: center;
+
+    padding: 5px;
 }
 
 .eventlist-event {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin: 5px 5px 5px 5px;
-    width: auto;
+
+    margin-top: 10px;
+    width: 90%;
 	min-height: 100px;
 	max-height: 250px;
 
@@ -82,4 +86,11 @@
 .eventlist-event__location > span,
 .eventlist-event__date > span {
     padding: 5px;
+}
+
+/* Desktop */
+@media only screen and (min-width: 1024px) {
+    .eventlist-event {
+        width: 600px;
+    }
 }
