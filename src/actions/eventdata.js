@@ -49,9 +49,9 @@ export function subscribeToEvent(eventId) {
         Api.events.subscribeToEventModules(eventId, (event) => {
             dispatch(setCurrentEventModules(event));
         });
-        Api.events.subscribeToEventParticipants(eventId, (event) => {
-            for (let participantId in event) {
-                if (event.hasOwnProperty(participantId)) {
+        Api.events.subscribeToEventParticipants(eventId, (eventParticipants) => {
+            for (let participantId in eventParticipants) {
+                if (eventParticipants.hasOwnProperty(participantId)) {
                     Api.user.subscribeToUserData(participantId, user => {
                         user.uid = participantId;
                         dispatch(updateCurrentEventParticipantsUsers(user));
@@ -59,7 +59,7 @@ export function subscribeToEvent(eventId) {
                 }
             }
 
-            dispatch(setCurrentEventParticipants(event));
+            dispatch(setCurrentEventParticipants(eventParticipants));
         });
     }
 }
