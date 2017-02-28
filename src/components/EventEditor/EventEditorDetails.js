@@ -61,7 +61,7 @@ function renderStartDate(module, startDate) {
             <Field label="Show date" name="details_showTime" component={CheckBox} />
             <div className="eventeditor-details__item">
                 <i className="material-icons color-gray">event</i>
-                <div className="event-details__item-text" title={ formatDate(startDate) }> { formatDate(startDate) } </div>
+                <Field className="eventeditor-details__item-field" value={ startDate } name="details_data_startDate" component="input" type="date"/>
             </div>
         </div>
     );
@@ -73,7 +73,7 @@ function renderLocation(module, location) {
             <Field label="Show location" name="details_showLocation" component={CheckBox} />
             <div className="eventeditor-details__item">
                 <i className="material-icons color-gray">location_on</i>
-                <div className="eventeditor-details__item-text" title={ formatLocation(location) }> { formatLocation(location) } </div>
+                 <Field className="eventeditor-details__item-field" name="details_data_location" component="input"/>
             </div>
         </div>
     );
@@ -101,14 +101,16 @@ const mapStateToProps = (state) => {
             showLocation: selector(state, 'details_showLocation'),
             showMap: selector(state, 'details_showMap')
         },
-        startDate: state.eventdata.startDate,
-        location: state.eventdata.location,
+        startDate: selector(state, 'details_data_startDate'),
+        location: selector(state, 'details_data_location'),
         map: state.eventdata.map,
         initialValues : {
             details_enabled: state.eventmodules.details.enabled,
             details_showTime: state.eventmodules.details.showTime,
             details_showLocation: state.eventmodules.details.showLocation,
-            details_showMap: state.eventmodules.details.showMap
+            details_showMap: state.eventmodules.details.showMap,
+            details_data_startDate: formatDate(state.eventdata.startDate),
+            details_data_location: state.eventdata.location
         }
     }
 }

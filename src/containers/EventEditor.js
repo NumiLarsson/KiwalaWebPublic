@@ -10,6 +10,7 @@ import EventEditorControlpanel from '../components/EventEditor/EventEditorContro
 import NavigationControl from '../components/Navigation/NavigationControl';
 import Spinner from '../components/Utils/Spinner';
 import './styles/eventeditor.css';
+import { formatDateUnix } from './../utils/utils';
 import { loadMapImageURL } from './../actions/maps'
 
 class EventEditor extends Component {
@@ -36,6 +37,13 @@ class EventEditor extends Component {
             showMap: values.details_showMap
         };
         this.props.updateEventModuleSettings(this.props.event.id, 'details', moduleSettings);
+
+        // Split the values to data
+        const eventData = {
+            startDate: formatDateUnix(values.details_data_startDate),
+            location: values.details_data_location
+        };
+        this.props.updateEventData(this.props.event.id, eventData);
     }
 
     handleDescriptionModuleSaved(values) {
