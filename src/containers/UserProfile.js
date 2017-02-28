@@ -6,21 +6,18 @@ import Spinner from '../components/Utils/Spinner';
 import NavigationControl from '../components/Navigation/NavigationControl';
 
 class UserProfile extends Component {
-    constructor() {
-        super();
-    }
 
     componentWillMount() {
+        this.props.getAcceptedEvents(this.props.user.uid);
     }
 
     render() {
         let { user, eventList } = this.props;
-        if (!user) {
+        if (!user || !eventList) {
             return (
-                <Spinner label="Loading" />
+                <Spinner />
             )
         } else {
-            this.props.getAcceptedEvents(this.props.user.uid);
             return(
                 <div className="userprofile">
                     <NavigationControl user={ user } template="userprofile" />
