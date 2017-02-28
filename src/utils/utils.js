@@ -18,7 +18,8 @@ export function formatDate(date) {
  */
 export function formatDateUnix(date) {
   let realDate = moment(date);
-  return realDate.isValid() ? parseInt(realDate.format('x')) : '';
+
+  return realDate.isValid() ? parseInt(realDate.format('x'), 10) : '';
 }
 
 /**
