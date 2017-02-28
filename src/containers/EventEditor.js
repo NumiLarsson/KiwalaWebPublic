@@ -22,11 +22,44 @@ class EventEditor extends Component {
         const {eventid} = this.props.params;
         this.props.subscribeToEvent(eventid);
 
-        this.handleDetailsModuleSaved = this.handleDetailsModuleSaved.bind(this);
+        this.handleDetailsModuleSaved       = this.handleDetailsModuleSaved.bind(this);
+        this.handleDescriptionModuleSaved   = this.handleDescriptionModuleSaved.bind(this);
+        this.handleParticipantsModuleSaved  = this.handleParticipantsModuleSaved.bind(this);
     }
 
-    handleDetailsModuleSaved(values) {        
-        this.props.updateEventModuleSettings(this.props.event.id, 'details', values);
+    handleDetailsModuleSaved(values) {
+        // Split the values to module
+        const moduleSettings = {
+            enabled: values.details_enabled,
+            showTime: values.details_showTime,
+            showLocation: values.details_showLocation,
+            showMap: values.details_showMap
+        };
+        this.props.updateEventModuleSettings(this.props.event.id, 'details', moduleSettings);
+    }
+
+    handleDescriptionModuleSaved(values) {
+        console.log(values);
+        // Split the values to module
+        const moduleSettings = {
+            enabled: values.description_enabled
+        };
+        this.props.updateEventModuleSettings(this.props.event.id, 'description', moduleSettings);
+
+        // Split the values to data
+        const eventData = {
+            description: values.description_data_text
+        };
+        this.props.updateEventData(this.props.event.id, eventData);
+    }
+
+    handleParticipantsModuleSaved(values) {
+        console.log(values);
+        // Split the values to module
+        const moduleSettings = {
+            enabled: values.participants_enabled
+        };
+        this.props.updateEventModuleSettings(this.props.event.id, 'participants', moduleSettings);
     }
 
     render() {
@@ -47,11 +80,11 @@ class EventEditor extends Component {
 
                         <div className="event-content">
                             <div className="event-content__spotlight">
-                                <EventEditorDetails onSubmit={this.handleDetailsModuleSaved} />
-                                <EventEditorDescription module={this.props.modules.description} description={this.props.event.description} />
+                                <EventEditorDetails onSubmit={this.handleDetailsModuleSaved} form="module-details" />
+                                <EventEditorDescription onSubmit={this.handleDescriptionModuleSaved} form="module-description" />
                             </div>
                             <div className="event-content__sideline">
-                                <EventEditorParticipants module={this.props.modules.participants} participants={this.props.event.participants} />
+                                <EventEditorParticipants onSubmit={this.handleParticipantsModuleSaved} form="module-participants" />
                             </div>
                         </div>
 

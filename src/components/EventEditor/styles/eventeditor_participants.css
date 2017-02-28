@@ -23,9 +23,9 @@
 .eventeditor-participants__mainenabler {
 	display: flex;
 	justify-content: space-between;
-	align-items: center;
+	align-items: flex-end;
 
-	padding: 0px 5px 5px 0px;
+	padding: 0px 5px 10px 0px;
 	border-bottom: 1px solid #E0E0E0;
 }
 
