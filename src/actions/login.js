@@ -11,34 +11,35 @@ import { createAction } from 'redux-actions';
 import { } from 'react-router-redux';
 //get the API
 import Api from '../api/Api';
+import { push } from 'react-router-redux';
 
 //Constants identifying actions.
 export const LOGIN_ACTIONS = {
     SET_EMAIL : 'SET_EMAIL',
     SET_PASSWORD : 'SET_PASSWORD',
-    LOGIN: 'LOGIN'
+    SET_PASSWORD2: 'SET_PASSWORD2',
+    TOGGLE_REGISTER: 'TOGGLE_REGISTER',
+    LOGIN: 'LOGIN',
+    LOGIN_SCREEN_ERROR: 'LOGIN_SCREEN_ERROR', 
+    RESET_LOGIN_SCREEN_ERROR: 'RESET_LOGIN_SCREEN_ERROR'
 };
 
 //Standard actions.
 export const setEmail = createAction(LOGIN_ACTIONS.SET_EMAIL);
 export const setPassword = createAction(LOGIN_ACTIONS.SET_PASSWORD);
-
-//Async action. This is what the thunk middleware lets us do.
-export function login(provider, email, password) {
-    return (dispatch) => {
-        switch (provider) {
-            case 'facebook':
-                return Api.auth.loginWithFacebookPopup();
-            case 'email':
-                return Api.auth.loginWithEmail(email, password);
-            default:
-                throw new Error('Trying to authenticate with an unknown provider');
-        }
-    }
-}
+export const setPassword2 = createAction(LOGIN_ACTIONS.SET_PASSWORD2);
+export const toggleRegister = createAction(LOGIN_ACTIONS.TOGGLE_REGISTER);
+export const loginScreenError = createAction(LOGIN_ACTIONS.LOGIN_SCREEN_ERROR);
+export const resetLoginScreenError = createAction(LOGIN_ACTIONS.RESET_LOGIN_SCREEN_ERROR);
 
 export function logout() {
     return dispatch => {
         return Api.auth.logout();
+    }
+ }
+
+ export function finishLogin() {
+    return dispatch => {
+        dispatch(push('/user'));
     }
  }
