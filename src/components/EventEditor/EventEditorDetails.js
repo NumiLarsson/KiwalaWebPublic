@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
-import { formatDate, formatLocation } from '../../utils/utils';
+import { formatDate } from '../../utils/utils';
 import IconButton from '../Utils/IconButtonField';
 import CheckBox from '../Utils/CheckBoxField';
 import './styles/eventeditor_details.css';

@@ -23,9 +23,19 @@ class EventEditor extends Component {
         const {eventid} = this.props.params;
         this.props.subscribeToEvent(eventid);
 
+        this.handleHeaderSettingsSaved      = this.handleHeaderSettingsSaved.bind(this);
         this.handleDetailsModuleSaved       = this.handleDetailsModuleSaved.bind(this);
         this.handleDescriptionModuleSaved   = this.handleDescriptionModuleSaved.bind(this);
         this.handleParticipantsModuleSaved  = this.handleParticipantsModuleSaved.bind(this);
+    }
+
+    handleHeaderSettingsSaved(values) {
+        // Split the values to data
+        const eventData = {
+            name: values.header_data_name,
+            headerImage: values.header_data_image
+        };
+        this.props.updateEventData(this.props.event.id, eventData);
     }
 
     handleDetailsModuleSaved(values) {
@@ -82,17 +92,17 @@ class EventEditor extends Component {
                     <NavigationControl user={this.props.user} eventId={this.props.event.id} template="eventeditor" />
                     <div className="event-editor">
 
-                        <EventEditorHeader headerImage={this.props.event.headerImage} name={this.props.event.name} />
+                        <EventEditorHeader onSubmit={this.handleHeaderSettingsSaved} />
 
                         <EventEditorControlpanel />
 
                         <div className="event-content">
                             <div className="event-content__spotlight">
-                                <EventEditorDetails onSubmit={this.handleDetailsModuleSaved} form="module-details" />
-                                <EventEditorDescription onSubmit={this.handleDescriptionModuleSaved} form="module-description" />
+                                <EventEditorDetails onSubmit={this.handleDetailsModuleSaved} />
+                                <EventEditorDescription onSubmit={this.handleDescriptionModuleSaved} />
                             </div>
                             <div className="event-content__sideline">
-                                <EventEditorParticipants onSubmit={this.handleParticipantsModuleSaved} form="module-participants" />
+                                <EventEditorParticipants onSubmit={this.handleParticipantsModuleSaved} />
                             </div>
                         </div>
 
