@@ -1,7 +1,5 @@
 .App {
   text-align: center;
-  /* For the navigation */
-  padding-top: 12%;
 }
 
 .App-logo {
@@ -63,8 +61,6 @@
 /* Desktop */
 @media only screen and (min-width: 1024px) {
   .App {
-    /* For the navigation */
-    padding-top: 50px;
   }
 
   .only-on-mobile {
