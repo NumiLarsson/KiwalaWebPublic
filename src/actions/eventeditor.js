@@ -46,10 +46,6 @@ export function updateEventData(eventId, dataUpdates) {
  */
 export function updateEventModuleSettings(eventId, module, settings) {
     return dispatch => {
-    	console.log('TESTING YOOO');
-    	console.log(eventId);
-    	console.log(module);
-    	console.log(settings);
         Api.events.updateEventModuleSettings(eventId, module, settings)
         .then(res => {
             dispatch(eventModuleUpdated(res));

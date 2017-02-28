@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm, formValueSelector } from 'redux-form';
 import { formatDate, formatLocation } from '../../utils/utils';
 import IconButton from '../Utils/IconButtonField';
 import CheckBox from '../Utils/CheckBoxField';
 import './styles/eventeditor_details.css';
 
 class EventEditorDetails extends Component {
-    
-    constructor() {
-        super();
-    }
 
     render() {
         if(this.props.module) {
@@ -22,8 +18,8 @@ class EventEditorDetails extends Component {
                             <i className="material-icons color-blue">info</i> <span> Details </span>
                         </div>
                         <div className="eventeditor-details__mainenabler">
-                            <Field label="Show module" name="enabled" component={CheckBox} />
-                            <Field mIcon="save" label="Save" name="detailsSave" component={IconButton} type="submit" /> 
+                            <Field label="Show module" name="details_enabled" component={CheckBox} />
+                            { renderSubmitButton(this.props.pristine) }
                         </div>
                         { renderStartDate(this.props.module, this.props.startDate) }
                         { renderLocation(this.props.module, this.props.location) }
@@ -46,12 +42,23 @@ EventEditorDetails = reduxForm({
     enableReinitialize: true
 })(EventEditorDetails);
 
-
+function renderSubmitButton(pristine) {
+    if(pristine) {
+        return (
+            null
+        );
+    }
+    else {
+        return (
+            <Field className="green" mIcon="save" label="Save" name="details_save" component={IconButton} type="submit" />
+        );
+    }
+}
 
 function renderStartDate(module, startDate) {
     return (
         <div className="eventeditor-details__enabler">
-            <Field label="Show date" name="showTime" component={CheckBox} />
+            <Field label="Show date" name="details_showTime" component={CheckBox} />
             <div className="eventeditor-details__item">
                 <i className="material-icons color-gray">event</i>
                 <div className="event-details__item-text" title={ formatDate(startDate) }> { formatDate(startDate) } </div>
@@ -63,7 +70,7 @@ function renderStartDate(module, startDate) {
 function renderLocation(module, location) {
     return (
          <div className="eventeditor-details__enabler">
-            <Field label="Show location" name="showLocation" component={CheckBox} />
+            <Field label="Show location" name="details_showLocation" component={CheckBox} />
             <div className="eventeditor-details__item">
                 <i className="material-icons color-gray">location_on</i>
                 <div className="eventeditor-details__item-text" title={ formatLocation(location) }> { formatLocation(location) } </div>
@@ -76,7 +83,7 @@ function renderMap(module, map) {
 
     return (
         <div className="eventeditor-details__enabler">
-            <Field label="Show map" name="showMap" component={CheckBox} />
+            <Field label="Show map" name="details_showMap" component={CheckBox} />
             <div className="eventeditor-details__map">
                 <img className="map-image" role="presentation" src={map} />
             </div>
@@ -85,17 +92,23 @@ function renderMap(module, map) {
 }
 
 //Maps the state in our store to the props property of the Example object.
+const selector = formValueSelector('module-details')
 const mapStateToProps = (state) => {
     return {
-        module: state.eventmodules.details,
+        module: {
+            enabled: selector(state, 'details_enabled'),
+            showTime: selector(state, 'details_showTime'),
+            showLocation: selector(state, 'details_showLocation'),
+            showMap: selector(state, 'details_showMap')
+        },
         startDate: state.eventdata.startDate,
         location: state.eventdata.location,
         map: state.eventdata.map,
         initialValues : {
-            enabled: state.eventmodules.details.enabled,
-            showTime: state.eventmodules.details.showTime,
-            showLocation: state.eventmodules.details.showLocation,
-            showMap: state.eventmodules.details.showMap
+            details_enabled: state.eventmodules.details.enabled,
+            details_showTime: state.eventmodules.details.showTime,
+            details_showLocation: state.eventmodules.details.showLocation,
+            details_showMap: state.eventmodules.details.showMap
         }
     }
 }

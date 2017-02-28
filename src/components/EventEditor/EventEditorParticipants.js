@@ -1,34 +1,25 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm, formValueSelector } from 'redux-form';
 import IconButton from '../Utils/IconButtonField';
 import CheckBox from '../Utils/CheckBoxField';
 import './styles/eventeditor_participants.css';
 
 class EventEditorParticipants extends Component {
     
-    constructor() {
-        super();
-
-        this.handleParticipantsEnabledChange     = this.handleParticipantsEnabledChange.bind(this);
-    }
-
-    handleParticipantsEnabledChange(event) {
-        //eventDetailsToggled(event.value.checked);
-    }
 
     render() {
         if(this.props.module) {
-            const { handleModuleSaved } = this.props;
+            const { handleSubmit } = this.props;
             return (
-                <form onSubmit={handleModuleSaved}>
+                <form onSubmit={handleSubmit}>
                     <div className={(this.props.module.enabled) ? "eventeditor-participants" : "eventeditor-participants disabled"}>
                         <div className="eventeditor-participants__header">
                             <i className="material-icons color-blue">person</i> <span> Participants ({ (this.props.participants) ? Object.keys(this.props.participants).length : "-" })</span>
                         </div>
                         <div className="eventeditor-participants__mainenabler">
-                            <Field label="Show module" name="participantsEnabled" component={CheckBox} />
-                            <Field mIcon="save" label="Save" name="participantsSave" component={IconButton} />
+                            <Field label="Show module" name="participants_enabled" component={CheckBox} />
+                            { renderSubmitButton(this.props.pristine) }
                         </div>
                         <div className="eventeditor-participants__list"> 
                             { renderParticipants(this.props.participants) } 
@@ -46,9 +37,22 @@ class EventEditorParticipants extends Component {
     
 }
 
+function renderSubmitButton(pristine) {
+    if(pristine) {
+        return (
+            null
+        );
+    }
+    else {
+        return (
+            <Field className="green" mIcon="save" label="Save" name="participants_save" component={IconButton} type="submit" />
+        );
+    }
+}
+
 // Decorate the form component
 EventEditorParticipants = reduxForm({
-  form: 'moduleparticipants', // a unique name for this form
+  form: 'module-participants', // a unique name for this form
   enableReinitialize: true
 })(EventEditorParticipants);
 
@@ -87,12 +91,15 @@ function renderAvatar(participant) {
 }
 
 //Maps the state in our store to the props property of the Example object.
+const selector = formValueSelector('module-participants')
 const mapStateToProps = (state) => {
     return {
-        module: state.eventmodules.participants,
+        module: {
+            enabled: selector(state, 'participants_enabled')
+        },
         participants: state.eventdata.participants,
         initialValues : {
-            participantsEnabled: state.eventmodules.participants.enabled
+            participants_enabled: state.eventmodules.participants.enabled
         }
     }
 }
