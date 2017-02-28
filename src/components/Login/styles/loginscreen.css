@@ -88,21 +88,12 @@
   outline: none;
 }
 
-.login-screen__button--flat:focus, .login-screen__button--flat:hover {
-    background-color: rgba(0,0,0,0.1);
-    box-shadow: none;
-}
-
 .login-screen__button--flat:active {
     background-color: rgba(0,0,0,0.2);
 }
 
 .login-screen--separate {
     margin-top: 10px;
-}
-
-.login-screen__button:hover {
-    background-color: #66BB6A;
 }
 
 .login-screen__button.red {
@@ -117,10 +108,6 @@
     background-color: #3b5998;
 }
 
-.login-screen__button--with-facebook:hover {
-    background-color: #8b9dc3;
-}
-
 .login-screen__button > i,
 .login-screen__button > span {
     vertical-align: middle;
@@ -128,4 +115,21 @@
 
 .login-screen__button > span {
     margin-left: 5px;
+}
+
+/* Desktop */
+@media only screen and (min-width: 768px) {
+
+    .login-screen__button:hover {
+        background-color: #66BB6A;
+    }
+
+    .login-screen__button--flat:hover {
+        background-color: rgba(0,0,0,0.1);
+        box-shadow: none;
+    }
+
+    .login-screen__button--with-facebook:hover {
+        background-color: #8b9dc3;
+    }
 }
