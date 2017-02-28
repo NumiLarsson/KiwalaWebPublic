@@ -73,7 +73,7 @@ function renderUserProfile() {
 function renderLogout() {
     return (
         <div className="navigationcontrol-item">
-          <button className="navigationcontrol-item__button" onClick={logout}><i className="material-icons">door</i><span>Logout</span></button>
+          <button className="navigationcontrol-item__button" onClick={logout}><i className="material-icons">exit_to_app</i><br className="only-on-mobile"/><span>Logout</span></button>
         </div>
     );
 }
