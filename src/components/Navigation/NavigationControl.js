@@ -21,12 +21,8 @@ const NavigationControl = (props) => {
     else {
         return (
              <div className="navigationcontrol">
-                <div className="navigationcontrol-item">
-                     <button className="navigationcontrol-item__button" onClick={goToHome}><i className="material-icons color-dark-blue">person</i><br className="only-on-mobile"/><span className="color-dark-blue">Login</span></button>
-                </div>
-                <div className="navigationcontrol-item">
-                     <button className="navigationcontrol-item__button" onClick={goToHome}><i className="material-icons color-dark-green">person_add</i><br className="only-on-mobile"/><span className="color-dark-green">Register</span></button>
-                </div>
+                { (props.template !== "home") ? renderLogout() : null }
+                { (props.template !== "home") ? renderRegister() : null }
             </div> 
         )
     }
@@ -52,6 +48,22 @@ function gotoEventSettings(eventId) {
 
 function gotoEvent(eventId) {
     browserHistory.push('/event/' + eventId);
+}
+
+function renderLogout(){
+    return (
+        <div className="navigationcontrol-item">
+             <button className="navigationcontrol-item__button" onClick={goToHome}><i className="material-icons color-dark-blue">person</i><br className="only-on-mobile"/><span className="color-dark-blue">Login</span></button>
+        </div>
+    );
+}
+
+function renderRegister(){
+    return (
+        <div className="navigationcontrol-item">
+             <button className="navigationcontrol-item__button" onClick={goToHome}><i className="material-icons color-dark-green">person_add</i><br className="only-on-mobile"/><span className="color-dark-green">Register</span></button>
+        </div>
+    );
 }
 
 function renderHome() {

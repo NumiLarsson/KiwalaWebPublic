@@ -17,8 +17,7 @@ class SplashScreen extends Component {
                 <NavigationControl user={this.props.user} template="home" />
                 <div className="splashscreen">
                     <img src="images/logo.png" role="presentation" className="splashscreen-logo"/>
-                    <h1>Kiwala</h1>
-                    <Link to={'event/2'}>Demo event</Link>
+                    <h1>Kiwala Event Organizer</h1>
                     <br/>
                     <Login />
                 </div>
