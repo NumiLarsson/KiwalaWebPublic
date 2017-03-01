@@ -55,12 +55,19 @@ export default class AuthApi {
  * @param {string} password - The password of the user.
  * @returns A Promise which resolves to a Firebase.Auth user object and rejects with an error message.
  */
-  createUser(email="", password="") {
+  createUser(name="", email="", password="") {
       let self = this;
       return new Promise((resolve, reject) => {
           self.auth().createUserWithEmailAndPassword(email, password)
           .then((user) => {
-              resolve(user);
+              user.updateProfile({
+                displayName: name
+                //photoURL: "https://example.com/jane-q-user/profile.jpg"
+              }).then(function() {
+                  resolve(user);
+              }, function(error) {
+                  reject(error);
+              });
           })
           .catch(error => {
               let err = ACCOUNT_CREATION_ERRORS[error.code] || 'Network error';

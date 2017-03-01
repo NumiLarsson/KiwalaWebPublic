@@ -1,10 +1,11 @@
 import {LOGIN_ACTIONS} from '../actions/login';
-const { SET_PASSWORD, SET_PASSWORD2, SET_EMAIL, TOGGLE_REGISTER, 
+const { SET_PASSWORD, SET_PASSWORD2, SET_NAME, SET_EMAIL, TOGGLE_REGISTER, 
     LOGIN_SCREEN_ERROR, RESET_LOGIN_SCREEN_ERROR } = LOGIN_ACTIONS;
 
 const initialState = {
     password: null,
     password2: null,
+    name: null,
     email: null,
     register: false,
     error: false,
@@ -14,6 +15,10 @@ const initialState = {
 export default (state = initialState, action) => {
     switch(action.type) {
 
+        case SET_NAME:
+            return Object.assign({}, state, {
+                name: action.payload
+            });
         case SET_EMAIL:
             return Object.assign({}, state, {
                 email: action.payload
