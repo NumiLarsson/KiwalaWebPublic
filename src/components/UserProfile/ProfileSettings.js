@@ -10,9 +10,11 @@ class ProfileSettings extends Component {
     render() {
         return (
             <div className="profilesettings">
-                <Field name="profilesettings_name" component="input" />
-                <Field name="profilesettings_email" component="input" />
-                {renderSubmitButton(this.props.pristine)}
+                <h2>Profile settings</h2>
+                <div className="profilesettings-window">
+                    <Field className="profilesettings__input" placeholder="Name" name="profilesettings_name" component="input" />
+                    {renderSubmitButton(this.props.pristine)}
+                </div>
             </div>
         )
     }
@@ -48,7 +50,7 @@ const mapStateToProps = (state) => {
         },
         initialValues : {
             profilesettings_email: state.auth.user.email,
-            profilesettings_name: state.auth.user.name
+            profilesettings_name: state.auth.user.displayName
         }
     }
 }
