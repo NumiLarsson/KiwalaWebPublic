@@ -49,8 +49,20 @@ class Login extends Component {
 
     loginWithFacebook() {
         Api.auth.loginWithFacebookPopup()
-        .then(() => {
-            this.props.finishLogin();
+        .then((user) => {
+            Api.user.createUserIfNotExists(user)
+            .then(() => {
+                Api.user.updateUserProfile(user.uid, {displayName: this.props.name})
+                .then(() => {
+                    this.props.finishLogin();
+                })
+                .catch(err => {
+                    this.props.loginScreenError(err);
+                })
+            })
+            .catch(err => {
+                this.props.loginScreenError(err);
+            })
         })
         .catch(err => {
             this.props.loginScreenError(err);
@@ -61,9 +73,15 @@ class Login extends Component {
         let {passed, message} = this.validate();
         
         if (passed) {
-            Api.auth.createUser(this.props.name, this.props.email, this.props.password)
-            .then(() => {
-                this.props.finishLogin();
+            Api.auth.createUser(this.props.email, this.props.password)
+            .then((user) => {
+                Api.user.createUserIfNotExists(user)
+                .then(() => {
+                    this.props.finishLogin();
+                })
+                .catch(err => {
+                    this.props.loginScreenError(err);
+                })
             })
             .catch(err => {
                 this.props.loginScreenError(err);
