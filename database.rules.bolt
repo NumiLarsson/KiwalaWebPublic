@@ -20,8 +20,6 @@ path /userAcceptedEvents/{uid}/{eventId} is Boolean {
   validate() { isEvent(eventId) }
 }
 
-
-
 //event
 path /events/{eventId} is Event {}
 
@@ -97,7 +95,7 @@ type UrlString extends String {
 }
 
 type EmailString extends String {
-  validate() {this.matches(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}$/i)}
+  validate() {this.matches(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i)}
 }
 
 //utility functions

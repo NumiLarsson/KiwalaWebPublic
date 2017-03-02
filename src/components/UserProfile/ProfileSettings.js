@@ -10,7 +10,9 @@ class ProfileSettings extends Component {
     render() {
         return (
             <div className="profilesettings">
-            {renderSubmitButton(this.props.pristine)}
+                <Field name="profilesettings_name" component="input" />
+                <Field name="profilesettings_email" component="input" />
+                {renderSubmitButton(this.props.pristine)}
             </div>
         )
     }
@@ -37,7 +39,7 @@ ProfileSettings = reduxForm({
 })(ProfileSettings);
 
 //Maps the state in our store to the props property of the Example object.
-const selector = formValueSelector('module-description')
+const selector = formValueSelector('profile-settings')
 const mapStateToProps = (state) => {
     return {
         profilesettings: {

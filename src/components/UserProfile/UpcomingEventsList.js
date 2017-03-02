@@ -32,22 +32,19 @@ function getHeaderImgStyle(headerImage) {
 function renderEventItem(event){
     if(event && event.eventData && event.eventModules){
         return (
-            <div>
-                <h1>Eventlist</h1>
-                <div key={event.eventId} className="eventlist-event" onClick={goToEvent.bind(this, event.eventId)}>
-                    <div className="eventlist-header" style={getHeaderImgStyle(event.eventData.headerImage)}>
-                        <div className="eventlist-header__gradient">
-                            <div className="eventlist-event__title" >
-                                {event.eventData.name}
-                            </div>
+            <div key={event.eventId} className="eventlist-event" onClick={goToEvent.bind(this, event.eventId)}>
+                <div className="eventlist-header" style={getHeaderImgStyle(event.eventData.headerImage)}>
+                    <div className="eventlist-header__gradient">
+                        <div className="eventlist-event__title" >
+                            {event.eventData.name}
                         </div>
                     </div>
+                </div>
 
-                    <div className="eventlist-event__details" >
-                        {renderEventDateString(event)}
-                        {renderEventLocationString(event)}
-                        {renderEventDescriptionString(event)}
-                    </div>
+                <div className="eventlist-event__details" >
+                    {renderEventDateString(event)}
+                    {renderEventLocationString(event)}
+                    {renderEventDescriptionString(event)}
                 </div>
             </div>
         );
