@@ -6,7 +6,8 @@ path /users/{uid} is User {
 
 type User {
   email: EmailString,
-  name : NameString | Null
+  name : NameString | Null,
+  photoURL: UrlString | Null
 }
 
 path /userAcceptedEvents/{uid} is Object {
@@ -89,6 +90,10 @@ type EventRef extends Boolean{
 
 type NameString extends String {
   validate() {this.length > 0 && this.length < 100}
+}
+
+type UrlString extends String {
+  validate() {this.length > 0}
 }
 
 type EmailString extends String {

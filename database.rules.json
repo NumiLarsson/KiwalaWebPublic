@@ -9,6 +9,9 @@
         "name": {
           ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length < 100"
         },
+        "photoURL": {
+          ".validate": "newData.isString() && newData.val().length > 0"
+        },
         "$other": {
           ".validate": "false"
         },
@@ -20,7 +23,7 @@
       "$uid": {
         ".validate": "newData.hasChildren()",
         ".read": "auth != null && auth.uid == $uid",
-        ".write": "true",
+        ".write": "auth != null && auth.uid == $uid",
         "$eventId": {
           ".validate": "newData.isBoolean() && root.child('events').child($eventId).val() != null"
         }
@@ -32,9 +35,6 @@
         "id": {
           ".validate": "newData.isString()"
         },
-        "name": {
-          ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length < 100"
-        },
         "$other": {
           ".validate": "false"
         },
@@ -44,6 +44,9 @@
     "eventData": {
       "$eventId": {
         ".validate": "newData.hasChildren()",
+        "name": {
+          ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length < 100"
+        },
         "description": {
           ".validate": "newData.isString()"
         },
