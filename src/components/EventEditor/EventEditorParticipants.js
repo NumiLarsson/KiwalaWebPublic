@@ -34,7 +34,6 @@ class EventEditorParticipants extends Component {
             )
         }
     }
-    
 }
 
 function renderSubmitButton(pristine) {
@@ -60,17 +59,29 @@ function renderParticipants(participants) {
 
     const listItems = [];
 
-    for (var key in participants) {
-            if (participants.hasOwnProperty(key)) {
-                listItems.push(
-                    <div key={key} className="eventeditor-participant">
-                        { renderAvatar(key) }
-                    <div className="eventeditor-participant__name" title={ key }>{ key }</div>
-                    </div>
-                )
-            }
+    for (var id in participants) {
+        if (participants.hasOwnProperty(id)) {
+            listItems.push(
+                <div key={id} className="eventeditor-participant">
+                    { renderAvatar(id) }
+                <div className="eventeditor-participant__name" title={ participantDisplayName(id, participants) }>{ participantDisplayName(id, participants) }</div>
+                </div>
+            )
+        }
     }
     return listItems;
+}
+
+function participantDisplayName(id, participants) {
+  if ( typeof participants[id] !== 'object') {
+    return id;
+  }
+
+  if (participants[id].displayName !== undefined) {
+    return participants[id].displayName;
+  }
+
+  return participants[id].email;
 }
 
 function renderAvatar(participant) {
