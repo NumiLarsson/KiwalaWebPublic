@@ -23,6 +23,7 @@ class UserProfile extends Component {
                 <div className="userprofile">
                     <NavigationControl user={ user } template="userprofile" />
                     <ProfileSettings user={ user } />
+                    <h2>Eventlist</h2>
                     <UpcomingEventsList user={ user } eventList={ eventList }/>
                 </div>
             );
