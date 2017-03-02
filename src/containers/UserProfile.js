@@ -46,7 +46,7 @@ class UserProfile extends Component {
                 <div className="userprofile">
                     <NavigationControl user={ user } template="userprofile" />
                     <ProfileSettings user={ user } onSubmit={ this.handleUserSettingsSaved } />
-                    <UpcomingEventsList user={ user } eventList={ eventList } />
+                    <UpcomingEventsList user={ user } eventList={ eventList } eventListLoaded={this.props.eventListLoaded} />
                 </div>
             );
         }
@@ -58,7 +58,8 @@ const mapStateToProps = (state) => {
     return {
         user: state.auth.user,
         userData: state.auth.userData,
-        eventList: state.userprofile.eventList
+        eventList: state.userprofile.eventList,
+        eventListLoaded : state.userprofile.eventListLoaded
     }
 }
 

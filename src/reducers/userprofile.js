@@ -1,7 +1,8 @@
 import { USER_PROFILE_ACTIONS } from '../actions/actionTypes';
 
 const initialState = {
-    eventList: []
+    eventList: [],
+    eventListLoaded: false
 }
 
 export default (state = initialState, action) => {
@@ -32,13 +33,15 @@ function addOrChangeData(state, payload) {
                 eventList: state.eventList
                     .slice(0, i)
                     .concat(tempArr)
-                    .concat(state.eventList.slice(i + 1))
+                    .concat(state.eventList.slice(i + 1)),
+                eventListLoaded: true
             });
         }
     }
     // Add, does not exist
     return Object.assign({}, state, {
-        eventList: state.eventList.concat([payload])
+        eventList: state.eventList.concat([payload]),
+        eventListLoaded: true
     });
 }
 
@@ -53,12 +56,14 @@ function addOrChangeModules(state, payload) {
                 eventList: state.eventList
                     .slice(0, i)
                     .concat(tempArr)
-                    .concat(state.eventList.slice(i + 1))
+                    .concat(state.eventList.slice(i + 1)),
+                eventListLoaded: true
             });
         }
     }
     // Add, does not exist
     return Object.assign({}, state, {
-        eventList: state.eventList.concat([payload])
+        eventList: state.eventList.concat([payload]),
+        eventListLoaded: true
     });
 }

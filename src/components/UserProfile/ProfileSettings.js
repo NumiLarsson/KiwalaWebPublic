@@ -11,8 +11,9 @@ class ProfileSettings extends Component {
         return (
             <form className="profilesettings__form" onSubmit={handleSubmit}>
                 <div className="profilesettings">
-                    <h2>Profile settings</h2>
+                    <h1>Profile settings</h1>
                     <div className="profilesettings-window">
+                        {renderProfileAvatar(this.props.userData.photoURL)}
                         Name:
                         <Field className="profilesettings__input" placeholder="Type here.." name="profilesettings_name" component="input" />
                         {renderSubmitButton(this.props.pristine)}
@@ -21,6 +22,33 @@ class ProfileSettings extends Component {
             </form>
         )
     }
+}
+
+function renderProfileAvatar(photoURL){
+    if(photoURL) {
+
+        return (
+            <div className="profilesettings-avatar" style={ getProfileAvatarStyle(photoURL) }>
+            </div>
+        );
+    }
+    else {
+        return (
+            <div className="profilesettings-avatar">
+                <i className="material-icons color-gray">person</i>
+            </div>
+        );
+    }
+}
+
+function getProfileAvatarStyle(photoURL) {
+    return {
+      backgroundImage: 'url(' + photoURL + ')',
+      backgroundSize: 'cover',
+      backgroundRepeat: 'no-repeat',
+      backgroundPosition: 'center',
+      overflow: 'hidden',
+    };
 }
 
 function renderSubmitButton(pristine) {
@@ -46,6 +74,8 @@ ProfileSettings = reduxForm({
 const selector = formValueSelector('profile-settings')
 const mapStateToProps = (state) => {
     return {
+        user: state.auth.user,
+        userData: state.auth.userData,
         profilesettings: {
             name: selector(state, 'profilesettings_name')
         },
