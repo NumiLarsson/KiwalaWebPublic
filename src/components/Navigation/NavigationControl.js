@@ -21,7 +21,7 @@ const NavigationControl = (props) => {
     else {
         return (
              <div className="navigationcontrol">
-                { (props.template !== "home") ? renderLogout() : null }
+                { (props.template !== "home") ? renderLogin() : null }
                 { (props.template !== "home") ? renderRegister() : null }
             </div> 
         )
@@ -50,7 +50,7 @@ function gotoEvent(eventId) {
     browserHistory.push('/event/' + eventId);
 }
 
-function renderLogout(){
+function renderLogin(){
     return (
         <div className="navigationcontrol-item">
              <button className="navigationcontrol-item__button" onClick={goToHome}><i className="material-icons color-dark-blue">person</i><br className="only-on-mobile"/><span className="color-dark-blue">Login</span></button>
