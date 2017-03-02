@@ -20,8 +20,6 @@ path /userAcceptedEvents/{uid}/{eventId} is Boolean {
   validate() { isEvent(eventId) }
 }
 
-
-
 //event
 path /events/{eventId} is Event {}
 
