@@ -50,6 +50,8 @@ export function subscribeToEvent(eventId) {
             dispatch(setCurrentEventModules(event));
         });
         Api.events.subscribeToEventParticipants(eventId, (eventParticipants) => {
+            dispatch(setCurrentEventParticipants(eventParticipants));
+            
             for (let participantId in eventParticipants) {
                 if (eventParticipants.hasOwnProperty(participantId)) {
                     Api.user.subscribeToUserData(participantId, user => {
@@ -58,8 +60,6 @@ export function subscribeToEvent(eventId) {
                     })
                 }
             }
-
-            dispatch(setCurrentEventParticipants(eventParticipants));
         });
     }
 }

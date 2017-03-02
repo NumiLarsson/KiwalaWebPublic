@@ -73,6 +73,8 @@ function renderParticipants(participants) {
 }
 
 function participantDisplayName(id, participants) {
+    console.log('TEEET');
+    console.log(typeof participants[id]);
   if ( typeof participants[id] !== 'object') {
     return id;
   }

@@ -39,9 +39,16 @@ export default (state = initialState, action) => {
 
         case UPDATE_CURRENT_EVENT_PARTICIPANTS_USERS:
 
-            let copy = Object.assign({}, state);
-            copy.participants[action.payload.uid] = action.payload;
-            return copy;
+            let uid = action.payload.uid;
+            return Object.assign({}, state, {
+                participants: Object.assign({}, state.participants, {
+                    [uid]: Object.assign({}, state.participants, {
+                        ...action.payload  
+                    })
+                })
+            });
+
+            
 
         case MAPS_ACTIONS.MAP_IMAGE_URL: 
             return Object.assign({}, state, {
