@@ -4,13 +4,17 @@ import './styles/upcomingeventslist.css';
 import { formatDate, formatLocation } from '../../utils/utils';
 
 const UpcomingEventsList = (props) => {
-    return (
-        <div className="upcomingeventslist">
-            <div className="upcomingeventslist-eventlist">
-                {Object.values(props.eventList).map(renderEventItem)}
+    if (props.eventList) { //This check has not been necessary, but try
+        return (
+            <div className="upcomingeventslist">
+                <div className="upcomingeventslist-eventlist">
+                    {Object.values(props.eventList).map(renderEventItem)}
+                </div>
             </div>
-        </div>
-    )
+        )
+    } else {
+        return (null);
+    }
 }
 
 export default (UpcomingEventsList);

@@ -9,14 +9,16 @@ export const fetchFutureEventsModules 	= createAction(USER_PROFILE_ACTIONS.GET_A
 export function getAcceptedEvents(uid) {
     return dispatch => {
         Api.user.getAcceptedEvents(uid, events => {
-            Object.keys(events).forEach((eventId) => {
-                Api.events.subscribeToEventData(eventId, (eventData) => {
-                    dispatch(fetchFutureEventsData({eventId, eventData}));
+            if (events) {
+                Object.keys(events).forEach((eventId) => {
+                    Api.events.subscribeToEventData(eventId, (eventData) => {
+                        dispatch(fetchFutureEventsData({eventId, eventData}));
+                    })
+                    Api.events.subscribeToEventModules(eventId, (eventModules) => {
+                        dispatch(fetchFutureEventsModules({eventId, eventModules}));
+                    })
                 })
-                Api.events.subscribeToEventModules(eventId, (eventModules) => {
-                    dispatch(fetchFutureEventsModules({eventId, eventModules}));
-                })
-            })
+            }
         })
     }
 }
