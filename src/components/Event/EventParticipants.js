@@ -39,13 +39,13 @@ function renderParticipants(participants) {
         );
     }
 
-    for (let key in participants) {
-        if (participants.hasOwnProperty(key)) {
+    for (let id in participants) {
+        if (participants.hasOwnProperty(id)) {
             listItems.push(
-                <div key={key} className="event-participant">
-                    { renderAvatar(key, participants) }
+                <div key={id} className="event-participant">
+                    { renderAvatar(id, participants) }
                     <div className="event-participant__name"
-                         title={ participantDisplayName(key, participants) }>{ participantDisplayName(key, participants) }</div>
+                         title={ participantDisplayName(id, participants) }>{ participantDisplayName(id, participants) }</div>
                 </div>
             )
         }

@@ -5,6 +5,7 @@ import ProfileSettings from '../components/UserProfile/ProfileSettings'
 import { getAcceptedEvents, updateUserProfile, fetchStandardAvatars, setAvatarSelectorOpen } from '../actions/userprofile'
 import Spinner from '../components/Utils/Spinner';
 import NavigationControl from '../components/Navigation/NavigationControl';
+import CreateEventComponent from '../components/UserInterface/CreateEventComponent';
 import './styles/userprofile.css';
 
 class UserProfile extends Component {
@@ -47,7 +48,10 @@ class UserProfile extends Component {
                 <div className="userprofile">
                     <NavigationControl user={ user } template="userprofile" />
                     <ProfileSettings user={ user } onSubmit={ this.handleUserSettingsSaved } fetchStandardAvatars={this.props.fetchStandardAvatars} setAvatarSelectorOpen={this.props.setAvatarSelectorOpen} />
-                    <UpcomingEventsList user={ user } eventList={ eventList } eventListLoaded={this.props.eventListLoaded} />
+                    <div className="userprofile__items">
+                        <UpcomingEventsList user={ user } eventList={ eventList } eventListLoaded={this.props.eventListLoaded}/>
+                        <CreateEventComponent/>
+                    </div>
                 </div>
             );
         }

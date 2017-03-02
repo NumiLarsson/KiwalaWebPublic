@@ -2,6 +2,7 @@ import EventApi from './EventApi';
 import UserApi from './UserApi';
 import AuthApi from './AuthApi';
 import firebase from 'firebase';
+import FacebookApi from "./FacebookApi";
 
 const FIREBASE_CONFIG = {
     apiKey: "AIzaSyA1tyluu4z1tOi8JluXy1kagarZa6EWLyI",
@@ -17,6 +18,7 @@ class Api {
   events = new EventApi(firebase.database);
   auth = new AuthApi(firebase.auth);
   user = new UserApi(firebase.database);
+  facebook = new FacebookApi(firebase.auth);
 
   constructor() {
     if (!Api.instance) {
