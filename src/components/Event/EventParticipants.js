@@ -27,7 +27,6 @@ const EventParticipants = (props) => {
 function renderParticipants(participants) {
 
   const listItems = [];
-  console.log(participants);
 
   for (let id in participants) {
     if (participants.hasOwnProperty(id)) {
@@ -35,7 +34,7 @@ function renderParticipants(participants) {
       listItems.push(
         <div key={id} className="event-participant">
           { renderAvatar(id) }
-          <div className="event-participant__name" title={ id }>{ participantDisplayName(id, participants) }</div>
+          <div className="event-participant__name" title={ participantDisplayName(id, participants) }>{ participantDisplayName(id, participants) }</div>
         </div>
       )
     }
@@ -65,8 +64,8 @@ function participantDisplayName(id, participants) {
     return id;
   }
 
-  if (participants[id].name !== undefined) {
-    return participants[id].name;
+  if (participants[id].displayName !== undefined) {
+    return participants[id].displayName;
   }
 
   return participants[id].email;

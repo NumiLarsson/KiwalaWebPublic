@@ -6,7 +6,7 @@ path /users/{uid} is User {
 
 type User {
   email: EmailString,
-  name : NameString | Null,
+  displayName : NameString | Null,
   photoURL: UrlString | Null
 }
 
@@ -97,7 +97,7 @@ type UrlString extends String {
 }
 
 type EmailString extends String {
-  validate() {this.matches(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}$/i)}
+  validate() {this.matches(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i)}
 }
 
 //utility functions

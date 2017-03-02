@@ -21,7 +21,7 @@ export default class UserApi {
                 if(!snapshot.val()) {
                     let newUser = {};
                     newUser.email = user.email;
-                    newUser.name = user.displayName || null;
+                    newUser.displayName = user.displayName || null;
                     newUser.photoURL = user.photoURL || null;
                     self.database().ref(`/users/${user.uid}`).set(newUser);
                 }

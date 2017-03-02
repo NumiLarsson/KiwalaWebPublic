@@ -4,9 +4,9 @@
       "$uid": {
         ".validate": "newData.hasChildren(['email'])",
         "email": {
-          ".validate": "newData.isString() && newData.val().matches(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\\\.[A-Z]{2,4}$/i)"
+          ".validate": "newData.isString() && newData.val().matches(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}$/i)"
         },
-        "name": {
+        "displayName": {
           ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length < 100"
         },
         "photoURL": {
