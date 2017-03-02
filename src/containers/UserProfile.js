@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import UpcomingEventsList from '../components/UserInterface/UpcomingEventsList'
+import UpcomingEventsList from '../components/UserProfile/UpcomingEventsList'
+import ProfileSettings from '../components/UserProfile/ProfileSettings'
 import { getAcceptedEvents } from '../actions/userprofile'
 import Spinner from '../components/Utils/Spinner';
 import NavigationControl from '../components/Navigation/NavigationControl';
@@ -21,6 +22,7 @@ class UserProfile extends Component {
             return(
                 <div className="userprofile">
                     <NavigationControl user={ user } template="userprofile" />
+                    <ProfileSettings user={ user } />
                     <UpcomingEventsList user={ user } eventList={ eventList }/>
                 </div>
             );
