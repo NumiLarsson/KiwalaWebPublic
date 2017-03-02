@@ -5,11 +5,26 @@ import ProfileSettings from '../components/UserProfile/ProfileSettings'
 import { getAcceptedEvents } from '../actions/userprofile'
 import Spinner from '../components/Utils/Spinner';
 import NavigationControl from '../components/Navigation/NavigationControl';
+import './styles/userprofile.css';
 
 class UserProfile extends Component {
 
+    constructor() {
+        super();
+        this.eventListFetched = false;
+        this.loadEventList = this.loadEventList.bind(this);
+    }
+
     componentWillMount() {
-        this.props.getAcceptedEvents(this.props.user.uid);
+    }
+
+    loadEventList() {
+        // Only fetch events if there is an user object and we haven't already fetched it.
+        // One guard is if it's fetched in reducer and another is for this specific module
+        if(this.props.user && !this.props.eventListLoaded && !this.eventListFetched){
+            this.eventListFetched = true;
+            this.props.getAcceptedEvents(this.props.user.uid);
+        }
     }
 
     render() {
@@ -18,12 +33,17 @@ class UserProfile extends Component {
             return (
                 <Spinner />
             )
+        } else if (!this.props.eventListLoaded) {
+            // User is loaded an we will trigger the event load
+            this.loadEventList();
+            return (
+                <Spinner />
+            )
         } else {
             return(
                 <div className="userprofile">
                     <NavigationControl user={ user } template="userprofile" />
                     <ProfileSettings user={ user } />
-                    <h2>Eventlist</h2>
                     <UpcomingEventsList user={ user } eventList={ eventList }/>
                 </div>
             );
@@ -35,7 +55,8 @@ class UserProfile extends Component {
 const mapStateToProps = (state) => {
     return {
         user: state.auth.user,
-        eventList: state.userprofile.eventList
+        eventList: state.userprofile.eventList,
+        eventListLoaded: state.userprofile.eventListLoaded
     }
 }
 

@@ -28,7 +28,7 @@ const routes = (
         <IndexRoute component={SplashScreen} />
         <Route path="/event/:eventid" component={EventViewer} />
         <Route path="/login" component={Login} />
-        <Route path="/user" component={UserProfile} onEnter={requireAuth} />
+        <Route path="/user" component={UserProfile}  />
         <Route path="eventsettings/:eventid" component={EventEditor} />
     </Route>
 );
