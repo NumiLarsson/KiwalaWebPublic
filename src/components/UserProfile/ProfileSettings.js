@@ -4,22 +4,24 @@ import { Field, reduxForm, formValueSelector } from 'redux-form';
 import IconButton from '../Utils/IconButtonField';
 import './styles/profilesettings.css';
 
-
 class ProfileSettings extends Component {
     
     render() {
+        const { handleSubmit } = this.props;
         return (
-            <div className="profilesettings">
-                <h2>Profile settings</h2>
-                <div className="profilesettings-window">
-                    <Field className="profilesettings__input" placeholder="Name" name="profilesettings_name" component="input" />
-                    {renderSubmitButton(this.props.pristine)}
+            <form onSubmit={handleSubmit}>
+                <div className="profilesettings">
+                    <h2>Profile settings</h2>
+                    <div className="profilesettings-window">
+                        Name:
+                        <Field className="profilesettings__input" placeholder="Type here.." name="profilesettings_name" component="input" />
+                        {renderSubmitButton(this.props.pristine)}
+                    </div>
                 </div>
-            </div>
+            </form>
         )
     }
 }
-
 
 function renderSubmitButton(pristine) {
     if(pristine) {

@@ -5,6 +5,7 @@ import { USER_PROFILE_ACTIONS } from './actionTypes'; //get action types
 //Standard actions.
 export const fetchFutureEventsData 		= createAction(USER_PROFILE_ACTIONS.GET_ACCEPTED_EVENTS_DATA);
 export const fetchFutureEventsModules 	= createAction(USER_PROFILE_ACTIONS.GET_ACCEPTED_EVENTS_MODULES);
+export const userProfileUpdated         = createAction(USER_PROFILE_ACTIONS.USER_PROFILE_UPDATED);
 
 export function getAcceptedEvents(uid) {
     return dispatch => {
@@ -19,6 +20,33 @@ export function getAcceptedEvents(uid) {
                     })
                 })
             }
+        })
+    }
+}
+
+/**
+ * Update user data.
+ * @param {string} eventId - The id of the user.
+ * @param {object} dataUpdates - Object mapping the name of the data field to the new value.
+ * @example updateUserProfile(2. {displayName: 'NewName Lool'})
+*/
+export function updateUserProfile(userId, dataUpdates) {
+    return dispatch => {
+        // User object in firebase
+        Api.auth.updateUserProfile(Api.auth.getCurrentUser(), dataUpdates)
+        .then(res => {
+            // User object in DB
+            Api.user.updateUserProfile(userId, dataUpdates)
+            .then(res => {
+                // User object in DB
+                dispatch(userProfileUpdated(res));
+            })
+            .catch(err => {
+                console.log(err);
+            })
+        })
+        .catch(err => {
+            console.log(err);
         })
     }
 }

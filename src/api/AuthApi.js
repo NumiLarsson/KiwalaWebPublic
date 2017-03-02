@@ -76,6 +76,25 @@ export default class AuthApi {
       })
     }
 
+/**
+ * Update an user.
+ * @param {string} email - The email of the user.
+ * @param {string} password - The password of the user.
+ * @returns A Promise which resolves to a Firebase.Auth user object and rejects with an error message.
+ */
+  updateUserProfile(user, updateData) {
+      let self = this;
+      return new Promise((resolve, reject) => {
+          user.updateProfile(updateData).then(function() {
+              resolve(user);
+          }, function(error) {
+              reject(error);
+          });
+      })
+    }
+
+
+
   /*
     Register to listen for auth changes.
     Returns a function which can be used to unregister the listener.
