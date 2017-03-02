@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Api from '../../api/Api';
-import { setEmail, setPassword, setPassword2, 
+import { setName, setEmail, setPassword, setPassword2, 
     toggleRegister, logout, finishLogin, loginScreenError, resetLoginScreenError} from '../../actions/login';
 import './styles/loginscreen.css';
 
@@ -9,6 +9,7 @@ class Login extends Component {
     
     constructor() {
         super();
+        this.setName = this.setName.bind(this);
         this.setEmail = this.setEmail.bind(this);
         this.setPassword = this.setPassword.bind(this);
         this.setPassword2 = this.setPassword2.bind(this);
@@ -18,6 +19,10 @@ class Login extends Component {
         this.logout = this.logout.bind(this);
         this.registerWithEmail = this.registerWithEmail.bind(this);
         this.validate = this.validate.bind(this);
+    }
+
+    setName(event) {
+        this.props.setName(event.target.value);
     }
 
     setEmail(event) {
@@ -56,7 +61,7 @@ class Login extends Component {
         let {passed, message} = this.validate();
         
         if (passed) {
-            Api.auth.createUser(this.props.email, this.props.password)
+            Api.auth.createUser(this.props.name, this.props.email, this.props.password)
             .then(() => {
                 this.props.finishLogin();
             })
@@ -76,6 +81,9 @@ class Login extends Component {
             return {passed: false, message};
         } else if(this.props.password !== this.props.password2) {
             message = 'The passwords are not equal';
+            return {passed: false, message};
+        } else if(this.props.name.length < 3) {
+            message = 'The name is too short, minimum 3 characters';
             return {passed: false, message};
         } else {
             return {passed: true, message};
@@ -117,6 +125,7 @@ class Login extends Component {
                             <input className="login-screen__input login-screen--separate" required type="email" placeholder="Email address" onChange={this.setEmail}/>
                             <input className="login-screen__input login-screen--separate" required type="password" placeholder="Password" onChange={this.setPassword}/>
                             {this.props.register && <input className="login-screen__input login-screen--separate" required type="password" placeholder="Password again" onChange={this.setPassword2}/>}
+                            {this.props.register && <input className="login-screen__input login-screen--separate" required type="text" placeholder="Name" onChange={this.setName}/>}
                             <button 
                                 className="login-screen__button login-screen--separate" 
                                 type="submit">
@@ -144,6 +153,7 @@ class Login extends Component {
 const mapStateToProps = (state) => {
     return {
         user: state.auth.user,
+        name: state.login.name,
         email: state.login.email,
         password: state.login.password,
         password2: state.login.password2,
@@ -157,6 +167,7 @@ const mapStateToProps = (state) => {
 //access them through the props property of the Example object. 
 const mapDispatchToProps = {
     logout,
+    setName,
     setEmail,
     setPassword,
     setPassword2,

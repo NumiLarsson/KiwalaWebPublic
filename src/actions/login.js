@@ -15,6 +15,7 @@ import { push } from 'react-router-redux';
 
 //Constants identifying actions.
 export const LOGIN_ACTIONS = {
+    SET_NAME : 'SET_NAME',
     SET_EMAIL : 'SET_EMAIL',
     SET_PASSWORD : 'SET_PASSWORD',
     SET_PASSWORD2: 'SET_PASSWORD2',
@@ -25,6 +26,7 @@ export const LOGIN_ACTIONS = {
 };
 
 //Standard actions.
+export const setName = createAction(LOGIN_ACTIONS.SET_NAME);
 export const setEmail = createAction(LOGIN_ACTIONS.SET_EMAIL);
 export const setPassword = createAction(LOGIN_ACTIONS.SET_PASSWORD);
 export const setPassword2 = createAction(LOGIN_ACTIONS.SET_PASSWORD2);

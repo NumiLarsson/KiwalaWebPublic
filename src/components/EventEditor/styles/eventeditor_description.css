@@ -41,6 +41,7 @@
 	font-size: 1.2em;
 
 	width: 100%;
+	min-height: 130px;
 	max-height: 250px;
 	resize: vertical;
 	box-sizing: border-box;

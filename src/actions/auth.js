@@ -28,6 +28,8 @@ export function listenForAuthChanges() {
             (user) => {
                 dispatch(userLoggedIn(user));
                 Api.user.createUserIfNotExists(user);
+                let { email, displayName, photoURL } = user; 
+                Api.user.updateUserProfile(user, { email, displayName, photoURL });
             }, //Success
             () => {
                 dispatch(userLoggedOut());
