@@ -19,7 +19,7 @@ class UserProfile extends Component {
     loadEventList() {
         // Only fetch events if there is an user object and we haven't already fetched it.
         // One guard is if it's fetched in reducer and another is for this specific module
-        if(this.props.user && !this.props.eventListLoaded && !this.eventListFetched){
+        if(this.props.user && !this.eventListFetched){
             this.eventListFetched = true;
             this.props.getAcceptedEvents(this.props.user.uid);
         }
@@ -34,18 +34,14 @@ class UserProfile extends Component {
     }
 
     render() {
-        let { user, eventList } = this.props;
-        if (!user || !eventList) {
-            return (
-                <Spinner />
-            )
-        } else if (!this.props.eventListLoaded) {
-            // User is loaded an we will trigger the event load
-            this.loadEventList();
+        let { user, userData, eventList } = this.props;
+        if (!user || !userData || !eventList) {
             return (
                 <Spinner />
             )
         } else {
+            // User is loaded an we will trigger the event load
+            this.loadEventList();
             return(
                 <div className="userprofile">
                     <NavigationControl user={ user } template="userprofile" />
@@ -61,8 +57,8 @@ class UserProfile extends Component {
 const mapStateToProps = (state) => {
     return {
         user: state.auth.user,
-        eventList: state.userprofile.eventList,
-        eventListLoaded: state.userprofile.eventListLoaded
+        userData: state.auth.userData,
+        eventList: state.userprofile.eventList
     }
 }
 

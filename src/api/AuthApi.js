@@ -83,7 +83,6 @@ export default class AuthApi {
  * @returns A Promise which resolves to a Firebase.Auth user object and rejects with an error message.
  */
   updateUserProfile(user, updateData) {
-      let self = this;
       return new Promise((resolve, reject) => {
           user.updateProfile(updateData).then(function() {
               resolve(user);

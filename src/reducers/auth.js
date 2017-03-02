@@ -1,8 +1,9 @@
-import {AUTH_ACTIONS} from '../actions/auth';
-const { USER_LOGGED_IN, USER_LOGGED_OUT } = AUTH_ACTIONS;
+import {AUTH_ACTIONS, USER_PROFILE_ACTIONS} from '../actions/auth';
+const { USER_LOGGED_IN, USER_LOGGED_OUT, SET_CURRENT_USER_DATA } = AUTH_ACTIONS;
 
 const initialState = {
-    user: null
+    user: null,
+    userData: null
 }
 
 export default (state = initialState, action) => {
@@ -17,7 +18,13 @@ export default (state = initialState, action) => {
         case USER_LOGGED_OUT:
 
             return Object.assign({}, state, {
-                user: null
+                user: null,
+                userData: null
+            });
+
+        case SET_CURRENT_USER_DATA:
+            return Object.assign({}, state, {
+                userData: action.payload
             });
 
         default:

@@ -9,7 +9,7 @@ class ProfileSettings extends Component {
     render() {
         const { handleSubmit } = this.props;
         return (
-            <form onSubmit={handleSubmit}>
+            <form className="profilesettings__form" onSubmit={handleSubmit}>
                 <div className="profilesettings">
                     <h2>Profile settings</h2>
                     <div className="profilesettings-window">
@@ -47,12 +47,10 @@ const selector = formValueSelector('profile-settings')
 const mapStateToProps = (state) => {
     return {
         profilesettings: {
-            email: selector(state, 'profilesettings_email'),
             name: selector(state, 'profilesettings_name')
         },
         initialValues : {
-            profilesettings_email: state.auth.user.email,
-            profilesettings_name: state.auth.user.displayName
+            profilesettings_name: state.auth.userData.displayName
         }
     }
 }

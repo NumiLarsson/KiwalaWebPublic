@@ -33,17 +33,12 @@ export function getAcceptedEvents(uid) {
 export function updateUserProfile(userId, dataUpdates) {
     return dispatch => {
         // User object in firebase
-        Api.auth.updateUserProfile(Api.auth.getCurrentUser(), dataUpdates)
+        //Api.auth.updateUserProfile(Api.auth.getCurrentUser(), dataUpdates)
+        // User object in DB
+        Api.user.updateUserProfile(userId, dataUpdates)
         .then(res => {
             // User object in DB
-            Api.user.updateUserProfile(userId, dataUpdates)
-            .then(res => {
-                // User object in DB
-                dispatch(userProfileUpdated(res));
-            })
-            .catch(err => {
-                console.log(err);
-            })
+            dispatch(userProfileUpdated(res));
         })
         .catch(err => {
             console.log(err);

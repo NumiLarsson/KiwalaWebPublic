@@ -16,25 +16,41 @@ import Api from '../api/Api';
 export const AUTH_ACTIONS = {
     USER_LOGGED_IN : 'USER_LOGGED_IN',
     USER_LOGGED_OUT : 'USER_LOGGED_OUT',
+    SET_CURRENT_USER_DATA : 'SET_CURRENT_USER_DATA'
 };
 
 //Standard actions.
-export const userLoggedIn = createAction(AUTH_ACTIONS.USER_LOGGED_IN);
-export const userLoggedOut = createAction(AUTH_ACTIONS.USER_LOGGED_OUT);
+export const userLoggedIn           = createAction(AUTH_ACTIONS.USER_LOGGED_IN);
+export const userLoggedOut          = createAction(AUTH_ACTIONS.USER_LOGGED_OUT);
+export const setCurrentUserData     = createAction(AUTH_ACTIONS.SET_CURRENT_USER_DATA);
 
-export function listenForAuthChanges() {
+export function listenForAuthChangesAndSubscribeToUser() {
     return (dispatch, getState) => {
         Api.auth.listenForAuthChanges(
             (user) => {
                 dispatch(userLoggedIn(user));
                 Api.user.createUserIfNotExists(user);
-                let { email, displayName, photoURL } = user; 
-                // DB
-                Api.user.updateUserProfile(user.uid, { email, displayName, photoURL });
+
+                Api.user.clearSubscriptions();
+
+                Api.user.subscribeToUserData(user.uid, (user) => {
+                    dispatch(setCurrentUserData(user));
+                });
+
             }, //Success
             () => {
                 dispatch(userLoggedOut());
             }
         );
     };
+}
+
+export function subscribeToUser(userId){
+    return dispatch => {
+        Api.user.clearSubscriptions();
+
+        Api.user.subscribeToUserData(userId, (user) => {
+            dispatch(setCurrentUserData(user));
+        });
+    }
 }
