@@ -33,7 +33,7 @@ function renderParticipants(participants) {
 
       listItems.push(
         <div key={id} className="event-participant">
-          { renderAvatar(id) }
+          { renderAvatar(id, participants) }
           <div className="event-participant__name" title={ participantDisplayName(id, participants) }>{ participantDisplayName(id, participants) }</div>
         </div>
       )
@@ -42,10 +42,10 @@ function renderParticipants(participants) {
   return listItems;
 }
 
-function renderAvatar(participant) {
-  if (!participant) {
+function renderAvatar(id, participants) {
+  if (participants[id].photoURL) {
     return (
-      <div className="event-participant__avatar"></div>
+      <div className="event-participant__avatar" style={getProfileAvatarStyle(participants[id].photoURL)}></div>
     );
   }
   else {
@@ -57,6 +57,16 @@ function renderAvatar(participant) {
       </div>
     );
   }
+}
+
+function getProfileAvatarStyle(photoURL) {
+    return {
+      backgroundImage: 'url(' + photoURL + ')',
+      backgroundSize: 'cover',
+      backgroundRepeat: 'no-repeat',
+      backgroundPosition: 'center',
+      overflow: 'hidden',
+    };
 }
 
 function participantDisplayName(id, participants) {

@@ -63,7 +63,7 @@ function renderParticipants(participants) {
         if (participants.hasOwnProperty(id)) {
             listItems.push(
                 <div key={id} className="eventeditor-participant">
-                    { renderAvatar(id) }
+                    { renderAvatar(id, participants) }
                 <div className="eventeditor-participant__name" title={ participantDisplayName(id, participants) }>{ participantDisplayName(id, participants) }</div>
                 </div>
             )
@@ -84,21 +84,31 @@ function participantDisplayName(id, participants) {
   return participants[id].email;
 }
 
-function renderAvatar(participant) {
-    if(!participant) {
-        return (
-            <div className="eventeditor-participant__avatar"></div>
-        );
-    }
-    else {
-        return (
-            <div className="eventeditor-participant__avatar">
-                <div className="eventeditor-participant__default__avatar">
-                    <i className="material-icons">person</i>
-                </div>
-            </div>
-        );
-    }
+function renderAvatar(id, participants) {
+  if (participants[id].photoURL) {
+    return (
+      <div className="event-participant__avatar" style={getProfileAvatarStyle(participants[id].photoURL)}></div>
+    );
+  }
+  else {
+    return (
+      <div className="event-participant__avatar">
+        <div className="event-participant__default__avatar">
+          <i className="material-icons">person</i>
+        </div>
+      </div>
+    );
+  }
+}
+
+function getProfileAvatarStyle(photoURL) {
+    return {
+      backgroundImage: 'url(' + photoURL + ')',
+      backgroundSize: 'cover',
+      backgroundRepeat: 'no-repeat',
+      backgroundPosition: 'center',
+      overflow: 'hidden',
+    };
 }
 
 //Maps the state in our store to the props property of the Example object.
