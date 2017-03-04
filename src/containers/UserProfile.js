@@ -28,7 +28,8 @@ class UserProfile extends Component {
     handleUserSettingsSaved(values) {
         // Split the values to data
         const userData = {
-            displayName: values.profilesettings_name
+            displayName: values.profilesettings_name,
+            photoURL: values.profilesettings_avatar
         };
         this.props.updateUserProfile(this.props.user.uid, userData);
     }

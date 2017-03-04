@@ -1,4 +1,4 @@
-import {AUTH_ACTIONS, USER_PROFILE_ACTIONS} from '../actions/auth';
+import {AUTH_ACTIONS} from '../actions/auth';
 const { USER_LOGGED_IN, USER_LOGGED_OUT, SET_CURRENT_USER_DATA } = AUTH_ACTIONS;
 
 const initialState = {

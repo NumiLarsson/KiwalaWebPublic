@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Field, reduxForm, formValueSelector } from 'redux-form';
+import { Field, reduxForm, formValueSelector, change } from 'redux-form';
 import IconButton from '../Utils/IconButtonField';
 import UserAvatarSelector from './UserAvatarSelector';
 import './styles/profilesettings.css';
@@ -25,8 +25,10 @@ class ProfileSettings extends Component {
         this.props.setAvatarSelectorOpen(false);
     }
 
-    setNewAvatar() {
+    setNewAvatar(avatar) {
         //Set new avatar
+        this.props.changeFieldValue('profilesettings_avatar', avatar);
+        //Close selector
         this.props.setAvatarSelectorOpen(false);
     }
     
@@ -37,7 +39,7 @@ class ProfileSettings extends Component {
                 <div className="profilesettings">
                     <h1 className="userprofile__header">Profile settings</h1>
                     <div className="profilesettings-window">
-                        {renderProfileAvatar(this.props.userData.photoURL, this.openAvatarSelector)}
+                        {renderProfileAvatar(this.props.profilesettings.photoURL, this.openAvatarSelector)}
                         { (this.props.avatarSelectorOpen) ?
                             <UserAvatarSelector avatarList={this.props.standardAvatars} handleChosenAvatar={this.setNewAvatar} handleClose={this.closeAvatarSelector} />
                             :
@@ -68,7 +70,9 @@ function renderProfileAvatar(photoURL, onClickFunction){
         return (
             <div className="profilesettings-avatar" onClick={onClickFunction} >
                 <i className="material-icons color-gray no_avatar">person</i>
-                <i className="material-icons color-gray edit_avatar">edit</i>
+                <div className="profilesettings-avatar__edit">
+                    <i className="material-icons color-gray edit_avatar">edit</i>
+                </div>
             </div>
         );
     }
@@ -112,17 +116,25 @@ const mapStateToProps = (state) => {
         standardAvatars: state.userprofile.standardAvatars,
         avatarSelectorOpen: state.userprofile.avatarSelectorOpen,
         profilesettings: {
-            name: selector(state, 'profilesettings_name')
+            name: selector(state, 'profilesettings_name'),
+            photoURL: selector(state, 'profilesettings_avatar')
         },
         initialValues : {
-            profilesettings_name: state.auth.userData.displayName
+            profilesettings_name: state.auth.userData.displayName,
+            profilesettings_avatar : state.auth.userData.photoURL
         }
     }
 }
 
 //Wrapping the action creators in a dispatch call and allowing us to 
 //access them through the props property of the Example object. 
-const mapDispatchToProps = {
+const mapDispatchToProps = function(dispatch) {
+    return {
+        // This will be passed as a property to the presentational component
+        changeFieldValue: function(field, value) {
+            dispatch(change('profile-settings', field, value))
+        }
+    }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileSettings);
