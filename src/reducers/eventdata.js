@@ -32,18 +32,19 @@ export default (state = initialState, action) => {
             });
 
         case SET_CURRENT_EVENT_PARTICIPANTS:
-            let newParticipants = {};
 
-            for(var k in state.participants){
+            // Filter out all the participants in state that's not in the payload!
+            // in order to remove unattenting participants
+            let newParticipants = {};
+            for(var k in action.payload){
                 console.log(k);
-                console.log(state.participants[k]);
-                newParticipants[k] = state.participants[k];
+                if(state.participants && state.participants[k])
+                    newParticipants[k] = state.participants[k];
             }
 
-            console.log(newParticipants);
-            console.log(action.payload);
-
-            return state;
+            return Object.assign({}, state, {
+                participants: newParticipants
+            });
 
         case UPDATE_CURRENT_EVENT_PARTICIPANTS_USERS:
 
