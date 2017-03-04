@@ -6,6 +6,7 @@ import { USER_PROFILE_ACTIONS } from './actionTypes'; //get action types
 export const fetchFutureEventsData 		= createAction(USER_PROFILE_ACTIONS.GET_ACCEPTED_EVENTS_DATA);
 export const fetchFutureEventsModules 	= createAction(USER_PROFILE_ACTIONS.GET_ACCEPTED_EVENTS_MODULES);
 export const userProfileUpdated         = createAction(USER_PROFILE_ACTIONS.USER_PROFILE_UPDATED);
+export const standardAvatarsRecieved    = createAction(USER_PROFILE_ACTIONS.STANDARD_AVATARS_RECIEVED);
 
 export function getAcceptedEvents(uid) {
     return dispatch => {
@@ -39,6 +40,25 @@ export function updateUserProfile(userId, dataUpdates) {
         .then(res => {
             // User object in DB
             dispatch(userProfileUpdated(res));
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    }
+}
+
+/**
+ * Fetches the standard avatars
+*/
+export function fetchStandardAvatars() {
+    return dispatch => {
+        // User object in firebase
+        //Api.auth.updateUserProfile(Api.auth.getCurrentUser(), dataUpdates)
+        // User object in DB
+        Api.user.fetchStandardAvatars()
+        .then(res => {
+            // User object in DB
+            dispatch(standardAvatarsRecieved(res));
         })
         .catch(err => {
             console.log(err);

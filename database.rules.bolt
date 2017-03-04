@@ -79,6 +79,15 @@ type DescriptionModule extends EventModule {}
 
 type ParticipantsModule extends EventModule {}
 
+//standardAvatars
+path /standardAvatars is StandardAvatar {
+  read() {true}
+  write() {true}
+}
+
+type StandardAvatar {
+  id: UrlString}
+
 
 //utility types
 

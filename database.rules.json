@@ -121,6 +121,17 @@
         ".read": "true",
         ".write": "true"
       }
+    },
+    "standardAvatars": {
+      ".validate": "newData.hasChildren(['id'])",
+      "id": {
+        ".validate": "newData.isString() && newData.val().length > 0"
+      },
+      "$other": {
+        ".validate": "false"
+      },
+      ".read": "true",
+      ".write": "true"
     }
   }
 }

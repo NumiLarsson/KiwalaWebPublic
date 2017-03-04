@@ -82,6 +82,28 @@ export default class UserApi {
     }
 
     /**
+     * Fetches the standard avatars
+     */    
+    fetchStandardAvatars(callback) {
+        let self = this;
+        return new Promise((resolve, reject) =>{
+            self.database().ref(`/standardAvatars/`).once('value')
+            .then(snapshot => {
+                let standardAvatars = snapshot.val();
+
+                if(standardAvatars) {
+                    resolve(standardAvatars);
+                } else {
+                    reject('No standard avatars found');
+                }
+            })
+            .catch(err => {
+                reject(err);
+            })
+        })
+    }
+
+    /**
      * Subscribe to data about the user.
      * @param {string} uid - ID of the user.
      * @param {function} cb - Function to call when the data changes.

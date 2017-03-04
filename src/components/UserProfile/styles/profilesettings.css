@@ -47,21 +47,56 @@
 }
 
 .profilesettings-avatar {
-	width: 70px;
-    height: 70px;
+	width: 100px;
+    height: 100px;
     margin: 10px 10px 20px 10px;
 
     background: #eee;
-    border-radius: 70px;
+    border-radius: 50px;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
+    cursor: pointer;
+
     overflow: hidden;
 }
-.profilesettings-avatar > i {
+.profilesettings-avatar > i.no_avatar {
 	font-size: 2em;
+}
+.profilesettings-avatar > .profilesettings-avatar__edit > i.edit_avatar {
+    font-size: 2em;
+    color: #fff;
+    display: none;
+}
+.profilesettings-avatar > .profilesettings-avatar__edit {
+    width: 100%;
+    height: 100%;
+    background-color: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profilesettings-avatar:hover {
+    
+}
+.profilesettings-avatar:hover > i.no_avatar {
+    display: none;
+}
+.profilesettings-avatar:hover > .profilesettings-avatar__edit {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.profilesettings-avatar:hover > .profilesettings-avatar__edit > i.edit_avatar {
+    font-size: 2em;
+    color: #fff;
+    display: block;
 }
 
 /* Desktop */
