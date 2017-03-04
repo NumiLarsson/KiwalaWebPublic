@@ -59,9 +59,15 @@
 
 .event-participant__default__avatar {
 	color: #757575;
+	width: 100%;
+	height: 100%;
 
-	margin-top: 1px;
-    margin-left: 1px;
+	display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.event-participant__default__avatar > i {
+	font-size: 16px;
 }
 
 .event-participant__name {
