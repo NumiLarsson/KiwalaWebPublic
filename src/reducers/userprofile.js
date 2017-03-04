@@ -3,7 +3,8 @@ import { USER_PROFILE_ACTIONS } from '../actions/actionTypes';
 const initialState = {
     eventList: [],
     eventListLoaded: false,
-    standardAvatars : null
+    standardAvatars : null,
+    avatarSelectorOpen: false
 }
 
 export default (state = initialState, action) => {
@@ -18,6 +19,11 @@ export default (state = initialState, action) => {
         case USER_PROFILE_ACTIONS.STANDARD_AVATARS_RECIEVED:
             return Object.assign({}, state, {
                 standardAvatars: action.payload
+            });
+
+        case USER_PROFILE_ACTIONS.TOGGLE_AVATAR_SELECTOR:
+            return Object.assign({}, state, {
+                avatarSelectorOpen: action.payload
             });
 
         default:

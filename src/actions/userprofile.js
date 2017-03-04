@@ -7,6 +7,7 @@ export const fetchFutureEventsData 		= createAction(USER_PROFILE_ACTIONS.GET_ACC
 export const fetchFutureEventsModules 	= createAction(USER_PROFILE_ACTIONS.GET_ACCEPTED_EVENTS_MODULES);
 export const userProfileUpdated         = createAction(USER_PROFILE_ACTIONS.USER_PROFILE_UPDATED);
 export const standardAvatarsRecieved    = createAction(USER_PROFILE_ACTIONS.STANDARD_AVATARS_RECIEVED);
+export const setAvatarSelectorOpen      = createAction(USER_PROFILE_ACTIONS.TOGGLE_AVATAR_SELECTOR);
 
 export function getAcceptedEvents(uid) {
     return dispatch => {

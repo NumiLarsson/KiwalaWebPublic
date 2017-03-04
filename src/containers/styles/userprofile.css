@@ -8,7 +8,7 @@
 	align-items: center;
 }
 
-.userprofile h1 {
+.userprofile h1.userprofile__header {
     color: #757575;
     font-size: 1.5em;
 }

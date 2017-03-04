@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import UpcomingEventsList from '../components/UserProfile/UpcomingEventsList'
 import ProfileSettings from '../components/UserProfile/ProfileSettings'
-import { getAcceptedEvents, updateUserProfile, fetchStandardAvatars } from '../actions/userprofile'
+import { getAcceptedEvents, updateUserProfile, fetchStandardAvatars, setAvatarSelectorOpen } from '../actions/userprofile'
 import Spinner from '../components/Utils/Spinner';
 import NavigationControl from '../components/Navigation/NavigationControl';
 import './styles/userprofile.css';
@@ -45,7 +45,7 @@ class UserProfile extends Component {
             return(
                 <div className="userprofile">
                     <NavigationControl user={ user } template="userprofile" />
-                    <ProfileSettings user={ user } onSubmit={ this.handleUserSettingsSaved } fetchStandardAvatars={this.props.fetchStandardAvatars} />
+                    <ProfileSettings user={ user } onSubmit={ this.handleUserSettingsSaved } fetchStandardAvatars={this.props.fetchStandardAvatars} setAvatarSelectorOpen={this.props.setAvatarSelectorOpen} />
                     <UpcomingEventsList user={ user } eventList={ eventList } eventListLoaded={this.props.eventListLoaded} />
                 </div>
             );
@@ -66,7 +66,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
     getAcceptedEvents,
     updateUserProfile,
-    fetchStandardAvatars
+    fetchStandardAvatars,
+    setAvatarSelectorOpen
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserProfile);

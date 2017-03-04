@@ -2,26 +2,32 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 import IconButton from '../Utils/IconButtonField';
+import UserAvatarSelector from './UserAvatarSelector';
 import './styles/profilesettings.css';
 
 class ProfileSettings extends Component {
 
     constructor() {
         super();
-        this.avatarSelectorOpen         = false;
         this.openAvatarSelector         = this.openAvatarSelector.bind(this);
         this.closeAvatarSelector        = this.closeAvatarSelector.bind(this);
+        this.setNewAvatar               = this.setNewAvatar.bind(this);
     }
 
     openAvatarSelector() {
+        this.props.setAvatarSelectorOpen(true);
         if(!this.props.standardAvatars) {
             this.props.fetchStandardAvatars();
         }
-        this.avatarSelectorOpen = true;
     }
 
-    closeAvatarSelector() {
-        this.avatarSelectorOpen = false;
+    closeAvatarSelector(event) {
+        this.props.setAvatarSelectorOpen(false);
+    }
+
+    setNewAvatar() {
+        //Set new avatar
+        this.props.setAvatarSelectorOpen(false);
     }
     
     render() {
@@ -29,9 +35,14 @@ class ProfileSettings extends Component {
         return (
             <form className="profilesettings__form" onSubmit={handleSubmit}>
                 <div className="profilesettings">
-                    <h1>Profile settings</h1>
+                    <h1 className="userprofile__header">Profile settings</h1>
                     <div className="profilesettings-window">
                         {renderProfileAvatar(this.props.userData.photoURL, this.openAvatarSelector)}
+                        { (this.props.avatarSelectorOpen) ?
+                            <UserAvatarSelector avatarList={this.props.standardAvatars} handleChosenAvatar={this.setNewAvatar} handleClose={this.closeAvatarSelector} />
+                            :
+                            null
+                        }
                         Name:
                         <Field className="profilesettings__input" placeholder="Type here.." name="profilesettings_name" component="input" />
                         {renderSubmitButton(this.props.pristine)}
@@ -99,6 +110,7 @@ const mapStateToProps = (state) => {
         user: state.auth.user,
         userData: state.auth.userData,
         standardAvatars: state.userprofile.standardAvatars,
+        avatarSelectorOpen: state.userprofile.avatarSelectorOpen,
         profilesettings: {
             name: selector(state, 'profilesettings_name')
         },
