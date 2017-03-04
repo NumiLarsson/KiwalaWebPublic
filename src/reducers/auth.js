@@ -19,11 +19,7 @@ export default (state = initialState, action) => {
 
             return Object.assign({}, state, {
                 user: null,
-                userData: {
-                    displayName: "",
-                    email: "",
-                    photoURL: null
-                }
+                userData: null
             });
 
         case SET_CURRENT_USER_DATA:

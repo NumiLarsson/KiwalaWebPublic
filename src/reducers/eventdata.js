@@ -46,9 +46,7 @@ export default (state = initialState, action) => {
                         ...action.payload  
                     })
                 })
-            });
-
-            
+            });            
 
         case MAPS_ACTIONS.MAP_IMAGE_URL: 
             return Object.assign({}, state, {
