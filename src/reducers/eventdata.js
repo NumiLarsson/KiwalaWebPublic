@@ -5,7 +5,7 @@ const { SET_CURRENT_EVENT, SET_CURRENT_EVENT_DATA, SET_CURRENT_EVENT_PARTICIPANT
 const initialState = {
     id: null,
     name: null,
-    participants: [],
+    participants: null,
     loaded: null, 
     map: null,
     description: "",
@@ -32,19 +32,25 @@ export default (state = initialState, action) => {
             });
 
         case SET_CURRENT_EVENT_PARTICIPANTS:
+            let newParticipants = {};
+
+            for(var k in state.participants){
+                console.log(k);
+                console.log(state.participants[k]);
+                newParticipants[k] = state.participants[k];
+            }
+
+            console.log(newParticipants);
             console.log(action.payload);
-            return Object.assign({}, state, {
-                participants: [state.participants].filter(removeIfNotInList.bind(this, action.payload))
-            });
+
+            return state;
 
         case UPDATE_CURRENT_EVENT_PARTICIPANTS_USERS:
 
             let uid = action.payload.uid;
             return Object.assign({}, state, {
                 participants: Object.assign({}, state.participants, {
-                    [uid]: Object.assign({}, state.participants, {
-                        ...action.payload  
-                    })
+                    [uid]: action.payload
                 })
             });            
 
@@ -55,11 +61,4 @@ export default (state = initialState, action) => {
         default:
             return state;
     }
-}
-
-function removeIfNotInList(participant, checklist) {
-    console.log('print');
-    console.log(participant);
-    return participant;
-    //return (checklist[participant])participant;
 }

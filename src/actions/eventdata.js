@@ -51,8 +51,7 @@ export function subscribeToEvent(eventId) {
         });
         Api.events.subscribeToEventParticipants(eventId, (eventParticipants) => {
             dispatch(setCurrentEventParticipants(eventParticipants));
-            console.log(eventParticipants);
-            
+
             // Clear subs before applying more
             Api.user.clearSubscriptions();
             for (let participantId in eventParticipants) {
