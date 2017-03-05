@@ -1,4 +1,14 @@
 .userprofile {
     width: 100%;
     padding: 5px;
+
+    display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.userprofile h1.userprofile__header {
+    color: #757575;
+    font-size: 1.5em;
 }

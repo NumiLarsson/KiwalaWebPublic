@@ -1,19 +1,23 @@
 import React from 'react';
 import { browserHistory } from 'react-router';
-import './styles/upcomingeventslist.css';
+import Spinner from '../Utils/Spinner';
 import { formatDate, formatLocation } from '../../utils/utils';
+import './styles/upcomingeventslist.css';
 
 const UpcomingEventsList = (props) => {
-    if (props.eventList) { //This check has not been necessary, but try
+    if (props.eventList && props.eventListLoaded) { //This check has not been necessary, but try
         return (
             <div className="upcomingeventslist">
+                { (props.eventList) ? <h1 className="userprofile__header">Eventlist</h1> : null}
                 <div className="upcomingeventslist-eventlist">
                     {Object.values(props.eventList).map(renderEventItem)}
                 </div>
             </div>
         )
     } else {
-        return (null);
+        return (
+            <Spinner />
+        )
     }
 }
 

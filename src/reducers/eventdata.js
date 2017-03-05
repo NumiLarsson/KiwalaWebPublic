@@ -33,15 +33,27 @@ export default (state = initialState, action) => {
 
         case SET_CURRENT_EVENT_PARTICIPANTS:
 
+            // Filter out all the participants in state that's not in the payload!
+            // in order to remove unattenting participants
+            let newParticipants = {};
+            for(var k in action.payload){
+                console.log(k);
+                if(state.participants && state.participants[k])
+                    newParticipants[k] = state.participants[k];
+            }
+
             return Object.assign({}, state, {
-                participants: action.payload   
+                participants: newParticipants
             });
 
         case UPDATE_CURRENT_EVENT_PARTICIPANTS_USERS:
 
-            let copy = Object.assign({}, state);
-            copy.participants[action.payload.uid] = action.payload;
-            return copy;
+            let uid = action.payload.uid;
+            return Object.assign({}, state, {
+                participants: Object.assign({}, state.participants, {
+                    [uid]: action.payload
+                })
+            });            
 
         case MAPS_ACTIONS.MAP_IMAGE_URL: 
             return Object.assign({}, state, {

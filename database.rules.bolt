@@ -20,8 +20,6 @@ path /userAcceptedEvents/{uid}/{eventId} is Boolean {
   validate() { isEvent(eventId) }
 }
 
-
-
 //event
 path /events/{eventId} is Event {}
 
@@ -80,6 +78,15 @@ type DetailsModule extends EventModule {
 type DescriptionModule extends EventModule {}
 
 type ParticipantsModule extends EventModule {}
+
+//standardAvatars
+path /standardAvatars is StandardAvatar {
+  read() {true}
+  write() {true}
+}
+
+type StandardAvatar {
+  id: UrlString}
 
 
 //utility types
