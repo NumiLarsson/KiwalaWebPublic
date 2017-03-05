@@ -1,0 +1,20 @@
+.event-details__date {
+    display: flex;
+    flex-direction: row;
+}
+
+.importer--loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 160px;
+}
+
+.importer__final-page {
+    text-align: center;
+    padding: 3rem;
+}
+
+.importer__final-page-check {
+    font-size:4rem;
+}
