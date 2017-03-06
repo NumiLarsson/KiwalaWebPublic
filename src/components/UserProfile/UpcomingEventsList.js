@@ -10,7 +10,7 @@ const UpcomingEventsList = (props) => {
             <div className="upcomingeventslist">
                 { (props.eventList) ? <h1 className="userprofile__header">Eventlist</h1> : null}
                 <div className="upcomingeventslist-eventlist">
-                    {Object.values(props.eventList).map(renderEventItem)}
+                    {Object.keys(props.eventList).map(key => props.eventList[key]).map(renderEventItem)}
                 </div>
             </div>
         )

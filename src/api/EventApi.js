@@ -274,4 +274,13 @@ export default class EventApi {
             }
         }
     }
+
+    create(event) {
+    	// TODO: add real event creation
+		return new Promise((resolve, reject) => {
+			setTimeout(() => {
+		    	resolve(true);
+			}, 1000);
+		})
+	}
 }

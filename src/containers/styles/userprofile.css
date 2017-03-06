@@ -12,3 +12,12 @@
     color: #757575;
     font-size: 1.5em;
 }
+
+.userprofile__items {
+    padding: 1rem;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

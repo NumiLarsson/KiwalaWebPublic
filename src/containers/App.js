@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import './styles/app.css';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <MuiThemeProvider>
+      {/*<div className="App">*/}
             {this.props.children}
-      </div>
+      {/*</div>*/}
+      </MuiThemeProvider>
     );
   }
 }
