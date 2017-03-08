@@ -7,6 +7,7 @@ import Spinner from '../components/Utils/Spinner';
 import NavigationControl from '../components/Navigation/NavigationControl';
 import CreateEventComponent from '../components/UserProfile/CreateEventComponent';
 import './styles/userprofile.css';
+import Api from '../api/Api'; //get the API
 
 class UserProfile extends Component {
 
@@ -35,6 +36,10 @@ class UserProfile extends Component {
         this.props.updateUserProfile(this.props.user.uid, userData);
     }
 
+    isUserUsingFacebook() {
+        return Api.auth.isUsingFacebook();
+    }
+
     render() {
         let { user, userData, eventList } = this.props;
         if (!user || !userData || !eventList) {
@@ -49,7 +54,7 @@ class UserProfile extends Component {
                     <NavigationControl user={ user } template="userprofile" />
                     <ProfileSettings user={ user } onSubmit={ this.handleUserSettingsSaved } fetchStandardAvatars={this.props.fetchStandardAvatars} setAvatarSelectorOpen={this.props.setAvatarSelectorOpen} />
                     <div className="userprofile__items">
-                        <CreateEventComponent />
+                        <CreateEventComponent isUsingFacebook={this.isUserUsingFacebook()} />
                         <UpcomingEventsList user={ user } eventList={ eventList } eventListLoaded={this.props.eventListLoaded}/>
                     </div>
                 </div>

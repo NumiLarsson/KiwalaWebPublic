@@ -5,4 +5,17 @@
     justify-content: center;
 
     margin: 5px;
+
+    width: 100%;
+}
+
+.createeventcomp-card {
+    padding: 10px;
+
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }

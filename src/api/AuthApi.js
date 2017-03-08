@@ -241,6 +241,6 @@ export default class AuthApi {
             return false;
         }
         let auth = JSON.parse(localStorage.getItem('authentication'));
-        return typeof auth === 'object' && auth.provider === 'facebook.com';
+        return auth !== null && typeof auth === 'object' && auth.provider === 'facebook.com';
     }
 }
