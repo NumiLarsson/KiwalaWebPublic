@@ -1,6 +1,5 @@
 import React from 'react';
-import { browserHistory } from 'react-router';
-import {Card, CardActions, CardTitle, CardText} from 'material-ui/Card';
+import {Card, CardActions/*, CardTitle, CardText*/} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import FacebookImporterComponent from './FacebookImporterComponent';
 import './styles/createeventcomponent.css';

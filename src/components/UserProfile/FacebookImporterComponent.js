@@ -62,6 +62,8 @@ class FacebookImporterComponent extends Component {
             case 2:
                 actions.push(<RaisedButton label="Close" primary={true} onTouchTap={this.exitFacebookImporter}/>)
                 break;
+            default:
+                break;
         }
         return (
             <div>
@@ -120,6 +122,7 @@ class FacebookImporterComponent extends Component {
 
     renderPage() {
         switch (this.props.page) {
+            default:
             case 0:
                 let SelectableList = makeSelectable(List);
 

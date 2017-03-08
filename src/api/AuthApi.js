@@ -64,40 +64,6 @@ export default class AuthApi {
         })
     }
 
-
-    /*
-     Register to listen for auth changes.
-     Returns a function which can be used to unregister the listener.
-     */
-    listenForAuthChanges(signedIn, signedOut) {
-        return this.auth().onAuthStateChanged(user => {
-            if (user) {
-                signedIn(user);
-            } else {
-                signedOut();
-            }
-        });
-    }
-
-
-    /**
-     * Sign in using email and password.
-     * @param {string} email - The email of the user.
-     * @param {string} password - The password of the user.
-     * @returns A Promise which resolves to a Firebase.Auth user object and rejects with an error message.
-     */
-    loginWithEmail(email = "", password = "") {
-        const self = this;
-        return new Promise((resolve, reject) => {
-            self.auth().signInWithEmailAndPassword(email, password)
-                .then(user => {
-                    console.log(user);
-                    // TODO: Store a token to localStorage
-                    resolve(user);
-                });
-        });
-    }
-
     /**
      * Create and sign an user.
      * @param {string} email - The email of the user.
@@ -174,7 +140,7 @@ export default class AuthApi {
                 })
                 .catch(error => {
                     let err = FACEBOOK_POPUP_ERRORS[error.code] || 'Network error';
-                    reject(error);
+                    reject(err);
                 })
         })
 

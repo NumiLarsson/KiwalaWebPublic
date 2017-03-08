@@ -11,17 +11,6 @@ import EventViewer from './containers/EventViewer';
 import UserProfile from './containers/UserProfile';
 import EventEditor from './containers/EventEditor';
 import Login from "./components/Login/Login";
-import Api from './api/Api'; //get the API
-
-const requireAuth = (nextState, replace, callback) => {
-
-    if (Api.auth.getCurrentUser()) {
-        callback();
-    } else {
-        replace('/');
-        callback();
-    }
-}
 
 const routes = (
     <Route path="/" component={App}>

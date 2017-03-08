@@ -36,8 +36,8 @@ export default (state = initialState, action) => {
             // Filter out all the participants in state that's not in the payload!
             // in order to remove unattenting participants
             let newParticipants = {};
-            for(var k in action.payload){
-                console.log(k);
+            for(var i = 0; i < action.payload.length; i++){
+                var k = action.payload[i];
                 if(state.participants && state.participants[k])
                     newParticipants[k] = state.participants[k];
             }
