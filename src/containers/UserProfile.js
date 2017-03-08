@@ -7,12 +7,13 @@ import Spinner from '../components/Utils/Spinner';
 import NavigationControl from '../components/Navigation/NavigationControl';
 import CreateEventComponent from '../components/UserProfile/CreateEventComponent';
 import './styles/userprofile.css';
+import Api from '../api/Api'; //get the API
 
 class UserProfile extends Component {
 
     constructor() {
         super();
-        this.eventListFetched           = false;
+        this.eventListRequested           = false;
         this.loadEventList              = this.loadEventList.bind(this);
         this.handleUserSettingsSaved    = this.handleUserSettingsSaved.bind(this);
     }
@@ -20,8 +21,8 @@ class UserProfile extends Component {
     loadEventList() {
         // Only fetch events if there is an user object and we haven't already fetched it.
         // One guard is if it's fetched in reducer and another is for this specific module
-        if(this.props.user && !this.eventListFetched){
-            this.eventListFetched = true;
+        if(this.props.user && !this.eventListRequested){
+            this.eventListRequested = true;
             this.props.getAcceptedEvents(this.props.user.uid);
         }
     }
@@ -33,6 +34,10 @@ class UserProfile extends Component {
             photoURL: values.profilesettings_avatar
         };
         this.props.updateUserProfile(this.props.user.uid, userData);
+    }
+
+    isUserUsingFacebook() {
+        return Api.auth.isUsingFacebook();
     }
 
     render() {
@@ -49,7 +54,7 @@ class UserProfile extends Component {
                     <NavigationControl user={ user } template="userprofile" />
                     <ProfileSettings user={ user } onSubmit={ this.handleUserSettingsSaved } fetchStandardAvatars={this.props.fetchStandardAvatars} setAvatarSelectorOpen={this.props.setAvatarSelectorOpen} />
                     <div className="userprofile__items">
-                        <CreateEventComponent />
+                        <CreateEventComponent isUsingFacebook={this.isUserUsingFacebook()} />
                         <UpcomingEventsList user={ user } eventList={ eventList } eventListLoaded={this.props.eventListLoaded}/>
                     </div>
                 </div>

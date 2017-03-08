@@ -5,6 +5,7 @@ export default class UserApi {
     constructor(database) {
         this.database = database;
         this.subscriptions = {};
+        this.profile_subscription = null;
     }
 
     /**
@@ -101,6 +102,23 @@ export default class UserApi {
                 reject(err);
             })
         })
+    }
+
+    /**
+     * Subscribe to data about the user.
+     * @param {string} uid - ID of the user.
+     * @param {function} cb - Function to call when the data changes.
+     */    
+    subscribeToProfileUserData(uid, cb) {
+        //Clear sub
+        if(this.profile_subscription)
+            this.profile_subscription.off();
+
+        let ref = this.database().ref(`/users/${uid}`);
+        ref.on('value', (snapshot) => {
+            cb(snapshot.val());
+        });
+        this.profile_subscription = ref;
     }
 
     /**
