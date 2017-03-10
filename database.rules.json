@@ -63,7 +63,7 @@
           ".validate": "false"
         },
         ".read": "true",
-        ".write": "root.child('events').child($eventId).val() != null"
+        ".write": "root.child('events').child($eventId).val() != null && root.child('eventAdmins').child($eventId).child(auth.uid).val() != null"
       }
     },
     "eventParticipants": {
@@ -119,7 +119,7 @@
           ".validate": "false"
         },
         ".read": "true",
-        ".write": "true"
+        ".write": "root.child('eventAdmins').child($eventId).child(auth.uid).val() != null"
       }
     },
     "standardAvatars": {
@@ -132,6 +132,15 @@
       },
       ".read": "true",
       ".write": "true"
+    },
+    "eventAdmins": {
+      "$eventId": {
+        "$uid": {
+          ".validate": "newData.isBoolean()",
+          ".read": "auth != null && auth.uid == $uid || root.child('eventAdmins').child($eventId).child(auth.uid).val() != null",
+          ".write": "root.child('eventAdmins').child($eventId).child(auth.uid).val() != null"
+        }
+      }
     }
   }
 }
