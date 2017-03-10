@@ -31,7 +31,7 @@ type Event {
 
 //eventData
 path /eventData/{eventId} is EventData {
-  write() {isEvent(eventId)}
+  write() {isEvent(eventId) && isAdmin()}
   read() {true}
 }
 
@@ -56,7 +56,7 @@ path /eventParticipants/{event}/{uid} is Boolean {
 //eventModules
 path /eventModules/{eventId} is EventModules {
   read() {true}
-  write() {true}
+  write() {isAdmin()}
 }
 
 type EventModules {
