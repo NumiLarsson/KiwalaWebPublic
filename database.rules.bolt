@@ -86,8 +86,20 @@ path /standardAvatars is StandardAvatar {
 }
 
 type StandardAvatar {
-  id: UrlString}
+  id: UrlString
+}
 
+// Event admins
+
+path /eventAdmins/{eventId}/{uid} is EventAdmin {
+  read() {isAdmin()}
+  write() {isAdmin()}
+}
+
+// The id is followed by a user level (1 is highest)
+type EventAdmin {
+  id: Integer
+}
 
 //utility types
 
@@ -112,3 +124,4 @@ type EmailString extends String {
 isCurrentUser(uid) { isSignedIn() && auth.uid == uid }
 isSignedIn() { auth != null }
 isEvent(event) {prior(root.events[event]) != null}
+isAdmin(event, uid) {true}
