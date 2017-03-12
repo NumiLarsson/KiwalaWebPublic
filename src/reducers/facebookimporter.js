@@ -1,14 +1,10 @@
 import {FACEBOOK_ACTIONS} from '../actions/facebookimporter';
 const {
     SET_PAGE,
-    PREV_PAGE,
-    NEXT_PAGE,
     OPEN_IMPORTER,
     CLOSE_IMPORTER,
     SET_EVENTS,
     SELECT_EVENT,
-    SET_START_TIME,
-    SET_END_TIME,
     EVENT_CREATION_INITIATED,
     EVENT_CREATION_FINISHED
 } = FACEBOOK_ACTIONS;
@@ -18,13 +14,7 @@ const initialState = {
     loading: false,
     active: false,
     events: [],
-    selectedEvent: {
-        id: null,
-        event: {
-            start_time: null,
-            end_time: null
-        }
-    }
+    selectedEvent: null
 }
 
 export default (state = initialState, action) => {
@@ -49,18 +39,6 @@ export default (state = initialState, action) => {
         case SELECT_EVENT:
             return Object.assign({}, state, {
                 selectedEvent: action.payload
-            });
-        case SET_START_TIME:
-            let newStartEvent = Object.assign({}, state.selectedEvent);
-            newStartEvent.event.start_time = action.payload;
-            return Object.assign({}, state, {
-                selectedEvent: newStartEvent
-            });
-        case SET_END_TIME:
-            let newEndEvent = Object.assign({}, state.selectedEvent);
-            newEndEvent.event.end_time = action.payload;
-            return Object.assign({}, state, {
-                selectedEvent: newEndEvent
             });
         case EVENT_CREATION_INITIATED:
             return Object.assign({}, state, {

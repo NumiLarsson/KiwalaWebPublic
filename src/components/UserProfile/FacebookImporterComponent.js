@@ -7,19 +7,22 @@ import {
     openImporter,
     closeImporter,
     setEvents,
-    selectEvent, setSelectedEventStartTime, setSelectedEventEndTime,
+    selectEvent,
     eventCreationInitiated, eventCreationFinished, setPage
-} from "../../actions/facebookimporter";
+} from '../../actions/facebookimporter';
+import {
+    setStartTime,
+    setEndTime,
+    setTitle,
+    setDescription
+} from '../../actions/eventcreator';
 import {List, ListItem, makeSelectable} from 'material-ui/List';
-import {Card, CardTitle, CardText} from 'material-ui/Card';
-import TextField from 'material-ui/TextField';
-import DatePicker from 'material-ui/DatePicker';
-import TimePicker from 'material-ui/TimePicker';
 import CircularProgress from 'material-ui/CircularProgress';
 import {connect} from "react-redux";
 import Api from "../../api/Api";
 import './styles/facebookimporter.css';
 import moment from 'moment';
+import CreateEventForm from './CreateEventForm';
 
 class FacebookImporterComponent extends Component {
 
@@ -32,12 +35,6 @@ class FacebookImporterComponent extends Component {
         this.previousPage = this.previousPage.bind(this);
         this.renderPage = this.renderPage.bind(this);
         this.setSelectedEvent = this.setSelectedEvent.bind(this);
-        this.setStartTime = this.setStartTime.bind(this);
-        this.setSelectedEventStartDate = this.setSelectedEventStartDate.bind(this);
-        this.setSelectedEventStartTime = this.setSelectedEventStartTime.bind(this);
-        this.setEndTime = this.setEndTime.bind(this);
-        this.setSelectedEventEndDate = this.setSelectedEventEndDate.bind(this);
-        this.setSelectedEventEndTime = this.setSelectedEventEndTime.bind(this);
 
         Api.facebook.getEvents().then(events => {
             this.props.setEvents(events);
@@ -106,7 +103,7 @@ class FacebookImporterComponent extends Component {
         // If we are going to the next page after setting up the event
         if (this.props.page === 1) {
             this.props.eventCreationInitiated();
-            Api.events.create(this.props.selectedEvent.event)
+            Api.events.create(this.props.event)
                .then(success => {
                     this.props.setPage(this.props.page + 1);
                     this.props.eventCreationFinished();
@@ -128,7 +125,7 @@ class FacebookImporterComponent extends Component {
 
                 return (
                     <SelectableList
-                        value={this.props.selectedEvent.id}
+                        value={this.props.selectedEvent}
                         onChange={this.setSelectedEvent}
                     >
                         {this.renderEvents(this.props.events)}
@@ -136,77 +133,7 @@ class FacebookImporterComponent extends Component {
                 );
             case 1:
                 return (
-                    <Card>
-                        <CardTitle title="Review Event Details" />
-                        <CardText>
-                            <div className="event-details">
-                                <TextField
-                                    floatingLabelText="Name"
-                                    defaultValue={this.props.selectedEvent.event.name}
-                                    fullWidth={true}
-                                />
-                                <TextField
-                                    floatingLabelText="Description"
-                                    defaultValue={this.props.selectedEvent.event.description}
-                                    multiLine={true}
-                                    fullWidth={true}
-                                />
-                                <div className="event-details__date">
-                                    <DatePicker
-                                        floatingLabelText="Start Date"
-                                        defaultDate={this.props.selectedEvent.event.start_time}
-                                        onChange={this.setSelectedEventStartDate}
-                                        fullWidth={true}
-                                        className="flex"
-                                    />
-                                    <TimePicker
-                                        floatingLabelText="Start Time"
-                                        defaultTime={this.props.selectedEvent.event.start_time}
-                                        onChange={this.setSelectedEventStartTime}
-                                        fullWidth={true}
-                                        className="flex"
-                                        />
-                                </div>
-
-                                {this.props.selectedEvent.event.end_time ? (
-                                    <div className="event-details__date">
-                                        <DatePicker
-                                            floatingLabelText="End Date"
-                                            defaultDate={this.props.selectedEvent.event.end_time}
-                                            minDate={this.props.selectedEvent.event.start_time}
-                                            onChange={this.setSelectedEventEndDate}
-                                            fullWidth={true}
-                                            className="flex"
-                                        />
-                                        <TimePicker
-                                            floatingLabelText="End Time"
-                                            defaultTime={this.props.selectedEvent.event.end_time}
-                                            onChange={this.setSelectedEventEndTime}
-                                            fullWidth={true}
-                                            className="flex"
-                                        />
-                                    </div>
-                                    ) : (
-                                        <div className="event-details__date">
-                                            <DatePicker
-                                                floatingLabelText="End Date"
-                                                minDate={this.props.selectedEvent.event.start_time}
-                                                onChange={this.setSelectedEventEndDate}
-                                                fullWidth={true}
-                                                className="flex"
-                                            />
-                                            <TimePicker
-                                                floatingLabelText="End Time"
-                                                onChange={this.setSelectedEventEndTime}
-                                                fullWidth={true}
-                                                className="flex"
-                                            />
-                                        </div>
-                                    )
-                                }
-                            </div>
-                        </CardText>
-                    </Card>
+                    <CreateEventForm/>
                 );
             case 2:
                 return (
@@ -221,14 +148,13 @@ class FacebookImporterComponent extends Component {
     }
 
     setSelectedEvent(event, index) {
-        this.props.selectEvent({id: index, event: {}});
+        this.props.selectEvent(index);
         Api.facebook.getEvent(index)
             .then(event => {
-                console.log(event);
-                this.props.selectEvent({
-                    id: index,
-                    event: event
-                });
+                this.props.setTitle(event.name);
+                this.props.setDescription(event.description);
+                this.props.setStartTime(event.start_time);
+                this.props.setEndTime(event.end_time);
             })
     }
 
@@ -320,6 +246,7 @@ const mapStateToProps = (state) => {
         active: state.facebookimporter.active,
         events: state.facebookimporter.events,
         selectedEvent: state.facebookimporter.selectedEvent,
+        event: state.eventcreator.event,
         loading: state.facebookimporter.loading
     }
 }
@@ -332,10 +259,12 @@ const mapDispatchToProps = {
     closeImporter,
     setEvents,
     selectEvent,
-    setSelectedEventStartTime,
-    setSelectedEventEndTime,
     eventCreationInitiated,
-    eventCreationFinished
+    eventCreationFinished,
+    setStartTime,
+    setEndTime,
+    setTitle,
+    setDescription
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(FacebookImporterComponent);

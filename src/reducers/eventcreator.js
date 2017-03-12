@@ -8,7 +8,7 @@ const {
 
 const initialState = {
     event: {
-        title: '',
+        name: '',
         description: '',
         start_time: new Date(),
         end_time: null
@@ -30,7 +30,7 @@ export default (state = initialState, action) => {
                 event: event
             });
         case SET_TITLE:
-            event.title = action.payload;
+            event.name = action.payload;
             return Object.assign({}, state, {
                 event: event
             });

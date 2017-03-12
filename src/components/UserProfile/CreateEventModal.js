@@ -10,7 +10,6 @@ import {
     eventCreationFinished,
     setPage
 } from "../../actions/createEventModal";
-import {Card, CardTitle, CardText} from 'material-ui/Card';
 import CircularProgress from 'material-ui/CircularProgress';
 import {connect} from "react-redux";
 import Api from "../../api/Api";
