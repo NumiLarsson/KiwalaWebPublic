@@ -48,6 +48,7 @@ class CreateEventForm extends Component {
                         floatingLabelStyle={{
                             top: '34px'
                         }}
+                        fullWidth={true}
                     />
                     <TimePicker
                         floatingLabelText="Start Time"
@@ -56,6 +57,7 @@ class CreateEventForm extends Component {
                         floatingLabelStyle={{
                             top: '34px'
                         }}
+                        fullWidth={true}
                     />
                 </div>
 
@@ -69,6 +71,7 @@ class CreateEventForm extends Component {
                                 floatingLabelStyle={{
                                     top: '34px'
                                 }}
+                                fullWidth={true}
                             />
                             <TimePicker
                                 floatingLabelText="End Time"
@@ -77,6 +80,7 @@ class CreateEventForm extends Component {
                                 floatingLabelStyle={{
                                     top: '34px'
                                 }}
+                                fullWidth={true}
                             />
                         </div>
                     ) : (
@@ -88,6 +92,7 @@ class CreateEventForm extends Component {
                                 floatingLabelStyle={{
                                     top: '34px'
                                 }}
+                                fullWidth={true}
                             />
                             <TimePicker
                                 floatingLabelText="End Time"
@@ -95,6 +100,7 @@ class CreateEventForm extends Component {
                                 floatingLabelStyle={{
                                     top: '34px'
                                 }}
+                                fullWidth={true}
                             />
                         </div>
                     )
