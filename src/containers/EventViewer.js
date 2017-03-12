@@ -54,7 +54,7 @@ class EventViewer extends Component {
 
                         <div className="event-content">
                             <div className="event-content__spotlight">
-                                <EventPolls activePolls={this.props.event.polls}/>
+                                <EventPolls activePolls={this.props.event.polls} uid={this.props.user.uid} eventId={this.props.event.id}/>
                                 <EventDetails module={this.props.modules.details} startDate={this.props.event.startDate} location={this.props.event.location} map={this.props.event.map}/>
                                 <EventDescription module={this.props.modules.description} description={this.props.event.description} />
                             </div>

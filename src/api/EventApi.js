@@ -301,7 +301,7 @@ export default class EventApi {
 			.then(snapshot => {
 				let result = snapshot.val();
 
-				if(result && result != 0) {
+				if(result) {
 					resolve(result);
 				}
 				else {
