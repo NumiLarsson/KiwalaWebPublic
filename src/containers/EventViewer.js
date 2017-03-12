@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getEvent, subscribeToEvent, setCurrentEvent, hasAdminPrivileges } from '../actions/eventdata';
+import { getEvent, subscribeToEvent, setCurrentEvent, hasAdminPrivileges, answerEventPoll } from '../actions/eventdata';
 import EventPolls from '../components/Event/EventPolls';
 import EventHeader from '../components/Event/EventHeader';
 import EventDetails from '../components/Event/EventDetails';
@@ -16,7 +16,8 @@ class EventViewer extends Component {
 
     constructor() {
         super();
-        this.adminPrivilegesRequested         = false;
+        this.adminPrivilegesRequested           = false;
+        this.answerPoll                         = this.answerPoll.bind(this);
     }
 
     componentWillMount(){
@@ -34,6 +35,11 @@ class EventViewer extends Component {
             this.adminPrivilegesRequested = true;
             this.props.hasAdminPrivileges(eventid, this.props.user.uid);
         }
+    }
+
+    answerPoll(pollId, key) {
+        if(this.props.user)
+            this.props.answerEventPoll(this.props.user.uid, pollId, key);
     }
 
     render() {
@@ -54,7 +60,7 @@ class EventViewer extends Component {
 
                         <div className="event-content">
                             <div className="event-content__spotlight">
-                                <EventPolls activePolls={this.props.event.polls} uid={this.props.user.uid} eventId={this.props.event.id}/>
+                                <EventPolls activePolls={this.props.event.polls} answerPollFunction={this.answerPoll} uid={this.props.user.uid} eventId={this.props.event.id}/>
                                 <EventDetails module={this.props.modules.details} startDate={this.props.event.startDate} location={this.props.event.location} map={this.props.event.map}/>
                                 <EventDescription module={this.props.modules.description} description={this.props.event.description} />
                             </div>
@@ -86,7 +92,8 @@ const mapDispatchToProps = {
     setCurrentEvent,
     subscribeToEvent,
     loadMapImageURL,
-    hasAdminPrivileges
+    hasAdminPrivileges,
+    answerEventPoll
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(EventViewer);

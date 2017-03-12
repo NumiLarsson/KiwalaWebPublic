@@ -51,23 +51,21 @@
     background-color: #eee;
 }
 
-.event-poll__questionmark {
-    margin: 0px 5px 0px 0px;
-    font-size: 1.5em;
-    color: #BDBDBD;
-    font-weight: 600;
-}
 .event-poll__question {
     width: 100%;
 
     display: flex;
     justify-content: flex-start;
-    align-items: center;
+    align-items: flex-start;
 
-    padding-bottom: 5px;
+    padding-bottom: 10px;
     border-bottom: 2px solid #E0E0E0;
 }
 
+.event-poll__question > i {
+    margin: 0px;
+    margin-right: 5px;
+}
 .event-poll__question > p {
     margin: 0px;
     font-size: 1.1em;

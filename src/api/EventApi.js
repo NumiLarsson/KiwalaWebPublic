@@ -263,6 +263,57 @@ export default class EventApi {
 	}
 
 	/**
+	 * Subsribe to all polls for an event.
+	 * @param {string} eventId - The id for the event.
+	 * @param {function} callback - Function to be called when a change occurs.
+ 	 */
+	subscribeToEventPolls(eventId, callback) {
+		let ref = this.database().ref(`/eventPolls/${eventId}`);
+		ref.on('value', snapshot => {
+			callback(snapshot.val());
+		});
+
+		this.subscriptions[`eventPolls_${eventId}`] = ref;
+	}
+
+	/**
+	 * Subsribe to all answers for a poll.
+	 * @param {string} pollId - The id for the poll.
+	 * @param {function} callback - Function to be called when a change occurs.
+ 	 */
+	subscribeToEventPollAnswers(pollId, callback) {
+		let ref = this.database().ref(`/eventPollAnswers/${pollId}`);
+		ref.on('value', snapshot => {
+			callback(snapshot.val());
+		});
+
+		this.subscriptions[`eventPollAnswers_${pollId}`] = ref;
+	}
+
+	/**
+	 * Answer a poll for a event.
+	 * @param {string} uid - The user id.
+	 * @param {string} pollId - The id for the poll.
+	 * @param {string} answerId - Local id for the answer in the poll.
+	 * @param {function} callback - Function to be called when a change occurs.
+ 	 */
+	answerEventPoll(uid, pollId, answerId) {
+		let self = this;
+		return new Promise((resolve, reject) => {
+			let updates = {}
+			updates[`/eventPollAnswers/${pollId}/${uid}`] = answerId;
+
+			self.database().ref().update(updates)
+			.then(() => {
+				resolve('SUCCESS');
+			})
+			.catch(err => {
+				reject(err);
+			});
+		});
+	}
+
+	/**
 	 * Check is the user has admin rights to the event.
 	 * @param {string} eventId - The id of the event.
 	 * @param {string} uid - The id of the user.
