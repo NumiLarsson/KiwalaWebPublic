@@ -6,7 +6,7 @@ import './styles/eventpolls.css';
 
 const EventPolls = (props) => {
 
-    if (props.module.enabled && props.activePolls && Api.auth.loggedIn() && Api.events.isAttendingEvent(props.eventId, props.uid)) {
+    if (props.module.enabled && props.activePolls && Api.auth.loggedIn() && props.isAttendingEvent) {
         return (
             <div className="event-polls">
                 <div className="event-polls__header">
