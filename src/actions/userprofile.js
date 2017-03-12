@@ -40,7 +40,7 @@ export function updateUserProfile(userId, dataUpdates) {
         Api.user.updateUserProfile(userId, dataUpdates)
         .then(res => {
             // User object in DB
-            dispatch(userProfileUpdated(res));
+            dispatch(userProfileUpdated(dataUpdates));
         })
         .catch(err => {
             console.log(err);
