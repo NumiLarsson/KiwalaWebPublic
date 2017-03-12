@@ -94,12 +94,12 @@ class FacebookImporterComponent extends Component {
     }
 
     startFacebookImporter() {
-        this.props.openImporter();
+        this.props.openModal();
     }
 
     exitFacebookImporter() {
         this.props.setPage(0);
-        this.props.closeImporter();
+        this.props.closeModal();
     }
 
     nextPage() {
@@ -241,7 +241,7 @@ class FacebookImporterComponent extends Component {
     }
 
     setStartTime(time) {
-        this.props.setSelectedEventStartTime(time);
+        this.props.setStartTime(time);
     }
 
     setSelectedEventEndDate(event, date) {
@@ -275,7 +275,7 @@ class FacebookImporterComponent extends Component {
     }
 
     setEndTime(time) {
-        this.props.setSelectedEventEndTime(time);
+        this.props.setEndTime(time);
     }
 
     renderEvents(events) {

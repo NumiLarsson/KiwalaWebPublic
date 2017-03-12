@@ -8,7 +8,20 @@ import auth from './auth';
 import login from "./login";
 import userprofile from './userprofile'
 import facebookimporter from "./facebookimporter";
+import eventcreator from "./eventcreator";
+import createEventModal from "./createEventModal";
 
-const root = combineReducers({eventdata, eventmodules, userprofile, auth, login, facebookimporter, routing: routerReducer, form: formReducer});
+const root = combineReducers({
+    eventdata,
+    eventmodules,
+    userprofile,
+    auth,
+    login,
+    facebookimporter,
+    eventcreator,
+    createEventModal,
+    routing: routerReducer,
+    form: formReducer
+});
 
 export default root;

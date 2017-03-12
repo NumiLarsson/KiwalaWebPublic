@@ -23,8 +23,8 @@ export const FACEBOOK_ACTIONS = {
 };
 
 export const setPage = createAction(FACEBOOK_ACTIONS.SET_PAGE);
-export const openImporter = createAction(FACEBOOK_ACTIONS.OPEN_IMPORTER);
-export const closeImporter = createAction(FACEBOOK_ACTIONS.CLOSE_IMPORTER);
+export const openImporter = createAction(FACEBOOK_ACTIONS.OPEN_MODAL);
+export const closeImporter = createAction(FACEBOOK_ACTIONS.CLOSE_MODAL);
 export const setEvents = createAction(FACEBOOK_ACTIONS.SET_EVENTS);
 export const selectEvent = createAction(FACEBOOK_ACTIONS.SELECT_EVENT);
 export const setSelectedEventStartTime = createAction(FACEBOOK_ACTIONS.SET_START_TIME);

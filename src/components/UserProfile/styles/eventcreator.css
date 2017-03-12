@@ -1,0 +1,4 @@
+.event-details__date {
+    display: flex;
+    flex-direction: row;
+}

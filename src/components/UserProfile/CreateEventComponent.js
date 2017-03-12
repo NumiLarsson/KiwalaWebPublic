@@ -1,7 +1,7 @@
 import React from 'react';
 import {Card, CardActions/*, CardTitle, CardText*/} from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
 import FacebookImporterComponent from './FacebookImporterComponent';
+import CreateEventModal from './CreateEventModal';
 import './styles/createeventcomponent.css';
 
 const CreateEventComponent = (props) => {
@@ -17,7 +17,7 @@ const CreateEventComponent = (props) => {
                     :
                     null
                 }
-                    <FlatButton label="Create"/>
+                    <CreateEventModal/>
                 </CardActions>
             </Card>
         </div>
