@@ -6,6 +6,7 @@ const initialState = {
     id: null,
     name: null,
     participants: null,
+    polls: null,
     loaded: null, 
     map: null,
     description: "",

@@ -1,0 +1,65 @@
+.event-polls {
+    padding: 10pt 5pt 10pt 5pt;
+
+    margin-top: 5px;
+    background-color: #fff;
+    text-align: left;
+
+    min-height: 125px;
+    max-height: 250px;
+
+    width: 100%;
+    word-wrap: break-word;
+    box-sizing: border-box;
+
+    border-radius: 0 0 2px 2px;
+
+    box-shadow: 1px 2px 3px #BDBDBD;
+}
+
+.event-polls__header {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #E0E0E0;
+}
+
+.event-polls__header > i,
+.event-polls__header > span {
+    vertical-align: middle;
+}
+
+.event-polls__header > span {
+    font-size: 1.3em;
+}
+
+.event-polls__list {
+    padding: 15px 20px;
+
+    /* Temporary values until we have a popup to show the rest */
+    /*height: 145px;*/
+    max-height: 400px;
+}
+
+.event-poll {
+    padding-top: 4px;
+    padding-bottom: 4px;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+/* Desktop */
+@media only screen and (min-width: 768px) {
+
+    .event-polls {
+        width: 300px;
+    }
+
+    .event-polls__header > p {
+        font-size: 1em;
+    }
+
+    .event-polls__header > span {
+        font-size: 1.1em;
+    }
+}
