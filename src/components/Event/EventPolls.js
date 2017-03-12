@@ -1,5 +1,4 @@
 import React from 'react';
-import {browserHistory} from 'react-router';
 import FlatButton from 'material-ui/FlatButton';
 import Api from '../../api/Api';
 import IconButton from '../Utils/IconButton';
@@ -7,7 +6,7 @@ import './styles/eventpolls.css';
 
 const EventPolls = (props) => {
 
-    if (props.activePolls && Api.auth.loggedIn() && Api.events.isAttendingEvent(props.eventId, props.uid)) {
+    if (props.module.enabled && props.activePolls && Api.auth.loggedIn() && Api.events.isAttendingEvent(props.eventId, props.uid)) {
         return (
             <div className="event-polls">
                 <div className="event-polls__header">
