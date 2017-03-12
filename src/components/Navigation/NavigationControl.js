@@ -12,7 +12,7 @@ const NavigationControl = (props) => {
             <div className="navigationcontrol">
                 { (props.template !== "home") ? renderHome() : null }
                 { (props.template === "eventviewer" || props.template === "eventeditor" || props.template === "home") ? renderUserProfile() : null }
-                { (props.template === "eventviewer") ? renderEventViewerAdminSettings(props.user, props.eventId) : null }
+                { (props.template === "eventviewer" && props.eventAdminPrivileges > 0) ? renderEventViewerAdminSettings(props.user, props.eventId) : null }
                 { (props.template === "eventeditor") ? renderEventEditorAdminSettings(props.user, props.eventId) : null }
                 { (props.template === "userprofile") ? renderLogout() : null }
             </div> 

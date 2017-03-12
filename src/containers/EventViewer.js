@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getEvent, subscribeToEvent, setCurrentEvent } from '../actions/eventdata';
+import { getEvent, subscribeToEvent, setCurrentEvent, hasAdminPrivileges } from '../actions/eventdata';
 import EventHeader from '../components/Event/EventHeader';
 import EventDetails from '../components/Event/EventDetails';
 import EventDescription from '../components/Event/EventDescription';
@@ -13,6 +13,11 @@ import { loadMapImageURL } from '../actions/maps'
 
 class EventViewer extends Component {
 
+    constructor() {
+        super();
+        this.adminPrivilegesRequested         = false;
+    }
+
     componentWillMount(){
         // perform any preparations for an upcoming update
         // Enable loading state
@@ -22,16 +27,24 @@ class EventViewer extends Component {
         this.props.subscribeToEvent(eventid);
     }
 
+    componentWillUpdate() {
+        if(this.props.user && !this.adminPrivilegesRequested) {
+            const {eventid} = this.props.params;
+            this.adminPrivilegesRequested = true;
+            this.props.hasAdminPrivileges(eventid, this.props.user.uid);
+        }
+    }
+
     render() {
         if(!this.props.event.loaded) {
             return (
                 <Spinner label="" />
             )
         }
-        else {
+        else {            
             return (
                 <div>
-                    <NavigationControl user={this.props.user} eventId={this.props.event.id} template="eventviewer" />
+                    <NavigationControl user={this.props.user} eventId={this.props.event.id} template="eventviewer" eventAdminPrivileges={this.props.event.adminLevel} />
                     <div className="event-viewer">
 
                         <EventHeader headerImage={this.props.event.headerImage} name={this.props.event.name} />
@@ -70,7 +83,8 @@ const mapDispatchToProps = {
     getEvent,
     setCurrentEvent,
     subscribeToEvent,
-    loadMapImageURL
+    loadMapImageURL,
+    hasAdminPrivileges
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(EventViewer);

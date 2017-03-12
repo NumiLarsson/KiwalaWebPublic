@@ -13,15 +13,12 @@ class UserProfile extends Component {
 
     constructor() {
         super();
-        this.eventListRequested           = false;
-        this.loadEventList              = this.loadEventList.bind(this);
+        this.eventListRequested         = false;
         this.handleUserSettingsSaved    = this.handleUserSettingsSaved.bind(this);
     }
 
-    loadEventList() {
-        // Only fetch events if there is an user object and we haven't already fetched it.
-        // One guard is if it's fetched in reducer and another is for this specific module
-        if(this.props.user && !this.eventListRequested){
+    componentWillUpdate() {
+        if(this.props.user && !this.eventListRequested) {
             this.eventListRequested = true;
             this.props.getAcceptedEvents(this.props.user.uid);
         }
@@ -48,7 +45,6 @@ class UserProfile extends Component {
             )
         } else {
             // User is loaded an we will trigger the event load
-            this.loadEventList();
             return(
                 <div className="userprofile">
                     <NavigationControl user={ user } template="userprofile" />
