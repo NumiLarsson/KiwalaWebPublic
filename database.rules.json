@@ -78,7 +78,7 @@
     },
     "eventModules": {
       "$eventId": {
-        ".validate": "newData.hasChildren(['details', 'description', 'participants'])",
+        ".validate": "newData.hasChildren(['details', 'description', 'participants', 'polls'])",
         "details": {
           ".validate": "newData.hasChildren(['enabled', 'showTime', 'showLocation', 'showMap'])",
           "enabled": {
@@ -115,6 +115,15 @@
             ".validate": "false"
           }
         },
+        "polls": {
+          ".validate": "newData.hasChildren(['enabled'])",
+          "enabled": {
+            ".validate": "newData.isBoolean()"
+          },
+          "$other": {
+            ".validate": "false"
+          }
+        },
         "$other": {
           ".validate": "false"
         },
@@ -133,14 +142,17 @@
     },
     "eventPolls": {
       "$eventId": {
+        ".validate": "newData.hasChildren()",
+        ".read": "true",
         "$pollId": {
           ".validate": "newData.hasChildren()",
-          ".read": "true",
           ".write": "auth != null"
         }
       }
     },
     "eventPollAnswers": {
+      ".validate": "newData.hasChildren()",
+      ".read": "true",
       "$pollId": {
         ".validate": "newData.hasChildren()",
         ".read": "true",

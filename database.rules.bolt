@@ -62,7 +62,8 @@ path /eventModules/{eventId} is EventModules {
 type EventModules {
   details: DetailsModule,
   description: DescriptionModule,
-  participants: ParticipantsModule
+  participants: ParticipantsModule,
+  polls: PollsModule
 }
 
 type EventModule {
@@ -78,6 +79,8 @@ type DetailsModule extends EventModule {
 type DescriptionModule extends EventModule {}
 
 type ParticipantsModule extends EventModule {}
+
+type PollsModule extends EventModule {}
 
 // Event admins
 path /eventAdmins/{eventId}/{uid} is EventAdmin {
