@@ -10,6 +10,8 @@ import './styles/eventcreator.css';
 class CreateEventForm extends Component {
 
     componentWillMount() {
+        this.setTitle = this.setTitle.bind(this);
+        this.setDescription = this.setDescription.bind(this);
         this.setEndTime = this.setEndTime.bind(this);
         this.setStartTime = this.setStartTime.bind(this);
         this.setEventEndDate = this.setEventEndDate.bind(this);
@@ -20,7 +22,7 @@ class CreateEventForm extends Component {
 
     render() {
         return (
-            <div className="event-details">
+            <div className="event-create">
                 <TextField
                     floatingLabelText="Name"
                     defaultValue={this.props.event.name}
@@ -40,7 +42,7 @@ class CreateEventForm extends Component {
                         top: '34px'
                     }}
                 />
-                <div className="event-details__date">
+                <div className="event-create__date">
                     <DatePicker
                         floatingLabelText="Start Date"
                         defaultDate={this.props.event.start_time}
@@ -64,7 +66,7 @@ class CreateEventForm extends Component {
                 </div>
 
                 {this.props.event.end_time ? (
-                        <div className="event-details__date">
+                        <div className="event-create__date">
                             <DatePicker
                                 floatingLabelText="End Date"
                                 defaultDate={this.props.event.end_time}
@@ -88,7 +90,7 @@ class CreateEventForm extends Component {
                             />
                         </div>
                     ) : (
-                        <div className="event-details__date">
+                        <div className="event-create__date">
                             <DatePicker
                                 floatingLabelText="End Date"
                                 minDate={this.props.event.start_time}

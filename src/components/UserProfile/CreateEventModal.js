@@ -33,7 +33,12 @@ class CreateEventModal extends Component {
 
         switch (this.props.page) {
             case 0:
-                actions.push(<RaisedButton label="Create" primary={true} onTouchTap={this.nextPage}/>)
+                actions.push(
+                    <RaisedButton
+                        label="Create"
+                        primary={true}
+                        disabled={! this.props.event.name.length}
+                        onTouchTap={this.nextPage}/>)
                 break;
             case 1:
                 actions.push(<RaisedButton label="Close" primary={true} onTouchTap={this.closeModal}/>)
@@ -53,6 +58,9 @@ class CreateEventModal extends Component {
                     onRequestClose={this.closeModal}
                     autoScrollBodyContent={true}
                     className="dialog"
+                    bodyStyle={{
+                        fontSize: '20px'
+                    }}
                 >
                     {this.props.loading ? (
                         <div className="importer--loading">

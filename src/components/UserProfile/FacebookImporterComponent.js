@@ -51,10 +51,22 @@ class FacebookImporterComponent extends Component {
 
         switch (this.props.page) {
             case 0:
-                actions.push(<RaisedButton label="Next" primary={true} onTouchTap={this.nextPage}/>);
+                actions.push(
+                    <RaisedButton
+                        label="Next"
+                        primary={true}
+                        disabled={this.props.selectedEvent === null}
+                        onTouchTap={this.nextPage}/>
+                );
                 break;
             case 1:
-                actions.push(<RaisedButton label="Create" primary={true} onTouchTap={this.nextPage}/>)
+                actions.push(
+                    <RaisedButton
+                        label="Create"
+                        primary={true}
+                        disabled={! this.props.event.name.length}
+                        onTouchTap={this.nextPage}/>
+                )
                 break;
             case 2:
                 actions.push(<RaisedButton label="Close" primary={true} onTouchTap={this.exitFacebookImporter}/>)
