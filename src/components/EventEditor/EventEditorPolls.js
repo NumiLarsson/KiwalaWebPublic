@@ -60,13 +60,12 @@ function renderPolls(polls) {
 
             for (let choice in polls[id].choices) {
                 pollChoices.push(
-                  <Field key={choice} className="eventeditor-poll__input" name="poll_enabled" value={polls[id].choices[choice]} component="input" />
+                  <FlatButton key={choice} label={polls[id].choices[choice]} />
                 )
             }
 
             listItems.push(
                 <div key={id} className="eventeditor-poll">
-                      <Field label="Active" name="poll_enabled" component={CheckBox} />
                       <div className="eventeditor-poll__question">
                         <i className="material-icons color-gray">bubble_chart</i>
                         <p>{polls[id].question}</p>
