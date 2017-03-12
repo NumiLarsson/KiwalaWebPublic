@@ -122,6 +122,31 @@
         ".write": "root.child('eventAdmins').child($eventId).child(auth.uid).val() != null"
       }
     },
+    "eventAdmins": {
+      "$eventId": {
+        "$uid": {
+          ".validate": "newData.isBoolean()",
+          ".read": "auth != null && auth.uid == $uid || root.child('eventAdmins').child($eventId).child(auth.uid).val() != null",
+          ".write": "root.child('eventAdmins').child($eventId).child(auth.uid).val() != null"
+        }
+      }
+    },
+    "eventPolls": {
+      "$eventId": {
+        "$pollId": {
+          ".validate": "newData.hasChildren()",
+          ".read": "true",
+          ".write": "auth != null"
+        }
+      }
+    },
+    "eventPollAnswers": {
+      "$pollId": {
+        ".validate": "newData.hasChildren()",
+        ".read": "true",
+        ".write": "auth != null"
+      }
+    },
     "standardAvatars": {
       ".validate": "newData.hasChildren(['id'])",
       "id": {
@@ -132,15 +157,6 @@
       },
       ".read": "true",
       ".write": "true"
-    },
-    "eventAdmins": {
-      "$eventId": {
-        "$uid": {
-          ".validate": "newData.isBoolean()",
-          ".read": "auth != null && auth.uid == $uid || root.child('eventAdmins').child($eventId).child(auth.uid).val() != null",
-          ".write": "root.child('eventAdmins').child($eventId).child(auth.uid).val() != null"
-        }
-      }
     }
   }
 }
