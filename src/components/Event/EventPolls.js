@@ -12,7 +12,7 @@ const EventPolls = (props) => {
             <div className="event-polls">
                 <div className="event-polls__header">
                     <i className="material-icons color-green">poll</i>
-                    <span> Active polls ({ Object.keys(props.activePolls).length })</span>
+                    <span> Active polls</span>
                 </div>
                 <div className="event-polls__list">
                     { renderPolls(props.activePolls, props.answerPollFunction, props.uid) }
@@ -31,12 +31,12 @@ function renderPolls(polls, answerPollFunction, uid) {
     const listItems = []; 
 
     for (let id in polls) {
-        if (polls.hasOwnProperty(id)) {
+        if (polls.hasOwnProperty(id) && polls[id].active) {
 
             let pollChoices = [];
 
             for (let choice in polls[id].choices) {
-              if(polls[id].answers[uid] && polls[id].answers[uid] == choice) {
+              if(polls[id].answers && polls[id].answers[uid] && polls[id].answers[uid] == choice) {
                 pollChoices.push(
                   // If this is already active choice, show it! primary={true}
                   <FlatButton key={choice} label={polls[id].choices[choice]} primary={true} onClick={() => answerPollFunction(id, choice)} />

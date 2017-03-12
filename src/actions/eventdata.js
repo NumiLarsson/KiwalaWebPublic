@@ -55,6 +55,15 @@ export function subscribeToEvent(eventId) {
         });
         Api.events.subscribeToEventPolls(eventId, (poll) => {
             dispatch(setCurrentEventPoll(poll));
+
+            Api.events.subscribeToEventPollAnswers(poll.id, (pollAnswers) => {
+                dispatch(setCurrentEventPollAnswers(pollAnswers));
+            }, (pollAnswers) => {
+                dispatch(setCurrentEventPollAnswers(pollAnswers));
+            });
+            
+        }, (poll) => {
+            dispatch(setCurrentEventPoll(poll));
         });
         Api.events.subscribeToEventParticipants(eventId, (eventParticipants) => {
             dispatch(setCurrentEventParticipants(eventParticipants));
