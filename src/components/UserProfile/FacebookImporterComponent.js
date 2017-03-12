@@ -94,12 +94,12 @@ class FacebookImporterComponent extends Component {
     }
 
     startFacebookImporter() {
-        this.props.openModal();
+        this.props.openImporter();
     }
 
     exitFacebookImporter() {
         this.props.setPage(0);
-        this.props.closeModal();
+        this.props.closeImporter();
     }
 
     nextPage() {
@@ -156,11 +156,15 @@ class FacebookImporterComponent extends Component {
                                         floatingLabelText="Start Date"
                                         defaultDate={this.props.selectedEvent.event.start_time}
                                         onChange={this.setSelectedEventStartDate}
+                                        fullWidth={true}
+                                        className="flex"
                                     />
                                     <TimePicker
                                         floatingLabelText="Start Time"
                                         defaultTime={this.props.selectedEvent.event.start_time}
                                         onChange={this.setSelectedEventStartTime}
+                                        fullWidth={true}
+                                        className="flex"
                                         />
                                 </div>
 
@@ -171,11 +175,15 @@ class FacebookImporterComponent extends Component {
                                             defaultDate={this.props.selectedEvent.event.end_time}
                                             minDate={this.props.selectedEvent.event.start_time}
                                             onChange={this.setSelectedEventEndDate}
+                                            fullWidth={true}
+                                            className="flex"
                                         />
                                         <TimePicker
                                             floatingLabelText="End Time"
                                             defaultTime={this.props.selectedEvent.event.end_time}
                                             onChange={this.setSelectedEventEndTime}
+                                            fullWidth={true}
+                                            className="flex"
                                         />
                                     </div>
                                     ) : (
@@ -184,10 +192,14 @@ class FacebookImporterComponent extends Component {
                                                 floatingLabelText="End Date"
                                                 minDate={this.props.selectedEvent.event.start_time}
                                                 onChange={this.setSelectedEventEndDate}
+                                                fullWidth={true}
+                                                className="flex"
                                             />
                                             <TimePicker
                                                 floatingLabelText="End Time"
                                                 onChange={this.setSelectedEventEndTime}
+                                                fullWidth={true}
+                                                className="flex"
                                             />
                                         </div>
                                     )
