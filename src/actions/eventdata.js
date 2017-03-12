@@ -16,12 +16,15 @@ import Api from '../api/Api';
 import { EVENT_ACTIONS } from './actionTypes';
 
 //Standard actions.
-export const setCurrentEvent                     = createAction(EVENT_ACTIONS.SET_CURRENT_EVENT);
-export const setCurrentEventData                 = createAction(EVENT_ACTIONS.SET_CURRENT_EVENT_DATA);
-export const setCurrentEventParticipants         = createAction(EVENT_ACTIONS.SET_CURRENT_EVENT_PARTICIPANTS);
-export const updateCurrentEventParticipantsUsers = createAction(EVENT_ACTIONS.UPDATE_CURRENT_EVENT_PARTICIPANTS_USERS);
-export const setCurrentEventModules              = createAction(EVENT_ACTIONS.SET_CURRENT_EVENT_MODULES);
-export const setEventAdminPrivileges             = createAction(EVENT_ACTIONS.SET_EVENT_ADMIN_PRIVILEGES);
+export const setCurrentEvent                        = createAction(EVENT_ACTIONS.SET_CURRENT_EVENT);
+export const setCurrentEventData                    = createAction(EVENT_ACTIONS.SET_CURRENT_EVENT_DATA);
+export const setCurrentEventParticipants            = createAction(EVENT_ACTIONS.SET_CURRENT_EVENT_PARTICIPANTS);
+export const updateCurrentEventParticipantsUsers    = createAction(EVENT_ACTIONS.UPDATE_CURRENT_EVENT_PARTICIPANTS_USERS);
+export const setCurrentEventModules                 = createAction(EVENT_ACTIONS.SET_CURRENT_EVENT_MODULES);
+export const setEventAdminPrivileges                = createAction(EVENT_ACTIONS.SET_EVENT_ADMIN_PRIVILEGES);
+export const setCurrentEventPoll                    = createAction(EVENT_ACTIONS.SET_EVENT_POLL);
+export const setCurrentEventPollAnswers             = createAction(EVENT_ACTIONS.SET_EVENT_POLL_ANSWERS);
+export const eventPollAnswered                      = createAction(EVENT_ACTIONS.EVENT_POLL_ANSWERED);
 
 //Async action. This is what the thunk middleware lets us do.
 export function getEvent(eventId) {
@@ -50,6 +53,9 @@ export function subscribeToEvent(eventId) {
         Api.events.subscribeToEventModules(eventId, (event) => {
             dispatch(setCurrentEventModules(event));
         });
+        Api.events.subscribeToEventPolls(eventId, (poll) => {
+            dispatch(setCurrentEventPoll(poll));
+        });
         Api.events.subscribeToEventParticipants(eventId, (eventParticipants) => {
             dispatch(setCurrentEventParticipants(eventParticipants));
 
@@ -64,6 +70,19 @@ export function subscribeToEvent(eventId) {
                 }
             }
         });
+    }
+}
+
+export function answerEventPoll(uid, pollId, answerId) {
+    return dispatch => {
+        Api.events.answerEventPoll(uid, pollId, answerId)
+        .then((result) => {
+            dispatch(eventPollAnswered(result));
+        })
+        .catch((error) => {
+            console.log(error);
+            dispatch({type: "GET_EVENT_ERROR", payload: pollId});
+        })
     }
 }
 

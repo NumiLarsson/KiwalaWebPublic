@@ -15,7 +15,7 @@ const EventPolls = (props) => {
                     <span> Active polls ({ Object.keys(props.activePolls).length })</span>
                 </div>
                 <div className="event-polls__list">
-                    { renderPolls(props.activePolls) }
+                    { renderPolls(props.activePolls, props.answerPollFunction) }
                 </div>
             </div>
         )
@@ -25,10 +25,9 @@ const EventPolls = (props) => {
             null
         )
     }
-
 }
 
-function renderPolls(polls) {
+function renderPolls(polls, answerPollFunction) {
     const listItems = []; 
 
     for (let id in polls) {
@@ -38,14 +37,15 @@ function renderPolls(polls) {
 
             for (let choice in polls[id].choices) {
               pollChoices.push(
-                  <FlatButton label={polls[id].choices[choice]} />
+                  // If this is already active choice, show it!
+                  <FlatButton key={choice} label={polls[id].choices[choice]} onClick={() => answerPollFunction(id, choice)} />
                 )
             }
 
             listItems.push(
                 <div key={id} className="event-poll">
                       <div className="event-poll__question">
-                        <div className="event-poll__questionmark">?</div>
+                        <i className="material-icons color-gray">bubble_chart</i>
                         <p>{polls[id].question}</p>
                       </div>
                       <div className="event-poll__results">

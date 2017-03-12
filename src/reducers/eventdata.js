@@ -1,6 +1,6 @@
 import { EVENT_ACTIONS } from '../actions/actionTypes';
 import { MAPS_ACTIONS } from '../actions/maps';
-const { SET_CURRENT_EVENT, SET_CURRENT_EVENT_DATA, SET_CURRENT_EVENT_PARTICIPANTS, UPDATE_CURRENT_EVENT_PARTICIPANTS_USERS, SET_EVENT_ADMIN_PRIVILEGES } = EVENT_ACTIONS;
+const { SET_CURRENT_EVENT, SET_CURRENT_EVENT_DATA, SET_CURRENT_EVENT_PARTICIPANTS, UPDATE_CURRENT_EVENT_PARTICIPANTS_USERS, SET_EVENT_ADMIN_PRIVILEGES, SET_EVENT_POLL, SET_EVENT_POLL_ANSWERS } = EVENT_ACTIONS;
 
 const initialState = {
     id: null,
@@ -8,7 +8,7 @@ const initialState = {
     participants: null,
     polls: {
         1: {
-            question: "Help?",
+            question: "Help me with this assignment can you please do that?",
             choices: {
                 1: "No",
                 2: "Yes"
@@ -73,6 +73,14 @@ export default (state = initialState, action) => {
             return Object.assign({}, state, {
                 participants: Object.assign({}, state.participants, {
                     [uid]: action.payload
+                })
+            });
+
+        case SET_EVENT_POLL:
+            let pollID = action.payload;
+            return Object.assign({}, state, {
+                polls: Object.assign({}, state.polls, {
+                    [pollID]: action.payload
                 })
             });
 
