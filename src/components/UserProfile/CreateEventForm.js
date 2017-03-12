@@ -49,6 +49,7 @@ class CreateEventForm extends Component {
                             top: '34px'
                         }}
                         fullWidth={true}
+                        className="flex"
                     />
                     <TimePicker
                         floatingLabelText="Start Time"
@@ -58,6 +59,7 @@ class CreateEventForm extends Component {
                             top: '34px'
                         }}
                         fullWidth={true}
+                        className="flex"
                     />
                 </div>
 
@@ -72,6 +74,7 @@ class CreateEventForm extends Component {
                                     top: '34px'
                                 }}
                                 fullWidth={true}
+                                className="flex"
                             />
                             <TimePicker
                                 floatingLabelText="End Time"
@@ -81,6 +84,7 @@ class CreateEventForm extends Component {
                                     top: '34px'
                                 }}
                                 fullWidth={true}
+                                className="flex"
                             />
                         </div>
                     ) : (
@@ -93,6 +97,7 @@ class CreateEventForm extends Component {
                                     top: '34px'
                                 }}
                                 fullWidth={true}
+                                className="flex"
                             />
                             <TimePicker
                                 floatingLabelText="End Time"
@@ -101,6 +106,7 @@ class CreateEventForm extends Component {
                                     top: '34px'
                                 }}
                                 fullWidth={true}
+                                className="flex"
                             />
                         </div>
                     )
