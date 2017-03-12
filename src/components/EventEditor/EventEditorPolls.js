@@ -23,7 +23,7 @@ class EventEditorPolls extends Component {
                         { renderSubmitButton(this.props.pristine) }
                     </div>
                     <div className="eventeditor-polls__list">
-                        { renderPolls(this.props.activePolls, this.props.answerPollFunction, this.props.uid) }
+                        { renderPolls(this.props.polls) }
                     </div>
                   </div>
                 </form>
@@ -50,7 +50,7 @@ function renderSubmitButton(pristine) {
     }
 }
 
-function renderPolls(polls, answerPollFunction, uid) {
+function renderPolls(polls) {
     const listItems = []; 
 
     for (let id in polls) {
@@ -59,21 +59,14 @@ function renderPolls(polls, answerPollFunction, uid) {
             let pollChoices = [];
 
             for (let choice in polls[id].choices) {
-              if(polls[id].answers && polls[id].answers[uid] && polls[id].answers[uid] == choice) {
                 pollChoices.push(
-                  // If this is already active choice, show it! primary={true}
-                  <FlatButton key={choice} label={polls[id].choices[choice]} primary={true} onClick={() => answerPollFunction(id, choice)} />
+                  <Field key={choice} className="eventeditor-poll__input" name="poll_enabled" value={polls[id].choices[choice]} component="input" />
                 )
-              }
-              else {
-                pollChoices.push(
-                  <FlatButton key={choice} label={polls[id].choices[choice]} onClick={() => answerPollFunction(id, choice)} />
-                )
-              }
             }
 
             listItems.push(
                 <div key={id} className="eventeditor-poll">
+                      <Field label="Active" name="poll_enabled" component={CheckBox} />
                       <div className="eventeditor-poll__question">
                         <i className="material-icons color-gray">bubble_chart</i>
                         <p>{polls[id].question}</p>
