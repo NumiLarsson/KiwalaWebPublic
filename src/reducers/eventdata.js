@@ -6,7 +6,28 @@ const initialState = {
     id: null,
     name: null,
     participants: null,
-    polls: null,
+    polls: {
+        1: {
+            question: "Help?",
+            choices: {
+                1: "No",
+                2: "Yes"
+            },
+            answers: {
+                userid: 1
+            }
+        },
+        2: {
+            question: "Help?",
+            choices: {
+                1: "No",
+                2: "Yes"
+            },
+            answers: {
+                userid: 1
+            }
+        }
+    },
     loaded: null, 
     map: null,
     description: "",
