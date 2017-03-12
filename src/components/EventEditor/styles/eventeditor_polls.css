@@ -57,7 +57,7 @@
 
     display: flex;
     justify-content: flex-start;
-    align-items: center;
+    align-items: flex-start;
     flex-direction: column;
 
     border-radius: 4px;
@@ -92,11 +92,21 @@
 
 .eventeditor-poll__choices {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: space-around;
     flex-direction: row;
 
+    width: 100%;
+
     padding-top: 10px;
+}
+
+.eventeditor-poll__input {
+    padding: 5px;
+    background: none;
+
+    border: none;
+    font-size: 1em;
 }
 
 /* Desktop */
