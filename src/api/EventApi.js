@@ -267,11 +267,15 @@ export default class EventApi {
 	 * @param {string} eventId - The id for the event.
 	 * @param {function} callback - Function to be called when a change occurs.
  	 */
-	subscribeToEventPolls(eventId, callback) {
+	subscribeToEventPolls(eventId, added, changed) {
 		let ref = this.database().ref(`/eventPolls/${eventId}`);
-		ref.on('value', snapshot => {
-			callback(snapshot.val());
-		});
+		ref.on('child_added', (snapshot => {
+			added(snapshot.val());
+		}));
+
+		ref.on('child_changed', (snapshot => {
+			changed(snapshot.val());
+		}));
 
 		this.subscriptions[`eventPolls_${eventId}`] = ref;
 	}
@@ -281,11 +285,23 @@ export default class EventApi {
 	 * @param {string} pollId - The id for the poll.
 	 * @param {function} callback - Function to be called when a change occurs.
  	 */
-	subscribeToEventPollAnswers(pollId, callback) {
+	subscribeToEventPollAnswers(pollId, added, changed) {
 		let ref = this.database().ref(`/eventPollAnswers/${pollId}`);
-		ref.on('value', snapshot => {
-			callback(snapshot.val());
-		});
+		ref.on('child_added', (snapshot => {
+			added(Object.assign({}, {}, {
+				pollId: pollId,
+				uid: snapshot.key,
+				val: snapshot.val()
+			}));
+		}));
+
+		ref.on('child_changed', (snapshot => {
+			changed(Object.assign({}, {}, {
+				pollId: pollId,
+				uid: snapshot.key,
+				val: snapshot.val()
+			}));
+		}));
 
 		this.subscriptions[`eventPollAnswers_${pollId}`] = ref;
 	}
@@ -300,10 +316,7 @@ export default class EventApi {
 	answerEventPoll(uid, pollId, answerId) {
 		let self = this;
 		return new Promise((resolve, reject) => {
-			let updates = {}
-			updates[`/eventPollAnswers/${pollId}/${uid}`] = answerId;
-
-			self.database().ref().update(updates)
+			self.database().ref(`/eventPollAnswers/${pollId}/${uid}`).set(answerId)
 			.then(() => {
 				resolve('SUCCESS');
 			})
@@ -326,7 +339,7 @@ export default class EventApi {
 			.then(snapshot => {
 				let result = snapshot.val();
 
-				if(result && result != 0) {
+				if(result && result !== 0) {
 					resolve(result);
 				}
 				else {

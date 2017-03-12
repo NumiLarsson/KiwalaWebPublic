@@ -6,28 +6,7 @@ const initialState = {
     id: null,
     name: null,
     participants: null,
-    polls: {
-        1: {
-            question: "Help me with this assignment can you please do that?",
-            choices: {
-                1: "No",
-                2: "Yes"
-            },
-            answers: {
-                userid: 1
-            }
-        },
-        2: {
-            question: "Help?",
-            choices: {
-                1: "No",
-                2: "Yes"
-            },
-            answers: {
-                userid: 1
-            }
-        }
-    },
+    polls: null,
     loaded: null, 
     map: null,
     description: "",
@@ -77,10 +56,23 @@ export default (state = initialState, action) => {
             });
 
         case SET_EVENT_POLL:
-            let pollID = action.payload;
+            let pollID = action.payload.id;
             return Object.assign({}, state, {
                 polls: Object.assign({}, state.polls, {
                     [pollID]: action.payload
+                })
+            });
+
+        case SET_EVENT_POLL_ANSWERS:
+            let userId = action.payload.uid;
+            let pollId = action.payload.pollId;
+            return Object.assign({}, state, {
+                polls: Object.assign({}, state.polls, {
+                    [pollId]: Object.assign({}, state.polls[pollId], {
+                        answers: Object.assign({}, state.polls[pollId].answers, {
+                            [userId]: action.payload.val
+                        })
+                    })
                 })
             });
 

@@ -48,14 +48,14 @@
     flex-direction: column;
 
     border-radius: 4px;
-    background-color: #eee;
+    background-color: #F5F5F5;
 }
 
 .event-poll__question {
     width: 100%;
 
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: flex-start;
 
     padding-bottom: 10px;
@@ -65,6 +65,8 @@
 .event-poll__question > i {
     margin: 0px;
     margin-right: 5px;
+    color: #BDBDBD;
+    justify-content: flex-start;
 }
 .event-poll__question > p {
     margin: 0px;
