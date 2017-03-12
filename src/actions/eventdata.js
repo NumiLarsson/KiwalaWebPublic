@@ -21,6 +21,7 @@ export const setCurrentEventData                 = createAction(EVENT_ACTIONS.SE
 export const setCurrentEventParticipants         = createAction(EVENT_ACTIONS.SET_CURRENT_EVENT_PARTICIPANTS);
 export const updateCurrentEventParticipantsUsers = createAction(EVENT_ACTIONS.UPDATE_CURRENT_EVENT_PARTICIPANTS_USERS);
 export const setCurrentEventModules              = createAction(EVENT_ACTIONS.SET_CURRENT_EVENT_MODULES);
+export const setEventAdminPrivileges             = createAction(EVENT_ACTIONS.SET_EVENT_ADMIN_PRIVILEGES);
 
 //Async action. This is what the thunk middleware lets us do.
 export function getEvent(eventId) {
@@ -63,5 +64,18 @@ export function subscribeToEvent(eventId) {
                 }
             }
         });
+    }
+}
+
+export function hasAdminPrivileges(eventId, uid) {
+    return dispatch => {
+        Api.events.hasAdminPrivileges(eventId, uid)
+        .then((result) => {
+            dispatch(setEventAdminPrivileges(result))
+        })
+        .catch((error) => {
+            console.log(error);
+            dispatch({type: "GET_EVENT_ERROR", payload: eventId});
+        })
     }
 }

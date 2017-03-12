@@ -31,7 +31,7 @@ type Event {
 
 //eventData
 path /eventData/{eventId} is EventData {
-  write() {isEvent(eventId)}
+  write() {isEvent(eventId) && userIsAdminOf(eventId)}
   read() {true}
 }
 
@@ -56,7 +56,7 @@ path /eventParticipants/{event}/{uid} is Boolean {
 //eventModules
 path /eventModules/{eventId} is EventModules {
   read() {true}
-  write() {true}
+  write() {userIsAdminOf(eventId)}
 }
 
 type EventModules {
@@ -86,8 +86,17 @@ path /standardAvatars is StandardAvatar {
 }
 
 type StandardAvatar {
-  id: UrlString}
+  id: UrlString
+}
 
+// Event admins
+
+path /eventAdmins/{eventId}/{uid} is EventAdmin {
+  read() {isCurrentUser(uid) || userIsAdminOf(eventId)}
+  write() {userIsAdminOf(eventId)}
+}
+
+type EventAdmin extends Boolean {}
 
 //utility types
 
@@ -112,3 +121,4 @@ type EmailString extends String {
 isCurrentUser(uid) { isSignedIn() && auth.uid == uid }
 isSignedIn() { auth != null }
 isEvent(event) {prior(root.events[event]) != null}
+userIsAdminOf(event) {prior(root.eventAdmins[event][auth.uid]) != null}

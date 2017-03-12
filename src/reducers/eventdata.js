@@ -1,6 +1,6 @@
 import { EVENT_ACTIONS } from '../actions/actionTypes';
 import { MAPS_ACTIONS } from '../actions/maps';
-const { SET_CURRENT_EVENT, SET_CURRENT_EVENT_DATA, SET_CURRENT_EVENT_PARTICIPANTS, UPDATE_CURRENT_EVENT_PARTICIPANTS_USERS } = EVENT_ACTIONS;
+const { SET_CURRENT_EVENT, SET_CURRENT_EVENT_DATA, SET_CURRENT_EVENT_PARTICIPANTS, UPDATE_CURRENT_EVENT_PARTICIPANTS_USERS, SET_EVENT_ADMIN_PRIVILEGES } = EVENT_ACTIONS;
 
 const initialState = {
     id: null,
@@ -11,7 +11,8 @@ const initialState = {
     description: "",
     startDate: null,
     location: null,
-    headerImage: null
+    headerImage: null,
+    adminLevel: 0 
 }
 
 export default (state = initialState, action) => {
@@ -46,13 +47,17 @@ export default (state = initialState, action) => {
             });
 
         case UPDATE_CURRENT_EVENT_PARTICIPANTS_USERS:
-
             let uid = action.payload.uid;
             return Object.assign({}, state, {
                 participants: Object.assign({}, state.participants, {
                     [uid]: action.payload
                 })
-            });            
+            });
+
+        case SET_EVENT_ADMIN_PRIVILEGES:
+            return Object.assign({}, state, {
+                adminLevel: action.payload
+            });
 
         case MAPS_ACTIONS.MAP_IMAGE_URL: 
             return Object.assign({}, state, {

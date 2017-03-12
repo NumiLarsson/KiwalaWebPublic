@@ -139,7 +139,6 @@ export default class EventApi {
 		this.subscriptions[`eventModules_${eventId}`] = ref;
 	}
 
-
 	/**
 	 * Update the settings for an event module.
 	 * @param {string} eventId - The id of the event.
@@ -261,6 +260,32 @@ export default class EventApi {
 		}));
 
 		this.subscriptions['eventList'] = ref;
+	}
+
+	/**
+	 * Check is the user has admin rights to the event.
+	 * @param {string} eventId - The id of the event.
+	 * @param {string} uid - The id of the user.
+	 * @returns A Promise which resolves to an event object.
+ 	 */
+	hasAdminPrivileges(eventId, uid) {
+		let self = this;
+		return new Promise((resolve, reject) =>{
+			self.database().ref(`/eventAdmins/${eventId}/${uid}/`).once('value')
+			.then(snapshot => {
+				let result = snapshot.val();
+
+				if(result && result != 0) {
+					resolve(result);
+				}
+				else {
+					resolve(false);
+				}
+			})
+			.catch(err => {
+				reject(err);
+			})
+		})
 	}
 
 	/**
