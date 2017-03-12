@@ -88,9 +88,17 @@ path /eventAdmins/{eventId}/{uid} is EventAdmin {
 type EventAdmin extends Boolean {}
 
 // Event polls
-path /eventPolls/{eventId}/{pollId} is Object {
+
+path /eventPolls/{eventId} is Object {
   read() {true}
+}
+
+path /eventPolls/{eventId}/{pollId} is Object {
   write() {isSignedIn()}
+}
+
+path /eventPollAnswers is Object {
+  read() {true}
 }
 
 path /eventPollAnswers/{pollId} is Object {
