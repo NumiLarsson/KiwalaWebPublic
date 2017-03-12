@@ -60,7 +60,11 @@ class EventViewer extends Component {
 
                         <div className="event-content">
                             <div className="event-content__spotlight">
-                                <EventPolls module={this.props.modules.polls} activePolls={this.props.event.polls} answerPollFunction={this.answerPoll} uid={this.props.user.uid} eventId={this.props.event.id}/>
+                                {(this.props.user) ?
+                                    <EventPolls module={this.props.modules.polls} activePolls={this.props.event.polls} answerPollFunction={this.answerPoll} uid={this.props.user.uid} isAttendingEvent={isAttendingEvent(this.props.event, this.props.user.uid)}/>
+                                    :
+                                    null
+                                }
                                 <EventDetails module={this.props.modules.details} startDate={this.props.event.startDate} location={this.props.event.location} map={this.props.event.map}/>
                                 <EventDescription module={this.props.modules.description} description={this.props.event.description} />
                             </div>
@@ -74,6 +78,14 @@ class EventViewer extends Component {
             )
         }
     }
+}
+
+function isAttendingEvent(event, userUid) {
+    if(event.participants) {
+        return (event.participants[userUid]);
+    }
+    
+    return false;
 }
 
 //Maps the state in our store to the props property of the Example object.
