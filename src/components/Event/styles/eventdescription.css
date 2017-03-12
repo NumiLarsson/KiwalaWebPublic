@@ -26,6 +26,8 @@
 	padding-right: 10px;
 	padding-top: 5px;
 	font-size: 1.2em;
+
+	white-space: pre-line;
 }
 
 .event-description__header > i,
