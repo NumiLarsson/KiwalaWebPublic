@@ -289,6 +289,32 @@ export default class EventApi {
 	}
 
 	/**
+	 * Check is the user has admin rights to the event.
+	 * @param {string} eventId - The id of the event.
+	 * @param {string} uid - The id of the user.
+	 * @returns A Promise which resolves to an event object.
+ 	 */
+	isAttendingEvent(eventId, uid) {
+		let self = this;
+		return new Promise((resolve, reject) =>{
+			self.database().ref(`/eventParticipants/${eventId}/${uid}/`).once('value')
+			.then(snapshot => {
+				let result = snapshot.val();
+
+				if(result && result != 0) {
+					resolve(result);
+				}
+				else {
+					resolve(false);
+				}
+			})
+			.catch(err => {
+				reject(err);
+			})
+		})
+	}
+
+	/**
 	  * Clear all subscriptions.
 	*/
     clearSubscriptions() {

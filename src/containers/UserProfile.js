@@ -17,6 +17,13 @@ class UserProfile extends Component {
         this.handleUserSettingsSaved    = this.handleUserSettingsSaved.bind(this);
     }
 
+    componentWillMount() {
+        if(this.props.user && !this.eventListRequested) {
+            this.eventListRequested = true;
+            this.props.getAcceptedEvents(this.props.user.uid);
+        }
+    }
+
     componentWillUpdate() {
         if(this.props.user && !this.eventListRequested) {
             this.eventListRequested = true;

@@ -91,7 +91,7 @@ type EventAdmin extends Boolean {}
 path /eventPolls/{eventId}/{pollId} is Object {
   read() {true}
   write() {isSignedIn()}
-}z
+}
 
 // -- Specify eventPoll and eventAnswer
 

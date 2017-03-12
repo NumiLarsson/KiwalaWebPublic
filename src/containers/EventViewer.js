@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getEvent, subscribeToEvent, setCurrentEvent, hasAdminPrivileges } from '../actions/eventdata';
+import EventPolls from '../components/Event/EventPolls';
 import EventHeader from '../components/Event/EventHeader';
 import EventDetails from '../components/Event/EventDetails';
 import EventDescription from '../components/Event/EventDescription';
@@ -53,6 +54,7 @@ class EventViewer extends Component {
 
                         <div className="event-content">
                             <div className="event-content__spotlight">
+                                <EventPolls activePolls={this.props.event.polls}/>
                                 <EventDetails module={this.props.modules.details} startDate={this.props.event.startDate} location={this.props.event.location} map={this.props.event.map}/>
                                 <EventDescription module={this.props.modules.description} description={this.props.event.description} />
                             </div>
