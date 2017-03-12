@@ -93,6 +93,11 @@ path /eventPolls/{eventId}/{pollId} is Object {
   write() {isSignedIn()}
 }
 
+path /eventPollAnswers/{pollId} is Object {
+  read() {true}
+  write() {isSignedIn()}
+}
+
 // -- Specify eventPoll and eventAnswer
 
 //standardAvatars
