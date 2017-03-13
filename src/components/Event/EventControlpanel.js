@@ -29,7 +29,8 @@ class EventControlpanel extends Component {
 
     render() {
         const labelStyles = {
-            fontSize: "1.1em"
+            fontSize: "1.1em",
+            fontColor: "#424242"
         };
 
         // If logged in && not attending
@@ -43,7 +44,7 @@ class EventControlpanel extends Component {
                     <div className="event-controlpanel">
                         <FlatButton onTouchTap={this.attendEvent}
                               label="Attend" backgroundColor="#fff"
-                              labelColor="#424242" labelStyle={labelStyles}
+                              labelStyle={labelStyles}
                               icon={<FontIcon className="material-icons" style={iconStyles}>event_available</FontIcon>}/>
                     </div>
                 </div>
@@ -60,7 +61,7 @@ class EventControlpanel extends Component {
                     <div className="event-controlpanel">
                         <FlatButton onTouchTap={this.unattendEvent}
                               label="Unattend" backgroundColor="#fff"
-                              labelColor="#424242" labelStyle={labelStyles}
+                              labelStyle={labelStyles}
                               icon={<FontIcon className="material-icons" style={iconStyles}>event_available</FontIcon>}/>
                     </div>
                 </div>

@@ -3,13 +3,10 @@ import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import FontIcon from 'material-ui/FontIcon';
 import Dialog from 'material-ui/Dialog';
-import {List, ListItem, makeSelectable} from 'material-ui/List';
-import {Card, CardTitle, CardText} from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
 import CircularProgress from 'material-ui/CircularProgress';
 import {connect} from "react-redux";
 import './styles/polleditor.css';
-import moment from 'moment';
 
 class PollEditor extends Component {
 
@@ -32,7 +29,6 @@ class PollEditor extends Component {
             <div>
                 <FlatButton onTouchTap={this.openPollEditor}
                               label="Create Poll" backgroundColor="#fff"
-                              labelColor="#424242"
                               icon={<FontIcon className="material-icons">poll</FontIcon>}/>
                 <Dialog
                     title="Facebook Event Importer"
