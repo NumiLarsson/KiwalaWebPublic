@@ -91,7 +91,7 @@ class CreateEventModal extends Component {
         // If we are going to the next page after setting up the event
         if (this.props.page === 0) {
             this.props.eventCreationInitiated();
-            Api.events.create(this.props.event)
+            Api.events.create(this.props.event, Api.auth.getCurrentUser())
                .then(success => {
                     this.props.setPage(this.props.page + 1);
                     this.props.eventCreationFinished();

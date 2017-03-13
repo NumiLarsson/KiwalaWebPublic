@@ -10,8 +10,10 @@ const initialState = {
     event: {
         name: '',
         description: '',
+        details: '',
+        participants: '',
         start_time: new Date(),
-        end_time: null
+        end_time: null,
     }
 }
 
