@@ -16,8 +16,10 @@ import Api from '../api/Api';
 import { EVENT_EDITOR_ACTIONS } from './actionTypes';
 
 //Standard actions.
-export const eventDataUpdated = createAction(EVENT_EDITOR_ACTIONS.EVENT_DATA_UPDATED);
+export const eventDataUpdated   = createAction(EVENT_EDITOR_ACTIONS.EVENT_DATA_UPDATED);
 export const eventModuleUpdated = createAction(EVENT_EDITOR_ACTIONS.EVENT_MODULE_DATA_UPDATED);
+export const openPollEditor     = createAction(EVENT_EDITOR_ACTIONS.EVENT_POLL_EDITOR_OPEN);
+export const closePollEditor    = createAction(EVENT_EDITOR_ACTIONS.EVENT_POLL_EDITOR_CLOSE);
 
 
 /**
