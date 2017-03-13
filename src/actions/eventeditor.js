@@ -16,11 +16,14 @@ import Api from '../api/Api';
 import { EVENT_EDITOR_ACTIONS } from './actionTypes';
 
 //Standard actions.
-export const eventDataUpdated   = createAction(EVENT_EDITOR_ACTIONS.EVENT_DATA_UPDATED);
-export const eventModuleUpdated = createAction(EVENT_EDITOR_ACTIONS.EVENT_MODULE_DATA_UPDATED);
-export const openPollEditor     = createAction(EVENT_EDITOR_ACTIONS.EVENT_POLL_EDITOR_OPEN);
-export const closePollEditor    = createAction(EVENT_EDITOR_ACTIONS.EVENT_POLL_EDITOR_CLOSE);
-export const resetPollEditor    = createAction(EVENT_EDITOR_ACTIONS.EVENT_POLL_EDITOR_RESET);
+export const eventDataUpdated           = createAction(EVENT_EDITOR_ACTIONS.EVENT_DATA_UPDATED);
+export const eventModuleUpdated         = createAction(EVENT_EDITOR_ACTIONS.EVENT_MODULE_DATA_UPDATED);
+export const openPollEditor             = createAction(EVENT_EDITOR_ACTIONS.EVENT_POLL_EDITOR_OPEN);
+export const closePollEditor            = createAction(EVENT_EDITOR_ACTIONS.EVENT_POLL_EDITOR_CLOSE);
+export const resetPollEditor            = createAction(EVENT_EDITOR_ACTIONS.EVENT_POLL_EDITOR_RESET);
+export const eventPollCreated           = createAction(EVENT_EDITOR_ACTIONS.EVENT_POLL_CREATED);
+export const eventPollAnswersRemoved    = createAction(EVENT_EDITOR_ACTIONS.EVENT_POLL_ANSWERS_REMOVED);
+export const eventPollRemoved           = createAction(EVENT_EDITOR_ACTIONS.EVENT_POLL_REMOVED);
 
 export function initNewPollAndOpenEditor() {
     return dispatch => {
@@ -29,6 +32,34 @@ export function initNewPollAndOpenEditor() {
 
         //Then open the editor
         dispatch(openPollEditor());
+    }
+}
+
+export function createPollForEvent(eventId, pollData) {
+    return dispatch => {
+        Api.events.createEventPoll(eventId, pollData, function() {
+            dispatch(eventPollCreated());
+            dispatch(closePollEditor());
+
+            //if error
+            //dispatch({type: "CREATE_EVENTPOLL_ERROR", payload: {eventId: eventId, pollData: pollData}});
+        });
+    }
+}
+
+export function removePollFromEvent(eventId, pollId) {
+    return dispatch => {
+        Api.events.removeEventPoll(eventId, pollId, function() {
+            dispatch(eventPollRemoved());
+
+            //if error
+            //dispatch({type: "CREATE_EVENTPOLL_ERROR", payload: {eventId: eventId, pollData: pollData}});
+        }, function() {
+            dispatch(eventPollAnswersRemoved());
+
+            //if error
+            //dispatch({type: "CREATE_EVENTPOLL_ERROR", payload: {eventId: eventId, pollData: pollData}});
+        });
     }
 }
 

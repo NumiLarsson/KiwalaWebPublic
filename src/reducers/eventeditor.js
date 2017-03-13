@@ -4,13 +4,7 @@ const { EVENT_POLL_EDITOR_OPEN, EVENT_POLL_EDITOR_CLOSE, EVENT_POLL_EDITOR_RESET
 const initialState = {
     polleditor: {
         loading: false,
-        open: false,
-        poll: {
-            question: "",
-            active: true,
-            id: null,
-            choices: []
-        }
+        open: false
     }
 }
 

@@ -25,7 +25,7 @@ class EventEditorPolls extends Component {
                         { renderSubmitButton(this.props.pristine) }
                     </div>
                     <div className="eventeditor-polls__list">
-                        { renderPolls(this.props.polls) }
+                        { renderPolls(this.props.polls, this.props.removePoll) }
                     </div>
                   </div>
                 </form>
@@ -53,7 +53,7 @@ function renderSubmitButton(pristine) {
     }
 }
 
-function renderPolls(polls) {
+function renderPolls(polls, removePoll) {
     const listItems = []; 
 
     for (let id in polls) {
@@ -69,6 +69,8 @@ function renderPolls(polls) {
 
             listItems.push(
                 <div key={id} className="eventeditor-poll">
+                      <FlatButton label="Remove" onTouchTap={() => removePoll(id)} icon={<FontIcon className="material-icons" color="#E53935">remove_circle</FontIcon>} />
+                      <br/>
                       <div className="eventeditor-poll__question">
                         <i className="material-icons color-gray">bubble_chart</i>
                         <p>{polls[id].question}</p>

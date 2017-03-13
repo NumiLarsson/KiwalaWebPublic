@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
+import IconButton from 'material-ui/IconButton';
 import FontIcon from 'material-ui/FontIcon';
 import Dialog from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
-import { Field, reduxForm, formValueSelector, reset } from 'redux-form';
+import CheckBox from '../Utils/CheckBoxField';
+import { Field, FieldArray, reduxForm, formValueSelector, reset, submit } from 'redux-form';
 import CircularProgress from 'material-ui/CircularProgress';
 import {connect} from "react-redux";
 import { initNewPollAndOpenEditor, closePollEditor } from '../../actions/eventeditor'
@@ -21,8 +23,8 @@ class PollEditor extends Component {
         super();
 
         this.handleClose        = this.handleClose.bind(this);
-        this.handleSubmit        = this.handleSubmit.bind(this);
         this.createNewPoll      = this.createNewPoll.bind(this);
+        this.submitPollForm     = this.submitPollForm.bind(this);
     }
 
     createNewPoll() {
@@ -35,22 +37,23 @@ class PollEditor extends Component {
         this.props.resetForm('eventeditor-poll');
     }
 
-    handleSubmit() {
-
+    submitPollForm() {
+        this.props.submitForm('eventeditor-poll');
     }
 
     render() {
         const actions = [
           <FlatButton
             label="Cancel"
-            primary={true}
+            secondary={true}
             onTouchTap={this.handleClose}
           />,
           <FlatButton
             label="Submit"
             primary={true}
-            disabled={true}
-            onTouchTap={this.handleSubmit}
+            disabled={this.props.pristine || this.props.poll.question.length < 3}
+            type="submit"
+            form="polleditor-form"
           />,
         ];
 
@@ -84,30 +87,49 @@ class PollEditor extends Component {
     }
 
     renderPage(poll) {
-
-        let pollChoices = [];
-
-        for (let choice in poll.choices) {
-            pollChoices.push(
-              <FlatButton key={choice} label={poll.choices[choice]} />
-            )
-        }
-
+        const { handleSubmit } = this.props;
         return (
-            <form onSubmit={this.handleClose}>
+            <form onSubmit={handleSubmit} id="polleditor-form">
                 <div className="polleditor-poll">
+                  <br/>
                   <div className="polleditor-poll__question">
                     <i className="material-icons color-gray">bubble_chart</i>
                     <Field className="polleditor-poll__questionfield" placeholder="Question" name="poll_question" component="input" type="text" />
                   </div>
-                  <div className="polleditor-poll__choices">
-                    {pollChoices}
-                  </div>
+                <FieldArray name="poll_choices" component={renderPollChoices} />
                 </div>
             </form>
         );
     }
 }
+
+const iconButtonStyle = {
+    verticalAlign: "center"
+}
+
+const renderPollChoices = ({ fields }) => (
+  <div className="polleditor-pollchoices">
+      <RaisedButton onClick={() => fields.push()}  label="Add answer" />
+      <div className="polleditor-poll__choices">
+        {fields.map((choice, index) =>
+          <div key={index} className="polleditor-poll__choice">
+            
+            <Field
+              className="polleditor-poll__choicefield"
+              name={choice}
+              type="text"
+              component="input"
+              placeholder={`Choice #${index + 1}`}/>
+              <IconButton style={iconButtonStyle} onClick={() => fields.remove(index)}>
+                  <FontIcon className="material-icons" color="#E53935" style={iconButtonStyle}>remove_circle</FontIcon>
+              </IconButton>
+          </div>
+        )}
+        {fields.error && <div className="error">{fields.error}</div>}
+      </div>
+  </div>
+)
+
 
 // Decorate the form component
 PollEditor = reduxForm({
@@ -127,9 +149,9 @@ const mapStateToProps = (state) => {
             choices: selector(state, 'poll_choices')
         },
         initialValues : {
-            poll_question: state.eventeditor.polleditor.poll.question,
-            poll_active: state.eventeditor.polleditor.poll.active,
-            poll_choices: state.eventeditor.polleditor.poll.choices
+            poll_question: '',
+            poll_active: true,
+            poll_choices: []
         }
     }
 }
@@ -140,6 +162,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     resetForm: (formName) => {
       dispatch(reset(formName))
+    },
+    submitForm: (formName) => {
+        dispatch(submit(formName))
     },
     initNewPollAndOpenEditor: () => dispatch(initNewPollAndOpenEditor()),
     closePollEditor: () => dispatch(closePollEditor())

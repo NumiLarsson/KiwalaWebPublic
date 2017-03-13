@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getEvent, subscribeToEvent, setCurrentEvent } from '../actions/eventdata';
-import { updateEventData, updateEventModuleSettings } from '../actions/eventeditor';
+import { updateEventData, updateEventModuleSettings, createPollForEvent, removePollFromEvent } from '../actions/eventeditor';
 import EventEditorPolls from '../components/EventEditor/EventEditorPolls';
 import EventEditorHeader from '../components/EventEditor/EventEditorHeader';
 import EventEditorDetails from '../components/EventEditor/EventEditorDetails';
@@ -29,6 +29,8 @@ class EventEditor extends Component {
         this.handleDescriptionModuleSaved   = this.handleDescriptionModuleSaved.bind(this);
         this.handleParticipantsModuleSaved  = this.handleParticipantsModuleSaved.bind(this);
         this.handlePollsModuleSaved         = this.handlePollsModuleSaved.bind(this);
+        this.handlePollsModalSaved          = this.handlePollsModalSaved.bind(this);
+        this.handleRemovePoll               = this.handleRemovePoll.bind(this);
     }
 
     handleHeaderSettingsSaved(values) {
@@ -95,6 +97,21 @@ class EventEditor extends Component {
         //this.props.updateEventData(this.props.event.id, eventData);
     }
 
+    handlePollsModalSaved(values) {
+        // Split the values to module
+        const pollSettings = {
+            active: values.poll_active,
+            question: values.poll_question,
+            choices: values.poll_choices
+        };
+        
+        this.props.createPollForEvent(this.props.event.id, pollSettings);
+    }
+
+    handleRemovePoll(pollId) {
+        this.props.removePollFromEvent(this.props.event.id, pollId);
+    }
+
     render() {
         if(!this.props.event.loaded && !this.props.modules.loaded) {
             return (
@@ -109,11 +126,11 @@ class EventEditor extends Component {
 
                         <EventEditorHeader onSubmit={this.handleHeaderSettingsSaved} />
 
-                        <EventEditorControlpanel />
+                        <EventEditorControlpanel handlePollsModalSaved={this.handlePollsModalSaved} />
 
                         <div className="event-content">
                             <div className="event-content__spotlight">
-                                <EventEditorPolls onSubmit={this.handlePollsModuleSaved} />
+                                <EventEditorPolls onSubmit={this.handlePollsModuleSaved} removePoll={this.handleRemovePoll} />
                                 <EventEditorDetails onSubmit={this.handleDetailsModuleSaved} />
                                 <EventEditorDescription onSubmit={this.handleDescriptionModuleSaved} />
                             </div>
@@ -146,7 +163,9 @@ const mapDispatchToProps = {
     subscribeToEvent,
     loadMapImageURL,
     updateEventData,
-    updateEventModuleSettings
+    updateEventModuleSettings,
+    createPollForEvent,
+    removePollFromEvent
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(EventEditor);
