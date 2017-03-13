@@ -267,7 +267,7 @@ export default class EventApi {
 	 * @param {string} eventId - The id for the event.
 	 * @param {function} callback - Function to be called when a change occurs.
  	 */
-	subscribeToEventPolls(eventId, added, changed) {
+	subscribeToEventPolls(eventId, added, changed, removed) {
 		let ref = this.database().ref(`/eventPolls/${eventId}`);
 		ref.on('child_added', (snapshot => {
 			added(snapshot.val());
@@ -275,6 +275,10 @@ export default class EventApi {
 
 		ref.on('child_changed', (snapshot => {
 			changed(snapshot.val());
+		}));
+
+		ref.on('child_removed', (snapshot => {
+			removed(snapshot.val());
 		}));
 
 		this.subscriptions[`eventPolls_${eventId}`] = ref;

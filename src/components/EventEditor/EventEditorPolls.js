@@ -56,7 +56,9 @@ function renderSubmitButton(pristine) {
 function renderPolls(polls, removePoll) {
     const listItems = []; 
 
+    console.log(polls);
     for (let id in polls) {
+        console.log(id);
         if (polls.hasOwnProperty(id) && polls[id].active) {
 
             let pollChoices = [];

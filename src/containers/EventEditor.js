@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getEvent, subscribeToEvent, setCurrentEvent } from '../actions/eventdata';
-import { updateEventData, updateEventModuleSettings, createPollForEvent, removePollFromEvent } from '../actions/eventeditor';
+import { getEvent, subscribeToEvent, setCurrentEvent, removePollFromEvent } from '../actions/eventdata';
+import { updateEventData, updateEventModuleSettings, createPollForEvent } from '../actions/eventeditor';
 import EventEditorPolls from '../components/EventEditor/EventEditorPolls';
 import EventEditorHeader from '../components/EventEditor/EventEditorHeader';
 import EventEditorDetails from '../components/EventEditor/EventEditorDetails';
@@ -39,7 +39,6 @@ class EventEditor extends Component {
             name: values.header_data_name,
             headerImage: values.header_data_image
         };
-        console.log("IS HERE");
         this.props.updateEventData(this.props.event.id, eventData);
     }
 
