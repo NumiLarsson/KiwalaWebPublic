@@ -1,6 +1,6 @@
 import { EVENT_ACTIONS } from '../actions/actionTypes';
 import { MAPS_ACTIONS } from '../actions/maps';
-const { SET_CURRENT_EVENT, SET_CURRENT_EVENT_DATA, SET_CURRENT_EVENT_PARTICIPANTS, UPDATE_CURRENT_EVENT_PARTICIPANTS_USERS, SET_EVENT_ADMIN_PRIVILEGES, SET_EVENT_POLL, SET_EVENT_POLL_ANSWERS } = EVENT_ACTIONS;
+const { SET_CURRENT_EVENT, SET_CURRENT_EVENT_DATA, SET_CURRENT_EVENT_PARTICIPANTS, UPDATE_CURRENT_EVENT_PARTICIPANTS_USERS, SET_EVENT_ADMIN_PRIVILEGES, SET_EVENT_POLL, SET_EVENT_POLL_ANSWERS, EVENT_POLL_REMOVED } = EVENT_ACTIONS;
 
 const initialState = {
     id: null,
@@ -63,6 +63,14 @@ export default (state = initialState, action) => {
                 polls: Object.assign({}, state.polls, {
                     [pollID]: action.payload
                 })
+            });
+
+        case EVENT_POLL_REMOVED:
+            let copy = Object.assign({}, state.polls);
+            delete copy[action.payload];
+
+            return Object.assign({}, state, {
+                polls: copy
             });
 
         case SET_EVENT_POLL_ANSWERS:

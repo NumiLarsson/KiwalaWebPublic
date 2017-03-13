@@ -24,10 +24,11 @@ class PollEditor extends Component {
 
         this.handleClose        = this.handleClose.bind(this);
         this.createNewPoll      = this.createNewPoll.bind(this);
-        this.submitPollForm     = this.submitPollForm.bind(this);
     }
 
     createNewPoll() {
+        this.props.resetForm('eventeditor-poll');
+        
         this.props.initNewPollAndOpenEditor();
     }
 
@@ -35,10 +36,6 @@ class PollEditor extends Component {
         this.props.closePollEditor();
         //Use data from editor
         this.props.resetForm('eventeditor-poll');
-    }
-
-    submitPollForm() {
-        this.props.submitForm('eventeditor-poll');
     }
 
     render() {

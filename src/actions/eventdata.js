@@ -25,6 +25,8 @@ export const setEventAdminPrivileges                = createAction(EVENT_ACTIONS
 export const setCurrentEventPoll                    = createAction(EVENT_ACTIONS.SET_EVENT_POLL);
 export const setCurrentEventPollAnswers             = createAction(EVENT_ACTIONS.SET_EVENT_POLL_ANSWERS);
 export const eventPollAnswered                      = createAction(EVENT_ACTIONS.EVENT_POLL_ANSWERED);
+export const eventPollRemoved                       = createAction(EVENT_ACTIONS.EVENT_POLL_REMOVED);
+export const eventPollAnswersRemoved                = createAction(EVENT_ACTIONS.EVENT_POLL_ANSWERS_REMOVED);
 
 //Async action. This is what the thunk middleware lets us do.
 export function getEvent(eventId) {
@@ -64,6 +66,8 @@ export function subscribeToEvent(eventId) {
             
         }, (poll) => {
             dispatch(setCurrentEventPoll(poll));
+        }, (poll) => {
+            dispatch(eventPollRemoved(poll.id));
         });
         Api.events.subscribeToEventParticipants(eventId, (eventParticipants) => {
             dispatch(setCurrentEventParticipants(eventParticipants));
@@ -78,6 +82,22 @@ export function subscribeToEvent(eventId) {
                     })
                 }
             }
+        });
+    }
+}
+
+export function removePollFromEvent(eventId, pollId) {
+    return dispatch => {
+        Api.events.removeEventPoll(eventId, pollId, function() {
+            //dispatch(eventPollRemoved(pollId));
+
+            //if error
+            //dispatch({type: "CREATE_EVENTPOLL_ERROR", payload: {eventId: eventId, pollData: pollData}});
+        }, function() {
+            dispatch(eventPollAnswersRemoved());
+
+            //if error
+            //dispatch({type: "CREATE_EVENTPOLL_ERROR", payload: {eventId: eventId, pollData: pollData}});
         });
     }
 }
