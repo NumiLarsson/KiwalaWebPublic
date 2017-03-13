@@ -23,6 +23,9 @@ export function getAcceptedEvents(uid) {
                     })
                 })
             }
+            else {
+                dispatch({type: "NO_EVENT_IN_LIST", payload: events})
+            }
         })
     }
 }

@@ -10,6 +10,11 @@ const initialState = {
 export default (state = initialState, action) => {
     switch(action.type) {
 
+        case USER_PROFILE_ACTIONS.NO_EVENT_IN_LIST:
+            return Object.assign({}, state, {
+                eventListLoaded: true
+            });
+
         case USER_PROFILE_ACTIONS.GET_ACCEPTED_EVENTS_DATA:
             return addOrChangeData(state, action.payload);
 

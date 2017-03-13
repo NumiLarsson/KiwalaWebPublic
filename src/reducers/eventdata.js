@@ -21,10 +21,12 @@ export default (state = initialState, action) => {
 
         case SET_CURRENT_EVENT:
             const {id, name} = action.payload;
-            return Object.assign({}, state, {
+            return Object.assign({}, initialState, {
                 id,
                 name,
-                loaded: true
+                loaded: true,
+                polls: null,
+                participants: null
             });
 
         case SET_CURRENT_EVENT_DATA:
