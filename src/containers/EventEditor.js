@@ -37,6 +37,7 @@ class EventEditor extends Component {
             name: values.header_data_name,
             headerImage: values.header_data_image
         };
+        console.log("IS HERE");
         this.props.updateEventData(this.props.event.id, eventData);
     }
 

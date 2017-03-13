@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PollEditor from './PollEditor';
 import './styles/eventeditor_controlpanel.css';
 
 class EventEditorControlpanel extends Component {
@@ -28,7 +29,7 @@ class EventEditorControlpanel extends Component {
         return (
             <div className="eventeditor-controlpanel-wrapper">
                 <div className="eventeditor-controlpanel">
-                    <button className="eventeditor-controlpanel__button" onClick={this.attendEvent}><span>Create Poll</span> <i className="material-icons">poll</i></button>
+                    <PollEditor />
                 </div>
             </div>
         )
