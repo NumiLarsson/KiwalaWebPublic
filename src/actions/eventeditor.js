@@ -20,7 +20,17 @@ export const eventDataUpdated   = createAction(EVENT_EDITOR_ACTIONS.EVENT_DATA_U
 export const eventModuleUpdated = createAction(EVENT_EDITOR_ACTIONS.EVENT_MODULE_DATA_UPDATED);
 export const openPollEditor     = createAction(EVENT_EDITOR_ACTIONS.EVENT_POLL_EDITOR_OPEN);
 export const closePollEditor    = createAction(EVENT_EDITOR_ACTIONS.EVENT_POLL_EDITOR_CLOSE);
+export const resetPollEditor    = createAction(EVENT_EDITOR_ACTIONS.EVENT_POLL_EDITOR_RESET);
 
+export function initNewPollAndOpenEditor() {
+    return dispatch => {
+        //First reset the poll state
+        dispatch(resetPollEditor());
+
+        //Then open the editor
+        dispatch(openPollEditor());
+    }
+}
 
 /**
  * Update event data.

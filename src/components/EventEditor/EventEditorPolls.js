@@ -48,7 +48,7 @@ function renderSubmitButton(pristine) {
     else {
         return (
             <Field label="Save" name="polls_save" component={RaisedButton} icon={<FontIcon className="material-icons">save</FontIcon>} 
-                backgroundColor="#689F38" labelColor="#fff" type="submit" type="submit" />
+                backgroundColor="#689F38" labelColor="#fff" type="submit" />
         );
     }
 }

@@ -3,6 +3,64 @@
     max-width: none !important;
 }
 
+.polleditor-poll {
+    padding: 10px;
+    margin: 10px 0px;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+
+    border-radius: 4px;
+    background-color: #F5F5F5;
+}
+
+.polleditor-poll__question {
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    padding-bottom: 10px;
+    border-bottom: 2px solid #E0E0E0;
+}
+
+.polleditor-poll__question > i {
+    margin: 0px;
+    margin-right: 5px;
+    color: #BDBDBD;
+    justify-content: flex-start;
+}
+
+.polleditor-poll__questionfield {
+    border: none;
+    background: none;
+
+    width: 100%;
+    margin: 0px;
+    font-size: 1.1em;
+}
+
+.polleditor-poll__results {
+    width: 100%;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+}
+
+.polleditor-poll__choices {
+    display: flex;
+    justify-content: center;
+    align-items: space-around;
+    flex-direction: row;
+
+    width: 100%;
+
+    padding-top: 10px;
+}
+
 /* Desktop */
 @media only screen and (min-width: 768px) {
     .polleditor-dialog {
