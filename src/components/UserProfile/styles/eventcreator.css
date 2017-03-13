@@ -3,6 +3,24 @@
     flex-direction:  column;
 }
 
+.event-create__location {
+    margin-top: 20px;
+}
+
+.event-create__location-autocomplete {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #cccccc;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.event-create__location-autocomplete:focus {
+    outline: 0;
+    border-bottom: 1px solid rgb(0, 188, 212);
+}
+
 @media screen and (min-width: 1024px) {
     .event-create__date {
         flex-direction: row;

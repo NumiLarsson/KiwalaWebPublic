@@ -4535,6 +4535,12 @@ react-event-listener@^0.4.0:
     react-addons-shallow-compare "^15.4.2"
     warning "^3.0.0"
 
+react-places-autocomplete@^4.0.5:
+  version "4.0.5"
+  resolved "https://registry.yarnpkg.com/react-places-autocomplete/-/react-places-autocomplete-4.0.5.tgz#da1ad45c894e44ec09807105c0a0b96c278661e7"
+  dependencies:
+    react "15.4.2"
+
 react-redux@^5.0.2:
   version "5.0.2"
   resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-5.0.2.tgz#3d9878f5f71c6fafcd45de1fbb162ea31f389814"
@@ -4626,7 +4632,7 @@ react-tap-event-plugin@^2.0.1:
   dependencies:
     fbjs "^0.8.6"
 
-react@^15.4.2:
+react@15.4.2, react@^15.4.2:
   version "15.4.2"
   resolved "https://registry.yarnpkg.com/react/-/react-15.4.2.tgz#41f7991b26185392ba9bae96c8889e7e018397ef"
   dependencies:

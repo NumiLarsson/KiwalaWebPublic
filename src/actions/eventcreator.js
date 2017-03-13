@@ -12,10 +12,12 @@ export const CREATE_ACTIONS = {
     SET_TITLE: 'SET_TITLE',
     SET_DESCRIPTION: 'SET_DESCRIPTION',
     SET_START_TIME: 'SET_START_TIME',
-    SET_END_TIME: 'SET_END_TIME'
+    SET_END_TIME: 'SET_END_TIME',
+    SET_LOCATION: 'SET_LOCATION'
 };
 
 export const setTitle = createAction(CREATE_ACTIONS.SET_TITLE);
 export const setDescription = createAction(CREATE_ACTIONS.SET_DESCRIPTION);
 export const setStartTime = createAction(CREATE_ACTIONS.SET_START_TIME);
 export const setEndTime = createAction(CREATE_ACTIONS.SET_END_TIME);
+export const setLocation = createAction(CREATE_ACTIONS.SET_LOCATION);
