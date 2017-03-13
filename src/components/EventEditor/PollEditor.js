@@ -47,7 +47,7 @@ class PollEditor extends Component {
                               label="Create Poll" backgroundColor="#fff"
                               icon={<FontIcon className="material-icons">poll</FontIcon>}/>
                 <Dialog
-                    title="Poll Editor"
+                    title="Create poll"
                     actions={actions}
                     open={this.props.open}
                     onRequestClose={null}
