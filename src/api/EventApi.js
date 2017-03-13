@@ -312,7 +312,7 @@ export default class EventApi {
 					this.database().ref(`/eventData/${newKey}`).set({
 							description: event.description,
 							headerImage: "http://theinsanedoll.me/wp-content/uploads/2017/01/party.jpg",
-							location: "Rio De Janeiro",
+							location: event.location,
 							name: event.name, 
 							startDate: event.start_time.getTime() 
 						});
@@ -325,7 +325,6 @@ export default class EventApi {
 						 participants: {enabled: true},
 						 polls: {enabled: false},
 					});
-					console.log("done");	
 				});
 		    	resolve(true);
 			}, 1000);

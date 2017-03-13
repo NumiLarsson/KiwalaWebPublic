@@ -11,7 +11,7 @@ const initialState = {
         name: '',
         description: '',
         details: '',
-        participants: '',
+        location: null,
         start_time: new Date(),
         end_time: null,
     }
