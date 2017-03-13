@@ -3,6 +3,7 @@ import FlatButton from 'material-ui/FlatButton';
 import Api from '../../api/Api';
 import IconButton from '../Utils/IconButton';
 import './styles/eventpolls.css';
+import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer } from 'recharts';
 
 const EventPolls = (props) => {
 
@@ -28,11 +29,12 @@ const EventPolls = (props) => {
 
 function renderPolls(polls, answerPollFunction, uid) {
     const listItems = []; 
-
     for (let id in polls) {
         if (polls.hasOwnProperty(id) && polls[id].active) {
 
             let pollChoices = [];
+            let sumAns = sumAnswers(polls[id].answers);
+            let pollAnswers = []
 
             for (let choice in polls[id].choices) {
               if(polls[id].answers && polls[id].answers[uid] && polls[id].answers[uid] == choice) {
@@ -46,8 +48,12 @@ function renderPolls(polls, answerPollFunction, uid) {
                   <FlatButton key={choice} label={polls[id].choices[choice]} onClick={() => answerPollFunction(id, choice)} />
                 )
               }
+              pollAnswers.push(
+                  {choice: polls[id].choices[choice], count: sumAns[choice]}
+              )
             }
-
+            console.log(pollAnswers);
+            
             listItems.push(
                 <div key={id} className="event-poll">
                       <div className="event-poll__question">
@@ -55,6 +61,13 @@ function renderPolls(polls, answerPollFunction, uid) {
                         <p>{polls[id].question}</p>
                       </div>
                       <div className="event-poll__results">
+                        <ResponsiveContainer>
+                            <BarChart data={pollAnswers} margin={{top: 10, right: 30, left: 0, bottom: 0}}>
+                                <Bar dataKey="count" fill="#8884d8" />
+                                <XAxis dataKey="choice" />
+                                <YAxis />
+                            </BarChart> 
+                        </ResponsiveContainer>
                       </div>
                       <div className="event-poll__choices">
                         {pollChoices}
@@ -64,6 +77,19 @@ function renderPolls(polls, answerPollFunction, uid) {
         }
     }
     return listItems;
+}
+
+function sumAnswers(answers) {
+   let summed = {};
+   for(let key in answers) {
+       let ans = answers[key];
+       if (ans in summed) {
+           summed[ans] = summed[ans] + 1;
+       } else {
+           summed[ans] = 1;
+       }
+   }
+   return summed;
 }
 
 export default (EventPolls);
