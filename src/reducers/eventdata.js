@@ -68,7 +68,6 @@ export default (state = initialState, action) => {
         case EVENT_POLL_REMOVED:
             let copy = Object.assign({}, state.polls);
             delete copy[action.payload];
-
             return Object.assign({}, state, {
                 polls: copy
             });

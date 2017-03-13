@@ -1,9 +1,7 @@
 import React from 'react';
 import FlatButton from 'material-ui/FlatButton';
 import Api from '../../api/Api';
-import IconButton from '../Utils/IconButton';
 import './styles/eventpolls.css';
-import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer } from 'recharts';
 
 const EventPolls = (props) => {
 
@@ -37,7 +35,7 @@ function renderPolls(polls, answerPollFunction, uid) {
             let pollAnswers = []
 
             for (let choice in polls[id].choices) {
-              if(polls[id].answers && polls[id].answers[uid] && polls[id].answers[uid] == choice) {
+              if(polls[id].answers && polls[id].answers[uid] && polls[id].answers[uid] === choice) {
                 pollChoices.push(
                   // If this is already active choice, show it! primary={true}
                   <FlatButton key={choice} label={polls[id].choices[choice]} primary={true} onClick={() => answerPollFunction(id, choice)} />
@@ -54,19 +52,12 @@ function renderPolls(polls, answerPollFunction, uid) {
             }
             
             listItems.push(
-                <div key={id} className="event-poll">
+                <div key={id.toString()} className="event-poll">
                       <div className="event-poll__question">
                         <i className="material-icons color-gray">bubble_chart</i>
                         <p>{polls[id].question}</p>
                       </div>
                       <div className="event-poll__results">
-                        <ResponsiveContainer>
-                            <BarChart data={pollAnswers} margin={{top: 10, right: 30, left: 0, bottom: 0}}>
-                                <Bar dataKey="count" fill="#29B6F6" label={true} animationDuration={500} />
-                                <XAxis dataKey="choice" allowDecimals={false}/>
-                                <YAxis hide={true} allowDecimals={false}/>
-                            </BarChart> 
-                        </ResponsiveContainer>
                       </div>
                       <div className="event-poll__choices">
                         {pollChoices}

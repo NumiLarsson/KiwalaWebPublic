@@ -88,12 +88,6 @@ class EventEditor extends Component {
             enabled: values.polls_enabled
         };
         this.props.updateEventModuleSettings(this.props.event.id, 'polls', moduleSettings);
-
-        // Split the values to data
-        const eventData = {
-            description: values.description_data_text
-        };
-        //this.props.updateEventData(this.props.event.id, eventData);
     }
 
     handlePollsModalSaved(values) {
