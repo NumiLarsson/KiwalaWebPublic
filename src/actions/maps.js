@@ -25,7 +25,15 @@ export function loadMapImageURL(val, zoom) {
             if (zoom) {
                 ZOOM = zoom;
             }
+            var geocodeParams = {
+                "address":    "Armégatan 5, 17171 Solna, Sweden"
+            };
+
+            gmAPI.geocode(geocodeParams, function(err, result){
+                    console.log(err, result);
+            });
             var params = {
+                
                 center: val,
                 zoom: ZOOM,
                 size: '620x200',

@@ -21,7 +21,7 @@ class EventViewer extends Component {
     componentWillMount(){
         // perform any preparations for an upcoming update
         // Enable loading state
-        this.props.loadMapImageURL();
+        this.props.loadMapImageURL(this.props.event.location, 12);
         // Load event
         const {eventid} = this.props.params;
         this.props.subscribeToEvent(eventid);
