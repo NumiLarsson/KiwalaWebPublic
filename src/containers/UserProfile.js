@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import UpcomingEventsList from '../components/UserProfile/UpcomingEventsList'
 import ProfileSettings from '../components/UserProfile/ProfileSettings'
-import { getAcceptedEvents, updateUserProfile, fetchStandardAvatars, setAvatarSelectorOpen } from '../actions/userprofile'
+import { getAcceptedEvents, resetUserProfileData, updateUserProfile, fetchStandardAvatars, setAvatarSelectorOpen } from '../actions/userprofile'
 import Spinner from '../components/Utils/Spinner';
 import NavigationControl from '../components/Navigation/NavigationControl';
 import CreateEventComponent from '../components/UserProfile/CreateEventComponent';
@@ -31,6 +31,10 @@ class UserProfile extends Component {
             this.eventListRequested = true;
             this.props.getAcceptedEvents(this.props.user.uid);
         }
+    }
+
+    componentWillUnmount() {
+        this.props.resetUserProfileData();
     }
 
     handleUserSettingsSaved(values) {
@@ -82,7 +86,8 @@ const mapDispatchToProps = {
     getAcceptedEvents,
     updateUserProfile,
     fetchStandardAvatars,
-    setAvatarSelectorOpen
+    setAvatarSelectorOpen,
+    resetUserProfileData
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserProfile);
