@@ -64,8 +64,8 @@ function renderPolls(polls, answerPollFunction, uid) {
                         <ResponsiveContainer>
                             <BarChart data={pollAnswers} margin={{top: 10, right: 30, left: 0, bottom: 0}}>
                                 <Bar dataKey="count" fill="#8884d8" />
-                                <XAxis dataKey="choice" />
-                                <YAxis />
+                                <XAxis dataKey="choice" allowDecimals={false}/>
+                                <YAxis allowDecimals={false}/>
                             </BarChart> 
                         </ResponsiveContainer>
                       </div>
