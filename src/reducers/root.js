@@ -3,6 +3,7 @@ import { reducer as formReducer } from 'redux-form';
 import { routerReducer } from 'react-router-redux';
 //Import custom reducers here.
 import eventdata from './eventdata';
+import eventeditor from './eventeditor';
 import eventmodules from './eventmodules';
 import auth from './auth';
 import login from "./login";
@@ -13,6 +14,7 @@ import createEventModal from "./createEventModal";
 
 const root = combineReducers({
     eventdata,
+    eventeditor,
     eventmodules,
     userprofile,
     auth,
