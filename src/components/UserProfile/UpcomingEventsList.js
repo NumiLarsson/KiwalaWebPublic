@@ -5,12 +5,21 @@ import { formatDate, formatLocation } from '../../utils/utils';
 import './styles/upcomingeventslist.css';
 
 const UpcomingEventsList = (props) => {
-    if (props.eventList && props.eventListLoaded) { //This check has not been necessary, but try
+    if (props.eventList && props.eventList.length > 0 && props.eventListLoaded) { //This check has not been necessary, but try
         return (
             <div className="upcomingeventslist">
                 { (props.eventList) ? <h1 className="userprofile__header">Eventlist</h1> : null}
                 <div className="upcomingeventslist-eventlist">
                     {Object.keys(props.eventList).map(key => props.eventList[key]).map(renderEventItem)}
+                </div>
+            </div>
+        )
+    } else if (props.eventList.length === 0) {
+        return (
+            <div className="upcomingeventslist">
+                { (props.eventList) ? <h1 className="userprofile__header">Eventlist</h1> : null}
+                <div className="upcomingeventslist-eventlist">
+                    <h1 className="userprofile__header"> Not attending any events </h1>
                 </div>
             </div>
         )
