@@ -16,12 +16,17 @@ import Api from '../api/Api';
 import { EVENT_ACTIONS } from './actionTypes';
 
 //Standard actions.
-export const setCurrentEvent                     = createAction(EVENT_ACTIONS.SET_CURRENT_EVENT);
-export const setCurrentEventData                 = createAction(EVENT_ACTIONS.SET_CURRENT_EVENT_DATA);
-export const setCurrentEventParticipants         = createAction(EVENT_ACTIONS.SET_CURRENT_EVENT_PARTICIPANTS);
-export const updateCurrentEventParticipantsUsers = createAction(EVENT_ACTIONS.UPDATE_CURRENT_EVENT_PARTICIPANTS_USERS);
-export const setCurrentEventModules              = createAction(EVENT_ACTIONS.SET_CURRENT_EVENT_MODULES);
-export const setEventAdminPrivileges             = createAction(EVENT_ACTIONS.SET_EVENT_ADMIN_PRIVILEGES);
+export const setCurrentEvent                        = createAction(EVENT_ACTIONS.SET_CURRENT_EVENT);
+export const setCurrentEventData                    = createAction(EVENT_ACTIONS.SET_CURRENT_EVENT_DATA);
+export const setCurrentEventParticipants            = createAction(EVENT_ACTIONS.SET_CURRENT_EVENT_PARTICIPANTS);
+export const updateCurrentEventParticipantsUsers    = createAction(EVENT_ACTIONS.UPDATE_CURRENT_EVENT_PARTICIPANTS_USERS);
+export const setCurrentEventModules                 = createAction(EVENT_ACTIONS.SET_CURRENT_EVENT_MODULES);
+export const setEventAdminPrivileges                = createAction(EVENT_ACTIONS.SET_EVENT_ADMIN_PRIVILEGES);
+export const setCurrentEventPoll                    = createAction(EVENT_ACTIONS.SET_EVENT_POLL);
+export const setCurrentEventPollAnswers             = createAction(EVENT_ACTIONS.SET_EVENT_POLL_ANSWERS);
+export const eventPollAnswered                      = createAction(EVENT_ACTIONS.EVENT_POLL_ANSWERED);
+export const eventPollRemoved                       = createAction(EVENT_ACTIONS.EVENT_POLL_REMOVED);
+export const eventPollAnswersRemoved                = createAction(EVENT_ACTIONS.EVENT_POLL_ANSWERS_REMOVED);
 
 //Async action. This is what the thunk middleware lets us do.
 export function getEvent(eventId) {
@@ -50,6 +55,20 @@ export function subscribeToEvent(eventId) {
         Api.events.subscribeToEventModules(eventId, (event) => {
             dispatch(setCurrentEventModules(event));
         });
+        Api.events.subscribeToEventPolls(eventId, (poll) => {
+            dispatch(setCurrentEventPoll(poll));
+
+            Api.events.subscribeToEventPollAnswers(poll.id, (pollAnswers) => {
+                dispatch(setCurrentEventPollAnswers(pollAnswers));
+            }, (pollAnswers) => {
+                dispatch(setCurrentEventPollAnswers(pollAnswers));
+            });
+            
+        }, (poll) => {
+            dispatch(setCurrentEventPoll(poll));
+        }, (poll) => {
+            dispatch(eventPollRemoved(poll.id));
+        });
         Api.events.subscribeToEventParticipants(eventId, (eventParticipants) => {
             dispatch(setCurrentEventParticipants(eventParticipants));
 
@@ -64,6 +83,35 @@ export function subscribeToEvent(eventId) {
                 }
             }
         });
+    }
+}
+
+export function removePollFromEvent(eventId, pollId) {
+    return dispatch => {
+        Api.events.removeEventPoll(eventId, pollId, function() {
+            //dispatch(eventPollRemoved(pollId));
+
+            //if error
+            //dispatch({type: "CREATE_EVENTPOLL_ERROR", payload: {eventId: eventId, pollData: pollData}});
+        }, function() {
+            dispatch(eventPollAnswersRemoved());
+
+            //if error
+            //dispatch({type: "CREATE_EVENTPOLL_ERROR", payload: {eventId: eventId, pollData: pollData}});
+        });
+    }
+}
+
+export function answerEventPoll(uid, pollId, answerId) {
+    return dispatch => {
+        Api.events.answerEventPoll(uid, pollId, answerId)
+        .then((result) => {
+            dispatch(eventPollAnswered(result));
+        })
+        .catch((error) => {
+            console.log(error);
+            dispatch({type: "ANSWER_EVENTPOLL_ERROR", payload: pollId});
+        })
     }
 }
 

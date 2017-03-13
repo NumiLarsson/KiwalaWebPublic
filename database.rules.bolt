@@ -62,7 +62,8 @@ path /eventModules/{eventId} is EventModules {
 type EventModules {
   details: DetailsModule,
   description: DescriptionModule,
-  participants: ParticipantsModule
+  participants: ParticipantsModule,
+  polls: PollsModule
 }
 
 type EventModule {
@@ -79,6 +80,37 @@ type DescriptionModule extends EventModule {}
 
 type ParticipantsModule extends EventModule {}
 
+type PollsModule extends EventModule {}
+
+// Event admins
+path /eventAdmins/{eventId}/{uid} is EventAdmin {
+  read() {isCurrentUser(uid) || userIsAdminOf(eventId)}
+  write() {userIsAdminOf(eventId)}
+}
+
+type EventAdmin extends Boolean {}
+
+// Event polls
+
+path /eventPolls/{eventId} is Object {
+  read() {true}
+}
+
+path /eventPolls/{eventId}/{pollId} is Object {
+  write() {isSignedIn()}
+}
+
+path /eventPollAnswers is Object {
+  read() {true}
+}
+
+path /eventPollAnswers/{pollId} is Object {
+  read() {true}
+  write() {isSignedIn()}
+}
+
+// -- Specify eventPoll and eventAnswer
+
 //standardAvatars
 path /standardAvatars is StandardAvatar {
   read() {true}
@@ -88,15 +120,6 @@ path /standardAvatars is StandardAvatar {
 type StandardAvatar {
   id: UrlString
 }
-
-// Event admins
-
-path /eventAdmins/{eventId}/{uid} is EventAdmin {
-  read() {isCurrentUser(uid) || userIsAdminOf(eventId)}
-  write() {userIsAdminOf(eventId)}
-}
-
-type EventAdmin extends Boolean {}
 
 //utility types
 

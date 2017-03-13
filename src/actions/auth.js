@@ -29,7 +29,7 @@ export function listenForAuthChangesAndSubscribeToUser() {
         Api.auth.listenForAuthChanges(
             (user) => {
                 dispatch(userLoggedIn(user));
-                Api.user.createUserIfNotExists(user)
+                //Api.user.createUserIfNotExists(user)
 
                 Api.user.clearSubscriptions()
 

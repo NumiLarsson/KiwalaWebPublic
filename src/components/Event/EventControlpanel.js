@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import FlatButton from 'material-ui/FlatButton';
+import FontIcon from 'material-ui/FontIcon';
 import { connect } from 'react-redux';
 import { attendEvent, unattendEvent } from '../../actions/eventviewer';
 import './styles/eventcontrolpanel.css';
@@ -26,22 +28,41 @@ class EventControlpanel extends Component {
     }
 
     render() {
+        const labelStyles = {
+            fontSize: "1.1em",
+            fontColor: "#424242"
+        };
+
         // If logged in && not attending
         if(this.props.user && !this.props.user.isAnonymous && !isAttendingEvent(this.props.event, this.props.user.uid)) {
+            const iconStyles = {
+                color: "#43A047"
+            };
+
             return (
                 <div className="event-controlpanel-wrapper">
                     <div className="event-controlpanel">
-                        <button className="event-controlpanel__attendbtn" onClick={this.attendEvent}><i className="material-icons">event_available</i> <span>Attend</span></button>
+                        <FlatButton onTouchTap={this.attendEvent}
+                              label="Attend" backgroundColor="#fff"
+                              labelStyle={labelStyles}
+                              icon={<FontIcon className="material-icons" style={iconStyles}>event_available</FontIcon>}/>
                     </div>
                 </div>
             )
         }
         // If logged in && already attending
         else if(this.props.user && !this.props.user.isAnonymous && isAttendingEvent(this.props.event, this.props.user.uid)) {
+            const iconStyles = {
+                color: "#E57373"
+            };
+
             return (
                 <div className="event-controlpanel-wrapper">
                     <div className="event-controlpanel">
-                        <button className="event-controlpanel__unattendbtn" onClick={this.unattendEvent}><i className="material-icons">event_busy</i> <span>Unattend</span></button>
+                        <FlatButton onTouchTap={this.unattendEvent}
+                              label="Unattend" backgroundColor="#fff"
+                              labelStyle={labelStyles}
+                              icon={<FontIcon className="material-icons" style={iconStyles}>event_available</FontIcon>}/>
                     </div>
                 </div>
             )

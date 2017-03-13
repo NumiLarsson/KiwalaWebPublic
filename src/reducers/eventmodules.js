@@ -14,6 +14,9 @@ const initialState = {
     },
     participants: {
         enabled: false
+    },
+    polls: {
+        enabled: false
     }
 }
 

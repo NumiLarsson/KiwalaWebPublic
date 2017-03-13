@@ -16,9 +16,35 @@ import Api from '../api/Api';
 import { EVENT_EDITOR_ACTIONS } from './actionTypes';
 
 //Standard actions.
-export const eventDataUpdated = createAction(EVENT_EDITOR_ACTIONS.EVENT_DATA_UPDATED);
-export const eventModuleUpdated = createAction(EVENT_EDITOR_ACTIONS.EVENT_MODULE_DATA_UPDATED);
+export const eventDataUpdated           = createAction(EVENT_EDITOR_ACTIONS.EVENT_DATA_UPDATED);
+export const eventModuleUpdated         = createAction(EVENT_EDITOR_ACTIONS.EVENT_MODULE_DATA_UPDATED);
+export const openPollEditor             = createAction(EVENT_EDITOR_ACTIONS.EVENT_POLL_EDITOR_OPEN);
+export const closePollEditor            = createAction(EVENT_EDITOR_ACTIONS.EVENT_POLL_EDITOR_CLOSE);
+export const resetPollEditor            = createAction(EVENT_EDITOR_ACTIONS.EVENT_POLL_EDITOR_RESET);
+export const eventPollCreated           = createAction(EVENT_EDITOR_ACTIONS.EVENT_POLL_CREATED);
 
+export function initNewPollAndOpenEditor() {
+    return dispatch => {
+        //First reset the poll state
+        dispatch(resetPollEditor());
+
+        //Then open the editor
+        dispatch(openPollEditor());
+    }
+}
+
+export function createPollForEvent(eventId, pollData) {
+    return dispatch => {
+        Api.events.createEventPoll(eventId, pollData, function() {
+            dispatch(eventPollCreated());
+            dispatch(closePollEditor());
+            dispatch(resetPollEditor());
+
+            //if error
+            //dispatch({type: "CREATE_EVENTPOLL_ERROR", payload: {eventId: eventId, pollData: pollData}});
+        });
+    }
+}
 
 /**
  * Update event data.

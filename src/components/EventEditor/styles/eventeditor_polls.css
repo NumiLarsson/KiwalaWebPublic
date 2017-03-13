@@ -1,0 +1,128 @@
+.eventeditor-polls {
+    padding: 10pt 5pt 10pt 5pt;
+
+    margin-top: 5px;
+    background-color: #fff;
+    text-align: left;
+
+    min-height: 125px;
+
+    width: 100%;
+    word-wrap: break-word;
+    box-sizing: border-box;
+
+    border-radius: 0 0 2px 2px;
+
+    box-shadow: 1px 2px 3px #BDBDBD;
+}
+
+.eventeditor-polls.disabled {
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+.eventeditor-polls__header {
+    padding-bottom: 10px;
+}
+
+.eventeditor-polls__header > i,
+.eventeditor-polls__header > span {
+    vertical-align: middle;
+}
+
+.eventeditor-polls__header > span {
+    font-size: 1.3em;
+}
+
+.eventeditor-polls__mainenabler {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    padding: 0px 5px 10px 0px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #E0E0E0;
+}
+
+.eventeditor-polls__list {
+    padding: 15px 20px;
+
+    /* Temporary values until we have a popup to show the rest */
+    /*height: 145px;*/
+}
+
+.eventeditor-poll {
+    padding: 10px;
+    margin: 10px 0px;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+
+    border-radius: 4px;
+    background-color: #F5F5F5;
+}
+
+.eventeditor-poll__question {
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    padding-bottom: 10px;
+    border-bottom: 2px solid #E0E0E0;
+}
+
+.eventeditor-poll__question > i {
+    margin: 0px;
+    margin-right: 5px;
+    color: #BDBDBD;
+    justify-content: flex-start;
+}
+.eventeditor-poll__question > p {
+    margin: 0px;
+    font-size: 1.1em;
+}
+
+.eventeditor-poll__results {
+    width: 100%;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+}
+
+.eventeditor-poll__choices {
+    display: flex;
+    justify-content: center;
+    align-items: space-around;
+    flex-direction: column;
+
+    width: 100%;
+
+    padding-top: 10px;
+}
+
+.eventeditor-poll__input {
+    padding: 5px;
+    background: none;
+
+    border: none;
+    font-size: 1em;
+}
+
+/* Desktop */
+@media only screen and (min-width: 768px) {
+
+    .eventeditor-polls__header > p {
+        font-size: 1em;
+    }
+
+    .eventeditor-polls__header > span {
+        font-size: 1.1em;
+    }
+
+    .eventeditor-poll__choices {
+        flex-direction: row;
+    }
+}

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import RaisedButton from 'material-ui/RaisedButton';
+import FontIcon from 'material-ui/FontIcon';
 import { Field, reduxForm, formValueSelector, change } from 'redux-form';
-import IconButton from '../Utils/IconButtonField';
 import UserAvatarSelector from './UserAvatarSelector';
 import './styles/profilesettings.css';
 
@@ -96,7 +97,9 @@ function renderSubmitButton(pristine) {
     }
     else {
         return (
-            <Field className="green" mIcon="save" label="Save" name="description_save" component={IconButton} type="submit" />
+            <Field label="Save" name="description_save" 
+                component={RaisedButton} icon={<FontIcon className="material-icons">save</FontIcon>} 
+                backgroundColor="#689F38" labelColor="#fff" type="submit" />
         );
     }
 }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PollEditor from './PollEditor';
 import './styles/eventeditor_controlpanel.css';
 
 class EventEditorControlpanel extends Component {
@@ -7,8 +8,10 @@ class EventEditorControlpanel extends Component {
     constructor() {
         super();
 
-        this.attendEvent = this.attendEvent.bind(this)
-        this.unattendEvent = this.unattendEvent.bind(this)
+        this.attendEvent            = this.attendEvent.bind(this)
+        this.unattendEvent          = this.unattendEvent.bind(this)
+
+        this.handlePollsModalSaved  = this.handlePollsModalSaved.bind(this)
     }
 
     componentDidMount(){
@@ -24,11 +27,15 @@ class EventEditorControlpanel extends Component {
         this.props.unattendEvent(this.props.event.id, this.props.user.uid);
     }
 
+    handlePollsModalSaved(values) {
+        this.props.handlePollsModalSaved(values);
+    }
+
     render() {
         return (
             <div className="eventeditor-controlpanel-wrapper">
                 <div className="eventeditor-controlpanel">
-                    <button className="eventeditor-controlpanel__button" onClick={this.attendEvent}><i className="material-icons">add</i> <span>Add module</span></button>
+                    <PollEditor onSubmit={this.handlePollsModalSaved} />
                 </div>
             </div>
         )

@@ -8,6 +8,7 @@ export const fetchFutureEventsModules 	= createAction(USER_PROFILE_ACTIONS.GET_A
 export const userProfileUpdated         = createAction(USER_PROFILE_ACTIONS.USER_PROFILE_UPDATED);
 export const standardAvatarsRecieved    = createAction(USER_PROFILE_ACTIONS.STANDARD_AVATARS_RECIEVED);
 export const setAvatarSelectorOpen      = createAction(USER_PROFILE_ACTIONS.TOGGLE_AVATAR_SELECTOR);
+export const resetUserProfileData       = createAction(USER_PROFILE_ACTIONS.RESET_USER_PROFILE_DATA); 
 
 export function getAcceptedEvents(uid) {
     return dispatch => {
@@ -22,9 +23,13 @@ export function getAcceptedEvents(uid) {
                     })
                 })
             }
+            else {
+                dispatch({type: "NO_EVENT_IN_LIST", payload: events})
+            }
         })
     }
 }
+
 
 /**
  * Update user data.

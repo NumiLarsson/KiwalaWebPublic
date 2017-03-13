@@ -75,7 +75,10 @@ class Login extends Component {
         if (passed) {
             Api.auth.createUser(this.props.email, this.props.password)
             .then((user) => {
-                Api.user.createUserIfNotExists(user)
+                let userObj = Object.assign({}, user, {
+                    displayName: this.props.name
+                });
+                Api.user.createUserIfNotExists(userObj)
                 .then(() => {
                     this.props.finishLogin();
                 })

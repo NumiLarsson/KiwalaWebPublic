@@ -8,6 +8,11 @@
     margin-bottom: 20px;
 
     background: #F5F5F5;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .avatarselector > h1 {

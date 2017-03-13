@@ -6,7 +6,6 @@
     text-align: left;
 
     min-height: 125px;
-    max-height: 250px;
 
     width: 100%;
     word-wrap: break-word;
@@ -35,8 +34,8 @@
     padding: 15px 20px;
 
     /* Temporary values until we have a popup to show the rest */
-    /*height: 145px;*/
-	max-height: 400px;
+    height: 200px;
+    overflow: auto;
 }
 
 .event-participant {

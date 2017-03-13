@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getEvent, subscribeToEvent, setCurrentEvent, hasAdminPrivileges } from '../actions/eventdata';
+import { getEvent, subscribeToEvent, setCurrentEvent, hasAdminPrivileges, answerEventPoll } from '../actions/eventdata';
+import EventPolls from '../components/Event/EventPolls';
 import EventHeader from '../components/Event/EventHeader';
 import EventDetails from '../components/Event/EventDetails';
 import EventDescription from '../components/Event/EventDescription';
@@ -15,7 +16,8 @@ class EventViewer extends Component {
 
     constructor() {
         super();
-        this.adminPrivilegesRequested         = false;
+        this.adminPrivilegesRequested           = false;
+        this.answerPoll                         = this.answerPoll.bind(this);
     }
 
     componentWillMount(){
@@ -33,6 +35,11 @@ class EventViewer extends Component {
             this.adminPrivilegesRequested = true;
             this.props.hasAdminPrivileges(eventid, this.props.user.uid);
         }
+    }
+
+    answerPoll(pollId, key) {
+        if(this.props.user)
+            this.props.answerEventPoll(this.props.user.uid, pollId, key);
     }
 
     render() {
@@ -53,6 +60,11 @@ class EventViewer extends Component {
 
                         <div className="event-content">
                             <div className="event-content__spotlight">
+                                {(this.props.user) ?
+                                    <EventPolls module={this.props.modules.polls} activePolls={this.props.event.polls} answerPollFunction={this.answerPoll} uid={this.props.user.uid} isAttendingEvent={isAttendingEvent(this.props.event, this.props.user.uid)}/>
+                                    :
+                                    null
+                                }
                                 <EventDetails module={this.props.modules.details} startDate={this.props.event.startDate} location={this.props.event.location} map={this.props.event.map}/>
                                 <EventDescription module={this.props.modules.description} description={this.props.event.description} />
                             </div>
@@ -66,6 +78,14 @@ class EventViewer extends Component {
             )
         }
     }
+}
+
+function isAttendingEvent(event, userUid) {
+    if(event.participants) {
+        return (event.participants[userUid]);
+    }
+    
+    return false;
 }
 
 //Maps the state in our store to the props property of the Example object.
@@ -84,7 +104,8 @@ const mapDispatchToProps = {
     setCurrentEvent,
     subscribeToEvent,
     loadMapImageURL,
-    hasAdminPrivileges
+    hasAdminPrivileges,
+    answerEventPoll
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(EventViewer);

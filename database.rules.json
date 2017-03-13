@@ -78,7 +78,7 @@
     },
     "eventModules": {
       "$eventId": {
-        ".validate": "newData.hasChildren(['details', 'description', 'participants'])",
+        ".validate": "newData.hasChildren(['details', 'description', 'participants', 'polls'])",
         "details": {
           ".validate": "newData.hasChildren(['enabled', 'showTime', 'showLocation', 'showMap'])",
           "enabled": {
@@ -115,11 +115,48 @@
             ".validate": "false"
           }
         },
+        "polls": {
+          ".validate": "newData.hasChildren(['enabled'])",
+          "enabled": {
+            ".validate": "newData.isBoolean()"
+          },
+          "$other": {
+            ".validate": "false"
+          }
+        },
         "$other": {
           ".validate": "false"
         },
         ".read": "true",
         ".write": "root.child('eventAdmins').child($eventId).child(auth.uid).val() != null"
+      }
+    },
+    "eventAdmins": {
+      "$eventId": {
+        "$uid": {
+          ".validate": "newData.isBoolean()",
+          ".read": "auth != null && auth.uid == $uid || root.child('eventAdmins').child($eventId).child(auth.uid).val() != null",
+          ".write": "root.child('eventAdmins').child($eventId).child(auth.uid).val() != null"
+        }
+      }
+    },
+    "eventPolls": {
+      "$eventId": {
+        ".validate": "newData.hasChildren()",
+        ".read": "true",
+        "$pollId": {
+          ".validate": "newData.hasChildren()",
+          ".write": "auth != null"
+        }
+      }
+    },
+    "eventPollAnswers": {
+      ".validate": "newData.hasChildren()",
+      ".read": "true",
+      "$pollId": {
+        ".validate": "newData.hasChildren()",
+        ".read": "true",
+        ".write": "auth != null"
       }
     },
     "standardAvatars": {
@@ -132,15 +169,6 @@
       },
       ".read": "true",
       ".write": "true"
-    },
-    "eventAdmins": {
-      "$eventId": {
-        "$uid": {
-          ".validate": "newData.isBoolean()",
-          ".read": "auth != null && auth.uid == $uid || root.child('eventAdmins').child($eventId).child(auth.uid).val() != null",
-          ".write": "root.child('eventAdmins').child($eventId).child(auth.uid).val() != null"
-        }
-      }
     }
   }
 }

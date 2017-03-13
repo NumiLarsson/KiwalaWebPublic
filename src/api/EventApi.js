@@ -263,6 +263,101 @@ export default class EventApi {
 	}
 
 	/**
+	 * Subsribe to all polls for an event.
+	 * @param {string} eventId - The id for the event.
+	 * @param {function} callback - Function to be called when a change occurs.
+ 	 */
+	subscribeToEventPolls(eventId, added, changed, removed) {
+		let ref = this.database().ref(`/eventPolls/${eventId}`);
+		ref.on('child_added', (snapshot => {
+			added(snapshot.val());
+		}));
+
+		ref.on('child_changed', (snapshot => {
+			changed(snapshot.val());
+		}));
+
+		ref.on('child_removed', (snapshot => {
+			removed(snapshot.val());
+		}));
+
+		this.subscriptions[`eventPolls_${eventId}`] = ref;
+	}
+
+	/**
+	 * Subsribe to all answers for a poll.
+	 * @param {string} pollId - The id for the poll.
+	 * @param {function} callback - Function to be called when a change occurs.
+ 	 */
+	subscribeToEventPollAnswers(pollId, added, changed) {
+		let ref = this.database().ref(`/eventPollAnswers/${pollId}`);
+		ref.on('child_added', (snapshot => {
+			added(Object.assign({}, {}, {
+				pollId: pollId,
+				uid: snapshot.key,
+				val: snapshot.val()
+			}));
+		}));
+
+		ref.on('child_changed', (snapshot => {
+			changed(Object.assign({}, {}, {
+				pollId: pollId,
+				uid: snapshot.key,
+				val: snapshot.val()
+			}));
+		}));
+
+		this.subscriptions[`eventPollAnswers_${pollId}`] = ref;
+	}
+
+	/**
+	 * Answer a poll for a event.
+	 * @param {string} eventId - The event id.
+	 * @param {Object} pollData - The data for the poll.
+	 * @param {function} callback - Function to be called when a change occurs.
+ 	 */
+	createEventPoll(eventId, pollData, callback) {
+		let self = this;
+		let id = self.database().ref(`/eventPolls/${eventId}`).push();
+		pollData = Object.assign({}, pollData, {
+			id: id.key
+		});
+		self.database().ref(`/eventPolls/${eventId}/${id.key}`).set(pollData, callback);
+	}
+
+	/**
+	 * Answer a poll for a event.
+	 * @param {string} eventId - The event id.
+	 * @param {Object} pollData - The data for the poll.
+	 * @param {function} callback - Function to be called when a change occurs.
+ 	 */
+	removeEventPoll(eventId, pollId, callbackPoll, callbackAnswers) {
+		let self = this;
+		self.database().ref(`/eventPolls/${eventId}/${pollId}`).set(null, callbackPoll);
+		self.database().ref(`/eventPollAnswers/${pollId}`).set(null, callbackAnswers);
+	}
+
+	/**
+	 * Answer a poll for a event.
+	 * @param {string} uid - The user id.
+	 * @param {string} pollId - The id for the poll.
+	 * @param {string} answerId - Local id for the answer in the poll.
+	 * @param {function} callback - Function to be called when a change occurs.
+ 	 */
+	answerEventPoll(uid, pollId, answerId) {
+		let self = this;
+		return new Promise((resolve, reject) => {
+			self.database().ref(`/eventPollAnswers/${pollId}/${uid}`).set(answerId)
+			.then(() => {
+				resolve('SUCCESS');
+			})
+			.catch(err => {
+				reject(err);
+			});
+		});
+	}
+
+	/**
 	 * Check is the user has admin rights to the event.
 	 * @param {string} eventId - The id of the event.
 	 * @param {string} uid - The id of the user.
@@ -275,7 +370,33 @@ export default class EventApi {
 			.then(snapshot => {
 				let result = snapshot.val();
 
-				if(result && result != 0) {
+				if(result && result !== 0) {
+					resolve(result);
+				}
+				else {
+					resolve(false);
+				}
+			})
+			.catch(err => {
+				reject(err);
+			})
+		})
+	}
+
+	/**
+	 * Check is the user has admin rights to the event.
+	 * @param {string} eventId - The id of the event.
+	 * @param {string} uid - The id of the user.
+	 * @returns A Promise which resolves to an event object.
+ 	 */
+	isAttendingEvent(eventId, uid) {
+		let self = this;
+		return new Promise((resolve, reject) =>{
+			self.database().ref(`/eventParticipants/${eventId}/${uid}/`).once('value')
+			.then(snapshot => {
+				let result = snapshot.val();
+
+				if(result) {
 					resolve(result);
 				}
 				else {

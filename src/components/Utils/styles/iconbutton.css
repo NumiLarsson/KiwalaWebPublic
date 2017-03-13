@@ -22,12 +22,11 @@
 }
 .iconbutton > i {
 	font-size: 2em;
+	margin-right: 5px;
 }
 .iconbutton > span {
 	font-size: 1.6em;
 	font-weight: 600;
-
-	margin-left: 5px;
 }
 
 /* Desktop */
