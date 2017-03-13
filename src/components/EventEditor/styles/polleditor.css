@@ -1,0 +1,11 @@
+.polleditor-dialog {
+    width: 100% !important;
+    max-width: none !important;
+}
+
+/* Desktop */
+@media only screen and (min-width: 768px) {
+    .polleditor-dialog {
+        width: 75% !important;
+    }
+}
