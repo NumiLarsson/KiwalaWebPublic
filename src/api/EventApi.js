@@ -444,7 +444,7 @@ export default class EventApi {
 									showMap: false},
 						 description: {enabled: true},
 						 participants: {enabled: true},
-						 polls: {enabled: false},
+						 polls: {enabled: true},
 					});
 				});
 		    	resolve(true);
