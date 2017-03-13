@@ -1,20 +1,16 @@
-import {FACEBOOK_ACTIONS} from '../actions/facebookimporter';
+import {MODAL_ACTIONS} from '../actions/createEventModal';
 const {
     SET_PAGE,
-    OPEN_IMPORTER,
-    CLOSE_IMPORTER,
-    SET_EVENTS,
-    SELECT_EVENT,
+    OPEN_MODAL,
+    CLOSE_MODAL,
     EVENT_CREATION_INITIATED,
     EVENT_CREATION_FINISHED
-} = FACEBOOK_ACTIONS;
+} = MODAL_ACTIONS;
 
 const initialState = {
     page: 0,
     loading: false,
-    active: false,
-    events: [],
-    selectedEvent: null
+    active: false
 }
 
 export default (state = initialState, action) => {
@@ -24,21 +20,13 @@ export default (state = initialState, action) => {
             return Object.assign({}, state, {
                 page: action.payload
             });
-        case OPEN_IMPORTER:
+        case OPEN_MODAL:
             return Object.assign({}, state, {
                 active: true
             });
-        case CLOSE_IMPORTER:
+        case CLOSE_MODAL:
             return Object.assign({}, state, {
                 active: false
-            });
-        case SET_EVENTS:
-            return Object.assign({}, state, {
-                events: action.payload
-            });
-        case SELECT_EVENT:
-            return Object.assign({}, state, {
-                selectedEvent: action.payload
             });
         case EVENT_CREATION_INITIATED:
             return Object.assign({}, state, {

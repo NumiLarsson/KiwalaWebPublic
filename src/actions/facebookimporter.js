@@ -16,8 +16,6 @@ export const FACEBOOK_ACTIONS = {
     CLOSE_IMPORTER: 'CLOSE_IMPORTER',
     SET_EVENTS: 'SET_EVENTS',
     SELECT_EVENT: 'SELECT_EVENT',
-    SET_START_TIME: 'SET_START_TIME',
-    SET_END_TIME: 'SET_END_TIME',
     EVENT_CREATION_INITIATED: 'EVENT_CREATION_INITIATED',
     EVENT_CREATION_FINISHED: 'EVENT_CREATION_FINISHED'
 };
@@ -27,7 +25,5 @@ export const openImporter = createAction(FACEBOOK_ACTIONS.OPEN_IMPORTER);
 export const closeImporter = createAction(FACEBOOK_ACTIONS.CLOSE_IMPORTER);
 export const setEvents = createAction(FACEBOOK_ACTIONS.SET_EVENTS);
 export const selectEvent = createAction(FACEBOOK_ACTIONS.SELECT_EVENT);
-export const setSelectedEventStartTime = createAction(FACEBOOK_ACTIONS.SET_START_TIME);
-export const setSelectedEventEndTime = createAction(FACEBOOK_ACTIONS.SET_END_TIME);
 export const eventCreationInitiated = createAction(FACEBOOK_ACTIONS.EVENT_CREATION_INITIATED);
 export const eventCreationFinished = createAction(FACEBOOK_ACTIONS.EVENT_CREATION_FINISHED);

@@ -1,0 +1,10 @@
+.event-create__date {
+    display: flex;
+    flex-direction:  column;
+}
+
+@media screen and (min-width: 1024px) {
+    .event-create__date {
+        flex-direction: row;
+    }
+}

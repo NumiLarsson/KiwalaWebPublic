@@ -57,6 +57,10 @@
   color: #2196F3;
 }
 
+.flex {
+  flex: 1;
+}
+
 
 /* Desktop */
 @media only screen and (min-width: 1024px) {
@@ -65,5 +69,13 @@
 
   .only-on-mobile {
     display: none;
+  }
+
+}
+
+@media only screen and (max-width: 1023px) {
+  .dialog {
+    height: 100vh;
+    width: 100vw;
   }
 }

@@ -300,10 +300,32 @@ export default class EventApi {
         }
     }
 
-    create(event) {
+    create(event, user) {
     	// TODO: add real event creation
 		return new Promise((resolve, reject) => {
 			setTimeout(() => {
+				var newKey = this.database().ref('/events/').push().key;
+				this.database().ref(`/events/${newKey}`).set({id: newKey}, (_newEvent) => {
+					this.database().ref(`/eventAdmins/${newKey}/${user.uid}`).set(1);
+					this.database().ref(`/eventParticipants/${newKey}/${user.uid}`).set(true);
+					this.database().ref(`/userAcceptedEvents/${user.uid}/${newKey}`).set(true);
+					this.database().ref(`/eventData/${newKey}`).set({
+							description: event.description,
+							headerImage: "http://theinsanedoll.me/wp-content/uploads/2017/01/party.jpg",
+							location: event.location,
+							name: event.name, 
+							startDate: event.start_time.getTime() 
+						});
+					this.database().ref(`/eventModules/${newKey}`).set({
+						 details: {enabled: true,
+						 			showTime: true,
+									showLocation: true,
+									showMap: false},
+						 description: {enabled: true},
+						 participants: {enabled: true},
+						 polls: {enabled: false},
+					});
+				});
 		    	resolve(true);
 			}, 1000);
 		})
