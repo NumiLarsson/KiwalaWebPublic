@@ -19,7 +19,6 @@ class UserProfile extends Component {
 
     componentWillMount() {
         if(this.props.user && !this.eventListRequested) {
-            console.log("REQ");
             this.eventListRequested = true;
             this.props.getAcceptedEvents(this.props.user.uid);
         }
@@ -27,7 +26,6 @@ class UserProfile extends Component {
 
     componentWillUpdate() {
         if(this.props.user && !this.eventListRequested) {
-            console.log("REQ");
             this.eventListRequested = true;
             this.props.getAcceptedEvents(this.props.user.uid);
         }
