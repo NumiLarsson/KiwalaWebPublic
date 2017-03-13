@@ -4,7 +4,6 @@ import RaisedButton from 'material-ui/RaisedButton';
 import IconButton from 'material-ui/IconButton';
 import FontIcon from 'material-ui/FontIcon';
 import Dialog from 'material-ui/Dialog';
-import TextField from 'material-ui/TextField';
 import CheckBox from '../Utils/CheckBoxField';
 import { Field, FieldArray, reduxForm, formValueSelector, reset, submit } from 'redux-form';
 import CircularProgress from 'material-ui/CircularProgress';
@@ -12,10 +11,32 @@ import {connect} from "react-redux";
 import { initNewPollAndOpenEditor, closePollEditor } from '../../actions/eventeditor'
 import './styles/polleditor.css';
 
-const customContentStyle = {
-  width: '100%',
-  maxWidth: 'none',
-};
+const iconButtonStyle = {
+    verticalAlign: "center"
+}
+
+const renderPollChoices = ({ fields }) => (
+  <div className="polleditor-pollchoices">
+      <RaisedButton onClick={() => fields.push()}  label="Add answer" />
+      <div className="polleditor-poll__choices">
+        {fields.map((choice, index) =>
+          <div key={index} className="polleditor-poll__choice">
+            
+            <Field
+              className="polleditor-poll__choicefield"
+              name={choice}
+              type="text"
+              component="input"
+              placeholder={`Choice #${index + 1}`}/>
+              <IconButton style={iconButtonStyle} onClick={() => fields.remove(index)}>
+                  <FontIcon className="material-icons" color="#E53935" style={iconButtonStyle}>remove_circle</FontIcon>
+              </IconButton>
+          </div>
+        )}
+        {fields.error && <div className="error">{fields.error}</div>}
+      </div>
+  </div>
+)
 
 class PollEditor extends Component {
 
@@ -28,7 +49,7 @@ class PollEditor extends Component {
 
     createNewPoll() {
         this.props.resetForm('eventeditor-poll');
-        
+
         this.props.initNewPollAndOpenEditor();
     }
 
@@ -99,34 +120,6 @@ class PollEditor extends Component {
         );
     }
 }
-
-const iconButtonStyle = {
-    verticalAlign: "center"
-}
-
-const renderPollChoices = ({ fields }) => (
-  <div className="polleditor-pollchoices">
-      <RaisedButton onClick={() => fields.push()}  label="Add answer" />
-      <div className="polleditor-poll__choices">
-        {fields.map((choice, index) =>
-          <div key={index} className="polleditor-poll__choice">
-            
-            <Field
-              className="polleditor-poll__choicefield"
-              name={choice}
-              type="text"
-              component="input"
-              placeholder={`Choice #${index + 1}`}/>
-              <IconButton style={iconButtonStyle} onClick={() => fields.remove(index)}>
-                  <FontIcon className="material-icons" color="#E53935" style={iconButtonStyle}>remove_circle</FontIcon>
-              </IconButton>
-          </div>
-        )}
-        {fields.error && <div className="error">{fields.error}</div>}
-      </div>
-  </div>
-)
-
 
 // Decorate the form component
 PollEditor = reduxForm({

@@ -86,14 +86,17 @@
 }
 
 .eventeditor-poll__results {
-    
+    width: 100%;
+    height: 150px;
+    display: flex;
+    justify-content: center;
 }
 
 .eventeditor-poll__choices {
     display: flex;
     justify-content: center;
     align-items: space-around;
-    flex-direction: row;
+    flex-direction: column;
 
     width: 100%;
 
@@ -117,5 +120,9 @@
 
     .eventeditor-polls__header > span {
         font-size: 1.1em;
+    }
+
+    .eventeditor-poll__choices {
+        flex-direction: row;
     }
 }
