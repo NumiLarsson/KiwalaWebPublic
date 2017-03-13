@@ -25,6 +25,9 @@ export default (state = initialState, action) => {
             return Object.assign({}, state, {
                 avatarSelectorOpen: action.payload
             });
+        
+        case USER_PROFILE_ACTIONS.RESET_USER_PROFILE_DATA:
+            return initialState;
 
         default:
             return state;
