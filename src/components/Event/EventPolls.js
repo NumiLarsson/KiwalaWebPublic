@@ -52,7 +52,6 @@ function renderPolls(polls, answerPollFunction, uid) {
                   {choice: polls[id].choices[choice], count: sumAns[choice]}
               )
             }
-            console.log(pollAnswers);
             
             listItems.push(
                 <div key={id} className="event-poll">

@@ -308,6 +308,33 @@ export default class EventApi {
 
 	/**
 	 * Answer a poll for a event.
+	 * @param {string} eventId - The event id.
+	 * @param {Object} pollData - The data for the poll.
+	 * @param {function} callback - Function to be called when a change occurs.
+ 	 */
+	createEventPoll(eventId, pollData, callback) {
+		let self = this;
+		let id = self.database().ref(`/eventPolls/${eventId}`).push();
+		pollData = Object.assign({}, pollData, {
+			id: id.key
+		});
+		self.database().ref(`/eventPolls/${eventId}/${id.key}`).set(pollData, callback);
+	}
+
+	/**
+	 * Answer a poll for a event.
+	 * @param {string} eventId - The event id.
+	 * @param {Object} pollData - The data for the poll.
+	 * @param {function} callback - Function to be called when a change occurs.
+ 	 */
+	removeEventPoll(eventId, pollId, callbackPoll, callbackAnswers) {
+		let self = this;
+		self.database().ref(`/eventPolls/${eventId}/${pollId}`).set(null, callbackPoll);
+		self.database().ref(`/eventPollAnswers/${pollId}`).set(null, callbackAnswers);
+	}
+
+	/**
+	 * Answer a poll for a event.
 	 * @param {string} uid - The user id.
 	 * @param {string} pollId - The id for the poll.
 	 * @param {string} answerId - Local id for the answer in the poll.

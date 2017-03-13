@@ -90,7 +90,7 @@ export function answerEventPoll(uid, pollId, answerId) {
         })
         .catch((error) => {
             console.log(error);
-            dispatch({type: "GET_EVENT_ERROR", payload: pollId});
+            dispatch({type: "ANSWER_EVENTPOLL_ERROR", payload: pollId});
         })
     }
 }
