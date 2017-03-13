@@ -38,7 +38,7 @@
 	padding-left: 15px;
 	padding-right: 10px;
 	padding-top: 5px;
-	font-size: 1.2em;
+	font-size: 1em;
 
 	width: 100%;
 	min-height: 130px;
@@ -46,7 +46,7 @@
 	resize: vertical;
 	box-sizing: border-box;
 
-	border: 1px solid #eee;
+	border: none;
 }
 
 .eventeditor-description__header > i,
