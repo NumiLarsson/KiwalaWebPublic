@@ -43,10 +43,12 @@ export default (state = initialState, action) => {
             // Filter out all the participants in state that's not in the payload!
             // in order to remove unattenting participants
             let newParticipants = {};
-            Object.keys(action.payload).forEach(function(key) {
-                if(state.participants && state.participants[key])
-                    newParticipants[key] = state.participants[key];
-            });
+            if(action.payload && action.payload.length) {
+                Object.keys(action.payload).forEach(function(key) {
+                    if(state.participants && state.participants[key])
+                        newParticipants[key] = state.participants[key];
+                }); 
+            }
 
             return Object.assign({}, state, {
                 participants: newParticipants

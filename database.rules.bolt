@@ -25,7 +25,7 @@ path /events/{eventId} is Event {}
 
 type Event {
   read() {true}
-  write() {false}
+  write() {isSignedIn()}
   id: String
 }
 
@@ -83,12 +83,16 @@ type ParticipantsModule extends EventModule {}
 type PollsModule extends EventModule {}
 
 // Event admins
-path /eventAdmins/{eventId}/{uid} is EventAdmin {
-  read() {isCurrentUser(uid) || userIsAdminOf(eventId)}
-  write() {userIsAdminOf(eventId)}
+
+path /eventAdmins/{eventId} is Object {
+  write() {isSignedIn()}
 }
 
-type EventAdmin extends Boolean {}
+path /eventAdmins/{eventId}/{uid} is EventAdmin {
+  read() {isCurrentUser(uid) || userIsAdminOf(eventId)}
+}
+
+type EventAdmin extends Number {}
 
 // Event polls
 
