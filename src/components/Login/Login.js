@@ -50,9 +50,9 @@ class Login extends Component {
     loginWithFacebook() {
         Api.auth.loginWithFacebookPopup()
         .then((user) => {
-            Api.user.createUserIfNotExists(user)
+            Api.user.createUserIfNotExists(user.user)
             .then(() => {
-                Api.user.updateUserProfile(user.uid, {displayName: this.props.name})
+                Api.user.updateUserProfile(user.user.uid, {displayName: this.props.name})
                 .then(() => {
                     this.props.finishLogin();
                 })
