@@ -10,7 +10,6 @@ import EventControlpanel from '../components/Event/EventControlpanel';
 import NavigationControl from '../components/Navigation/NavigationControl';
 import Spinner from '../components/Utils/Spinner';
 import './styles/eventviewer.css';
-import { loadMapImageURL } from '../actions/maps'
 
 class EventViewer extends Component {
 
@@ -23,7 +22,6 @@ class EventViewer extends Component {
     componentWillMount(){
         // perform any preparations for an upcoming update
         // Enable loading state
-        this.props.loadMapImageURL(this.props.event.location, 12);
         // Load event
         const {eventid} = this.props.params;
         this.props.subscribeToEvent(eventid);
@@ -103,7 +101,6 @@ const mapDispatchToProps = {
     getEvent,
     setCurrentEvent,
     subscribeToEvent,
-    loadMapImageURL,
     hasAdminPrivileges,
     answerEventPoll
 }

@@ -12,6 +12,7 @@ import {  } from 'react-router-redux';
 //get the API
 import Api from '../api/Api';
 
+import { loadMapImageURL } from './maps'
 //get action types
 import { EVENT_ACTIONS } from './actionTypes';
 
@@ -50,6 +51,7 @@ export function subscribeToEvent(eventId) {
             dispatch(setCurrentEvent(event));
         });
         Api.events.subscribeToEventData(eventId, (event) => {
+            dispatch(loadMapImageURL(event.location, 12));
             dispatch(setCurrentEventData(event));
         });
         Api.events.subscribeToEventModules(eventId, (event) => {
