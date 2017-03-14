@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getEvent, subscribeToEvent, setCurrentEvent, hasAdminPrivileges, answerEventPoll } from '../actions/eventdata';
+import { getEvent, subscribeToEvent, setCurrentEvent, hasAdminPrivileges, answerEventPoll, resetEvent } from '../actions/eventdata';
 import EventPolls from '../components/Event/EventPolls';
 import EventHeader from '../components/Event/EventHeader';
 import EventDetails from '../components/Event/EventDetails';
@@ -27,6 +27,10 @@ class EventViewer extends Component {
         // Load event
         const {eventid} = this.props.params;
         this.props.subscribeToEvent(eventid);
+    }
+
+    componentWillUnmount() {
+        this.props.resetEvent();
     }
 
     componentWillUpdate() {
@@ -105,7 +109,8 @@ const mapDispatchToProps = {
     subscribeToEvent,
     loadMapImageURL,
     hasAdminPrivileges,
-    answerEventPoll
+    answerEventPoll,
+    resetEvent
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(EventViewer);

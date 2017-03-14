@@ -16,6 +16,7 @@ import Api from '../api/Api';
 import { EVENT_ACTIONS } from './actionTypes';
 
 //Standard actions.
+export const resetEvent                             = createAction(EVENT_ACTIONS.RESET_EVENT);
 export const setCurrentEvent                        = createAction(EVENT_ACTIONS.SET_CURRENT_EVENT);
 export const setCurrentEventData                    = createAction(EVENT_ACTIONS.SET_CURRENT_EVENT_DATA);
 export const setCurrentEventParticipants            = createAction(EVENT_ACTIONS.SET_CURRENT_EVENT_PARTICIPANTS);
