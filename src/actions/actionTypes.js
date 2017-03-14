@@ -1,5 +1,6 @@
 //Constants identifying actions.
 export const EVENT_ACTIONS = {
+    RESET_EVENT: 'RESET_EVENT',
     GET_EVENT : 'GET_EVENT',
     SET_CURRENT_EVENT : 'SET_CURRENT_EVENT',
     SET_CURRENT_EVENT_DATA : 'SET_CURRENT_EVENT_DATA',

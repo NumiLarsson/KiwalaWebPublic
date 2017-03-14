@@ -4,6 +4,7 @@ const {
     SET_DESCRIPTION,
     SET_START_TIME,
     SET_END_TIME,
+    SET_LOCATION
 } = CREATE_ACTIONS;
 
 const initialState = {
@@ -11,7 +12,7 @@ const initialState = {
         name: '',
         description: '',
         details: '',
-        location: null,
+        location: '',
         start_time: new Date(),
         end_time: null,
     }
@@ -41,7 +42,11 @@ export default (state = initialState, action) => {
             return Object.assign({}, state, {
                 event: event
             });
-
+        case SET_LOCATION:
+            event.location = action.payload
+            return Object.assign({}, state, {
+                event: event
+            });
         default:
             return state;
     }

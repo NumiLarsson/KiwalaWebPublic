@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getEvent, subscribeToEvent, setCurrentEvent, hasAdminPrivileges, answerEventPoll } from '../actions/eventdata';
+import { getEvent, subscribeToEvent, setCurrentEvent, hasAdminPrivileges, answerEventPoll, resetEvent } from '../actions/eventdata';
 import EventPolls from '../components/Event/EventPolls';
 import EventHeader from '../components/Event/EventHeader';
 import EventDetails from '../components/Event/EventDetails';
@@ -10,7 +10,6 @@ import EventControlpanel from '../components/Event/EventControlpanel';
 import NavigationControl from '../components/Navigation/NavigationControl';
 import Spinner from '../components/Utils/Spinner';
 import './styles/eventviewer.css';
-import { loadMapImageURL } from '../actions/maps'
 
 class EventViewer extends Component {
 
@@ -23,10 +22,13 @@ class EventViewer extends Component {
     componentWillMount(){
         // perform any preparations for an upcoming update
         // Enable loading state
-        this.props.loadMapImageURL(this.props.event.location, 12);
         // Load event
         const {eventid} = this.props.params;
         this.props.subscribeToEvent(eventid);
+    }
+
+    componentWillUnmount() {
+        this.props.resetEvent();
     }
 
     componentWillUpdate() {
@@ -103,9 +105,9 @@ const mapDispatchToProps = {
     getEvent,
     setCurrentEvent,
     subscribeToEvent,
-    loadMapImageURL,
     hasAdminPrivileges,
-    answerEventPoll
+    answerEventPoll,
+    resetEvent
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(EventViewer);

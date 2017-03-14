@@ -1,6 +1,6 @@
 import { EVENT_ACTIONS } from '../actions/actionTypes';
 import { MAPS_ACTIONS } from '../actions/maps';
-const { SET_CURRENT_EVENT, SET_CURRENT_EVENT_DATA, SET_CURRENT_EVENT_PARTICIPANTS, UPDATE_CURRENT_EVENT_PARTICIPANTS_USERS, SET_EVENT_ADMIN_PRIVILEGES, SET_EVENT_POLL, SET_EVENT_POLL_ANSWERS, EVENT_POLL_REMOVED } = EVENT_ACTIONS;
+const { RESET_EVENT, SET_CURRENT_EVENT, SET_CURRENT_EVENT_DATA, SET_CURRENT_EVENT_PARTICIPANTS, UPDATE_CURRENT_EVENT_PARTICIPANTS_USERS, SET_EVENT_ADMIN_PRIVILEGES, SET_EVENT_POLL, SET_EVENT_POLL_ANSWERS, EVENT_POLL_REMOVED } = EVENT_ACTIONS;
 
 const initialState = {
     id: null,
@@ -19,9 +19,12 @@ const initialState = {
 export default (state = initialState, action) => {
     switch(action.type) {
 
+        case RESET_EVENT:
+            return initialState;
+
         case SET_CURRENT_EVENT:
             const {id, name} = action.payload;
-            return Object.assign({}, initialState, {
+            return Object.assign({}, state, {
                 id,
                 name,
                 loaded: true,

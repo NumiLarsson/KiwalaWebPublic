@@ -12,10 +12,12 @@ import {  } from 'react-router-redux';
 //get the API
 import Api from '../api/Api';
 
+import { loadMapImageURL } from './maps'
 //get action types
 import { EVENT_ACTIONS } from './actionTypes';
 
 //Standard actions.
+export const resetEvent                             = createAction(EVENT_ACTIONS.RESET_EVENT);
 export const setCurrentEvent                        = createAction(EVENT_ACTIONS.SET_CURRENT_EVENT);
 export const setCurrentEventData                    = createAction(EVENT_ACTIONS.SET_CURRENT_EVENT_DATA);
 export const setCurrentEventParticipants            = createAction(EVENT_ACTIONS.SET_CURRENT_EVENT_PARTICIPANTS);
@@ -50,6 +52,7 @@ export function subscribeToEvent(eventId) {
             dispatch(setCurrentEvent(event));
         });
         Api.events.subscribeToEventData(eventId, (event) => {
+            dispatch(loadMapImageURL(event.location, 12));
             dispatch(setCurrentEventData(event));
         });
         Api.events.subscribeToEventModules(eventId, (event) => {

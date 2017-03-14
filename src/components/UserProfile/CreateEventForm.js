@@ -3,9 +3,10 @@ import {connect} from "react-redux";
 import TextField from 'material-ui/TextField';
 import DatePicker from 'material-ui/DatePicker';
 import TimePicker from 'material-ui/TimePicker';
-import {setStartTime, setEndTime, setTitle, setDescription} from "../../actions/eventcreator";
+import {setStartTime, setEndTime, setTitle, setDescription, setLocation} from "../../actions/eventcreator";
 import moment from 'moment';
 import './styles/eventcreator.css';
+import PlacesAutocomplete from 'react-places-autocomplete'
 
 class CreateEventForm extends Component {
 
@@ -18,6 +19,7 @@ class CreateEventForm extends Component {
         this.setEventEndTime = this.setEventEndTime.bind(this);
         this.setEventStartDate = this.setEventStartDate.bind(this);
         this.setEventStartTime = this.setEventStartTime.bind(this);
+        this.selectLocation = this.selectLocation.bind(this);
     }
 
     render() {
@@ -40,6 +42,16 @@ class CreateEventForm extends Component {
                     onChange={this.setDescription}
                     floatingLabelStyle={{
                         top: '34px'
+                    }}
+                />
+                <PlacesAutocomplete
+                    value={this.props.event.location}
+                    onChange={this.selectLocation}
+                    onSelect={this.selectLocation}
+                    classNames={{
+                        root: 'event-create__location',
+                        autocompleteContainer: 'event-create__location-autocomplete-container',
+                        input: 'event-create__location-autocomplete'
                     }}
                 />
                 <div className="event-create__date">
@@ -182,6 +194,10 @@ class CreateEventForm extends Component {
 
         this.setEndTime(currentDate.toDate());
     }
+
+    selectLocation(location, placeId) {
+        this.props.setLocation(location);
+    }
 }
 
 //Maps the state in our store to the props property of the Example object.
@@ -197,7 +213,8 @@ const mapDispatchToProps = {
     setStartTime,
     setEndTime,
     setTitle,
-    setDescription
+    setDescription,
+    setLocation
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateEventForm);

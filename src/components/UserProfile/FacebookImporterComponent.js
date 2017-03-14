@@ -14,7 +14,7 @@ import {
     setStartTime,
     setEndTime,
     setTitle,
-    setDescription
+    setDescription, setLocation
 } from '../../actions/eventcreator';
 import {List, ListItem, makeSelectable} from 'material-ui/List';
 import CircularProgress from 'material-ui/CircularProgress';
@@ -163,10 +163,13 @@ class FacebookImporterComponent extends Component {
         this.props.selectEvent(index);
         Api.facebook.getEvent(index)
             .then(event => {
+                console.log(event);
                 this.props.setTitle(event.name);
                 this.props.setDescription(event.description);
                 this.props.setStartTime(event.start_time);
                 this.props.setEndTime(event.end_time);
+                const fbLocation = event.place.location;
+                this.props.setLocation(`${fbLocation.street}, ${fbLocation.city}, ${fbLocation.zip}, ${fbLocation.country}`);
             })
     }
 
@@ -276,7 +279,8 @@ const mapDispatchToProps = {
     setStartTime,
     setEndTime,
     setTitle,
-    setDescription
+    setDescription,
+    setLocation
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(FacebookImporterComponent);
