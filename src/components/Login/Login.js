@@ -52,13 +52,7 @@ class Login extends Component {
         .then((user) => {
             Api.user.createUserIfNotExists(user.user)
             .then(() => {
-                Api.user.updateUserProfile(user.user.uid, {displayName: this.props.name})
-                .then(() => {
-                    this.props.finishLogin();
-                })
-                .catch(err => {
-                    this.props.loginScreenError(err);
-                })
+                this.props.finishLogin();
             })
             .catch(err => {
                 this.props.loginScreenError(err);
