@@ -87,3 +87,34 @@ export function loadMapImageURL(val, zoom) {
         }
     }
 }
+
+export function loadMapMultiMarkers(center, markers, zoom) {
+    return (dispatch) => {
+        let index = 0
+        for (let marker in markers) {
+            markers.push( {
+                location: markers,
+                label: index++,
+                color: 'red',
+                shadow: true
+            })
+        }
+        var params = {
+            center: center,
+            zoom: zoom,
+            size: '640x200',
+            maptype: 'roadmap',
+            markers: markers,
+            style: [
+                {
+                    feature: 'road',
+                    element: 'all',
+                    rules: {
+                        hue: '0x00ff00'
+                    }
+                }
+            ]
+        };
+        dispatch(mapImageURL(gmAPI.staticMap(params)));
+    }
+}
