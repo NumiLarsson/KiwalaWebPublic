@@ -9,6 +9,7 @@ const initialState = {
     polls: null,
     loaded: null, 
     map: null,
+    mapZoom: 5,
     description: "",
     startDate: null,
     location: null,

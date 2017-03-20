@@ -7,6 +7,7 @@ import EventDetails from '../components/Event/EventDetails';
 import EventDescription from '../components/Event/EventDescription';
 import EventParticipants from '../components/Event/EventParticipants';
 import EventControlpanel from '../components/Event/EventControlpanel';
+import EventTravelplans from '../components/Event/EventTravelplans';
 import NavigationControl from '../components/Navigation/NavigationControl';
 import Spinner from '../components/Utils/Spinner';
 import './styles/eventviewer.css';
@@ -73,6 +74,7 @@ class EventViewer extends Component {
                             <div className="event-content__sideline">
                                 <EventParticipants module={this.props.modules.participants} participants={this.props.event.participants} />
                             </div>
+                            <EventTravelplans />
                         </div>
 
                     </div>

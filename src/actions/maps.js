@@ -17,7 +17,7 @@ var publicConfig = {
 var gmAPI = new GoogleMapsAPI(publicConfig);
 
 const STOCKHOLM_LOCATION = "59.329321, 18.068581";
-var ZOOM = 12;
+var ZOOM = 5;
 
 export function loadMapImageURL(val, zoom) {
     if (val) {
@@ -63,7 +63,7 @@ export function loadMapImageURL(val, zoom) {
         return (dispatch) => {
             var params = {
                 center: STOCKHOLM_LOCATION,
-                zoom: 12,
+                zoom: ZOOM,
                 size: '640x200',
                 maptype: 'roadmap',
                 markers: [

@@ -19,7 +19,7 @@ class EventEditor extends Component {
     componentWillMount(){
         // perform any preparations for an upcoming update
         // Enable loading state
-        this.props.loadMapImageURL(this.props.event.location, 12);
+        this.props.loadMapImageURL(this.props.event.location, this.props.event.mapZoom);
         // Load event
         const {eventid} = this.props.params;
         this.props.subscribeToEvent(eventid);
