@@ -22,9 +22,9 @@ class EventTravelplans extends Component {
     }
 
     render() {
-        let renderLocations = formatLocations(this.props.event.location);
+        let renderLocations = this.formatLocations(this.props.event.location);
         return (
-            <div> null </div>
+            <div> <ul> renderLocations </ul> </div>
         );
     }
 }
