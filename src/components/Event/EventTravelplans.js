@@ -11,7 +11,7 @@ class EventTravelplans extends Component {
     formatLocations(locations) {
         return (
             locations.map( (location) => {
-                <li> {location} </li>
+                <li key={location}> {location} </li>
             })
         );
     }
@@ -22,10 +22,17 @@ class EventTravelplans extends Component {
     }
 
     render() {
-        let renderLocations = this.formatLocations(this.props.event.location);
-        return (
-            <div> <ul> renderLocations </ul> </div>
-        );
+
+        let { locations } = this.props.event;
+
+        if (locations) {
+            let renderLocations = this.formatLocations(locations);
+            return (
+                <div> <ul> renderLocations </ul> </div>
+            );
+        } else {
+            return null;
+        }
     }
 }
 

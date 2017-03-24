@@ -13,6 +13,7 @@ const initialState = {
     description: "",
     startDate: null,
     location: null,
+    locations: ["Pag, Croatia", "Hvar, Croatia"],
     headerImage: null,
     adminLevel: 0 
 }
